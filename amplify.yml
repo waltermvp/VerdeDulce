@@ -10,7 +10,7 @@ frontend:
     preBuild:
       commands:
         - nvm use 20
-        - npm install --silent --global expo-cli
+        # - npm install --silent --global expo-cli
         - |-
           if [ -f yarn.lock ]; then
            yarn
@@ -22,7 +22,8 @@ frontend:
     build:
       commands:
         - mkdir ./dist && touch ./dist/index.html
-        - 'expo build:web'
+        # - 'npx expo build:web'
+        - 'yarn build:web'
   artifacts:
     baseDirectory: web-build
     files:
