@@ -86,3 +86,8 @@ web-build/
 !env.js
 
 /coverage
+
+# amplify
+.amplify
+amplify_outputs*
+amplifyconfiguration*
