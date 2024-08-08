@@ -21,8 +21,9 @@ lightBackground:"#f2f1e4",
   "lightGreen": "#d8ed6d",
   "veryDarkGreen": "#0f150f",
   "lightYellowGreen": "#ebfe72",
-  "paleBlue": "#dae8e9"
-,
+  "paleBlue": "#dae8e9",
+  "greenFont": "#0B3E35",
+
   neutral100: "#FFFFFF",
   neutral200: "#F4F2F1",
   neutral300: "#D7CEC9",

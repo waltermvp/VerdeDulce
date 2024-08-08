@@ -1,6 +1,7 @@
 const en = {
   landingScreen:{
-    prompt: "Verde Dulce! Sustainable and high-quality food.",    
+    name:"Verde Dulce",
+    prompt: "Fresh, high quality. Sourced sustanably and locally.",    
   },
   common: {
     ok: "OK!",

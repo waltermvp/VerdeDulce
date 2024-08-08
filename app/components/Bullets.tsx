@@ -1,7 +1,7 @@
 import * as React from "react"
-import { StyleProp, TextStyle, View, ViewStyle } from "react-native"
+import { FlatList, StyleProp, TextStyle, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors, typography } from "app/theme"
+import { colors, spacing, typography } from "app/theme"
 import { Text } from "app/components/Text"
 
 export interface BulletsProps {
@@ -20,30 +20,46 @@ export const Bullets = observer(function Bullets(props: BulletsProps) {
   const { style, items } = props
   const $styles = [$container, style]
 
+  const renderBullet = ({ item }) => {
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "column",
+
+          // justifyContent: "space-between",
+          // alignItems: "center",
+          // backgroundColor: "red",
+          // width: "100%",
+        }}
+      >
+        <Text style={$text} preset="formLabel">
+          {item.title}
+        </Text>
+        <Text style={$text} preset="formLabel">
+          {item.subtitle}
+        </Text>
+      </View>
+    )
+  }
   return (
-    <View style={$styles}>
-      {items.map((item, index) => (
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <View key={index} style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={$text}>{item.title}</Text>
-            <Text style={$text}>{item.subtitle}</Text>
-          </View>
-          <View key={index} style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={$text}>{item.title}</Text>
-            <Text style={$text}>{item.subtitle}</Text>
-          </View>
-        </View>
-      ))}
-    </View>
+    <FlatList
+      style={$styles}
+      columnWrapperStyle={{ gap: spacing.lg }}
+      data={items}
+      numColumns={2}
+      renderItem={renderBullet}
+    />
   )
 })
 
 const $container: ViewStyle = {
-  justifyContent: "center",
+  width: "100%",
+  gap: spacing.sm,
 }
 
 const $text: TextStyle = {
   fontFamily: typography.primary.normal,
   fontSize: 14,
-  color: colors.palette.primary500,
+  color: colors.palette.greenFont,
 }

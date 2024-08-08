@@ -1,7 +1,7 @@
 import * as React from "react"
 import { StyleProp, TextStyle, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors, typography } from "app/theme"
+import { colors, spacing, typography } from "app/theme"
 import { Text } from "app/components/Text"
 import { Image } from "expo-image"
 import { Bullets } from "./Bullets"
@@ -34,18 +34,23 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
         contentFit="cover"
         transition={1000}
       />
-      <Text style={styles.title}>{item.name}</Text>
-      <Text style={styles.description}>{item.description}</Text>
-      <Text style={styles.price}>{item.price}</Text>
-      <Bullets
-        items={[
-          { title: "860", subtitle: "CALORIES" },
-          { title: "860", subtitle: "CALORIES" },
-          { title: "860", subtitle: "CALORIES" },
-          { title: "860", subtitle: "CALORIES" },
-          { title: "860", subtitle: "CALORIES" },
-        ]}
-      />
+      <View style={{ width: SIZE, marginTop: spacing.md }}>
+        <Text preset="subheading">{item.name}</Text>
+        <Text preset="formLabel">{item.description}</Text>
+        {/* <Text style={styles.price} preset="bold">
+          {item.price}
+        </Text> */}
+        <Bullets
+          style={{ marginTop: spacing.md }}
+          items={[
+            { title: "860", subtitle: "CALORIES" },
+            { title: "860", subtitle: "CALORIES" },
+            { title: "860", subtitle: "CALORIES" },
+            { title: "860", subtitle: "CALORIES" },
+            { title: "860", subtitle: "CALORIES" },
+          ]}
+        />
+      </View>
       {/* </View> */}
     </View>
   )
@@ -54,20 +59,21 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
 const $container: ViewStyle = {
   // justifyContent: "center",
   flex: 1,
-  alignItems: "center",
-  borderColor: "red",
-  borderWidth: 3,
+  paddingVertical: spacing.lg,
+  // alignItems: "center",
+  // justifyContent: "center",
+  // textAlign: "center",
 }
 
 const styles = {
   item: {
     // flexDirection: "column",
     alignItems: "center",
-    borderColor: "red",
+    // borderColor: "red",
     borderWidth: 3,
     // flex: 1,
   },
   title: { textAlign: "center" },
   price: {},
-  description: {},
+  description: { alignItems: "center" },
 }

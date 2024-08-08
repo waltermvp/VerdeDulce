@@ -74,7 +74,7 @@ export function Text(props: TextProps) {
 }
 
 const $sizeStyles = {
-  xxxl: { fontSize: 48, lineHeight: 52 } satisfies TextStyle,
+  xxxl: { fontSize: 52, lineHeight: 52 } satisfies TextStyle,
   xxl: { fontSize: 36, lineHeight: 44 } satisfies TextStyle,
   xl: { fontSize: 24, lineHeight: 34 } satisfies TextStyle,
   lg: { fontSize: 20, lineHeight: 32 } satisfies TextStyle,
@@ -91,7 +91,7 @@ const $fontWeightStyles = Object.entries(typography.primary).reduce((acc, [weigh
 const $baseStyle: StyleProp<TextStyle> = [
   $sizeStyles.sm,
   $fontWeightStyles.normal,
-  { color: colors.text },
+  { color: colors.text, lineHeight: 18 },
 ]
 
 const $presets = {

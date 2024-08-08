@@ -43,7 +43,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
 
   const renderSectionHeader = ({ section }) => {
     return (
-      <View style={{}}>
+      <View style={{ margin: 0 }}>
         <Text preset="subheading">{section.title}</Text>
       </View>
     )
@@ -80,6 +80,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
 const $root: ViewStyle = {
   flex: 1,
   backgroundColor: colors.palette.lightBackground,
+  paddingHorizontal: spacing.lg,
 }
 
 const sections = [
