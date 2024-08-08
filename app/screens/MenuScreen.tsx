@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle ,View} from "react-native"
+import { ViewStyle, View } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { MenuHeader, MenuItem, Screen, Text } from "app/components"
 import { FlashList } from "@shopify/flash-list"
@@ -35,24 +35,20 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       price: "$11.99",
     },
     // Add more menu items here
-  ];
+  ]
 
-  const renderMenuItem = ({ item }) => <MenuItem item={item} />;
-
-
-
+  const renderMenuItem = ({ item }) => <MenuItem item={item} />
 
   return (
     <Screen style={$root} preset="scroll">
       <FlashList
-
-      ListHeaderComponent={MenuHeader}
-      data={DATA}
-      renderItem={renderMenuItem}/>
+        ListHeaderComponent={MenuHeader}
+        data={DATA}
+        numColumns={2}
+        renderItem={renderMenuItem}
+      />
     </Screen>
-
-    )
-  
+  )
 })
 
 const $root: ViewStyle = {

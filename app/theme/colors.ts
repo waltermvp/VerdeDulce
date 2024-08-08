@@ -1,5 +1,18 @@
 // TODO: write documentation for colors and palette in own markdown file and add links from here
 
+
+// {
+//   "veryLightGray": "#f4f3f2",
+//   "darkTeal": "#1b463c",
+//   "lightGreen": "#d8ed6d",
+//   "veryDarkGreen": "#0f150f",
+//   "lightYellowGreen": "#ebfe72",
+//   "paleBlue": "#dae8e9"
+// }
+
+
+
+
 const palette = {
   neutral100: "#FFFFFF",
   neutral200: "#F4F2F1",
@@ -11,12 +24,19 @@ const palette = {
   neutral800: "#191015",
   neutral900: "#000000",
 
-  primary100: "#F4E0D9",
-  primary200: "#E8C1B4",
-  primary300: "#DDA28E",
-  primary400: "#D28468",
-  primary500: "#C76542",
-  primary600: "#A54F31",
+  // primary100: "#F4E0D9",
+  // primary200: "#E8C1B4",
+  // primary300: "#DDA28E",
+  // primary400: "#D28468",
+  // primary500: "#C76542",
+  // primary600: "#A54F31",
+  "primary100": "#ebfe72",  // lightYellowGreen
+  "primary200": "#bfcf5e",
+  "primary300": "#93a14a",
+  "primary400": "#677237",
+  "primary500": "#3b4423",
+  "primary600": "#0f150f"   // veryDarkGreen
+,
 
   secondary100: "#DCDDE9",
   secondary200: "#BCC0D6",
