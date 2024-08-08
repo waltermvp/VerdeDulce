@@ -7849,10 +7849,10 @@ react-native-screens@3.31.1:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
-react-native-type-animation@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-type-animation/-/react-native-type-animation-0.4.0.tgz#b40eec5fea2d20f7cbe2f5ad703c6329efd4b4f8"
-  integrity sha512-JQikS4iv4ltxsH6y0XbdcOvXEKtPt93UgXgG6bQqvQirr6reuqM4DNxxyoRG6eB5fxex+PHcu2x+NZX2C6vt1Q==
+react-native-typewriter-effect@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/react-native-typewriter-effect/-/react-native-typewriter-effect-0.1.4.tgz#f7baa8d0365f111051914b3d2c81a89c9f759af9"
+  integrity sha512-/hCQ6rgQtpV9iNIHMBrx3KVJY2CoKxU0GExo/VvSjjm8wDJdw2Dy6pSh0ybzjJgN63PLflCET8OIJFQqP02Ylw==
 
 react-native-web@~0.19.6:
   version "0.19.12"

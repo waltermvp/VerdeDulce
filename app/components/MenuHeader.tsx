@@ -4,8 +4,9 @@ import { observer } from "mobx-react-lite"
 import { colors, typography } from "app/theme"
 import { Text } from "app/components/Text"
 import { Image } from "expo-image"
-import { TypeAnimation } from "react-native-type-animation"
-const HEIGHT = 225
+import TypeWriterEffect from "react-native-typewriter-effect"
+
+const HEIGHT = 275
 export interface MenuHeaderProps {
   /**
    * An optional style override useful for padding & margin.
@@ -27,27 +28,11 @@ export const MenuHeader = observer(function MenuHeader(props: MenuHeaderProps) {
           <Image style={{ flex: 1 }} source={require("../../assets/images/VerdeDulce_logo.svg")} />
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={$text}>Verde Dulce</Text>
-          {/* <TypeAnimation
-            sequence={[
-              { text: "Verde" },
-              { text: "Dulce" },
-              {
-                action: () => {
-                  console.log("Finished first two sequences")
-                },
-              },
-              { text: "One Two Three" },
-              { text: "One Two" },
-              { text: "One" },
-            ]}
-            loop
-            style={{
-              color: "white",
-              backgroundColor: "green",
-              fontSize: 30,
-            }}
-          /> */}
+          {/* <Text style={$text}>Verde Dulce</Text> */}
+          <TypeWriterEffect
+            style={{ fontFamily: "Open Sans" }}
+            content="Verde Dulce! Comida de alta sostenible, y de alta calidad."
+          />
         </View>
       </View>
     </View>
