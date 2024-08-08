@@ -14,6 +14,15 @@
 
 
 const palette = {
+
+lightBackground:"#f2f1e4",
+  "veryLightGray": "#f4f3f2",
+  "darkTeal": "#1b463c",
+  "lightGreen": "#d8ed6d",
+  "veryDarkGreen": "#0f150f",
+  "lightYellowGreen": "#ebfe72",
+  "paleBlue": "#dae8e9"
+,
   neutral100: "#FFFFFF",
   neutral200: "#F4F2F1",
   neutral300: "#D7CEC9",

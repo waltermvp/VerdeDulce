@@ -20,15 +20,24 @@ export interface MenuHeaderProps {
 export const MenuHeader = observer(function MenuHeader(props: MenuHeaderProps) {
   const { style } = props
   const $styles = [$container, style]
-
+  const showImage = false
   return (
     <View style={$styles}>
       <View style={{ flexDirection: "row" }}>
-        <View style={{ flex: 1, height: HEIGHT }}>
-          <Image style={{ flex: 1 }} source={require("../../assets/images/VerdeDulce_logo.svg")} />
-        </View>
+        {showImage && (
+          <View style={{ flex: 1, height: HEIGHT }}>
+            <Image
+              style={{ flex: 1 }}
+              source={require("../../assets/images/VerdeDulce_logo.svg")}
+            />
+          </View>
+        )}
         <View style={{ flex: 1, justifyContent: "center", marginLeft: spacing.lg }}>
-          <Text tx="landingScreen.prompt" preset="heading"></Text>
+          <Text
+            tx="landingScreen.prompt"
+            preset="headingLG"
+            style={{ textAlign: "center", paddingHorizontal: spacing.xxl }}
+          ></Text>
           {/* <TypeWriterEffect
             style={typography.primary}
             content="Verde Dulce! Comida de alta sostenible, y de alta calidad."

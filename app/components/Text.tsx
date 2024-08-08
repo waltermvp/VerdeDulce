@@ -74,6 +74,7 @@ export function Text(props: TextProps) {
 }
 
 const $sizeStyles = {
+  xxxl: { fontSize: 48, lineHeight: 52 } satisfies TextStyle,
   xxl: { fontSize: 36, lineHeight: 44 } satisfies TextStyle,
   xl: { fontSize: 24, lineHeight: 34 } satisfies TextStyle,
   lg: { fontSize: 20, lineHeight: 32 } satisfies TextStyle,
@@ -98,6 +99,7 @@ const $presets = {
 
   bold: [$baseStyle, $fontWeightStyles.bold] as StyleProp<TextStyle>,
 
+  headingLG: [$baseStyle, $sizeStyles.xxxl, $fontWeightStyles.light] as StyleProp<TextStyle>,
   heading: [$baseStyle, $sizeStyles.xxl, $fontWeightStyles.bold] as StyleProp<TextStyle>,
 
   subheading: [$baseStyle, $sizeStyles.lg, $fontWeightStyles.medium] as StyleProp<TextStyle>,

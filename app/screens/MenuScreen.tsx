@@ -4,7 +4,9 @@ import { ViewStyle, View, SectionList } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { MenuHeader, MenuItem, Screen, Text } from "app/components"
 import { FlashList as FlatList } from "@shopify/flash-list"
-import { spacing } from "app/theme"
+import { colors, spacing } from "app/theme"
+import { useMediaQuery } from "react-responsive"
+
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
@@ -16,35 +18,24 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
 
   // Pull in navigation via hook
   // const navigation = useNavigation()
-  const DATA = [
-    {
-      id: "1",
-      name: "Kale Caesar",
-      description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
-      price: "$9.99",
-    },
-    {
-      id: "2",
-      name: "Harvest Bowl",
-      description: "Roasted brussels sprouts, roasted sweet potatoes, and wild rice",
-      price: "$10.99",
-    },
-    {
-      id: "3",
-      name: "Spicy Thai Salad",
-      description: "Organic arugula, spicy cashew dressing, and sesame tofu",
-      price: "$11.99",
-    },
-    // Add more menu items here
-  ]
-
-  const renderMenuItem = ({ item }) => <MenuItem item={item} />
+  // const isDesktopOrLaptop = useMediaQuery({
+  //   query: "(min-width: 1224px)",
+  // })
+  // const isBigScreen = useMediaQuery({ query: "(min-width: 1824px)" })
+  // const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" })
+  // const isPortrait = useMediaQuery({ query: "(orientation: portrait)" })
+  // const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" })
+  // const numberOfColumns = breakpointGroup === "group1"
+  const isBigScreen = useMediaQuery({ query: "(min-width: 1224px)" })
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
+  // 490 // 800
+  const numberOfColumns = isSmallScreen ? 1 : isBigScreen ? 3 : 2
   const renderSection = ({ item }) => {
     return (
       <FlatList
         data={item.list}
-        numColumns={3}
-        renderItem={renderListItem}
+        numColumns={numberOfColumns}
+        renderItem={renderMenuItem}
         keyExtractor={keyExtractor}
       />
     )
@@ -58,14 +49,8 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
     )
   }
 
-  const renderListItem = ({ item }) => {
-    return (
-      <MenuItem item={item} />
-      // <View style={{ height: 50, width: 100, borderColor: "green", borderWidth: 1 }}>
-      //   <Text>{item.name}</Text>
-      //   <Text>{item.color}</Text>
-      // </View>
-    )
+  const renderMenuItem = ({ item }) => {
+    return <MenuItem item={item} />
   }
 
   const keyExtractor = (item) => {
@@ -94,6 +79,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
 
 const $root: ViewStyle = {
   flex: 1,
+  backgroundColor: colors.palette.lightBackground,
 }
 
 const sections = [
@@ -105,12 +91,22 @@ const sections = [
         key: "vegetables",
         list: [
           {
-            name: "Carrot",
-            color: "Orange",
+            id: "1",
+            name: "Kale Caesar",
+            description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
+            price: "$9.99",
           },
           {
-            name: "Cabbage",
-            color: "Purple",
+            id: "2",
+            name: "Harvest Bowl",
+            description: "Roasted brussels sprouts, roasted sweet potatoes, and wild rice",
+            price: "$10.99",
+          },
+          {
+            id: "3",
+            name: "Spicy Thai Salad",
+            description: "Organic arugula, spicy cashew dressing, and sesame tofu",
+            price: "$11.99",
           },
         ],
       },
@@ -124,20 +120,22 @@ const sections = [
         key: "fruits",
         list: [
           {
-            name: "Apple",
-            color: "Green",
+            id: "1",
+            name: "Kale Caesar",
+            description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
+            price: "$9.99",
           },
           {
-            name: "Banana",
-            color: "Yellow",
+            id: "2",
+            name: "Harvest Bowl",
+            description: "Roasted brussels sprouts, roasted sweet potatoes, and wild rice",
+            price: "$10.99",
           },
           {
-            name: "Strawberry",
-            color: "Red",
-          },
-          {
-            name: "Blueberry",
-            color: "Blue",
+            id: "3",
+            name: "Spicy Thai Salad",
+            description: "Organic arugula, spicy cashew dressing, and sesame tofu",
+            price: "$11.99",
           },
         ],
       },
