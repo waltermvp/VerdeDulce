@@ -1,12 +1,8 @@
 import React from "react"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { MenuScreen } from "app/screens"
 import { createDrawerNavigator } from "@react-navigation/drawer"
-import { Text } from "app/components"
-import { colors, spacing, typography } from "app/theme"
-import { Image } from "expo-image"
-import { View } from "react-native-reanimated/lib/typescript/Animated"
-import { t } from "i18n-js"
+
+import { colors, spacing } from "app/theme"
 
 export type MenuNavigatorParamList = {
   Menu: undefined
