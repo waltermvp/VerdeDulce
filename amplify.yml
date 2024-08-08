@@ -25,7 +25,7 @@ frontend:
         # - 'npx expo build:web'
         - 'yarn run bundle:web'
   artifacts:
-    baseDirectory: ./VerdeDulce/build
+    baseDirectory: ./verdedulce/build
     files:
       - '**/*'
   cache:
