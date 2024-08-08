@@ -23,7 +23,7 @@ frontend:
       commands:
         - mkdir ./dist && touch ./dist/index.html
         # - 'npx expo build:web'
-        - 'yarn build:web'
+        - 'yarn run build:web'
   artifacts:
     baseDirectory: web-build
     files:
