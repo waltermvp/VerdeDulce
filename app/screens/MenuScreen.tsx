@@ -4,6 +4,7 @@ import { ViewStyle, View, SectionList } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { MenuHeader, MenuItem, Screen, Text } from "app/components"
 import { FlashList as FlatList } from "@shopify/flash-list"
+import { spacing } from "app/theme"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
@@ -50,15 +51,20 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   }
 
   const renderSectionHeader = ({ section }) => {
-    return <Text>{section.title}</Text>
+    return (
+      <View style={{}}>
+        <Text preset="subheading">{section.title}</Text>
+      </View>
+    )
   }
 
   const renderListItem = ({ item }) => {
     return (
-      <View style={{ height: 50, width: 100, borderColor: "green", borderWidth: 1 }}>
-        <Text>{item.name}</Text>
-        <Text>{item.color}</Text>
-      </View>
+      <MenuItem item={item} />
+      // <View style={{ height: 50, width: 100, borderColor: "green", borderWidth: 1 }}>
+      //   <Text>{item.name}</Text>
+      //   <Text>{item.color}</Text>
+      // </View>
     )
   }
 
@@ -74,8 +80,10 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
         numColumns={2}
         renderItem={renderMenuItem}
       /> */}
+      <MenuHeader />
       <SectionList
-        ListHeaderComponent={MenuHeader}
+        // ListHeaderComponent={MenuHeader}
+        contentContainerStyle={{ padding: spacing.sm }}
         sections={sections}
         renderSectionHeader={renderSectionHeader}
         renderItem={renderSection}

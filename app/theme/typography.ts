@@ -10,15 +10,37 @@ import {
   SpaceGrotesk_700Bold as spaceGroteskBold,
 } from "@expo-google-fonts/space-grotesk"
 
+import {
+  OpenSans_300Light as openSansLight,
+  OpenSans_400Regular as openSansRegular,
+  OpenSans_500Medium as openSansMedium,
+  OpenSans_600SemiBold as openSansSemiBold,
+  OpenSans_700Bold as openSansBold,
+} from "@expo-google-fonts/open-sans"
+
+
 export const customFontsToLoad = {
   spaceGroteskLight,
   spaceGroteskRegular,
   spaceGroteskMedium,
   spaceGroteskSemiBold,
   spaceGroteskBold,
+  openSansLight,
+  openSansRegular,
+  openSansMedium,
+  openSansSemiBold,
+  openSansBold,
 }
 
 const fonts = {
+  openSans: {
+    // Cross-platform Google font.
+    light: "openSansLight",
+    normal: "openSansRegular",
+    medium: "openSansMedium",
+    semiBold: "openSansSemiBold",
+    bold: "openSansBold",
+  },
   spaceGrotesk: {
     // Cross-platform Google font.
     light: "spaceGroteskLight",
@@ -59,7 +81,7 @@ export const typography = {
   /**
    * The primary font. Used in most places.
    */
-  primary: fonts.spaceGrotesk,
+  primary: fonts.openSans,
   /**
    * An alternate font used for perhaps titles and stuff.
    */
