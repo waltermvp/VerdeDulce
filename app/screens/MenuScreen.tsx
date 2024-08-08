@@ -26,7 +26,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   // const isPortrait = useMediaQuery({ query: "(orientation: portrait)" })
   // const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" })
   // const numberOfColumns = breakpointGroup === "group1"
-  const isBigScreen = useMediaQuery({ query: "(min-width: 1224px)" })
+  const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
   const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
   // 490 // 800
   const numberOfColumns = isSmallScreen ? 1 : isBigScreen ? 3 : 2
@@ -68,7 +68,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       <MenuHeader />
       <SectionList
         // ListHeaderComponent={MenuHeader}
-        contentContainerStyle={{ padding: spacing.sm }}
+        contentContainerStyle={{ padding: spacing.sm, justifyContent: "flex-start" }}
         sections={sections}
         renderSectionHeader={renderSectionHeader}
         renderItem={renderSection}
