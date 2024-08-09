@@ -1,5 +1,6 @@
 const es = {
   landingScreen: {
+    order:"Ordena",
     name: "Verde Dulce",
     prompt: "Comida fresca y de alta calidad. Sostenible y de origen local.",
   },
