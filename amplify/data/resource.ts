@@ -15,7 +15,8 @@ const schema = a.schema({
       price: a.integer(),
       calories: a.integer(),
       category: a.string(),
-      metaData: a.json()
+      metaData: a.json(),
+      available:a.boolean()
       
     })
     .authorization((allow) => [allow.guest()]),
