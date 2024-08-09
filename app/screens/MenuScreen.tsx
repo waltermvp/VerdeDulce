@@ -55,14 +55,18 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
                   flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: colors.palette.lightGreen,
+                  backgroundColor: colors.palette.greenFont,
                   padding: spacing.sm,
                   borderRadius: 13,
-                  borderBottomColor: colors.palette.veryDarkGreen,
+                  borderBottomColor: colors.palette.neutral900,
                   borderBottomWidth: onHoverIn ? 2 : 0,
                 }}
               >
-                <Text tx="landingScreen.order" preset="bold"></Text>
+                <Text
+                  tx="landingScreen.order"
+                  preset="bold"
+                  style={{ color: colors.palette.lightYellowGreen }}
+                ></Text>
                 <Ionicons
                   style={{
                     // textDecorationLine: onHoverIn ? "underline" : undefined,
@@ -70,7 +74,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
                   }}
                   name="logo-whatsapp"
                   size={24}
-                  // color="green"
+                  color={colors.palette.lightYellowGreen}
                 />
               </View>
             </Pressable>
