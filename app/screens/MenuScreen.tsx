@@ -35,7 +35,11 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
         headerRight: () => {
           return (
             <Pressable
-              style={{ marginRight: spacing.lg, flexDirection: "row", alignItems: "center" }}
+              style={{
+                marginRight: isSmallScreen ? spacing.xs : spacing.lg,
+                flexDirection: "row",
+                alignItems: "center",
+              }}
               onPress={() => {
                 // navigation.navigate("Order")
               }}
@@ -57,7 +61,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
                   alignItems: "center",
                   justifyContent: "center",
                   backgroundColor: colors.palette.greenFont,
-                  padding: spacing.sm,
+                  padding: isSmallScreen ? spacing.xxs : spacing.sm,
                   borderRadius: 13,
                   borderBottomColor: colors.palette.neutral900,
                   borderBottomWidth: onHoverIn ? 2 : 0,
@@ -71,7 +75,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
                 <Ionicons
                   style={{
                     // textDecorationLine: onHoverIn ? "underline" : undefined,
-                    paddingLeft: spacing.sm,
+                    paddingLeft: isSmallScreen ? spacing.xs : spacing.sm,
                   }}
                   name="logo-whatsapp"
                   size={24}
