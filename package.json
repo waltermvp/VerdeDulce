@@ -27,7 +27,8 @@
     "web": "npx expo start --web",
     "bundle:web": "npx expo export --platform web",
     "serve:web": "npx server dist",
-    "prebuild:clean": "npx expo prebuild --clean"
+    "prebuild:clean": "npx expo prebuild --clean",
+    "generate":"npx ampx generate outputs --app-id d1ptvrvloahojd --branch main"
   },
   "dependencies": {
     "@expo-google-fonts/open-sans": "^0.2.3",

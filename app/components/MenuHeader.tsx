@@ -38,9 +38,11 @@ export const MenuHeader = observer(function MenuHeader(props: MenuHeaderProps) {
         preset="headingLG"
         style={{
           textAlign: "center",
-          padding: spacing.xl,
-          maxWidth: "75%",
+          paddingVertical: spacing.lg,
+          // maxWidth: "75%",
           alignSelf: "center",
+          fontSize: 32,
+          lineHeight: 40,
           // paddingBottom: -20,
           // marginBottom: -20,
         }}

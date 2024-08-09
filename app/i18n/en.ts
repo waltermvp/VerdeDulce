@@ -1,6 +1,7 @@
 const en = {
   landingScreen:{
     name:"Verde Dulce",
+    order:"Order",
     prompt: "Fresh, high quality. Sourced sustanably and locally.",    
   },
   common: {
@@ -8,6 +9,7 @@ const en = {
     cancel: "Cancel",
     back: "Back",
     logOut: "Log Out",
+    logIn: "Log In",
   },
   welcomeScreen: {
     postscript:

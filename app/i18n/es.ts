@@ -1,5 +1,6 @@
 const es = {
   landingScreen: {
+    order:"Ordena",
     name: "Verde Dulce",
     prompt: "Comida fresca y de alta calidad. Sostenible y de origen local.",
   },
@@ -9,6 +10,8 @@ const es = {
     cancel: "Cancelar",
     back: "Atrás",
     logOut: "Cerrar sesión",
+    logIn: "Log In",
+
   },
   welcomeScreen: {
     postscript:
@@ -47,7 +50,6 @@ const es = {
   },
   demoNavigator: {
     componentsTab: "Componentes",
-  },
-}
+ 
 
 export default es;

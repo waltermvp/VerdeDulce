@@ -1,13 +1,17 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle, View, SectionList } from "react-native"
+import { ViewStyle, View, SectionList, Pressable } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { MenuHeader, MenuItem, Screen, Text } from "app/components"
 import { FlashList as FlatList } from "@shopify/flash-list"
 import { colors, spacing } from "app/theme"
 import { useMediaQuery } from "react-responsive"
+import { useFocusEffect } from "@react-navigation/native"
 
-// import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
+import { Ionicons } from "@expo/vector-icons"
+import { imageCDNURL } from "app/utils/linkbuilder"
+
 // import { useStores } from "app/models"
 
 interface MenuScreenProps extends AppStackScreenProps<"Menu"> {}
@@ -16,8 +20,75 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
 
+  const navigation = useNavigation()
+  const [onHoverIn, setOnHoverIn] = React.useState(false)
+  const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
+  // 490 // 800
+  const numberOfColumns = isSmallScreen ? 1 : isBigScreen ? 3 : 2
+
+  const multiplier = numberOfColumns === 3 ? 1 : numberOfColumns === 2 ? 1 : 0.25
+
+  useFocusEffect(
+    React.useCallback(() => {
+      navigation.setOptions({
+        headerRight: () => {
+          return (
+            <Pressable
+              style={{
+                marginRight: isSmallScreen ? spacing.xs : spacing.lg,
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+              onPress={() => {
+                // navigation.navigate("Order")
+              }}
+              onHoverIn={() => {
+                setOnHoverIn(true)
+              }}
+              onHoverOut={() => {
+                setOnHoverIn(false)
+              }}
+            >
+              {/* <Image
+                style={{ height: 48 * multiplier, width: 207 * multiplier }}
+                source={require("../../assets/images/WhatsAppButtonGreenLarge.svg")}
+              /> */}
+
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: colors.palette.greenFont,
+                  padding: isSmallScreen ? spacing.xxs : spacing.sm,
+                  borderRadius: 13,
+                  borderBottomColor: colors.palette.neutral900,
+                  borderBottomWidth: onHoverIn ? 2 : 0,
+                }}
+              >
+                <Text
+                  tx="landingScreen.order"
+                  preset="bold"
+                  style={{ color: colors.palette.lightYellowGreen }}
+                ></Text>
+                <Ionicons
+                  style={{
+                    // textDecorationLine: onHoverIn ? "underline" : undefined,
+                    paddingLeft: isSmallScreen ? spacing.xs : spacing.sm,
+                  }}
+                  name="logo-whatsapp"
+                  size={24}
+                  color={colors.palette.lightYellowGreen}
+                />
+              </View>
+            </Pressable>
+          )
+        },
+      })
+    }, [navigation, onHoverIn]),
+  )
   // Pull in navigation via hook
-  // const navigation = useNavigation()
   // const isDesktopOrLaptop = useMediaQuery({
   //   query: "(min-width: 1224px)",
   // })
@@ -26,10 +97,6 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   // const isPortrait = useMediaQuery({ query: "(orientation: portrait)" })
   // const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" })
   // const numberOfColumns = breakpointGroup === "group1"
-  const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
-  // 490 // 800
-  const numberOfColumns = isSmallScreen ? 1 : isBigScreen ? 3 : 2
   const renderSection = ({ item }) => {
     return (
       <FlatList
@@ -96,18 +163,21 @@ const sections = [
             name: "Kale Caesar",
             description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
             price: "$9.99",
+            url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
           },
           {
             id: "2",
             name: "Harvest Bowl",
             description: "Roasted brussels sprouts, roasted sweet potatoes, and wild rice",
             price: "$10.99",
+            url: imageCDNURL("Q423_OLO_HarvestBowlsAlmonda_3600x2400_1_zsngyb.png"),
           },
           {
             id: "3",
             name: "Spicy Thai Salad",
             description: "Organic arugula, spicy cashew dressing, and sesame tofu",
             price: "$11.99",
+            url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
           },
         ],
       },
@@ -125,18 +195,21 @@ const sections = [
             name: "Kale Caesar",
             description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
             price: "$9.99",
+            url: imageCDNURL("Q423_OLO_HarvestBowlsAlmonda_3600x2400_1_zsngyb.png"),
           },
           {
             id: "2",
             name: "Harvest Bowl",
             description: "Roasted brussels sprouts, roasted sweet potatoes, and wild rice",
             price: "$10.99",
+            url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
           },
           {
             id: "3",
             name: "Spicy Thai Salad",
             description: "Organic arugula, spicy cashew dressing, and sesame tofu",
             price: "$11.99",
+            url: imageCDNURL("Q423_OLO_HarvestBowlsAlmonda_3600x2400_1_zsngyb.png"),
           },
         ],
       },
