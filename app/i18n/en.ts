@@ -9,6 +9,7 @@ const en = {
     cancel: "Cancel",
     back: "Back",
     logOut: "Log Out",
+    logIn: "Log In",
   },
   welcomeScreen: {
     postscript:

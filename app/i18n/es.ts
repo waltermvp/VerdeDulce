@@ -10,6 +10,8 @@ const es = {
     cancel: "Cancelar",
     back: "Atrás",
     logOut: "Cerrar sesión",
+    logIn: "Log In",
+
   },
   welcomeScreen: {
     postscript:
@@ -48,7 +50,6 @@ const es = {
   },
   demoNavigator: {
     componentsTab: "Componentes",
-  },
-}
+ 
 
 export default es;
