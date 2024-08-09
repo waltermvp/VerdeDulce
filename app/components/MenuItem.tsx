@@ -1,7 +1,7 @@
 import * as React from "react"
-import { StyleProp, TextStyle, View, ViewStyle } from "react-native"
+import { StyleProp, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors, spacing, typography } from "app/theme"
+import { spacing } from "app/theme"
 import { Text } from "app/components/Text"
 import { Image } from "expo-image"
 import { Bullets } from "./Bullets"
@@ -29,7 +29,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
       {/* <View style={styles.item}> */}
       <Image
         style={{ height: SIZE, width: SIZE, borderRadius: 9 }}
-        source="https://picsum.photos/seed/696/3000/2000"
+        source={item.url}
         placeholder={{ blurhash }}
         contentFit="cover"
         transition={1000}
@@ -57,23 +57,6 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
 })
 
 const $container: ViewStyle = {
-  // justifyContent: "center",
   flex: 1,
   paddingVertical: spacing.lg,
-  // alignItems: "center",
-  // justifyContent: "center",
-  // textAlign: "center",
-}
-
-const styles = {
-  item: {
-    // flexDirection: "column",
-    alignItems: "center",
-    // borderColor: "red",
-    borderWidth: 3,
-    // flex: 1,
-  },
-  title: { textAlign: "center" },
-  price: {},
-  description: { alignItems: "center" },
 }

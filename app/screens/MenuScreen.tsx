@@ -10,6 +10,7 @@ import { useFocusEffect } from "@react-navigation/native"
 
 import { useNavigation } from "@react-navigation/native"
 import { Ionicons } from "@expo/vector-icons"
+import { imageCDNURL } from "app/utils/linkbuilder"
 
 // import { useStores } from "app/models"
 
@@ -158,18 +159,21 @@ const sections = [
             name: "Kale Caesar",
             description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
             price: "$9.99",
+            url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
           },
           {
             id: "2",
             name: "Harvest Bowl",
             description: "Roasted brussels sprouts, roasted sweet potatoes, and wild rice",
             price: "$10.99",
+            url: imageCDNURL("Q423_OLO_HarvestBowlsAlmonda_3600x2400_1_zsngyb.png"),
           },
           {
             id: "3",
             name: "Spicy Thai Salad",
             description: "Organic arugula, spicy cashew dressing, and sesame tofu",
             price: "$11.99",
+            url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
           },
         ],
       },
@@ -187,18 +191,21 @@ const sections = [
             name: "Kale Caesar",
             description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
             price: "$9.99",
+            url: imageCDNURL("Q423_OLO_HarvestBowlsAlmonda_3600x2400_1_zsngyb.png"),
           },
           {
             id: "2",
             name: "Harvest Bowl",
             description: "Roasted brussels sprouts, roasted sweet potatoes, and wild rice",
             price: "$10.99",
+            url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
           },
           {
             id: "3",
             name: "Spicy Thai Salad",
             description: "Organic arugula, spicy cashew dressing, and sesame tofu",
             price: "$11.99",
+            url: imageCDNURL("Q423_OLO_HarvestBowlsAlmonda_3600x2400_1_zsngyb.png"),
           },
         ],
       },
