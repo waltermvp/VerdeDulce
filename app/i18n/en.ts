@@ -1,7 +1,7 @@
 const en = {
   landingScreen:{
     name:"Verde Dulce",
-    order:"Order",
+    order:"Order Now",
     prompt: "Fresh, high quality. Sourced sustanably and locally.",    
   },
   common: {
