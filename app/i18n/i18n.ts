@@ -4,6 +4,7 @@ import { I18nManager } from "react-native"
 
 // if English isn't your default language, move Translations to the appropriate language file.
 import en, { Translations } from "./en"
+import es from "./es"
 import ar from "./ar"
 import ko from "./ko"
 import fr from "./fr"
@@ -12,12 +13,12 @@ import jp from "./jp"
 i18n.fallbacks = true
 
 // to use regional locales use { "en-US": enUS } etc
-i18n.translations = { ar, en, "en-US": en, ko, fr, jp }
+i18n.translations = { ar, en, "en-US": en, ko, fr, jp ,es }
 
 const fallbackLocale = "en-US"
 const systemLocale = Localization.getLocales()[0]
 const systemLocaleTag = systemLocale?.languageTag ?? "en-US"
-
+console.log("systemLocaleTag", systemLocaleTag)
 if (Object.prototype.hasOwnProperty.call(i18n.translations, systemLocaleTag)) {
   // if specific locales like en-FI or en-US is available, set it
   i18n.locale = systemLocaleTag
