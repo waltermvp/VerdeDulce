@@ -42,7 +42,9 @@ export type AppStackParamList = {
   MenuNav: NavigatorScreenParams<MenuNavigatorParamList>
   Menu: undefined
   // 🔥 Your screens go here
-  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  Order: undefined
+	Admin: undefined
+	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 /**
@@ -85,7 +87,9 @@ const AppStack = observer(function AppStack() {
 
       {/** 🔥 Your screens go here */}
       <Stack.Screen name="Menu" component={Screens.MenuScreen} />
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      <Stack.Screen name="Order" component={Screens.OrderScreen} />
+			<Stack.Screen name="Admin" component={Screens.AdminScreen} />
+			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })

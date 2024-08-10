@@ -28,7 +28,12 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
     <View style={$styles}>
       {/* <View style={styles.item}> */}
       <Image
-        style={{ height: SIZE, width: SIZE, borderRadius: 9 }}
+        style={{
+          height: SIZE,
+          width: SIZE,
+          borderRadius: 9,
+          // borderColor: "red",  borderWidth: 2
+        }}
         source={item.url}
         placeholder={{ blurhash }}
         contentFit="cover"

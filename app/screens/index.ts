@@ -8,3 +8,5 @@ export * from "./DemoShowroomScreen/DemoShowroomScreen"
 export * from "./ErrorScreen/ErrorBoundary"
 // export other screens here
 export * from "./MenuScreen"
+export * from "./OrderScreen"
+export * from "./AdminScreen"

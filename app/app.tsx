@@ -30,7 +30,10 @@ import { customFontsToLoad } from "./theme"
 import Config from "./config"
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { ViewStyle } from "react-native"
+import { Amplify } from "aws-amplify"
+import amplifyOutputs from "../amplify_outputs.json"
 
+Amplify.configure(amplifyOutputs)
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
 // Web linking configuration
@@ -41,6 +44,10 @@ const config = {
       path: "",
     },
     Welcome: "welcome",
+    Menu: "menu",
+    //TODO: build out the menu item UI
+    // MenuItem: "menuItem/:id",
+    Admin: "admin",
     Demo: {
       screens: {
         DemoShowroom: {
