@@ -18,6 +18,7 @@ const Drawer = createDrawerNavigator<MenuNavigatorParamList>()
 export const MenuNavigator = () => {
   return (
     <Drawer.Navigator
+      initialRouteName="Menu"
       drawerContent={(props) => {
         return (
           <View style={{ flex: 1, backgroundColor: colors.palette.greenFont }}>
@@ -62,9 +63,9 @@ export const MenuNavigator = () => {
       }}
     >
       <Drawer.Screen name="Menu" component={MenuScreen} />
-      <Drawer.Screen name="Admin" component={AdminScreen} />
-      <Drawer.Screen name="Order" component={OrderScreen} />
-      <Drawer.Screen name="Login" component={LoginScreen} />
+      {/* <Drawer.Screen name="Admin" component={AdminScreen} />
+      <Drawer.Screen name="Order" component={OrderScreen} /> */}
+      {/* <Drawer.Screen name="Login" component={LoginScreen} /> */}
     </Drawer.Navigator>
   )
 }

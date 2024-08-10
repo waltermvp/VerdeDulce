@@ -13,6 +13,8 @@ const es = {
     logIn: "Log In",
 
   },
+  menuScreen:{
+    orderMessage: "Hola, me gustaría hacer un pedido con Verde Dulce.",    },
   welcomeScreen: {
     postscript:
       "psst — Probablemente esto no es lo que parece tu aplicación. (A menos que tu diseñador te haya entregado estas pantallas, y en ese caso, ¡lánzalo!)",
