@@ -10,7 +10,8 @@ import { useFocusEffect } from "@react-navigation/native"
 import { Linking } from "react-native" // Import Linking module
 import { useNavigation } from "@react-navigation/native"
 import { imageCDNURL } from "app/utils/linkbuilder"
-import Config from "../config"
+// import Config from "../config"
+import { translate } from "app/i18n"
 
 // import { useStores } from "app/models"
 
@@ -25,7 +26,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
   // 490 // 800
   const numberOfColumns = isSmallScreen ? 1 : isBigScreen ? 3 : 2
-
+  //TODO: localize
   useFocusEffect(
     React.useCallback(() => {
       navigation.setOptions({
@@ -35,14 +36,13 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
               tx="landingScreen.order"
               icon="logo-whatsapp"
               onPress={() => {
-                console.log("Order button pressed")
                 // navigation.navigate("OrderScreen", { screen: "Order" })
-                const phoneNumber = "+593-96-302-1783" // Replace with the actual phone number
+                const phoneNumber = "+593963021783" // Replace with the actual phone number
 
-                const message = `Hello, I would like to place an ${Config.APP_NAME} order.` // Replace with the actual message
-                const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
+                const message = translate("menuScreen.orderMessage") // Replace with the actual message
+                const url = `whatsapp://send?text=${encodeURIComponent(
                   message,
-                )}`
+                )}&phone=${encodeURIComponent(phoneNumber)}`
                 Linking.openURL(url).catch((err) => console.error("Failed to open WhatsApp", err))
               }}
             />
