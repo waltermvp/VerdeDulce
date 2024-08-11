@@ -48,7 +48,7 @@ const config = {
     Menu: "menu",
     //TODO: build out the menu item UI
     // MenuItem: "menuItem/:id",
-    // Admin: "admin",
+    Admin: "admin",
     //   Demo: {
     //     screens: {
     //       DemoShowroom: {

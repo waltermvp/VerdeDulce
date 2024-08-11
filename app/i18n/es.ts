@@ -128,7 +128,24 @@ const es:Translations = {
       content:
         "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
     },
+    
   },
+  loginScreen: {
+    signIn: "Iniciar sesión",
+    enterDetails:
+      "Ingresa tus detalles abajo para desbloquear información ultrasecreta. Nunca adivinarás lo que tenemos esperando. O quizás sí; no es ciencia espacial.",
+    emailFieldLabel: "Correo electrónico",
+    passwordFieldLabel: "Contraseña",
+    emailFieldPlaceholder: "Ingresa tu dirección de correo electrónico",
+    passwordFieldPlaceholder: "Contraseña supersecreta aquí",
+    tapToSignIn: "¡Toca para iniciar sesión!",
+    hint: "Consejo: puedes usar cualquier dirección de correo y tu contraseña favorita :)",
+    venueName: "Nombre del lugar",
+    venueNamePlaceholder: "Ingresa el nombre del lugar",
+    tapSignUp: "Toca para registrarte",
+  },
+
+  
 }
 
 

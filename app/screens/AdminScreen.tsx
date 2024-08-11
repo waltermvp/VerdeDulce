@@ -29,7 +29,7 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
 
     const sub = client.models.Item.observeQuery({
       // filter: { displayId: { eq: displayID } },
-      authMode: "apiKey",
+      authMode: "userPool",
     }).subscribe({
       next: ({ items, isSynced }) => {
         console.log("els.Slide.observeQuery items", items, isSynced)
