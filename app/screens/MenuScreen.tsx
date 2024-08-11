@@ -24,6 +24,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   const navigation = useNavigation()
   const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
   const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
+
   // 490 // 800
   const numberOfColumns = isSmallScreen ? 1 : isBigScreen ? 3 : 2
   //TODO: localize

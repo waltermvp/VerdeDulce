@@ -39,7 +39,7 @@ export const MenuHeader = observer(function MenuHeader(props: MenuHeaderProps) {
         style={{
           textAlign: "center",
           paddingVertical: spacing.lg,
-          // maxWidth: "75%",
+          maxWidth: "65%",
           alignSelf: "center",
           fontSize: 32,
           lineHeight: 40,

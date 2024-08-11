@@ -1,19 +1,49 @@
-import React, { FC } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { SectionList, ViewStyle, FlatList, View } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Button, MenuItem, OrderButton, Screen, Text } from "app/components"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"
 import { useStores } from "app/models"
-import { Ionicons } from "@expo/vector-icons" // Import Ionicons from the appropriate library
 import { imageCDNURL } from "app/utils/linkbuilder"
 import { useMediaQuery } from "react-responsive"
 import { spacing } from "app/theme"
+// import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query"
+import { generateClient } from "aws-amplify/data"
+import { Schema } from "amplify/data/resource"
+type Item = Schema["Item"]["type"]
 
 interface AdminScreenProps extends AppStackScreenProps<"Admin"> {}
 
 export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen() {
   const navigation = useNavigation()
+  // const queryClient = new QueryClient()
+  const [items, setItems] = useState<Item[] | null>(null)
+  const client = generateClient<Schema>()
+
+  useEffect(() => {
+    // if (!displayID) {
+    //   // setMode(MODE.MISSING_UDID)
+    //   return
+    // }
+
+    const sub = client.models.Item.observeQuery({
+      // filter: { displayId: { eq: displayID } },
+      authMode: "apiKey",
+    }).subscribe({
+      next: ({ items, isSynced }) => {
+        console.log("els.Slide.observeQuery items", items, isSynced)
+        if (isSynced) {
+          setItems(items)
+          // setSlideCount(items.length)
+        }
+      },
+    })
+    return () => {
+      sub.unsubscribe()
+    }
+  }, [client])
+
   const {
     authenticationStore: { isAuthenticated },
   } = useStores()
@@ -23,6 +53,7 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
   // 490 // 800
   const numberOfColumns = isSmallScreen ? 1 : isBigScreen ? 3 : 2
   console.log("numberOfColumns", numberOfColumns)
+  console.log("displays", items)
   useFocusEffect(
     React.useCallback(() => {
       navigation.setOptions({
@@ -32,6 +63,15 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
       })
     }, [navigation]),
   )
+
+  // const { isPending, error, data } = useQuery({
+  //   queryKey: ["repoData"],
+  //   queryFn: () => fetch("https://api.github.com/repos/TanStack/query").then((res) => res.json()),
+  // })
+
+  // if (isPending) return "Loading..."
+
+  // if (error) return "An error has occurred: " + error.message
 
   const renderMenuItem = ({ item }) => {
     return <MenuItem item={item} />

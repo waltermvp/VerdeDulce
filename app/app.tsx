@@ -32,6 +32,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { ViewStyle } from "react-native"
 import { Amplify } from "aws-amplify"
 import amplifyOutputs from "../amplify_outputs.json"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 Amplify.configure(amplifyOutputs)
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
@@ -40,24 +41,24 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 const prefix = Linking.createURL("/")
 const config = {
   screens: {
-    Login: {
-      path: "",
-    },
-    Welcome: "welcome",
+    // Login: {
+    //   path: "",
+    // },
+    // Welcome: "welcome",
     Menu: "menu",
     //TODO: build out the menu item UI
     // MenuItem: "menuItem/:id",
-    Admin: "admin",
-    Demo: {
-      screens: {
-        DemoShowroom: {
-          path: "showroom/:queryIndex?/:itemIndex?",
-        },
-        DemoDebug: "debug",
-        DemoPodcastList: "podcast",
-        DemoCommunity: "community",
-      },
-    },
+    // Admin: "admin",
+    //   Demo: {
+    //     screens: {
+    //       DemoShowroom: {
+    //         path: "showroom/:queryIndex?/:itemIndex?",
+    //       },
+    //       DemoDebug: "debug",
+    //       DemoPodcastList: "podcast",
+    //       DemoCommunity: "community",
+    //     },
+    //   },
   },
 }
 
@@ -106,15 +107,19 @@ function App(props: AppProps) {
   }
 
   // otherwise, we're ready to render the app
+  const queryClient = new QueryClient()
+
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <ErrorBoundary catchErrors={Config.catchErrors}>
         <GestureHandlerRootView style={$container}>
-          <AppNavigator
-            linking={linking}
-            initialState={initialNavigationState}
-            onStateChange={onNavigationStateChange}
-          />
+          <QueryClientProvider client={queryClient}>
+            <AppNavigator
+              linking={linking}
+              initialState={initialNavigationState}
+              onStateChange={onNavigationStateChange}
+            />
+          </QueryClientProvider>
         </GestureHandlerRootView>
       </ErrorBoundary>
     </SafeAreaProvider>
