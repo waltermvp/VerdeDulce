@@ -1,5 +1,4 @@
-import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
-
+import { type ClientSchema, a, defineData } from "@aws-amplify/backend"
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
 adding a new "isDone" field as a boolean. The authorization rule below
@@ -9,27 +8,30 @@ and "delete" any "Todo" records.
 const schema = a.schema({
   Item: a
     .model({
-      content: a.string(),
+      name: a.string(),
+      // content: a.string(),
       url: a.string(),
       description: a.string(),
       price: a.integer(),
       calories: a.integer(),
       category: a.string(),
       metaData: a.json(),
-      available:a.boolean()
-      
+      available: a.boolean(),
     })
-    .authorization((allow) => [allow.guest()]),
-});
+    .authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
+})
 
-export type Schema = ClientSchema<typeof schema>;
+export type Schema = ClientSchema<typeof schema>
 
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: 'userPool',
+    defaultAuthorizationMode: "userPool",
+    apiKeyAuthorizationMode: { expiresInDays: 7 },
+
+    //TODO:  add apikey as an authorization mode
   },
-});
+})
 
 /*== STEP 2 ===============================================================
 Go to your frontend source code. From your client-side code, generate a

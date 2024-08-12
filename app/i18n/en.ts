@@ -1,18 +1,29 @@
 const en = {
-  landingScreen:{
-    name:"Verde Dulce",
-    order:"Order Now",
-    prompt: "Fresh, high quality. Sourced sustanably and locally.",    
+  landingScreen: {
+    name: "Verde Dulce",
+    order: "Order Now",
+    prompt: "Fresh, high quality. Sourced sustanably and locally.",
   },
   common: {
     ok: "OK!",
+    done: "Done",
     cancel: "Cancel",
     back: "Back",
     logOut: "Log Out",
     logIn: "Log In",
   },
-  menuScreen:{
-  orderMessage:"Hello, I would like to place an order with Verde Dulce.",
+  menuScreen: {
+    orderMessage: "Hello, I would like to place an order with Verde Dulce.",
+  },
+  adminScreen: {
+    title: "Create Item",
+    name: "Name",
+    category: "Category",
+    description: "Description",
+    price: "Price",
+    calories: "Calories",
+    url: "URL",
+    subtitle: "Create a new item for the menu.",
   },
   welcomeScreen: {
     postscript:
@@ -131,7 +142,6 @@ const en = {
     venueNamePlaceholder: "Ingresa el nombre del lugar",
     tapSignUp: "Toca para registrarte",
   },
-
 }
 
 export default en
