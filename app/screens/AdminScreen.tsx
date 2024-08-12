@@ -41,17 +41,22 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
   const client = generateClient<Schema>()
   const showCreateItemUI = async () => {
     try {
-      const createResult = await client.models.Item.create({
-        name: "Kale Caesar",
-        category: "Salad",
+      const createResult = await client.models.Item.create(
+        {
+          name: "Kale Caesar",
 
-        description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
-        price: getRandomInt(6, 15),
-        calories: getRandomInt(400, 1100),
-        url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
-      })
+          category: "Salad",
+
+          description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
+          price: getRandomInt(6, 15),
+          calories: getRandomInt(400, 1100),
+          url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
+        },
+        { authMode: "userPool" },
+      )
       console.log("createResult", createResult)
     } catch (error) {
+      console.log("errorrr:", error)
       Alert.alert("Error", JSON.stringify(error, null, 2))
     }
   }

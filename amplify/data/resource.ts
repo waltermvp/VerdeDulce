@@ -18,7 +18,7 @@ const schema = a.schema({
       metaData: a.json(),
       available: a.boolean(),
     })
-    .authorization((allow) => [allow.guest(), allow.publicApiKey()]),
+    .authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
 })
 
 export type Schema = ClientSchema<typeof schema>
