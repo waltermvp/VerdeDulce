@@ -11,9 +11,17 @@ export type MenuNavigatorParamList = {
   Menu: undefined
   Order: undefined
   Admin: undefined
-  Login: undefined
   CreateItem: undefined
 }
+// <RootStack.Navigator>
+// <RootStack.Group>
+//   <RootStack.Screen name="Home" component={HomeScreen} />
+//   <RootStack.Screen name="Details" component={DetailsScreen} />
+// </RootStack.Group>
+// <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+//   <RootStack.Screen name="MyModal" component={ModalScreen} />
+// </RootStack.Group>
+// </RootStack.Navigator>
 
 const Drawer = createDrawerNavigator<MenuNavigatorParamList>()
 export const MenuNavigator = () => {
@@ -66,8 +74,7 @@ export const MenuNavigator = () => {
       <Drawer.Screen name="Menu" component={MenuScreen} />
       <Drawer.Screen name="Admin" component={AdminScreen} />
       <Drawer.Screen name="Order" component={OrderScreen} />
-      <Drawer.Screen name="Login" component={LoginScreen} />
-      <Drawer.Screen name="CreateItem" component={CreateItemScreen} />
+      {/* <Drawer.Screen name="Login" component={LoginScreen} /> */}
     </Drawer.Navigator>
   )
 }

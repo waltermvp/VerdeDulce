@@ -43,9 +43,9 @@ export type AppStackParamList = {
   Menu: undefined
   // 🔥 Your screens go here
   Order: undefined
-	Admin: undefined
-	CreateItem: undefined
-	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  Admin: undefined
+  CreateItem: undefined
+  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 /**
@@ -67,31 +67,30 @@ const AppStack = observer(function AppStack() {
     authenticationStore: { isAuthenticated },
   } = useStores()
 
-  return <MenuNavigator />
   return (
     <Stack.Navigator
-      screenOptions={{ headerShown: false, navigationBarColor: colors.background }}
-      initialRouteName={true ? "Menu" : "Login"}
+      screenOptions={{ navigationBarColor: colors.background, headerShown: false }}
+      initialRouteName={true ? "MenuNav" : "Login"}
     >
-      {true ? (
-        <>
-          {/* <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} /> */}
+      {/* return <MenuNavigator /> */}
 
-          {/* <Stack.Screen name="Demo" component={DemoNavigator} /> */}
-          <Stack.Screen name="MenuNav" component={MenuNavigator} />
-        </>
-      ) : (
-        <>
-          <Stack.Screen name="Login" component={Screens.LoginScreen} />
-        </>
-      )}
+      <Stack.Group>
+        <Stack.Screen name="MenuNav" component={MenuNavigator} />
+      </Stack.Group>
+
+      <Stack.Group
+        screenOptions={{ presentation: "card" }}
+        // screenOptions={{ presentation: "fullScreenModal" }}
+      >
+        <Stack.Screen name="Login" component={Screens.LoginScreen} />
+        {/* <Stack.Screen name="Menu" component={Screens.MenuScreen} />
+        <Stack.Screen name="Order" component={Screens.OrderScreen} />
+        <Stack.Screen name="Admin" component={Screens.AdminScreen} /> */}
+        <Stack.Screen name="CreateItem" component={Screens.CreateItemScreen} />
+      </Stack.Group>
 
       {/** 🔥 Your screens go here */}
-      <Stack.Screen name="Menu" component={Screens.MenuScreen} />
-      <Stack.Screen name="Order" component={Screens.OrderScreen} />
-			<Stack.Screen name="Admin" component={Screens.AdminScreen} />
-			<Stack.Screen name="CreateItem" component={Screens.CreateItemScreen} />
-			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })

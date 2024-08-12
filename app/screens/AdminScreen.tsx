@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { SectionList, ViewStyle, FlatList, View, Alert } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Button, MenuItem, OrderButton, Screen, Text } from "app/components"
+import { Button, CreateItem, MenuItem, OrderButton, Screen, Text } from "app/components"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"
 import { useStores } from "app/models"
 import { imageCDNURL } from "app/utils/linkbuilder"
@@ -11,6 +11,9 @@ import { spacing } from "app/theme"
 // import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query"
 import { generateClient } from "aws-amplify/data"
 import { Schema } from "amplify/data/resource"
+import { Dialog, Portal } from "react-native-paper"
+import { translate } from "app/i18n"
+
 type Item = Schema["Item"]["type"]
 
 interface AdminScreenProps extends AppStackScreenProps<"Admin"> {}
@@ -37,9 +40,19 @@ function getRandomInt(min: number, max: number) {
 export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen() {
   const navigation = useNavigation()
   // const queryClient = new QueryClient()
+
+  const {
+    createItemStore: { createItemReady, setData },
+  } = useStores()
   const [items, setItems] = useState<Item[] | null>(null)
   const client = generateClient<Schema>()
-  const showCreateItemUI = async () => {
+  const [visible, setVisible] = React.useState(false)
+
+  const showDialog = () => setVisible(true)
+
+  const hideDialog = () => setVisible(false)
+
+  const createItemMutation = async () => {
     try {
       const createResult = await client.models.Item.create(
         {
@@ -54,10 +67,12 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
         },
         { authMode: "userPool" },
       )
+      hideDialog()
       console.log("createResult", createResult)
     } catch (error) {
       console.log("errorrr:", error)
       Alert.alert("Error", JSON.stringify(error, null, 2))
+      hideDialog()
     }
   }
 
@@ -82,7 +97,7 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
     return () => {
       sub.unsubscribe()
     }
-  }, [client])
+  }, [])
 
   const {
     authenticationStore: { isAuthenticated },
@@ -98,7 +113,15 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
     React.useCallback(() => {
       navigation.setOptions({
         headerRight: () => {
-          return <OrderButton tx="landingScreen.name" icon="add" onPress={showCreateItemUI} />
+          return (
+            <OrderButton
+              tx="landingScreen.name"
+              icon="add"
+              onPress={() => {
+                navigation.navigate("CreateItem")
+              }}
+            />
+          )
         },
       })
     }, [navigation]),
@@ -171,9 +194,23 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
       </Screen>
     )
   }
+  console.log("createItemReady", createItemReady, "!!")
+
   return (
     <Screen style={$root} preset="scroll">
       <Text preset="heading" text="admin" />
+      <View>
+        <Button onPress={showDialog}>Show Dialog</Button>
+        <Portal>
+          <CreateItemDialog
+            visible={visible}
+            hideDialog={hideDialog}
+            enabled={!createItemReady}
+            setData={setData}
+            onCreate={createItemMutation}
+          />
+        </Portal>
+      </View>
 
       <SectionList
         // contentContainerStyle={{ padding: spacing.sm }}
@@ -186,6 +223,40 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
   )
 })
 
+const CreateItemDialog = ({ visible, hideDialog, enabled, setData, onCreate }) => {
+  // const [ErrorBoundary]
+  return (
+    <Dialog visible={visible} onDismiss={hideDialog}>
+      <Dialog.Title>{translate("adminScreen.title")}</Dialog.Title>
+      <Dialog.ScrollArea>
+        <Text preset="default">{translate("adminScreen.subtitle")}</Text>
+        <CreateItem setData={setData} />
+      </Dialog.ScrollArea>
+
+      <Dialog.Actions>
+        <Button onPress={hideDialog}>{translate("common.cancel")}</Button>
+        <Button
+          preset={enabled ? "default" : "reversed"}
+          disabled={enabled}
+          disabledStyle={{ opacity: 0.06 }}
+          onPress={onCreate}
+        >
+          {translate("adminScreen.title")}
+        </Button>
+      </Dialog.Actions>
+    </Dialog>
+
+    // <Dialog visible={visible} onDismiss={hideDialog}>
+    //   <Dialog.Title>{translate("admin.createItem")}</Dialog.Title>
+    //   <Dialog.Content>
+    //     <CreateItem />
+    //   </Dialog.Content>
+    //   <Dialog.Actions>
+    //     <Button onPress={hideDialog}>{translate("admin.done")}</Button>
+    //   </Dialog.Actions>
+    // </Dialog>
+  )
+}
 const $root: ViewStyle = {
   flex: 1,
   padding: spacing.sm,

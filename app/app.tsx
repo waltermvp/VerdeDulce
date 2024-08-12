@@ -33,6 +33,7 @@ import { ViewStyle } from "react-native"
 import { Amplify } from "aws-amplify"
 import amplifyOutputs from "../amplify_outputs.json"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { PaperProvider } from "react-native-paper"
 
 Amplify.configure(amplifyOutputs)
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
@@ -114,11 +115,13 @@ function App(props: AppProps) {
       <ErrorBoundary catchErrors={Config.catchErrors}>
         <GestureHandlerRootView style={$container}>
           <QueryClientProvider client={queryClient}>
-            <AppNavigator
-              linking={linking}
-              initialState={initialNavigationState}
-              onStateChange={onNavigationStateChange}
-            />
+            <PaperProvider>
+              <AppNavigator
+                linking={linking}
+                initialState={initialNavigationState}
+                onStateChange={onNavigationStateChange}
+              />
+            </PaperProvider>
           </QueryClientProvider>
         </GestureHandlerRootView>
       </ErrorBoundary>
