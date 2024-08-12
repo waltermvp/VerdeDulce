@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { SectionList, ViewStyle, FlatList, View } from "react-native"
+import { SectionList, ViewStyle, FlatList, View, Alert } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Button, MenuItem, OrderButton, Screen, Text } from "app/components"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"
@@ -14,12 +14,47 @@ import { Schema } from "amplify/data/resource"
 type Item = Schema["Item"]["type"]
 
 interface AdminScreenProps extends AppStackScreenProps<"Admin"> {}
+/**
+ * Returns a random number between min (inclusive) and max (exclusive)
+ */
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min
+}
+
+/**
+ * Returns a random integer between min (inclusive) and max (inclusive).
+ * The value is no lower than min (or the next integer greater than min
+ * if min isn't an integer) and no greater than max (or the next integer
+ * lower than max if max isn't an integer).
+ * Using Math.round() will give you a non-uniform distribution!
+ */
+function getRandomInt(min: number, max: number) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
 
 export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen() {
   const navigation = useNavigation()
   // const queryClient = new QueryClient()
   const [items, setItems] = useState<Item[] | null>(null)
   const client = generateClient<Schema>()
+  const showCreateItemUI = async () => {
+    try {
+      const createResult = await client.models.Item.create({
+        name: "Kale Caesar",
+        category: "Salad",
+
+        description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
+        price: getRandomInt(6, 15),
+        calories: getRandomInt(400, 1100),
+        url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
+      })
+      console.log("createResult", createResult)
+    } catch (error) {
+      Alert.alert("Error", JSON.stringify(error, null, 2))
+    }
+  }
 
   useEffect(() => {
     // if (!displayID) {
@@ -58,7 +93,7 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
     React.useCallback(() => {
       navigation.setOptions({
         headerRight: () => {
-          return <OrderButton tx="landingScreen.name" icon="add" />
+          return <OrderButton tx="landingScreen.name" icon="add" onPress={showCreateItemUI} />
         },
       })
     }, [navigation]),

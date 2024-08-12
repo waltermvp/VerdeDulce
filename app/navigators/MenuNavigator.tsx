@@ -1,5 +1,5 @@
 import React from "react"
-import { AdminScreen, LoginScreen, MenuScreen, OrderScreen } from "app/screens"
+import { AdminScreen, CreateItemScreen, LoginScreen, MenuScreen, OrderScreen } from "app/screens"
 import { createDrawerNavigator, DrawerItem } from "@react-navigation/drawer"
 import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer"
 import { Ionicons } from "@expo/vector-icons" // Add this import
@@ -12,6 +12,7 @@ export type MenuNavigatorParamList = {
   Order: undefined
   Admin: undefined
   Login: undefined
+  CreateItem: undefined
 }
 
 const Drawer = createDrawerNavigator<MenuNavigatorParamList>()
@@ -66,6 +67,7 @@ export const MenuNavigator = () => {
       <Drawer.Screen name="Admin" component={AdminScreen} />
       <Drawer.Screen name="Order" component={OrderScreen} />
       <Drawer.Screen name="Login" component={LoginScreen} />
+      <Drawer.Screen name="CreateItem" component={CreateItemScreen} />
     </Drawer.Navigator>
   )
 }
