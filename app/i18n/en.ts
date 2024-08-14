@@ -24,6 +24,9 @@ const en = {
     calories: "Calories",
     url: "URL",
     subtitle: "Create a new item for the menu.",
+    subtitleDelete: "Delete an item from the menu.",
+    titleDelete: "Delete Item",
+    descriptionDelete: "Are you sure you want to delete this item?",
   },
   welcomeScreen: {
     postscript:

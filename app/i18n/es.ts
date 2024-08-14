@@ -1,8 +1,8 @@
 import { Translations } from "./en"
 
-const es:Translations = {
+const es: Translations = {
   landingScreen: {
-    order:"Ordena Ya",
+    order: "Ordena Ya",
     name: "Verde Dulce",
     prompt: "Comida fresca y de alta calidad. Sostenible y de origen local.",
   },
@@ -12,16 +12,29 @@ const es:Translations = {
     back: "Atrás",
     logOut: "Cerrar sesión",
     logIn: "Log In",
-
   },
-  menuScreen:{
-    orderMessage: "Hola, me gustaría hacer un pedido con Verde Dulce.",    },
+  menuScreen: {
+    orderMessage: "Hola, me gustaría hacer un pedido con Verde Dulce.",
+  },
   welcomeScreen: {
     postscript:
       "psst — Probablemente esto no es lo que parece tu aplicación. (A menos que tu diseñador te haya entregado estas pantallas, y en ese caso, ¡lánzalo!)",
     readyForLaunch: "Tu aplicación, casi lista para el lanzamiento!",
     exciting: "(¡ohh, esto es emocionante!)",
     letsGo: "¡Vamos!",
+  },
+  adminScreen: {
+    title: "Crear Artículo",
+    name: "Nombre",
+    category: "Categoría",
+    description: "Descripción",
+    price: "Precio",
+    calories: "Calorías",
+    url: "URL",
+    subtitle: "Crear un nuevo artículo para el menú.",
+    subtitleDelete: "Eliminar un artículo del menú.",
+    titleDelete: "Eliminar Artículo",
+    descriptionDelete: "¿Estás seguro de que deseas eliminar este artículo?",
   },
   errorScreen: {
     title: "¡Algo salió mal!",
@@ -33,7 +46,8 @@ const es:Translations = {
   emptyStateComponent: {
     generic: {
       heading: "Tan vacío... tan triste",
-      content: "No se encontraron datos aún. Intenta hacer clic en el botón para actualizar o recargar la aplicación.",
+      content:
+        "No se encontraron datos aún. Intenta hacer clic en el botón para actualizar o recargar la aplicación.",
       button: "Intentemos esto de nuevo",
     },
   },
@@ -128,7 +142,6 @@ const es:Translations = {
       content:
         "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
     },
-    
   },
   loginScreen: {
     signIn: "Iniciar sesión",
@@ -144,10 +157,6 @@ const es:Translations = {
     venueNamePlaceholder: "Ingresa el nombre del lugar",
     tapSignUp: "Toca para registrarte",
   },
-
-  
 }
 
-
-
-export default es;
+export default es

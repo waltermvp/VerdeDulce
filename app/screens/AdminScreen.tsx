@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react"
+import React, { FC, useEffect, useLayoutEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { SectionList, ViewStyle, FlatList, View, Alert } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
@@ -45,6 +45,7 @@ type CreateItemInput = {
   calories: number
   url: string
 }
+
 export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen() {
   const navigation = useNavigation()
   // const queryClient = new QueryClient()
@@ -57,6 +58,10 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
   const [items, setItems] = useState<Item[]>([])
   const client = generateClient<Schema>()
   const [visible, setVisible] = React.useState(false)
+  const [itemIDToDelete, setItemIDToDelete] = React.useState<string | null>(null)
+  const isBigScreen = useMediaQuery({ query: "(min-width: 769px)" })
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
+  const numberOfColumns = isSmallScreen ? 1 : isBigScreen ? 3 : 2
 
   const showDialog = () => setVisible(true)
 
@@ -73,12 +78,27 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
           description: data?.description,
           price: data?.price,
           calories: data?.calories,
-          // url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
+          url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
         },
         { authMode: "userPool" },
       )
       hideDialog()
       console.log("createResult", createResult)
+    } catch (error) {
+      console.log("errorrr:", error)
+      Alert.alert("Error", JSON.stringify(error, null, 2))
+      hideDialog()
+    }
+  }
+  const deleteItemMutation = async (id: string) => {
+    try {
+      await client.models.Item.delete(
+        {
+          id,
+        },
+        { authMode: "userPool" },
+      )
+      hideDialog()
     } catch (error) {
       console.log("errorrr:", error)
       Alert.alert("Error", JSON.stringify(error, null, 2))
@@ -115,10 +135,6 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
     authenticationStore: { isAuthenticated },
   } = useStores()
 
-  const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
-  // 490 // 800
-  const numberOfColumns = isSmallScreen ? 1 : isBigScreen ? 3 : 2
   useFocusEffect(
     React.useCallback(() => {
       navigation.setOptions({
@@ -128,7 +144,13 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
       })
     }, [navigation]),
   )
-
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      ti: () => {
+        return <OrderButton tx="landingScreen.name" icon="add" onPress={showDialog} />
+      },
+    })
+  }, [navigation])
   // const { isPending, error, data } = useQuery({
   //   queryKey: ["repoData"],
   //   queryFn: () => fetch("https://api.github.com/repos/TanStack/query").then((res) => res.json()),
@@ -144,14 +166,14 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
         style={{
           alignSelf: "center",
           width: "100%",
-          // alignItems: "center",
-          // justifyContent: "space-evenly",
         }}
-        columnWrapperStyle={{
-          // gap: spacing.xxl * 6,
-          // flex: 1,
-          justifyContent: "space-between",
-        }}
+        columnWrapperStyle={
+          numberOfColumns !== 1 && {
+            // gap: spacing.xxl * 6,
+            // flex: 1,
+            justifyContent: "space-between",
+          }
+        }
         contentContainerStyle={
           {
             // flexGrow: 1,
@@ -165,17 +187,26 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
         data={item.list}
         numColumns={numberOfColumns}
         renderItem={({ item }) => {
-          return <MenuItem item={item} />
+          return (
+            <MenuItem
+              item={item}
+              showDelete={true}
+              onDelete={() => {
+                setItemIDToDelete(item.id)
+                showDialog()
+              }}
+            />
+          )
         }}
         keyExtractor={keyExtractor}
-        // extraData={numberOfColumns}
+        extraData={numberOfColumns}
         key={numberOfColumns}
       />
       // </View>
     )
   }
   const renderSectionTitle = ({ section }) => {
-    return <Text preset="heading">{JSON.stringify(section.title)}</Text>
+    return <Text preset="heading">{section.title}</Text>
   }
   const keyExtractor = (item) => {
     return item.name
@@ -184,7 +215,6 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
   if (!isAuthenticated) {
     return (
       <Screen style={$root} preset="scroll">
-        <Text text="admin" />
         <Button
           text="Go to Menu"
           onPress={() => {
@@ -194,26 +224,61 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
       </Screen>
     )
   }
+
   console.log("createItemReady", createItemReady, "!!")
-  console.log("items", items, "!!")
 
   return (
     <Screen style={$root} preset="scroll">
-      <Text preset="heading" text="admin" />
       <View>
         <Portal>
-          <CreateItemDialog
+          {/* <CreateItemDialog
             visible={visible}
             hideDialog={hideDialog}
             enabled={!createItemReady}
             setData={setData}
             onCreate={createItemMutation}
-          />
+          /> */}
+          <Dialog visible={visible} onDismiss={hideDialog}>
+            <Dialog.Title>
+              {!itemIDToDelete
+                ? translate("adminScreen.title")
+                : translate("adminScreen.titleDelete")}
+            </Dialog.Title>
+            <Dialog.ScrollArea>
+              <Text preset="default">
+                {!itemIDToDelete
+                  ? translate("adminScreen.subtitle")
+                  : translate("adminScreen.subtitleDelete")}
+              </Text>
+              {!itemIDToDelete && <CreateItem setData={setData} />}
+            </Dialog.ScrollArea>
+
+            <Dialog.Actions>
+              <Button onPress={hideDialog}>{translate("common.cancel")}</Button>
+              <Button
+                disabled={!itemIDToDelete ? !createItemReady : false}
+                disabledStyle={{ opacity: 0.06 }}
+                onPress={
+                  !itemIDToDelete
+                    ? createItemMutation
+                    : () => {
+                        if (itemIDToDelete) {
+                          deleteItemMutation(itemIDToDelete)
+                        }
+                      }
+                }
+              >
+                {itemIDToDelete
+                  ? translate("adminScreen.subtitleDelete")
+                  : translate("adminScreen.title")}
+              </Button>
+            </Dialog.Actions>
+          </Dialog>
         </Portal>
       </View>
 
       <SectionList
-        // contentContainerStyle={{ padding: spacing.sm }}
+        contentContainerStyle={{ padding: spacing.sm, gap: 10 }}
         // horizontal
         sections={items}
         renderItem={renderSection}
@@ -232,145 +297,17 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
 //   url: string
 // }
 
-const CreateItemDialog = ({
-  visible,
-  hideDialog,
-  enabled,
-  setData,
-  onCreate,
-}: {
-  visible: boolean
-  hideDialog: () => void
-  enabled: boolean
-  setData: (data: any) => void
-  oncCreate: () => void
-}) => {
-  // const [ErrorBoundary]
-  return (
-    <Dialog visible={visible} onDismiss={hideDialog}>
-      <Dialog.Title>{translate("adminScreen.title")}</Dialog.Title>
-      <Dialog.ScrollArea>
-        <Text preset="default">{translate("adminScreen.subtitle")}</Text>
-        <CreateItem setData={setData} />
-      </Dialog.ScrollArea>
-
-      <Dialog.Actions>
-        <Button onPress={hideDialog}>{translate("common.cancel")}</Button>
-        <Button
-          preset={enabled ? "default" : "reversed"}
-          disabled={enabled}
-          disabledStyle={{ opacity: 0.06 }}
-          onPress={onCreate}
-        >
-          {translate("adminScreen.title")}
-        </Button>
-      </Dialog.Actions>
-    </Dialog>
-
-    // <Dialog visible={visible} onDismiss={hideDialog}>
-    //   <Dialog.Title>{translate("admin.createItem")}</Dialog.Title>
-    //   <Dialog.Content>
-    //     <CreateItem />
-    //   </Dialog.Content>
-    //   <Dialog.Actions>
-    //     <Button onPress={hideDialog}>{translate("admin.done")}</Button>
-    //   </Dialog.Actions>
-    // </Dialog>
-  )
-}
 const $root: ViewStyle = {
   flex: 1,
   padding: spacing.sm,
 }
 
-const DATA = [
-  {
-    title: "Vegetables",
-    key: "vegetables",
-    data: [
-      {
-        key: "vegetables",
-        list: [
-          {
-            id: "1",
-            name: "Kale Caesar",
-            description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
-            price: "$9.99",
-            url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
-          },
-          {
-            id: "2",
-            name: "Harvest Bowl",
-            description: "Roasted brussels sprouts, roasted sweet potatoes, and wild rice",
-            price: "$10.99",
-            url: imageCDNURL("Q423_OLO_HarvestBowlsAlmonda_3600x2400_1_zsngyb.png"),
-          },
-          {
-            id: "3",
-            name: "Spicy Thai Salad",
-            description: "Organic arugula, spicy cashew dressing, and sesame tofu",
-            price: "$11.99",
-            url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
-          },
-          {
-            id: "4",
-            name: "Spicy Thai Salad",
-            description: "Organic arugula, spicy cashew dressing, and sesame tofu",
-            price: "$11.99",
-            url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
-          },
-          {
-            id: "5",
-            name: "Spicy Thai Salad",
-            description: "Organic arugula, spicy cashew dressing, and sesame tofu",
-            price: "$11.99",
-            url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
-          },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Fruits",
-    key: "fruits",
-    data: [
-      {
-        key: "fruits",
-        list: [
-          {
-            id: "1",
-            name: "Kale Caesar",
-            description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
-            price: "$9.99",
-            url: imageCDNURL("Q423_OLO_HarvestBowlsAlmonda_3600x2400_1_zsngyb.png"),
-          },
-          {
-            id: "2",
-            name: "Harvest Bowl",
-            description: "Roasted brussels sprouts, roasted sweet potatoes, and wild rice",
-            price: "$10.99",
-            url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
-          },
-          {
-            id: "3",
-            name: "Spicy Thai Salad",
-            description: "Organic arugula, spicy cashew dressing, and sesame tofu",
-            price: "$11.99",
-            url: imageCDNURL("Q423_OLO_HarvestBowlsAlmonda_3600x2400_1_zsngyb.png"),
-          },
-        ],
-      },
-    ],
-  },
-]
-
 const transformData = (data) => {
-  console.log("data", data)
   // Group items by their category
   const groupedData = data.reduce((acc, item) => {
-    console.log("item", item)
-    console.log("item", item[0])
-    const category = item.category.toLowerCase() // Assuming categories are distinct and well-defined
+    // console.log("item", item)
+    // console.log("item", item[0])
+    const category = item.category?.toLowerCase() // Assuming categories are distinct and well-defined
     if (!acc[category]) {
       acc[category] = []
     }
@@ -378,7 +315,7 @@ const transformData = (data) => {
       id: item.id,
       name: item.name,
       description: item.description,
-      price: `$${item.price.toFixed(2)}`,
+      price: `$${item.price?.toFixed(2)}`,
       // url: imageCDNURL(item.url.split("/").pop()), // Extracting the filename from the URL for use in imageCDNURL
     })
     return acc
@@ -393,7 +330,7 @@ const transformData = (data) => {
         key: key,
         list: list.map((item, idx) => ({
           ...item,
-          id: (index * 100 + idx + 1).toString(), // Generating unique IDs for the list items
+          // id: (index * 100 + idx + 1).toString(), // Generating unique IDs for the list items
         })),
       },
     ],
