@@ -12,6 +12,7 @@ const es: Translations = {
     back: "Atrás",
     logOut: "Cerrar sesión",
     logIn: "Log In",
+    comingSoon: "¡Próximamente!",
   },
   menuScreen: {
     orderMessage: "Hola, me gustaría hacer un pedido con Verde Dulce.",

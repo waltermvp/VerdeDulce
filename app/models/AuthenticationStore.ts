@@ -1,5 +1,6 @@
 import { type Instance, type SnapshotOut, types } from "mobx-state-tree"
 // import config from "../aws_config"
+import { withSetPropAction } from "./helpers/withSetPropAction"
 import {
   signUp,
   signIn,
@@ -10,8 +11,9 @@ import {
   resendSignUpCode,
   SignUpInput,
 } from "aws-amplify/auth"
-import { generateClient } from "aws-amplify/data"
-import type { Schema } from "../../amplify/data/resource"
+
+// import { generateClient } from "aws-amplify/data"
+// import type { Schema } from "../../amplify/data/resource"
 
 // type SignUpParameters = {
 //   username: string;
@@ -20,7 +22,7 @@ import type { Schema } from "../../amplify/data/resource"
 //   phone_number: string;
 // };
 
-const client = generateClient<Schema>()
+// const client = generateClient<Schema>()
 export const AuthenticationStoreModel = types
   .model("AuthenticationStore")
   .props({
@@ -43,7 +45,7 @@ export const AuthenticationStoreModel = types
     // Resending
     resendLoading: false,
   })
-
+  .actions(withSetPropAction)
   .views((store) => ({
     get isAuthenticated() {
       return !!store.authToken
@@ -60,7 +62,6 @@ export const AuthenticationStoreModel = types
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(store.authEmail) && (store.authPassword?.length ?? 0) > 4
       return enabled
     },
-
     get signUpValidationError() {
       if (store.authEmail.length === 0) return "can't be blank"
       if (store.authEmail.length < 6) return "must be at least 6 characters"
@@ -73,12 +74,32 @@ export const AuthenticationStoreModel = types
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(store.authEmail) &&
         (store.authPassword?.length ?? 0) > 4 &&
         store.authConfirmPassword === store.authPassword
-        console.log(enabled, "enabled")
-        console.log(store.authPassword,store.authEmail, store.authConfirmPassword, "enabled")
-        return enabled
+      console.log(enabled, "enabled")
+      console.log(store.authPassword, store.authEmail, store.authConfirmPassword, "enabled")
+      return enabled
     },
   }))
   .actions((store) => ({
+    async signOutAuth() {
+      try {
+        await signOut()
+        store.setProp("authToken", undefined)
+        store.setProp("authEmail", "")
+        this.clear()
+        console.log("scleareddd")
+      } catch (error) {
+        console.log("error", error)
+      }
+    },
+    async signInAuth({ username, password }: { username: string; password: string }) {
+      const result = await signIn({ username, password })
+      if (result.isSignedIn) {
+        await this.refreshAuthStatus
+      }
+
+      store.setProp("authToken", JSON.stringify(result))
+      console.log(result, "result")
+    },
     setAuthToken(value?: string) {
       store.authToken = value
     },
@@ -112,8 +133,12 @@ export const AuthenticationStoreModel = types
     setResendLoading(value: boolean) {
       store.resendLoading = value
     },
-    setAuthData(token: string, email: string, userID: string) {
-      store.authToken = token
+    setAuthData(
+      //token: string,
+      email: string,
+      userID: string,
+    ) {
+      // store.authToken = token
       store.authEmail = email
       store.subjectID = userID
     },
@@ -192,7 +217,6 @@ export const AuthenticationStoreModel = types
             userAttributes: {
               email: store.authEmail,
               // phone_number, // E.164 number convention
-              
             },
             // optional
             autoSignIn: true,
