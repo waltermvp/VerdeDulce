@@ -34,12 +34,13 @@ export const CreateItemStoreModel = types
       // }
     },
     setData(data: any) {
-      const { name, category, description, price, calories } = data
+      const { name, category, description, price, calories, url } = data
       typeof name !== "undefined" && store.setProp("name", name)
       typeof category !== "undefined" && store.setProp("category", category)
       typeof description !== "undefined" && store.setProp("description", description)
       typeof price !== "undefined" && store.setProp("price", price)
       typeof calories !== "undefined" && store.setProp("calories", calories)
+      typeof url !== "undefined" && store.setProp("url", url)
       // store.setProp("url", data.url)
     },
     // addFavorite(item: Item) {
@@ -52,14 +53,10 @@ export const CreateItemStoreModel = types
 
   .views((store) => ({
     get createItemReady() {
-      console.log(
-        !!(store.name && store.category && store.description && store.price && store.calories),
-        "its this",
-      )
       return !!(
         (store.name && store.category && store.description && store.price && store.calories)
-        //&&
-        //store.url
+        //  &&
+        // store.url
       )
     },
     // get episodesForList() {
