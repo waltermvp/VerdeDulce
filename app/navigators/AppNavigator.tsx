@@ -16,7 +16,6 @@ import React from "react"
 import { useColorScheme } from "react-native"
 import * as Screens from "app/screens"
 import Config from "../config"
-import { useStores } from "../models"
 // import { DemoNavigator, DemoTabParamList } from "./DemoNavigator"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { colors } from "app/theme"
@@ -63,10 +62,15 @@ export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStack
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = observer(function AppStack() {
-  const {
-    authenticationStore: { isAuthenticated },
-  } = useStores()
+  // const {
+  //   authenticationStore: { isAuthenticated },
+  // } = useStores()
 
+  // useEffect(() => {
+  //   // if (!isAuthenticated) {
+  //   //   navigationRef.current?.navigate("Login")
+  //   // }
+  // }, [isAuthenticated])
   return (
     <Stack.Navigator
       screenOptions={{ navigationBarColor: colors.background, headerShown: false }}

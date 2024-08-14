@@ -16,7 +16,7 @@ export const OrderScreen: FC<OrderScreenProps> = observer(function OrderScreen()
   // const navigation = useNavigation()
   return (
     <Screen style={$root} preset="scroll">
-      <Text text="order" />
+      <Text tx="common.comingSoon" preset="heading" style={{ textAlign: "center" }} />
     </Screen>
   )
 })

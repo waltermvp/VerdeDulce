@@ -11,6 +11,7 @@ const en = {
     back: "Back",
     logOut: "Log Out",
     logIn: "Log In",
+    comingSoon: "Coming Soon!",
   },
   menuScreen: {
     orderMessage: "Hello, I would like to place an order with Verde Dulce.",

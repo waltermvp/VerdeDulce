@@ -1,8 +1,16 @@
 import React, { FC, useEffect, useLayoutEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { SectionList, ViewStyle, FlatList, View, Alert } from "react-native"
+import { SectionList, ViewStyle, FlatList, View, Alert, Dimensions } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Button, CreateItem, MenuItem, OrderButton, Screen, Text } from "app/components"
+import {
+  Button,
+  CreateItem,
+  MenuItem,
+  OrderButton,
+  PlaceholderMenu,
+  Screen,
+  Text,
+} from "app/components"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"
 import { useStores } from "app/models"
 import { imageCDNURL } from "app/utils/linkbuilder"
@@ -13,7 +21,6 @@ import { generateClient } from "aws-amplify/data"
 import { Schema } from "amplify/data/resource"
 import { Dialog, Portal } from "react-native-paper"
 import { translate } from "app/i18n"
-
 type Item = Schema["Item"]["type"]
 
 interface AdminScreenProps extends AppStackScreenProps<"Admin"> {}
@@ -62,7 +69,7 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
   const isBigScreen = useMediaQuery({ query: "(min-width: 769px)" })
   const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
   const numberOfColumns = isSmallScreen ? 1 : isBigScreen ? 3 : 2
-
+  const [isSyncedLocal, setIsSyncedLocal] = useState(false)
   const showDialog = () => setVisible(true)
 
   const hideDialog = () => setVisible(false)
@@ -78,7 +85,7 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
           description: data?.description,
           price: data?.price,
           calories: data?.calories,
-          url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
+          url: data.url ? imageCDNURL(data?.url) : undefined,
         },
         { authMode: "userPool" },
       )
@@ -117,6 +124,7 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
       authMode: "apiKey",
     }).subscribe({
       next: ({ items, isSynced }) => {
+        setIsSyncedLocal(isSynced)
         if (isSynced) {
           const transformed = transformData(items)
           console.log("transformed", transformed)
@@ -187,6 +195,7 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
         data={item.list}
         numColumns={numberOfColumns}
         renderItem={({ item }) => {
+          console.log("item", item)
           return (
             <MenuItem
               item={item}
@@ -211,12 +220,19 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
   const keyExtractor = (item) => {
     return item.name
   }
+  if (!isSyncedLocal) {
+    return (
+      <Screen style={$root} preset="scroll">
+        <PlaceholderMenu />
+      </Screen>
+    )
+  }
 
   if (!isAuthenticated) {
     return (
       <Screen style={$root} preset="scroll">
         <Button
-          text="Go to Menu"
+          text="Login"
           onPress={() => {
             navigation.navigate("Login")
           }}
@@ -280,6 +296,13 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
       <SectionList
         contentContainerStyle={{ padding: spacing.sm, gap: 10 }}
         // horizontal
+        ListEmptyComponent={() => {
+          return (
+            <Text style={{ textAlign: "center" }} preset="heading">
+              No items
+            </Text>
+          )
+        }}
         sections={items}
         renderItem={renderSection}
         renderSectionHeader={renderSectionTitle}
@@ -316,7 +339,7 @@ const transformData = (data) => {
       name: item.name,
       description: item.description,
       price: `$${item.price?.toFixed(2)}`,
-      // url: imageCDNURL(item.url.split("/").pop()), // Extracting the filename from the URL for use in imageCDNURL
+      url: item.url, //imageCDNURL(item.url.split("/").pop()), // Extracting the filename from the URL for use in imageCDNURL
     })
     return acc
   }, {})

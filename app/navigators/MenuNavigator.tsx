@@ -1,30 +1,27 @@
 import React from "react"
-import { AdminScreen, CreateItemScreen, LoginScreen, MenuScreen, OrderScreen } from "app/screens"
+import { AdminScreen, LoginScreen, MenuScreen, OrderScreen } from "app/screens"
 import { createDrawerNavigator, DrawerItem } from "@react-navigation/drawer"
 import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer"
 import { Ionicons } from "@expo/vector-icons" // Add this import
-
 import { colors, spacing } from "app/theme"
-import { Linking, View } from "react-native"
+import { View } from "react-native"
 import { translate } from "app/i18n"
+import { useStores } from "app/models"
+import { observer } from "mobx-react-lite"
+
 export type MenuNavigatorParamList = {
   Menu: undefined
   Order: undefined
   Admin: undefined
-  CreateItem: undefined
 }
-// <RootStack.Navigator>
-// <RootStack.Group>
-//   <RootStack.Screen name="Home" component={HomeScreen} />
-//   <RootStack.Screen name="Details" component={DetailsScreen} />
-// </RootStack.Group>
-// <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-//   <RootStack.Screen name="MyModal" component={ModalScreen} />
-// </RootStack.Group>
-// </RootStack.Navigator>
 
 const Drawer = createDrawerNavigator<MenuNavigatorParamList>()
-export const MenuNavigator = () => {
+
+export const MenuNavigator = observer(() => {
+  const {
+    authenticationStore: { isAuthenticated, signOutAuth, signInAuth },
+  } = useStores()
+
   return (
     <Drawer.Navigator
       initialRouteName="Menu"
@@ -34,10 +31,24 @@ export const MenuNavigator = () => {
             <DrawerContentScrollView {...props}>
               <DrawerItemList {...props} />
               <DrawerItem
-                label={translate("common.logIn")}
+                label={isAuthenticated ? translate("common.logOut") : translate("common.logIn")}
                 labelStyle={{ color: colors.palette.neutral100 }}
-                onPress={() => Linking.openURL("https://mywebsite.com/help")}
-                icon={() => <Ionicons name="log-in" size={24} color={colors.palette.neutral100} />}
+                onPress={async () => {
+                  if (isAuthenticated) {
+                    await signOutAuth()
+                  } else {
+                    console.log("signing out")
+                    signInAuth({ username: "walter+1@epiphanyapps.com", password: "Chacalona87!" })
+                    console.log("signed out")
+                  }
+                }}
+                icon={() => (
+                  <Ionicons
+                    name={isAuthenticated ? "log-out" : "log-in"}
+                    size={24}
+                    color={colors.palette.neutral100}
+                  />
+                )}
               ></DrawerItem>
             </DrawerContentScrollView>
           </View>
@@ -48,7 +59,7 @@ export const MenuNavigator = () => {
           headerShown: true,
           // title: "Verde Dulce",
           headerStyle: { backgroundColor: colors.palette.lightBackground },
-          headerTitle: route?.name !== "Admin" && "verdedulce",
+          headerTitle: route?.name === "Admin" ? "Admin" : "verdedulce",
           headerTitleAlign: "center",
           headerTitleStyle: {
             color: colors.palette.primary500,
@@ -74,9 +85,8 @@ export const MenuNavigator = () => {
       }}
     >
       <Drawer.Screen name="Menu" component={MenuScreen} />
-      <Drawer.Screen name="Admin" component={AdminScreen} />
       <Drawer.Screen name="Order" component={OrderScreen} />
-      {/* <Drawer.Screen name="Login" component={LoginScreen} /> */}
+      {isAuthenticated && <Drawer.Screen name="Admin" component={AdminScreen} />}
     </Drawer.Navigator>
   )
-}
+})

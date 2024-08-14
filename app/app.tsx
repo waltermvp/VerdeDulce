@@ -46,10 +46,17 @@ const config = {
     //   path: "",
     // },
     // Welcome: "welcome",
+    // MenuNav: {
     Menu: "menu",
-    //TODO: build out the menu item UI
-    // MenuItem: "menuItem/:id",
+    // //TODO: build out the menu item UI
+    // // MenuItem: "menuItem/:id",
     Admin: "admin",
+    Order: "order",
+    // },
+    // Menu: "menu",
+    // //TODO: build out the menu item UI
+    // // MenuItem: "menuItem/:id",
+    // Admin: "admin",
     //   Demo: {
     //     screens: {
     //       DemoShowroom: {
