@@ -1,9 +1,10 @@
 import * as React from "react"
 import { StyleProp, TextStyle, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors, typography } from "app/theme"
-import { Text } from "app/components/Text"
+import { colors, spacing, typography } from "app/theme"
+import { StorageManager } from "@aws-amplify/ui-react-storage"
 import { TextInput } from "react-native-paper"
+import { CategoryList } from "./CategoryList"
 
 export interface CreateItemProps {
   /**
@@ -29,16 +30,23 @@ export const CreateItem = observer(function CreateItem(props: CreateItemProps) {
   const [description, setDescription] = React.useState("")
   const [price, setPrice] = React.useState(0)
   const [calories, setCalories] = React.useState(0)
+  const [url, setURL] = React.useState<string | null>(null)
+  const [uploading, setUploading] = React.useState(false)
+
   React.useEffect(() => {
-    setData({ name, category, description, price, calories })
-  }, [name, category, description, price, calories])
+    setData({ name, category, description, price, calories, url })
+  }, [name, category, description, price, calories, url])
 
   return (
     <View style={$styles}>
-      {/* <Text style={$text}>Hello</Text> */}
-
       <TextInput label="Name" value={name} onChangeText={setName} />
-      <TextInput label="Category" value={category} onChangeText={setCategory} />
+
+      <CategoryList
+        style={{ flex: 1 }}
+        callback={(value) => {
+          setCategory(value)
+        }}
+      />
       <TextInput label="Description" value={description} onChangeText={setDescription} />
       <TextInput
         label="Price"
@@ -58,16 +66,29 @@ export const CreateItem = observer(function CreateItem(props: CreateItemProps) {
         }}
         keyboardType="number-pad"
       />
+      <View style={{ width: 100, height: 100, borderColor: "black", borderWidth: 3 }}>
+        <StorageManager
+          // accessLevel="protected"
+          acceptedFileTypes={["image/*"]}
+          path="menu-pictures/"
+          maxFileCount={1}
+          onUploadError={(error) => console.log("error", error)}
+          onUploadSuccess={(data) => {
+            console.log("data", data)
+            setURL(data.key)
+
+            setUploading(false)
+          }}
+          onUploadStart={() => setUploading(true)}
+          isResumable
+        />
+      </View>
     </View>
   )
 })
 
 const $container: ViewStyle = {
   justifyContent: "center",
-}
-
-const $text: TextStyle = {
-  fontFamily: typography.primary.normal,
-  fontSize: 14,
-  color: colors.palette.primary500,
+  // alignItems: "center",
+  // paddingHorizontal: spacing.xl,
 }

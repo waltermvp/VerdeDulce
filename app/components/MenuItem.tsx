@@ -5,6 +5,7 @@ import { spacing } from "app/theme"
 import { Text } from "app/components/Text"
 import { Image } from "expo-image"
 import { Bullets } from "./Bullets"
+import { Badge } from "react-native-paper"
 
 export interface MenuItemProps {
   /**
@@ -12,6 +13,8 @@ export interface MenuItemProps {
    */
   style?: StyleProp<ViewStyle>
   item: any
+  showDelete?: boolean
+  onDelete?: () => void
 }
 
 /**
@@ -19,13 +22,26 @@ export interface MenuItemProps {
  */
 const SIZE = 250
 export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
-  const { style, item } = props
+  const { style, item, showDelete = false, onDelete } = props
   const $styles = [$container, style]
   const blurhash =
     "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj["
 
   return (
     <View style={$styles}>
+      {showDelete && (
+        <Badge
+          style={{
+            alignSelf: "flex-end",
+            marginRight: spacing.xxl,
+            marginBottom: -spacing.xs,
+            zIndex: 9,
+          }}
+          onPress={onDelete}
+        >
+          X
+        </Badge>
+      )}
       {/* <View style={styles.item}> */}
       <Image
         style={{

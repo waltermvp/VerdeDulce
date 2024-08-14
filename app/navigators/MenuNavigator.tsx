@@ -43,32 +43,34 @@ export const MenuNavigator = () => {
           </View>
         )
       }}
-      screenOptions={{
-        headerShown: true,
-        // title: "Verde Dulce",
-        headerStyle: { backgroundColor: colors.palette.lightBackground },
-        headerTitle: "verdedulce",
-        headerTitleAlign: "center",
-        headerTitleStyle: {
-          color: colors.palette.primary500,
-          fontSize: spacing.lg,
-        },
-        drawerLabelStyle: { color: colors.palette.neutral100 },
-        drawerStyle: {
-          backgroundColor: colors.palette.greenFont,
-          // width: 240,
-        },
+      screenOptions={({ route }) => {
+        return {
+          headerShown: true,
+          // title: "Verde Dulce",
+          headerStyle: { backgroundColor: colors.palette.lightBackground },
+          headerTitle: route?.name !== "Admin" && "verdedulce",
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            color: colors.palette.primary500,
+            fontSize: spacing.lg,
+          },
+          drawerLabelStyle: { color: colors.palette.neutral100 },
+          drawerStyle: {
+            backgroundColor: colors.palette.greenFont,
+            // width: 240,
+          },
 
-        // headerTitle: () => {
-        //   return (
-        //     <View style={{ flex: 1 }}>
-        //       <Image style={{ flex: 1 }} source={require("../../assets/icons/VerdeDulce.svg")} />
-        //     </View>
-        //   )
-        // },
-        // header: () => {
-        //   return <Text style={{ backgroundColor: "red" }}>testing</Text>
-        // },
+          // headerTitle: () => {
+          //   return (
+          //     <View style={{ flex: 1 }}>
+          //       <Image style={{ flex: 1 }} source={require("../../assets/icons/VerdeDulce.svg")} />
+          //     </View>
+          //   )
+          // },
+          // header: () => {
+          //   return <Text style={{ backgroundColor: "red" }}>testing</Text>
+          // },
+        }
       }}
     >
       <Drawer.Screen name="Menu" component={MenuScreen} />
