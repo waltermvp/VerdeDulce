@@ -36,15 +36,25 @@ function getRandomInt(min: number, max: number) {
   max = Math.floor(max)
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
-
+//TODO: Add sort order to sections
+type CreateItemInput = {
+  name: string
+  category: string
+  description: string
+  price: number
+  calories: number
+  url: string
+}
 export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen() {
   const navigation = useNavigation()
   // const queryClient = new QueryClient()
 
   const {
-    createItemStore: { createItemReady, setData },
+    createItemStore: { createItemReady },
   } = useStores()
-  const [items, setItems] = useState<Item[] | null>(null)
+
+  const [data, setData] = useState<CreateItemInput | null>(null)
+  const [items, setItems] = useState<Item[]>([])
   const client = generateClient<Schema>()
   const [visible, setVisible] = React.useState(false)
 
@@ -56,14 +66,14 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
     try {
       const createResult = await client.models.Item.create(
         {
-          name: "Kale Caesar",
+          name: data?.name,
 
-          category: "Salad",
+          category: data?.category,
 
-          description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
-          price: getRandomInt(6, 15),
-          calories: getRandomInt(400, 1100),
-          url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
+          description: data?.description,
+          price: data?.price,
+          calories: data?.calories,
+          // url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
         },
         { authMode: "userPool" },
       )
@@ -87,9 +97,11 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
       authMode: "apiKey",
     }).subscribe({
       next: ({ items, isSynced }) => {
-        console.log("els.Slide.observeQuery items", items, isSynced)
         if (isSynced) {
-          setItems(items)
+          const transformed = transformData(items)
+          console.log("transformed", transformed)
+          setItems(transformed)
+
           // setSlideCount(items.length)
         }
       },
@@ -107,21 +119,11 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
   const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
   // 490 // 800
   const numberOfColumns = isSmallScreen ? 1 : isBigScreen ? 3 : 2
-  console.log("numberOfColumns", numberOfColumns)
-  console.log("displays", items)
   useFocusEffect(
     React.useCallback(() => {
       navigation.setOptions({
         headerRight: () => {
-          return (
-            <OrderButton
-              tx="landingScreen.name"
-              icon="add"
-              onPress={() => {
-                navigation.navigate("CreateItem")
-              }}
-            />
-          )
+          return <OrderButton tx="landingScreen.name" icon="add" onPress={showDialog} />
         },
       })
     }, [navigation]),
@@ -136,9 +138,6 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
 
   // if (error) return "An error has occurred: " + error.message
 
-  const renderMenuItem = ({ item }) => {
-    return <MenuItem item={item} />
-  }
   const renderSection = ({ item }) => {
     return (
       <FlatList
@@ -163,10 +162,11 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
             // flex: 1,
           }
         }
-        // horizontal
         data={item.list}
         numColumns={numberOfColumns}
-        renderItem={renderMenuItem}
+        renderItem={({ item }) => {
+          return <MenuItem item={item} />
+        }}
         keyExtractor={keyExtractor}
         // extraData={numberOfColumns}
         key={numberOfColumns}
@@ -195,12 +195,12 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
     )
   }
   console.log("createItemReady", createItemReady, "!!")
+  console.log("items", items, "!!")
 
   return (
     <Screen style={$root} preset="scroll">
       <Text preset="heading" text="admin" />
       <View>
-        <Button onPress={showDialog}>Show Dialog</Button>
         <Portal>
           <CreateItemDialog
             visible={visible}
@@ -215,7 +215,7 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
       <SectionList
         // contentContainerStyle={{ padding: spacing.sm }}
         // horizontal
-        sections={DATA}
+        sections={items}
         renderItem={renderSection}
         renderSectionHeader={renderSectionTitle}
       ></SectionList>
@@ -223,7 +223,28 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
   )
 })
 
-const CreateItemDialog = ({ visible, hideDialog, enabled, setData, onCreate }) => {
+// type CreateItemInput = {
+//   name: string
+//   category: string
+//   description: string
+//   price: number
+//   calories: number
+//   url: string
+// }
+
+const CreateItemDialog = ({
+  visible,
+  hideDialog,
+  enabled,
+  setData,
+  onCreate,
+}: {
+  visible: boolean
+  hideDialog: () => void
+  enabled: boolean
+  setData: (data: any) => void
+  oncCreate: () => void
+}) => {
   // const [ErrorBoundary]
   return (
     <Dialog visible={visible} onDismiss={hideDialog}>
@@ -342,3 +363,41 @@ const DATA = [
     ],
   },
 ]
+
+const transformData = (data) => {
+  console.log("data", data)
+  // Group items by their category
+  const groupedData = data.reduce((acc, item) => {
+    console.log("item", item)
+    console.log("item", item[0])
+    const category = item.category.toLowerCase() // Assuming categories are distinct and well-defined
+    if (!acc[category]) {
+      acc[category] = []
+    }
+    acc[category].push({
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      price: `$${item.price.toFixed(2)}`,
+      // url: imageCDNURL(item.url.split("/").pop()), // Extracting the filename from the URL for use in imageCDNURL
+    })
+    return acc
+  }, {})
+  console.log("groupedData", groupedData)
+  // Transform the grouped data into the desired structure
+  return Object.entries(groupedData).map(([key, list], index) => ({
+    title: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize the category name
+    key: key,
+    data: [
+      {
+        key: key,
+        list: list.map((item, idx) => ({
+          ...item,
+          id: (index * 100 + idx + 1).toString(), // Generating unique IDs for the list items
+        })),
+      },
+    ],
+  }))
+}
+
+// const DATA = transformData(originalData);
