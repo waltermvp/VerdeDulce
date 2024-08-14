@@ -53,6 +53,7 @@ export const CreateItemStoreModel = types
 
   .views((store) => ({
     get createItemReady() {
+      return true
       return !!(
         (store.name && store.category && store.description && store.price && store.calories)
         //  &&
