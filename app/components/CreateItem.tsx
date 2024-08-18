@@ -5,6 +5,7 @@ import { colors, spacing, typography } from "app/theme"
 import { StorageManager } from "@aws-amplify/ui-react-storage"
 import { TextInput } from "react-native-paper"
 import { CategoryList } from "./CategoryList"
+import { imageCDNURL } from "app/utils/linkbuilder"
 
 export interface CreateItemProps {
   /**
@@ -75,7 +76,9 @@ export const CreateItem = observer(function CreateItem(props: CreateItemProps) {
           onUploadError={(error) => console.log("error", error)}
           onUploadSuccess={(data) => {
             console.log("data", data)
-            setURL(data.key)
+            const url = imageCDNURL(data.key, "thumbnail", false, "cover", 0)
+            console.log("url", url)
+            setURL(url)
 
             setUploading(false)
           }}

@@ -13,7 +13,6 @@ import {
 } from "app/components"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"
 import { useStores } from "app/models"
-import { imageCDNURL } from "app/utils/linkbuilder"
 import { useMediaQuery } from "react-responsive"
 import { spacing } from "app/theme"
 // import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query"
@@ -21,6 +20,8 @@ import { generateClient } from "aws-amplify/data"
 import { Schema } from "amplify/data/resource"
 import { Dialog, Portal } from "react-native-paper"
 import { translate } from "app/i18n"
+import { SectionGrid } from "react-native-super-grid"
+import { transformDataForSectionList } from "app/models/ItemStore"
 type Item = Schema["Item"]["type"]
 
 interface AdminScreenProps extends AppStackScreenProps<"Admin"> {}
@@ -85,7 +86,7 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
           description: data?.description,
           price: data?.price,
           calories: data?.calories,
-          url: data.url ? imageCDNURL(data?.url) : undefined,
+          url: data.url,
         },
         { authMode: "userPool" },
       )
@@ -126,7 +127,7 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
       next: ({ items, isSynced }) => {
         setIsSyncedLocal(isSynced)
         if (isSynced) {
-          const transformed = transformData(items)
+          const transformed = transformDataForSectionList(items)
           console.log("transformed", transformed)
           setItems(transformed)
 
@@ -143,18 +144,18 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
     authenticationStore: { isAuthenticated },
   } = useStores()
 
-  useFocusEffect(
-    React.useCallback(() => {
-      navigation.setOptions({
-        headerRight: () => {
-          return <OrderButton tx="landingScreen.name" icon="add" onPress={showDialog} />
-        },
-      })
-    }, [navigation]),
-  )
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     navigation.setOptions({
+  //       headerRight: () => {
+  //         return <OrderButton tx="landingScreen.name" icon="add" onPress={showDialog} />
+  //       },
+  //     })
+  //   }, [navigation]),
+  // )
   useLayoutEffect(() => {
     navigation.setOptions({
-      ti: () => {
+      headerRight: () => {
         return <OrderButton tx="landingScreen.name" icon="add" onPress={showDialog} />
       },
     })
@@ -168,57 +169,20 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
 
   // if (error) return "An error has occurred: " + error.message
 
-  const renderSection = ({ item }) => {
+  const renderMenuItem = ({ item }) => {
     return (
-      <FlatList
-        style={{
-          alignSelf: "center",
-          width: "100%",
+      <MenuItem
+        item={item}
+        showDelete={true}
+        onDelete={() => {
+          setItemIDToDelete(item.id)
+          showDialog()
         }}
-        columnWrapperStyle={
-          numberOfColumns !== 1 && {
-            // gap: spacing.xxl * 6,
-            // flex: 1,
-            justifyContent: "space-between",
-          }
-        }
-        contentContainerStyle={
-          {
-            // flexGrow: 1,
-            // alignItems: "center",
-            // backgroundColor: "red",
-            // alignItems: "center",
-            // justifyContent: "center",
-            // flex: 1,
-          }
-        }
-        data={item.list}
-        numColumns={numberOfColumns}
-        renderItem={({ item }) => {
-          console.log("item", item)
-          return (
-            <MenuItem
-              item={item}
-              showDelete={true}
-              onDelete={() => {
-                setItemIDToDelete(item.id)
-                showDialog()
-              }}
-            />
-          )
-        }}
-        keyExtractor={keyExtractor}
-        extraData={numberOfColumns}
-        key={numberOfColumns}
       />
-      // </View>
     )
   }
   const renderSectionTitle = ({ section }) => {
     return <Text preset="heading">{section.title}</Text>
-  }
-  const keyExtractor = (item) => {
-    return item.name
   }
   if (!isSyncedLocal) {
     return (
@@ -293,20 +257,13 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
         </Portal>
       </View>
 
-      <SectionList
-        contentContainerStyle={{ padding: spacing.sm, gap: 10 }}
-        // horizontal
-        ListEmptyComponent={() => {
-          return (
-            <Text style={{ textAlign: "center" }} preset="heading">
-              No items
-            </Text>
-          )
-        }}
-        sections={items}
-        renderItem={renderSection}
-        renderSectionHeader={renderSectionTitle}
-      ></SectionList>
+      {items.length > 0 && (
+        <SectionGrid
+          sections={items}
+          renderItem={renderMenuItem}
+          renderSectionHeader={renderSectionTitle}
+        />
+      )}
     </Screen>
   )
 })
@@ -325,39 +282,39 @@ const $root: ViewStyle = {
   padding: spacing.sm,
 }
 
-const transformData = (data) => {
-  // Group items by their category
-  const groupedData = data.reduce((acc, item) => {
-    // console.log("item", item)
-    // console.log("item", item[0])
-    const category = item.category?.toLowerCase() // Assuming categories are distinct and well-defined
-    if (!acc[category]) {
-      acc[category] = []
-    }
-    acc[category].push({
-      id: item.id,
-      name: item.name,
-      description: item.description,
-      price: `$${item.price?.toFixed(2)}`,
-      url: item.url, //imageCDNURL(item.url.split("/").pop()), // Extracting the filename from the URL for use in imageCDNURL
-    })
-    return acc
-  }, {})
-  console.log("groupedData", groupedData)
-  // Transform the grouped data into the desired structure
-  return Object.entries(groupedData).map(([key, list], index) => ({
-    title: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize the category name
-    key: key,
-    data: [
-      {
-        key: key,
-        list: list.map((item, idx) => ({
-          ...item,
-          // id: (index * 100 + idx + 1).toString(), // Generating unique IDs for the list items
-        })),
-      },
-    ],
-  }))
-}
+// const transformData = (data) => {
+//   // Group items by their category
+//   const groupedData = data.reduce((acc, item) => {
+//     // console.log("item", item)
+//     // console.log("item", item[0])
+//     const category = item.category?.toLowerCase() // Assuming categories are distinct and well-defined
+//     if (!acc[category]) {
+//       acc[category] = []
+//     }
+//     acc[category].push({
+//       id: item.id,
+//       name: item.name,
+//       description: item.description,
+//       price: `$${item.price?.toFixed(2)}`,
+//       url: item.url, //imageCDNURL(item.url.split("/").pop()), // Extracting the filename from the URL for use in imageCDNURL
+//     })
+//     return acc
+//   }, {})
+//   console.log("groupedData", groupedData)
+//   // Transform the grouped data into the desired structure
+//   return Object.entries(groupedData).map(([key, list], index) => ({
+//     title: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize the category name
+//     key: key,
+//     data: [
+//       {
+//         key: key,
+//         list: list.map((item, idx) => ({
+//           ...item,
+//           // id: (index * 100 + idx + 1).toString(), // Generating unique IDs for the list items
+//         })),
+//       },
+//     ],
+//   }))
+// }
 
 // const DATA = transformData(originalData);

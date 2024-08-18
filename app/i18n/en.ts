@@ -16,6 +16,18 @@ const en = {
   menuScreen: {
     orderMessage: "Hello, I would like to place an order with Verde Dulce.",
   },
+  orderScreen: {
+    account: "Account",
+    content: "",
+  },
+  homeScreen: {
+    welcome: "Welcome, %{name}.",
+    order: "Order Now",
+    menu: "Menu",
+    loyalty: "Loyalty",
+    scan: "Scan",
+    account: "Account",
+  },
   adminScreen: {
     title: "Create Item",
     name: "Name",
@@ -28,6 +40,9 @@ const en = {
     subtitleDelete: "Delete an item from the menu.",
     titleDelete: "Delete Item",
     descriptionDelete: "Are you sure you want to delete this item?",
+  },
+  accountScreen: {
+    title: "Welcome to the sweet life",
   },
   welcomeScreen: {
     postscript:

@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query"
 import { Schema } from "amplify/data/resource"
 import { generateClient } from "aws-amplify/api"
+import { imageCDNURL } from "app/utils/linkbuilder"
 
 // type Item = Schema["Item"]["type"]
 
@@ -66,7 +67,6 @@ export const useReactQuerySubscription = () => {
   const client = generateClient<Schema>()
 
   useEffect(() => {
-
     const sub = client.models.Item.observeQuery({
       // filter: { displayId: { eq: displayID } },
       authMode: "apiKey",
@@ -76,14 +76,12 @@ export const useReactQuerySubscription = () => {
         if (isSynced) {
           // const data = JSON.parse(items)
           console.log("data", items)
-          console.log("data",typeof items)
+          console.log("data", typeof items)
           const queryKey = [...items.entity, data.id].filter(Boolean)
           queryClient.invalidateQueries({ queryKey })
-    
         }
       },
     })
-
 
     // websocket.onmessage = (event) => {
     //   const data = JSON.parse(event.data)
@@ -100,15 +98,8 @@ export const useReactQuerySubscription = () => {
     return () => {
       sub.unsubscribe()
     }
-  
-
-
-
-
   }, [queryClient])
 }
-
-
 
 // useEffect(() => {
 //   if (!displayID) {
@@ -132,3 +123,79 @@ export const useReactQuerySubscription = () => {
 //     sub.unsubscribe()
 //   }
 // }, [displayID])
+export const transformData = (data) => {
+  // Group items by their category
+  const groupedData = data.reduce((acc, item) => {
+    // console.log("item", item)
+    // console.log("item", item[0])
+    const category = item.category?.toLowerCase() // Assuming categories are distinct and well-defined
+    if (!acc[category]) {
+      acc[category] = []
+    }
+
+    acc[category].push({
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      price: `$${item.price?.toFixed(2)}`,
+      url: item.url, //imageCDNURL(item.url.split("/").pop()), // Extracting the filename from the URL for use in imageCDNURL
+    })
+    return acc
+  }, {})
+
+  // Transform the grouped data into the desired structure
+  const final = Object.entries(groupedData).map(([key, list], index) => ({
+    title: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize the category name
+    key: key,
+    data: [
+      {
+        key: key,
+        list: list.map((item, idx) => ({
+          ...item,
+          // id: (index * 100 + idx + 1).toString(), // Generating unique IDs for the list items
+        })),
+      },
+    ],
+  }))
+
+  return final
+}
+export const transformDataForSectionList = (data) => {
+  // Group items by their category
+  const groupedData = data.reduce((acc, item) => {
+    const category = item.category?.toLowerCase() // Assuming categories are distinct and well-defined
+    console.log("category", category)
+    if (!acc[category]) {
+      acc[category] = []
+    }
+
+    acc[category].push({
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      available: item.available,
+      category: item.category,
+      metadata: item.metadata,
+      price: `$${item.price.toFixed(2)}`,
+      calories: item.calories,
+      url: imageCDNURL(item.url), // Extracting the filename from the URL for use in imageCDNURL
+    })
+    return acc
+  }, {})
+  // console.log(item, "item")
+  // console.log(category, "category")
+  console.log("groupedData", groupedData)
+
+  // const  sectionlistData = groupedData.map((category) => ({
+  //   title: category,
+  //   data: groupedData[category],
+  // }))
+  // Transform the grouped data into the SectionList structure
+  const groupedFinal = Object.keys(groupedData).map((category) => ({
+    title: category,
+    data: groupedData[category],
+  }))
+
+  console.log("groupedFinal", groupedFinal)
+  return groupedFinal
+}

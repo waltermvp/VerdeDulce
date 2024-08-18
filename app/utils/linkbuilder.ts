@@ -1,7 +1,7 @@
 import amplifyOutputs from "../../amplify_outputs.json"
 import { colors, typography } from "app/theme"
 import { ImageStyle } from "expo-image"
-import { StyleProp , type TextStyle,  } from "react-native"
+import { StyleProp, type TextStyle } from "react-native"
 //TODO: review presets
 const cloudfrontCDN = "https://dta56yysqj9ke.cloudfront.net"
 
@@ -70,7 +70,7 @@ export const imageCDNURL = (
       height = 200
       break
   }
-  
+
   const variables = {
     bucket: amplifyOutputs.storage.bucket_name,
     key: thumbnailURL,
@@ -85,7 +85,7 @@ export const imageCDNURL = (
       rotate: Number(rotation),
     },
   }
-// console.log(variables, "variables")
+  console.log(variables, "variables")
   const imageRequest = JSON.stringify(variables)
   const encodedObject = btoa(imageRequest)
   const url = `${cloudfrontCDN}/${encodedObject}`
@@ -103,4 +103,3 @@ export const moderatedURL = (urlString: string) => {
   const url = `${cloudfrontCDN}/${encodedObject}`
   return url
 }
-

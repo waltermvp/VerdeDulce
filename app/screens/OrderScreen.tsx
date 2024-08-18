@@ -1,22 +1,33 @@
-import React, { FC } from "react"
+import React, { FC, useLayoutEffect } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Screen, Text } from "app/components"
-// import { useNavigation } from "@react-navigation/native"
-// import { useStores } from "app/models"
+import { Button, OrderButton, Screen, Text } from "app/components"
+import { useNavigation } from "@react-navigation/native"
+import { useStores } from "app/models"
 
 interface OrderScreenProps extends AppStackScreenProps<"Order"> {}
 
 export const OrderScreen: FC<OrderScreenProps> = observer(function OrderScreen() {
-  // Pull in one of our MST stores
-  // const { someStore, anotherStore } = useStores()
+  const {} = useStores()
+  const navigation = useNavigation()
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return (
+          <Button
+            tx="orderScreen.account"
+            preset="link"
+            onPress={() => navigation.navigate("Account")}
+          />
+        )
+      },
+    })
+  }, [navigation])
 
-  // Pull in navigation via hook
-  // const navigation = useNavigation()
   return (
     <Screen style={$root} preset="scroll">
-      <Text tx="common.comingSoon" preset="heading" style={{ textAlign: "center" }} />
+      <Text tx="common.comingSoon" preset="idead" style={{ textAlign: "center" }} />
     </Screen>
   )
 })

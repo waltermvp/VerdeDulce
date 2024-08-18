@@ -20,6 +20,7 @@ import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { colors } from "app/theme"
 import { MenuNavigator, MenuNavigatorParamList } from "./MenuNavigator"
+import { OrderNavigator } from "./OrderNavigator"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -39,11 +40,16 @@ export type AppStackParamList = {
   Login: undefined
   // Demo: NavigatorScreenParams<DemoTabParamList>
   MenuNav: NavigatorScreenParams<MenuNavigatorParamList>
+  OrderNav: undefined // NavigatorScreenParams<MenuNavigatorParamList>
   Menu: undefined
   // 🔥 Your screens go here
   Order: undefined
   Admin: undefined
   CreateItem: undefined
+  Account: undefined
+  Home: undefined
+  Loyalty: undefined
+  Scan: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -80,6 +86,7 @@ const AppStack = observer(function AppStack() {
 
       <Stack.Group>
         <Stack.Screen name="MenuNav" component={MenuNavigator} />
+        <Stack.Screen name="OrderNav" component={OrderNavigator} />
       </Stack.Group>
 
       <Stack.Group
@@ -94,6 +101,10 @@ const AppStack = observer(function AppStack() {
       </Stack.Group>
 
       {/** 🔥 Your screens go here */}
+      <Stack.Screen name="Account" component={Screens.AccountScreen} />
+      <Stack.Screen name="Home" component={Screens.HomeScreen} />
+      <Stack.Screen name="Loyalty" component={Screens.LoyaltyScreen} />
+      <Stack.Screen name="Scan" component={Screens.ScanScreen} />
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )

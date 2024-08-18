@@ -1,32 +1,70 @@
-import React, { FC } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle, View, SectionList } from "react-native"
+import { ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { MenuHeader, MenuItem, OrderButton, Screen, Text } from "app/components"
-import { FlashList as FlatList } from "@shopify/flash-list"
+
 import { colors, spacing } from "app/theme"
-import { useMediaQuery } from "react-responsive"
+// import { useMediaQuery } from "react-responsive"
 import { useFocusEffect } from "@react-navigation/native"
 import { Linking } from "react-native" // Import Linking module
 import { useNavigation } from "@react-navigation/native"
 import { imageCDNURL } from "app/utils/linkbuilder"
 // import Config from "../config"
 import { translate } from "app/i18n"
-
+import { SectionGrid } from "react-native-super-grid"
+import { transformData, transformDataForSectionList } from "app/models/ItemStore"
 // import { useStores } from "app/models"
+import { Schema } from "amplify/data/resource"
+import { Dialog, Portal } from "react-native-paper"
+import { generateClient } from "aws-amplify/api"
+type Item = Schema["Item"]["type"]
 
 interface MenuScreenProps extends AppStackScreenProps<"Menu"> {}
 
 export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
+  const [items1, setItems] = useState<Item[]>([])
+  const client = generateClient<Schema>()
+  const [visible, setVisible] = React.useState(false)
+  const [isSyncedLocal, setIsSyncedLocal] = useState(false)
+  const showDialog = () => setVisible(true)
+
+  const hideDialog = () => setVisible(false)
 
   const navigation = useNavigation()
-  const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
+  // const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
+  // const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
 
-  // 490 // 800
-  const numberOfColumns = isSmallScreen ? 1 : isBigScreen ? 3 : 2
+  useEffect(() => {
+    // if (!displayID) {
+    //   // setMode(MODE.MISSING_UDID)
+    //   return
+    // }
+
+    const sub = client.models.Item.observeQuery({
+      // filter: { displayId: { eq: displayID } },
+      authMode: "apiKey",
+    }).subscribe({
+      next: ({ items, isSynced }) => {
+        setIsSyncedLocal(isSynced)
+        if (isSynced) {
+          if (items.length > 0) {
+            const transformed = transformDataForSectionList(items)
+            console.log("transformed", transformed)
+            setItems(transformed)
+          }
+
+          // setSlideCount(items.length)
+        }
+      },
+    })
+    return () => {
+      sub.unsubscribe()
+    }
+  }, [])
+
   //TODO: localize
   useFocusEffect(
     React.useCallback(() => {
@@ -37,7 +75,8 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
               tx="landingScreen.order"
               icon="logo-whatsapp"
               onPress={() => {
-                // navigation.navigate("OrderScreen", { screen: "Order" })
+                navigation.navigate("OrderNav", { screen: "Home" })
+                return
                 const phoneNumber = "+593963021783" // Replace with the actual phone number
 
                 const message = translate("menuScreen.orderMessage") // Replace with the actual message
@@ -53,49 +92,34 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
     }, [navigation]),
   )
 
-  const renderSection = ({ item }) => {
-    return (
-      <FlatList
-        data={item.list}
-        numColumns={numberOfColumns}
-        renderItem={renderMenuItem}
-        keyExtractor={keyExtractor}
-      />
-    )
-  }
-
-  const renderSectionHeader = ({ section }) => {
-    return (
-      <View style={{ margin: 0 }}>
-        <Text preset="subheading">{section.title}</Text>
-      </View>
-    )
+  const renderSectionTitle = ({ section }) => {
+    return <Text preset="heading">{section.title}</Text>
   }
 
   const renderMenuItem = ({ item }) => {
-    return <MenuItem item={item} />
-  }
-
-  const keyExtractor = (item) => {
-    return item.name
+    return (
+      <MenuItem
+        item={item}
+        // showDelete={true}
+        onDelete={() => {
+          // setItemIDToDelete(item.id)
+          // showDialog()
+        }}
+      />
+    )
   }
 
   return (
     <Screen style={$root} preset="scroll">
-      {/* <FlashList
-        ListHeaderComponent={MenuHeader}
-        data={DATA}
-        numColumns={2}
-        renderItem={renderMenuItem}
-      /> */}
       <MenuHeader />
-      <SectionList
-        // ListHeaderComponent={MenuHeader}
-        contentContainerStyle={{ padding: spacing.sm, justifyContent: "flex-start" }}
-        sections={sections}
-        renderSectionHeader={renderSectionHeader}
-        renderItem={renderSection}
-      />
+      {items1.length > 0 && (
+        <SectionGrid
+          itemDimension={130}
+          sections={items1}
+          renderItem={renderMenuItem}
+          renderSectionHeader={renderSectionTitle}
+        />
+      )}
     </Screen>
   )
 })
@@ -105,71 +129,3 @@ const $root: ViewStyle = {
   backgroundColor: colors.palette.lightBackground,
   paddingHorizontal: spacing.lg,
 }
-
-//TODO: tranform code needs to be written
-const sections = [
-  {
-    title: "Vegetables",
-    key: "vegetables",
-    data: [
-      {
-        key: "vegetables",
-        list: [
-          {
-            id: "1",
-            name: "Kale Caesar",
-            description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
-            price: "$9.99",
-            url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
-          },
-          {
-            id: "2",
-            name: "Harvest Bowl",
-            description: "Roasted brussels sprouts, roasted sweet potatoes, and wild rice",
-            price: "$10.99",
-            url: imageCDNURL("Q423_OLO_HarvestBowlsAlmonda_3600x2400_1_zsngyb.png"),
-          },
-          {
-            id: "3",
-            name: "Spicy Thai Salad",
-            description: "Organic arugula, spicy cashew dressing, and sesame tofu",
-            price: "$11.99",
-            url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
-          },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Fruits",
-    key: "fruits",
-    data: [
-      {
-        key: "fruits",
-        list: [
-          {
-            id: "1",
-            name: "Kale Caesar",
-            description: "Organic baby kale, shaved parmesan, and house-made caesar dressing",
-            price: "$9.99",
-            url: imageCDNURL("Q423_OLO_HarvestBowlsAlmonda_3600x2400_1_zsngyb.png"),
-          },
-          {
-            id: "2",
-            name: "Harvest Bowl",
-            description: "Roasted brussels sprouts, roasted sweet potatoes, and wild rice",
-            price: "$10.99",
-            url: imageCDNURL("Q224_OLO_Carmelized_Garlic_Steak_Plate_3600x2400.png"),
-          },
-          {
-            id: "3",
-            name: "Spicy Thai Salad",
-            description: "Organic arugula, spicy cashew dressing, and sesame tofu",
-            price: "$11.99",
-            url: imageCDNURL("Q423_OLO_HarvestBowlsAlmonda_3600x2400_1_zsngyb.png"),
-          },
-        ],
-      },
-    ],
-  },
-]
