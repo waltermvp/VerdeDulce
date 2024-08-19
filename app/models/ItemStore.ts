@@ -178,7 +178,7 @@ export const transformDataForSectionList = (data) => {
       metadata: item.metadata,
       price: `$${item.price.toFixed(2)}`,
       calories: item.calories,
-      url: imageCDNURL(item.url), // Extracting the filename from the URL for use in imageCDNURL
+      url: item.url, // Extracting the filename from the URL for use in imageCDNURL
     })
     return acc
   }, {})

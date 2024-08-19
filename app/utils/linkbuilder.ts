@@ -85,7 +85,7 @@ export const imageCDNURL = (
       rotate: Number(rotation),
     },
   }
-  console.log(variables, "variables")
+
   const imageRequest = JSON.stringify(variables)
   const encodedObject = btoa(imageRequest)
   const url = `${cloudfrontCDN}/${encodedObject}`
