@@ -70,7 +70,8 @@
     ],
     "experiments": {
       "tsconfigPaths": true
-    }
+    },
+    "sdkVersion": "51.0.28"
   },
   "ignite": {
     "version": "9.7.2"
