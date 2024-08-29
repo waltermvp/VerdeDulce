@@ -86,8 +86,8 @@ export const MenuNavigator = observer(() => {
       }}
     >
       <Drawer.Screen name="Menu" component={MenuScreen} />
-      <Drawer.Screen name="Order" component={OrderScreen} />
-      <Drawer.Screen name="Account" component={AccountScreen} />
+      {/* <Drawer.Screen name="Order" component={OrderScreen} /> */}
+      {/* <Drawer.Screen name="Account" component={AccountScreen} /> */}
       {isAuthenticated && <Drawer.Screen name="Admin" component={AdminScreen} />}
     </Drawer.Navigator>
   )

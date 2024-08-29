@@ -5,7 +5,7 @@ import { AppStackScreenProps } from "app/navigators"
 import { MenuHeader, MenuItem, OrderButton, Screen, Text } from "app/components"
 
 import { colors, spacing } from "app/theme"
-// import { useMediaQuery } from "react-responsive"
+import { useMediaQuery } from "react-responsive"
 import { useFocusEffect } from "@react-navigation/native"
 import { Linking } from "react-native" // Import Linking module
 import { useNavigation } from "@react-navigation/native"
@@ -18,6 +18,7 @@ import { transformData, transformDataForSectionList } from "app/models/ItemStore
 import { Schema } from "amplify/data/resource"
 import { Dialog, Portal } from "react-native-paper"
 import { generateClient } from "aws-amplify/api"
+const sweetgreenMenu = require("menu.json")
 type Item = Schema["Item"]["type"]
 
 interface MenuScreenProps extends AppStackScreenProps<"Menu"> {}
@@ -25,7 +26,7 @@ interface MenuScreenProps extends AppStackScreenProps<"Menu"> {}
 export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
-  const [items1, setItems] = useState<Item[]>([])
+  const [items1, setItems] = useState<Item[]>(sweetgreenMenu)
   const client = generateClient<Schema>()
   const [visible, setVisible] = React.useState(false)
   const [isSyncedLocal, setIsSyncedLocal] = useState(false)
@@ -35,35 +36,35 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
 
   const navigation = useNavigation()
   // const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
-  // const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
 
-  useEffect(() => {
-    // if (!displayID) {
-    //   // setMode(MODE.MISSING_UDID)
-    //   return
-    // }
+  // useEffect(() => {
+  //   // if (!displayID) {
+  //   //   // setMode(MODE.MISSING_UDID)
+  //   //   return
+  //   // }
 
-    const sub = client.models.Item.observeQuery({
-      // filter: { displayId: { eq: displayID } },
-      authMode: "apiKey",
-    }).subscribe({
-      next: ({ items, isSynced }) => {
-        setIsSyncedLocal(isSynced)
-        if (isSynced) {
-          if (items.length > 0) {
-            const transformed = transformDataForSectionList(items)
-            console.log("transformed", transformed)
-            setItems(transformed)
-          }
+  //   const sub = client.models.Item.observeQuery({
+  //     // filter: { displayId: { eq: displayID } },
+  //     authMode: "apiKey",
+  //   }).subscribe({
+  //     next: ({ items, isSynced }) => {
+  //       setIsSyncedLocal(isSynced)
+  //       if (isSynced) {
+  //         if (items.length > 0) {
+  //           const transformed = transformDataForSectionList(items)
+  //           console.log("transformed", transformed)
+  //           setItems(transformed)
+  //         }
 
-          // setSlideCount(items.length)
-        }
-      },
-    })
-    return () => {
-      sub.unsubscribe()
-    }
-  }, [])
+  //         // setSlideCount(items.length)
+  //       }
+  //     },
+  //   })
+  //   return () => {
+  //     sub.unsubscribe()
+  //   }
+  // }, [])
 
   //TODO: localize
   useFocusEffect(
@@ -75,8 +76,8 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
               tx="landingScreen.order"
               icon="logo-whatsapp"
               onPress={() => {
-                navigation.navigate("OrderNav", { screen: "Home" })
-                return
+                // navigation.navigate("OrderNav", { screen: "Home" })
+                // return
                 const phoneNumber = "+593963021783" // Replace with the actual phone number
 
                 const message = translate("menuScreen.orderMessage") // Replace with the actual message
@@ -92,11 +93,11 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
     }, [navigation]),
   )
 
-  const renderSectionTitle = ({ section }) => {
-    return <Text preset="heading">{section.title}</Text>
+  const renderSectionTitle = ({ section }: { section: any }) => {
+    return <Text preset="heading">{section.title.toUpperCase()}</Text>
   }
 
-  const renderMenuItem = ({ item }) => {
+  const renderMenuItem = ({ item }: { item: any }) => {
     return (
       <MenuItem
         item={item}
@@ -109,13 +110,16 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
     )
   }
 
+  // console.log("items1", items1)
+  console.log("items1", items1.length)
+  console.log(isSmallScreen, "isSmallScreen")
   return (
     <Screen style={$root} preset="scroll">
       <MenuHeader />
       {items1.length > 0 && (
         <SectionGrid
-          itemDimension={130}
-          sections={items1}
+          itemDimension={isSmallScreen ? 100 : 250}
+          sections={transformDataForSectionList(items1)}
           renderItem={renderMenuItem}
           renderSectionHeader={renderSectionTitle}
         />

@@ -77,6 +77,20 @@ const AppStack = observer(function AppStack() {
   //   //   navigationRef.current?.navigate("Login")
   //   // }
   // }, [isAuthenticated])
+
+  return (
+    <Stack.Navigator
+      screenOptions={{ navigationBarColor: colors.background, headerShown: false }}
+      initialRouteName={true ? "MenuNav" : "Login"}
+    >
+      {/* return <MenuNavigator /> */}
+
+      <Stack.Group>
+        <Stack.Screen name="MenuNav" component={MenuNavigator} />
+      </Stack.Group>
+    </Stack.Navigator>
+  )
+
   return (
     <Stack.Navigator
       screenOptions={{ navigationBarColor: colors.background, headerShown: false }}

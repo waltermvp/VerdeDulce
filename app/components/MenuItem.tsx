@@ -6,6 +6,8 @@ import { Text } from "app/components/Text"
 import { Image } from "expo-image"
 import { Bullets } from "./Bullets"
 import { Badge } from "react-native-paper"
+import image from "reactotron-core-client/dist/types/src/plugins/image"
+import { imageCDNURL } from "app/utils/linkbuilder"
 
 export interface MenuItemProps {
   /**
@@ -25,6 +27,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
   const { style, item, showDelete = false, onDelete } = props
   const $styles = [$container, style]
   console.log("MenuItem.tsx: item.url: ", item.url)
+  const url = imageCDNURL("SG_Web_Image_Plate_Hot_Honey_Chicken.png")
   return (
     <View style={$styles}>
       {showDelete && (
@@ -48,7 +51,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
           borderRadius: 9,
           // borderColor: "red",  borderWidth: 2
         }}
-        source={{ uri: item.url }}
+        source={{ uri: url }}
         onError={(e) => console.log("MenuItem.tsx: Image onError: ", e)}
         // placeHolder={() => <PlaceholderMenu />}
         contentFit="cover"
