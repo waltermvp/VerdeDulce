@@ -88,16 +88,25 @@ export const OrderButton = observer(function OrderButton(props: OrderButtonProps
           borderBottomWidth: onHoverIn ? 2 : 0,
         }}
       >
-        <Text tx={tx} preset="bold" style={{ color: colors.palette.lightYellowGreen }}></Text>
-        <Ionicons
+        <Text
+          tx={tx}
+          preset="bold"
           style={{
-            // textDecorationLine: onHoverIn ? "underline" : undefined,
-            paddingLeft: isSmallScreen ? spacing.xs : spacing.sm,
+            color: colors.palette.lightYellowGreen,
+            fontSize: isSmallScreen ? 12 : undefined,
           }}
-          name={icon}
-          size={24}
-          color={colors.palette.lightYellowGreen}
-        />
+        ></Text>
+        {!isSmallScreen && (
+          <Ionicons
+            style={{
+              // textDecorationLine: onHoverIn ? "underline" : undefined,
+              paddingLeft: isSmallScreen ? spacing.xs : spacing.sm,
+            }}
+            name={icon}
+            size={24}
+            color={colors.palette.lightYellowGreen}
+          />
+        )}
       </View>
     </Pressable>
   )

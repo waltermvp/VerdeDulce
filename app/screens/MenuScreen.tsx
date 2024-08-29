@@ -110,16 +110,12 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
     )
   }
 
-  // console.log("items1", items1)
-  console.log("items1", items1.length)
-  console.log(isSmallScreen, "isSmallScreen")
   return (
     <Screen style={$root} preset="scroll">
-      <Text>{isSmallScreen.toString()}??</Text>
       <MenuHeader />
       {items1.length > 0 && (
         <SectionGrid
-          itemDimension={isSmallScreen ? 100 : 250}
+          itemDimension={isSmallScreen ? 150 : 250}
           sections={transformDataForSectionList(items1)}
           renderItem={renderMenuItem}
           renderSectionHeader={renderSectionTitle}

@@ -80,5 +80,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
 
 const $container: ViewStyle = {
   // flex: 1,
+  alignItems: "center",
   paddingVertical: spacing.lg,
+  // backgroundColor: "red",
 }
