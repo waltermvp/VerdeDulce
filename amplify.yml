@@ -21,7 +21,7 @@ frontend:
           fi
     build:
       commands:
-        - mkdir ./dist && touch ./dist/index.html
+        # - mkdir ./dist && touch ./dist/index.html
         # - 'npx expo build:web'
         - 'yarn run bundle:web'
   artifacts:
