@@ -115,6 +115,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   console.log(isSmallScreen, "isSmallScreen")
   return (
     <Screen style={$root} preset="scroll">
+      <Text>{isSmallScreen.toString()}??</Text>
       <MenuHeader />
       {items1.length > 0 && (
         <SectionGrid
