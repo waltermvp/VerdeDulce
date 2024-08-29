@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { MenuHeader, MenuItem, OrderButton, Screen, Text } from "app/components"
+import { Footer, MenuHeader, MenuItem, OrderButton, Screen, Text } from "app/components"
 
 import { colors, spacing } from "app/theme"
 import { useMediaQuery } from "react-responsive"
@@ -125,6 +125,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
           renderSectionHeader={renderSectionTitle}
         />
       )}
+      <Footer />
     </Screen>
   )
 })
@@ -132,5 +133,4 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
 const $root: ViewStyle = {
   flex: 1,
   backgroundColor: colors.palette.lightBackground,
-  paddingHorizontal: spacing.lg,
 }

@@ -5,6 +5,7 @@ adding a new "isDone" field as a boolean. The authorization rule below
 specifies that any unauthenticated user can "create", "read", "update", 
 and "delete" any "Todo" records.
 =========================================================================*/
+//TODO: rename to product
 const schema = a.schema({
   Item: a
     .model({
@@ -19,7 +20,16 @@ const schema = a.schema({
       available: a.boolean(),
     })
     .authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
+
+  User: a
+    .model({
+      email: a.string(),
+      available: a.boolean(),
+    })
+    .authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
 })
+
+User: a
 
 export type Schema = ClientSchema<typeof schema>
 

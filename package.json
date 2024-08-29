@@ -28,7 +28,8 @@
     "bundle:web": "npx expo export --platform web",
     "serve:web": "npx server dist",
     "prebuild:clean": "npx expo prebuild --clean",
-    "generate": "npx ampx generate outputs --app-id d1ptvrvloahojd --branch main"
+    "generate": "npx ampx generate outputs --app-id d1ptvrvloahojd --branch main",
+    "apiToken": "curl -X POST --data \"username=my_user&password=my_password&device_name=my_device\" https://your.url/api/token"
   },
   "dependencies": {
     "@aws-amplify/react-native": "^1.1.4",
@@ -48,11 +49,11 @@
     "apisauce": "3.0.1",
     "aws-amplify": "^6.5.0",
     "date-fns": "^2.30.0",
-    "expo": "~51.0.28",
+    "expo": "~51.0.31",
     "expo-application": "~5.9.1",
     "expo-build-properties": "~0.12.1",
     "expo-font": "~12.0.5",
-    "expo-image": "~1.12.13",
+    "expo-image": "~1.12.15",
     "expo-linking": "~6.3.1",
     "expo-localization": "~15.0.3",
     "expo-splash-screen": "~0.27.4",
@@ -107,7 +108,7 @@
     "eslint-plugin-react-native": "4.0.0",
     "eslint-plugin-reactotron": "^0.1.2",
     "jest": "^29.2.1",
-    "jest-expo": "~51.0.2",
+    "jest-expo": "~51.0.4",
     "patch-package": "^8.0.0",
     "postinstall-prepare": "1.0.1",
     "prettier": "2.8.8",

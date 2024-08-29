@@ -31,7 +31,7 @@ export const MenuNavigator = observer(() => {
           <View style={{ flex: 1, backgroundColor: colors.palette.greenFont }}>
             <DrawerContentScrollView {...props}>
               <DrawerItemList {...props} />
-              <DrawerItem
+              {/* <DrawerItem
                 label={isAuthenticated ? translate("common.logOut") : translate("common.logIn")}
                 labelStyle={{ color: colors.palette.neutral100 }}
                 onPress={async () => {
@@ -50,7 +50,7 @@ export const MenuNavigator = observer(() => {
                     color={colors.palette.neutral100}
                   />
                 )}
-              ></DrawerItem>
+              ></DrawerItem> */}
             </DrawerContentScrollView>
           </View>
         )
@@ -88,7 +88,7 @@ export const MenuNavigator = observer(() => {
       <Drawer.Screen name="Menu" component={MenuScreen} />
       {/* <Drawer.Screen name="Order" component={OrderScreen} /> */}
       {/* <Drawer.Screen name="Account" component={AccountScreen} /> */}
-      {isAuthenticated && <Drawer.Screen name="Admin" component={AdminScreen} />}
+      {/* {isAuthenticated && <Drawer.Screen name="Admin" component={AdminScreen} />} */}
     </Drawer.Navigator>
   )
 })

@@ -1,6 +1,5 @@
 // TODO: write documentation for colors and palette in own markdown file and add links from here
 
-
 // {
 //   "veryLightGray": "#f4f3f2",
 //   "darkTeal": "#1b463c",
@@ -10,19 +9,15 @@
 //   "paleBlue": "#dae8e9"
 // }
 
-
-
-
 const palette = {
-
-lightBackground:"#f2f1e4",
-  "veryLightGray": "#f4f3f2",
-  "darkTeal": "#1b463c",
-  "lightGreen": "#d8ed6d",
-  "veryDarkGreen": "#0f150f",
-  "lightYellowGreen": "#ebfe72",
-  "paleBlue": "#dae8e9",
-  "greenFont": "#0B3E35",
+  lightBackground: "#f2f1e4",
+  veryLightGray: "#f4f3f2",
+  darkTeal: "#1b463c",
+  lightGreen: "#d8ed6d",
+  veryDarkGreen: "#0f150f",
+  lightYellowGreen: "#ebfe72",
+  paleBlue: "#dae8e9",
+  greenFont: "#0B3E35",
 
   neutral100: "#FFFFFF",
   neutral200: "#F4F2F1",
@@ -40,14 +35,13 @@ lightBackground:"#f2f1e4",
   // primary400: "#D28468",
   // primary500: "#C76542",
   // primary600: "#A54F31",
-  "primary100": "#ebfe72",  // lightYellowGreen
-  "primary200": "#bfcf5e",
-  "primary300": "#93a14a",
-  "primary400": "#677237",
-  "primary500": "#3b4423",
-  "primary600": "#0f150f"   // veryDarkGreen
-,
-
+  primary100: "#ebfe72", // lightYellowGreen
+  primary200: "#bfcf5e",
+  primary300: "#93a14a",
+  primary400: "#677237",
+  primary500: "#3b4423",
+  primary600: "#0f150f", // veryDarkGreen
+  footerGreen: "#D8E5D6",
   secondary100: "#DCDDE9",
   secondary200: "#BCC0D6",
   secondary300: "#9196B9",
