@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle } from "react-native"
+import { Dimensions, ViewStyle, View } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Footer, MenuHeader, MenuItem, OrderButton, Screen, Text } from "app/components"
 
@@ -18,6 +18,8 @@ import { transformData, transformDataForSectionList } from "app/models/ItemStore
 import { Schema } from "amplify/data/resource"
 import { Dialog, Portal } from "react-native-paper"
 import { generateClient } from "aws-amplify/api"
+
+const width = Dimensions.get("window").width
 const sweetgreenMenu = require("menu.json")
 type Item = Schema["Item"]["type"]
 
@@ -94,7 +96,11 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   )
 
   const renderSectionTitle = ({ section }: { section: any }) => {
-    return <Text preset="heading">{section.title.toUpperCase()}</Text>
+    return (
+      <View style={{ width: width }}>
+        <Text preset="heading">{section.title.toUpperCase()}</Text>
+      </View>
+    )
   }
 
   const renderMenuItem = ({ item }: { item: any }) => {
@@ -102,6 +108,16 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       <MenuItem
         item={item}
         // showDelete={true}
+        onPress={() => {
+          const phoneNumber = "+593963021783" // Replace with the actual phone number
+
+          const message = translate("menuScreen.orderMenuItemMessage", { item: item.name }) // Replace with the actual message
+
+          const url = `whatsapp://send?text=${encodeURIComponent(
+            message,
+          )}&phone=${encodeURIComponent(phoneNumber)}`
+          Linking.openURL(url).catch((err) => console.error("Failed to open WhatsApp", err))
+        }}
         onDelete={() => {
           // setItemIDToDelete(item.id)
           // showDialog()
@@ -109,13 +125,21 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       />
     )
   }
-
   return (
     <Screen style={$root} preset="scroll">
       <MenuHeader />
       {items1.length > 0 && (
         <SectionGrid
-          itemDimension={isSmallScreen ? 250 : 250}
+          // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
+          stickySectionHeadersEnabled={true}
+          contentContainerStyle={{
+            // margin: spacing.xl,
+            alignItems: "center",
+          }}
+          itemDimension={isSmallScreen ? 225 : 350}
+          // itemContainerStyle={{ height: 500 }}
+          // itemContainerStyle={{ height: 200 }}
+          maxItemsPerRow={isSmallScreen ? 1 : 3}
           sections={transformDataForSectionList(items1)}
           renderItem={renderMenuItem}
           renderSectionHeader={renderSectionTitle}
@@ -128,5 +152,8 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
 
 const $root: ViewStyle = {
   flex: 1,
+  // borderWidth: 3,
+  // borderColor: "pink",
+  padding: spacing.xxl,
   backgroundColor: colors.palette.lightBackground,
 }

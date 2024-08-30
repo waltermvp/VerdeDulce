@@ -16,6 +16,8 @@ const es: Translations = {
   },
   menuScreen: {
     orderMessage: "Hola, me gustaría hacer un pedido con Verde Dulce.",
+    orderMenuItemMessage:
+      "Hola, me gustaría hacer un pedido con Verde Dulce. Me gustaría ordenar {{item}}",
   },
   welcomeScreen: {
     postscript:

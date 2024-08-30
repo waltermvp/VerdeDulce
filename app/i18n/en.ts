@@ -15,6 +15,8 @@ const en = {
   },
   menuScreen: {
     orderMessage: "Hello, I would like to place an order with Verde Dulce.",
+    orderMenuItemMessage:
+      "Hola, me gustaría hacer un pedido con Verde Dulce. Me gustaría ordenar {{item}}",
   },
   orderScreen: {
     account: "Account",

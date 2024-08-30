@@ -82,7 +82,7 @@ export const OrderButton = observer(function OrderButton(props: OrderButtonProps
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: colors.palette.greenFont,
-          padding: isSmallScreen ? spacing.xxs : spacing.sm,
+          padding: isSmallScreen ? spacing.xs : spacing.sm,
           borderRadius: 13,
           borderBottomColor: colors.palette.neutral900,
           borderBottomWidth: onHoverIn ? 2 : 0,

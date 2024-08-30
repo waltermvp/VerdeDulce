@@ -39,7 +39,7 @@ export const MenuHeader = observer(function MenuHeader(props: MenuHeaderProps) {
         style={{
           textAlign: "center",
           paddingVertical: spacing.lg,
-          maxWidth: "65%",
+          maxWidth: "75%",
           alignSelf: "center",
           fontSize: 32,
           lineHeight: 40,
@@ -61,10 +61,4 @@ const $container: ViewStyle = {
   justifyContent: "center",
   // height: HEIGHT,
   // backgroundColor: "red",
-}
-
-const $text: TextStyle = {
-  fontFamily: typography.primary.normal,
-  fontSize: 14,
-  color: colors.palette.primary500,
 }
