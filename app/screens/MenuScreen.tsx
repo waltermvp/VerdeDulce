@@ -16,7 +16,6 @@ import { SectionGrid } from "react-native-super-grid"
 import { transformData, transformDataForSectionList } from "app/models/ItemStore"
 // import { useStores } from "app/models"
 import { Schema } from "amplify/data/resource"
-import { Dialog, Portal } from "react-native-paper"
 import { generateClient } from "aws-amplify/api"
 
 const width = Dimensions.get("window").width
@@ -125,8 +124,11 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       />
     )
   }
+
   return (
     <Screen style={$root} preset="scroll">
+      <Footer />
+
       <MenuHeader />
       {items1.length > 0 && (
         <SectionGrid

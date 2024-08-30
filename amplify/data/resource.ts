@@ -29,8 +29,6 @@ const schema = a.schema({
     .authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
 })
 
-User: a
-
 export type Schema = ClientSchema<typeof schema>
 
 export const data = defineData({

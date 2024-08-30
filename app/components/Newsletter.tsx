@@ -3,7 +3,7 @@ import { StyleProp, TextStyle, TouchableOpacity, View, ViewStyle } from "react-n
 import { observer } from "mobx-react-lite"
 import { colors, spacing, typography } from "app/theme"
 import { Text } from "app/components/Text"
-import { TextInput } from "react-native-paper"
+import { ActivityIndicator, TextInput } from "react-native-paper"
 import Ionicons from "@expo/vector-icons/Ionicons"
 import { useStores } from "app/models"
 
@@ -21,21 +21,36 @@ export const Newsletter = observer(function Newsletter(props: NewsletterProps) {
   const { style } = props
   const $styles = [$container, style]
 
-  const { authenticationStore } = useStores()
+  const {
+    createSignUpStore: { isSignInEnabled, signUp, email, setEmail, signUpLoading },
+  } = useStores()
 
-  const [email, setEmail] = React.useState("")
   const [color, setColor] = React.useState(colors.palette.lightBackground)
 
+  const saveSignUp = async () => {
+    try {
+      await signUp(email)
+      setEmail("")
+      setColor(colors.palette.lightBackground)
+    } catch (error) {
+      console.log("error", error)
+      setColor(colors.palette.angry100)
+    }
+  }
   return (
     <View style={$styles}>
       <View>
-        <Text preset="subheading">Join Our NewsLetter </Text>
-        <Text preset="default">
+        <Text preset="subheading" style={{ paddingBottom: spacing.md }}>
+          Join Our NewsLetter{" "}
+        </Text>
+        <Text preset="default" style={{ paddingBottom: spacing.sm }}>
           Sign up for exclusive promos, new menu drops, store openings, and more.
         </Text>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <TextInput
             mode="outlined"
+            placeholderTextColor={colors.palette.neutral400}
+            textColor={colors.palette.greenFont}
             outlineStyle={{
               borderColor: colors.palette.greenFont,
               borderWidth: 1.5,
@@ -52,6 +67,7 @@ export const Newsletter = observer(function Newsletter(props: NewsletterProps) {
             value={email}
             onChangeText={setEmail}
             onFocus={({ nativeEvent }) => console.log("focused", nativeEvent)}
+            onSubmitEditing={saveSignUp}
             // right={
             //   <Ionicons
             //     // style={{ marginRight: 10, flex: 1, height: 32, width: 32, backgroundColor: "red" }}
@@ -61,14 +77,21 @@ export const Newsletter = observer(function Newsletter(props: NewsletterProps) {
             //   />
             // }
           ></TextInput>
-          <TouchableOpacity onPress={() => console.log("pressed")}>
-            <Ionicons
-              // style={{ marginRight: 10, flex: 1, height: 32, width: 32, backgroundColor: "red" }}
-              name="arrow-forward-circle-sharp"
-              size={32}
+          {signUpLoading ? (
+            <ActivityIndicator
               color={colors.palette.greenFont}
+              style={{ paddingLeft: spacing.sm }}
             />
-          </TouchableOpacity>
+          ) : (
+            <TouchableOpacity onPress={isSignInEnabled ? saveSignUp : undefined}>
+              <Ionicons
+                // style={{ marginRight: 10, flex: 1, height: 32, width: 32, backgroundColor: "red" }}
+                name="arrow-forward-circle-sharp"
+                size={32}
+                color={isSignInEnabled ? colors.palette.greenFont : colors.palette.neutral400}
+              />
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </View>

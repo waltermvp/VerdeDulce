@@ -1,16 +1,6 @@
 import { type Instance, type SnapshotOut, types } from "mobx-state-tree"
 // import config from "../aws_config"
 import { withSetPropAction } from "./helpers/withSetPropAction"
-import {
-  signUp,
-  signIn,
-  confirmSignUp,
-  getCurrentUser,
-  autoSignIn,
-  signOut,
-  resendSignUpCode,
-  SignUpInput,
-} from "aws-amplify/auth"
 
 import { generateClient } from "aws-amplify/data"
 import type { Schema } from "../../amplify/data/resource"
@@ -49,10 +39,20 @@ export const NewsletterStoreModel = types
     },
   }))
   .actions((store) => ({
-    async signUp() {
-      await signOut()
+    async signUp(email: string) {
+      store.setProp("signUpLoading", true)
+      try {
+        await client.models.User.create({ email })
+        store.setProp("signUpLoading", false)
+      } catch (error) {
+        store.setProp("signUpLoading", false)
+        throw error
+      }
+    },
+    setEmail(email: string) {
+      store.setProp("email", email)
     },
   }))
 
-export interface AuthenticationStore extends Instance<typeof AuthenticationStoreModel> {}
-export interface AuthenticationStoreSnapshot extends SnapshotOut<typeof AuthenticationStoreModel> {}
+export interface NewsletterStoreStore extends Instance<typeof NewsletterStoreModel> {}
+export interface NewsletterStoreSnapshot extends SnapshotOut<typeof NewsletterStoreModel> {}
