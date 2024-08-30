@@ -41,6 +41,8 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 // Web linking configuration
 const prefix = Linking.createURL("/")
 const config = {
+  prefixes: ["http://localhost:8080/", "http://localhost:8080", "localhost:8080", "verdedulce.com"],
+
   screens: {
     // Login: {
     //   path: "",
