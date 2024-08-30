@@ -65,6 +65,10 @@ export const Footer = observer(function Footer(props: FooterProps) {
             },
           ]}
         />
+        {/* add copyright information */}
+        <Text style={{ fontStyle: typography.fonts.poppins.light, alignSelf: "flex-end" }}>
+          &copy; 2024 VerdeDulce. All rights reserved.
+        </Text>
       </View>
     </View>
   )

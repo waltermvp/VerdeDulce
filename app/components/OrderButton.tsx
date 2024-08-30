@@ -48,11 +48,7 @@ export const OrderButton = observer(function OrderButton(props: OrderButtonProps
   const [onHoverIn, setOnHoverIn] = React.useState(false)
 
   const $styles = [$container, style]
-  const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
   const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
-  const isLargerThan479 = useMediaQuery({ query: "(min-width: 479px)" })
-  console.log("isLargerThan479 in order button", isLargerThan479)
-  console.log("isSmallScreen in order button", isSmallScreen)
   return (
     <Pressable
       style={[

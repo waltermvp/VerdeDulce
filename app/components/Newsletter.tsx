@@ -60,10 +60,13 @@ export const Newsletter = observer(function Newsletter(props: NewsletterProps) {
 
       <View>
         <Text preset="subheading" style={{ paddingBottom: spacing.md }}>
-          Join Our NewsLetter
+          {/* Join Our NewsLetter */}
+          Únete a Nuestro Boletín
         </Text>
         <Text preset="default" style={{ paddingBottom: spacing.sm }}>
-          Sign up for exclusive promos, new menu drops, store openings, and more.
+          {/* Sign up for exclusive promos, new menu drops, store openings, and more. */}
+          Regístrate para recibir promociones exclusivas, lanzamientos de nuevos menús, aperturas de
+          tiendas y más
         </Text>
         {status === "idle" && (
           <View style={{ flexDirection: "row", alignItems: "center" }}>

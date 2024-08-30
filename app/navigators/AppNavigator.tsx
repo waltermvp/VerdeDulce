@@ -50,7 +50,8 @@ export type AppStackParamList = {
   Home: undefined
   Loyalty: undefined
   Scan: undefined
-  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  Faq: undefined
+	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 /**
@@ -119,7 +120,8 @@ const AppStack = observer(function AppStack() {
       <Stack.Screen name="Home" component={Screens.HomeScreen} />
       <Stack.Screen name="Loyalty" component={Screens.LoyaltyScreen} />
       <Stack.Screen name="Scan" component={Screens.ScanScreen} />
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      <Stack.Screen name="Faq" component={Screens.FaqScreen} />
+			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })

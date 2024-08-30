@@ -1,27 +1,35 @@
 import React from "react"
-import { AccountScreen, AdminScreen, LoginScreen, MenuScreen, OrderScreen } from "app/screens"
+import {
+  AccountScreen,
+  AdminScreen,
+  FaqScreen,
+  LoginScreen,
+  MenuScreen,
+  OrderScreen,
+} from "app/screens"
 import { createDrawerNavigator, DrawerItem } from "@react-navigation/drawer"
 import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer"
 import { Ionicons } from "@expo/vector-icons" // Add this import
 import { colors, spacing } from "app/theme"
 import { View } from "react-native"
 import { translate } from "app/i18n"
-import { useStores } from "app/models"
+// import { useStores } from "app/models"
 import { observer } from "mobx-react-lite"
 
 export type MenuNavigatorParamList = {
   Menu: undefined
-  Order: undefined
-  Admin: undefined
-  Account: undefined
+  FAQ: undefined
+  // Order: undefined
+  // Admin: undefined
+  // Account: undefined
 }
 
 const Drawer = createDrawerNavigator<MenuNavigatorParamList>()
 
 export const MenuNavigator = observer(() => {
-  const {
-    authenticationStore: { isAuthenticated, signOutAuth, signInAuth },
-  } = useStores()
+  // const {
+  //   authenticationStore: { isAuthenticated, signOutAuth, signInAuth },
+  // } = useStores()
 
   return (
     <Drawer.Navigator
@@ -86,6 +94,7 @@ export const MenuNavigator = observer(() => {
       }}
     >
       <Drawer.Screen name="Menu" component={MenuScreen} />
+      <Drawer.Screen name="FAQ" component={FaqScreen} />
       {/* <Drawer.Screen name="Order" component={OrderScreen} /> */}
       {/* <Drawer.Screen name="Account" component={AccountScreen} /> */}
       {/* {isAuthenticated && <Drawer.Screen name="Admin" component={AdminScreen} />} */}
