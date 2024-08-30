@@ -9,6 +9,7 @@ import { Badge } from "react-native-paper"
 import { imageCDNURL } from "app/utils/linkbuilder"
 import { OrderButton } from "./OrderButton"
 import { useMediaQuery } from "react-responsive"
+import { A } from "@expo/html-elements"
 
 const minHeight = 775
 export interface MenuItemProps {
@@ -104,17 +105,19 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
             </View>
             <View style={{ flex: 1 }}>
               {show && (
-                <OrderButton
-                  style={{
-                    marginTop: spacing.md,
-                    padding: spacing.md,
-                    // width: "90%",
-                    width: isSmallScreen ? 222 : 333,
-                    // bottom: spacing.xxxs,
-                  }}
-                  tx="landingScreen.order"
-                  onPress={onPress}
-                />
+                <A href="https://google.com">
+                  <OrderButton
+                    style={{
+                      marginTop: spacing.md,
+                      padding: spacing.md,
+                      // width: "90%",
+                      width: isSmallScreen ? 222 : 333,
+                      // bottom: spacing.xxxs,
+                    }}
+                    tx="landingScreen.order"
+                    onPress={onPress}
+                  />
+                </A>
               )}
             </View>
           </View>
