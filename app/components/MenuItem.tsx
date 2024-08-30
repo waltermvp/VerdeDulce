@@ -29,10 +29,9 @@ export interface MenuItemProps {
 export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
   const { style, item, showDelete = false, onDelete, onPress, show = false } = props
   const $styles = [$container, style]
-  console.log("MenuItem.tsx: item.url: ", item.url)
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" })
+  const url = imageCDNURL(item.url)
 
-  const url = imageCDNURL("SG_Web_Image_Plate_Hot_Honey_Chicken.png")
   return (
     <Pressable
       // onPress={onPress}
