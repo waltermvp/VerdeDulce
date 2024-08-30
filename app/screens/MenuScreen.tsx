@@ -97,8 +97,8 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
 
   const renderSectionTitle = ({ section }: { section: any }) => {
     return (
-      <View style={{ width: width }}>
-        <Text preset="heading">{section.title.toUpperCase()}</Text>
+      <View style={{ width: width, paddingLeft: spacing.sm }}>
+        <Text preset="subheading">{section.title.toUpperCase()}</Text>
       </View>
     )
   }
@@ -130,10 +130,13 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       <MenuHeader />
       {items1.length > 0 && (
         <SectionGrid
+          renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
           // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
           stickySectionHeadersEnabled={true}
           contentContainerStyle={{
-            // margin: spacing.xl,
+            // margin: spacing.xxl,
+            // paddingHorizontal: spacing.xxs,
+
             alignItems: "center",
           }}
           itemDimension={isSmallScreen ? 225 : 350}
@@ -154,6 +157,5 @@ const $root: ViewStyle = {
   flex: 1,
   // borderWidth: 3,
   // borderColor: "pink",
-  padding: spacing.xxl,
   backgroundColor: colors.palette.lightBackground,
 }
