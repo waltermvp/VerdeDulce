@@ -120,6 +120,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
             message,
           )}&phone=${encodeURIComponent(phoneNumber)}`
           await Linking.openURL(url).catch((err) => console.error("Failed to open WhatsApp", err))
+          // e.prevent
         }}
         onDelete={() => {
           // setItemIDToDelete(item.id)
@@ -148,7 +149,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
           // itemContainerStyle={{ height: 500 }}
           // itemContainerStyle={{ height: 200 }}
           maxItemsPerRow={isSmallScreen ? 1 : 3}
-          sections={transformDataForSectionList(items)}
+          sections={transformDataForSectionList(items.filter((item) => item.activated))}
           renderItem={renderMenuItem}
           renderSectionHeader={renderSectionTitle}
         />

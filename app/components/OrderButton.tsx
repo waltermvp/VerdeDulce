@@ -92,6 +92,7 @@ export const OrderButton = observer(function OrderButton(props: OrderButtonProps
               style={{
                 fontSize: isSmallScreen ? 12 : undefined,
                 color: !hovered ? colors.palette.primary100 : colors.palette.greenFont,
+                textAlign: "center",
               }}
             ></Text>
             {!isSmallScreen && (

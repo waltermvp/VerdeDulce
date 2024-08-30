@@ -179,6 +179,7 @@ export const transformDataForSectionList = (data) => {
       calories: item.calories,
       carbs: item.calories,
       protein: item.protein,
+      activated: item.activated,
       fat: item.fat,
       url: item.url, // Extracting the filename from the URL for use in imageCDNURL
     })
