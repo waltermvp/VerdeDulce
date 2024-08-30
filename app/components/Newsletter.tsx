@@ -3,7 +3,7 @@ import { StyleProp, TextStyle, TouchableOpacity, View, ViewStyle } from "react-n
 import { observer } from "mobx-react-lite"
 import { colors, spacing, typography } from "app/theme"
 import { Text } from "app/components/Text"
-import { ActivityIndicator, TextInput } from "react-native-paper"
+import { ActivityIndicator, Snackbar, TextInput } from "react-native-paper"
 import Ionicons from "@expo/vector-icons/Ionicons"
 import { useStores } from "app/models"
 
@@ -26,6 +26,11 @@ export const Newsletter = observer(function Newsletter(props: NewsletterProps) {
   } = useStores()
 
   const [color, setColor] = React.useState(colors.palette.lightBackground)
+  const [visible, setVisible] = React.useState(false)
+
+  const onToggleSnackBar = () => setVisible(!visible)
+
+  const onDismissSnackBar = () => setVisible(false)
 
   const saveSignUp = async () => {
     try {
@@ -34,14 +39,28 @@ export const Newsletter = observer(function Newsletter(props: NewsletterProps) {
       setColor(colors.palette.lightBackground)
     } catch (error) {
       console.log("error", error)
+      setVisible(true)
       setColor(colors.palette.angry100)
     }
   }
   return (
     <View style={$styles}>
+      <Snackbar
+        visible={visible}
+        // onDismiss={onDismissSnackBar}
+        action={{
+          label: "Undo",
+          onPress: () => {
+            // Do something
+          },
+        }}
+      >
+        Hey there! I'm a Snackbar.
+      </Snackbar>
+
       <View>
         <Text preset="subheading" style={{ paddingBottom: spacing.md }}>
-          Join Our NewsLetter{" "}
+          Join Our NewsLetter
         </Text>
         <Text preset="default" style={{ paddingBottom: spacing.sm }}>
           Sign up for exclusive promos, new menu drops, store openings, and more.

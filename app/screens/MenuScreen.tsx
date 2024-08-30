@@ -127,8 +127,6 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
 
   return (
     <Screen style={$root} preset="scroll">
-      <Footer />
-
       <MenuHeader />
       {items1.length > 0 && (
         <SectionGrid
