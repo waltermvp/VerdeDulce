@@ -1,176 +1,330 @@
 [
   {
-    "id": 1,
-    "name": "Guacamole Verde",
-    "price": 12.95,
-    "description": "La ensalada Guacamole Verde es una opción fresca y abundante que incluye aguacate, pollo asado, tomates, cebolla roja, chips de tortilla, queso cheddar blanco, todo aderezado con vinagreta de cilantro y jalapeño con lima.",
-    "calories": 555,
-    "carbohydrates": 30,
-    "protein": 30,
-    "fat": 36,
-    "ingredients": [
-      "Mesclun Orgánico",
-      "Aguacate",
-      "Pollo Asado",
-      "Tomates",
-      "Cebolla Roja",
-      "Chips de Tortilla",
-      "Queso Cheddar Blanco"
-    ],
-    "category": "Ensalada"
+    "name": "Caramelized Garlic Steak",
+    "description": "Wild rice, spicy broccoli, tomatoes, warm roasted sweet potatoes, caramelized garlic steak, pesto vinaigrette",
+    "price": 17.65,
+    "calories": 860,
+    "imageUrl": "URL_HERE",
+    "category": "Bowls"
   },
   {
-    "id": 2,
+    "name": "Steakhouse Chopped",
+    "description": "Chopped romaine, herbed quinoa, shredded cabbage, tomatoes, crispy onions, blue cheese, caramelized garlic steak, green goddess ranch",
+    "price": 17.15,
+    "calories": 815,
+    "imageUrl": "URL_HERE",
+    "category": "Bowls"
+  },
+  {
+    "name": "Kale Caesar (Steak)",
+    "description": "Chopped romaine, shredded kale, tomatoes, parmesan crisps, shaved parmesan, caramelized garlic steak, caesar, lime squeeze",
+    "price": 16.45,
+    "calories": 720,
+    "imageUrl": "URL_HERE",
+    "category": "Salads"
+  },
+  {
+    "name": "Hot Honey Chicken",
+    "description": "Herbed quinoa, crispy onions, blackened chicken, warm roasted sweet potatoes, veg slaw, hot honey mustard sauce",
+    "price": 15.95,
+    "calories": 835,
+    "imageUrl": "URL_HERE",
+    "category": "Protein Plates"
+  },
+  {
+    "name": "Miso Glazed Salmon",
+    "description": "White rice, cucumbers, nori sesame seasoning, crispy onions, pickled onions, avocado, miso glazed salmon, spicy cashew",
+    "price": 16.95,
+    "calories": 930,
+    "imageUrl": "URL_HERE",
+    "category": "Protein Plates"
+  },
+  {
     "name": "Harvest Bowl",
-    "price": 12.75,
-    "description": "Un bowl abundante y cálido que combina pollo asado, arroz salvaje orgánico, col rizada rallada, manzanas, batatas, almendras tostadas y queso de cabra con una vinagreta balsámica.",
-    "calories": 705,
-    "carbohydrates": 68,
-    "protein": 43,
-    "fat": 32,
-    "ingredients": [
-      "Pollo Asado",
-      "Arroz Salvaje Orgánico",
-      "Col Rizada Rallada",
-      "Manzanas",
-      "Batatas",
-      "Almendras Tostadas",
-      "Queso de Cabra"
-    ],
-    "category": "Bowl"
+    "description": "Shredded kale, wild rice, roasted sweet potatoes, roasted almonds, apples, goat cheese, roasted chicken, balsamic vinaigrette",
+    "price": 14.45,
+    "calories": 765,
+    "imageUrl": "URL_HERE",
+    "category": "Bowls"
   },
   {
-    "id": 3,
-    "name": "Shroomami",
-    "price": 12.5,
-    "description": "El bowl Shroomami es una opción sabrosa que incluye una mezcla de portobello caliente, remolachas crudas, brotes de soja, albahaca, semillas de girasol picantes, arroz salvaje orgánico, col rizada rallada y aderezo de miso y jengibre.",
-    "calories": 660,
-    "carbohydrates": 74,
-    "protein": 21,
-    "fat": 28,
-    "ingredients": [
-      "Mezcla de Portobello",
-      "Remolachas Crudas",
-      "Brotes de Soja",
-      "Albahaca",
-      "Semillas de Girasol Picantes",
-      "Arroz Salvaje Orgánico",
-      "Col Rizada Rallada"
-    ],
-    "category": "Bowl"
+    "name": "Crispy Rice Bowl",
+    "description": "Arugula, wild rice, cilantro, cucumbers, shredded cabbage, roasted almonds, crispy rice, raw carrots, blackened chicken, lime squeeze, spicy cashew",
+    "price": 15.45,
+    "calories": 640,
+    "imageUrl": "URL_HERE",
+    "category": "Bowls"
   },
   {
-    "id": 4,
-    "name": "Kale Caesar",
-    "price": 11.95,
-    "description": "Esta clásica ensalada César se prepara con col rizada rallada, lechuga romana picada, pollo asado, tomates, crujientes de parmesano, parmesano rallado y aderezo César.",
-    "calories": 420,
-    "carbohydrates": 18,
-    "protein": 27,
-    "fat": 28,
-    "ingredients": [
-      "Col Rizada Rallada",
-      "Lechuga Romana Picada",
-      "Pollo Asado",
-      "Tomates",
-      "Crujientes de Parmesano",
-      "Parmesano Rallado"
-    ],
-    "category": "Ensalada"
-  },
-  {
-    "id": 6,
     "name": "Chicken Pesto Parm",
-    "price": 13.75,
-    "description": "Una deliciosa combinación de pollo asado, garbanzos calientes, quinua caliente, col rizada rallada, brócoli picante, vinagreta de pesto, pan rallado, parmesano rallado y salsa picante.",
-    "calories": 710,
-    "carbohydrates": 47,
-    "protein": 46,
-    "fat": 37,
-    "ingredients": [
-      "Pollo Asado",
-      "Garbanzos Calientes",
-      "Quinua Caliente",
-      "Col Rizada Rallada",
-      "Brócoli Picante",
-      "Vinagreta de Pesto"
-    ],
-    "category": "Bowl"
+    "description": "Baby spinach, herbed quinoa, spicy broccoli, tomatoes, za'atar breadcrumbs, roasted chicken, shaved parmesan, pesto vinaigrette, sweetgreen hot sauce",
+    "price": 14.95,
+    "calories": 540,
+    "imageUrl": "URL_HERE",
+    "category": "Bowls"
   },
   {
-    "id": 7,
-    "name": "Spicy Thai Salad",
-    "price": 12.5,
-    "description": "La ensalada Spicy Thai incluye rúcula orgánica, col rizada rallada, quinua caliente, pollo asado, brócoli picante, zanahorias crudas, albahaca, semillas de girasol picantes y aderezo de anacardo picante.",
-    "calories": 645,
-    "carbohydrates": 46,
-    "protein": 29,
-    "fat": 38,
-    "ingredients": [
-      "Rúcula Orgánica",
-      "Col Rizada Rallada",
-      "Quinua Caliente",
-      "Pollo Asado",
-      "Brócoli Picante",
-      "Zanahorias Crudas"
-    ],
-    "category": "Ensalada"
+    "name": "Chicken Avocado Ranch",
+    "description": "Chopped romaine, white rice, tortilla chips, apples, pickled onions, avocado, blackened chicken, green goddess ranch",
+    "price": 14.45,
+    "calories": 705,
+    "imageUrl": "URL_HERE",
+    "category": "Bowls"
   },
   {
-    "id": 8,
-    "name": "Hummus Tahina",
-    "price": 12.25,
-    "description": "Una ensalada inspirada en el Mediterráneo con hummus casero, falafel de hierbas, lechuga romana picada orgánica, col rizada rallada, tomates, cebolla roja, pepino, pan rallado za'atar y yogur de tahini con pepino.",
-    "calories": 620,
-    "carbohydrates": 60,
-    "protein": 18,
-    "fat": 35,
-    "ingredients": [
-      "Hummus Casero",
-      "Falafel de Hierbas",
-      "Lechuga Romana Picada Orgánica",
-      "Col Rizada Rallada",
-      "Tomates",
-      "Cebolla Roja"
-    ],
-    "category": "Ensalada"
-  },
-  {
-    "id": 9,
-    "name": "Spicy Sabzi",
-    "price": 12.5,
-    "description": "Una ensalada picante y centrada en vegetales con espinacas tiernas orgánicas, col rizada rallada, quinua picante, remolachas crudas, brócoli picante, zanahorias, albahaca, brotes, aderezo de anacardo picante y un toque de lima.",
-    "calories": 670,
-    "carbohydrates": 74,
-    "protein": 17,
-    "fat": 35,
-    "ingredients": [
-      "Espinacas Tiernas Orgánicas",
-      "Col Rizada Rallada",
-      "Quinua Picante",
-      "Remolachas Crudas",
-      "Brócoli Picante",
-      "Zanahorias"
-    ],
-    "category": "Ensalada"
-  },
-  {
-    "id": 10,
     "name": "Shroomami",
-    "price": 12.5,
-    "description": "El bowl Shroomami es una opción sabrosa que incluye una mezcla de portobello caliente, remolachas crudas, brotes de soja, albahaca, semillas de girasol picantes, arroz salvaje orgánico, col rizada rallada y aderezo de miso y jengibre.",
-    "calories": 660,
-    "carbohydrates": 74,
-    "protein": 21,
-    "fat": 28,
-    "ingredients": [
-      "Mezcla de Portobello",
-      "Remolachas Crudas",
-      "Brotes de Soja",
-      "Albahaca",
-      "Semillas de Girasol Picantes",
-      "Arroz Salvaje Orgánico"
-    ],
-    "category": "Bowl"
+    "description": "Shredded kale, wild rice, basil, cucumbers, shredded cabbage, roasted almonds, warm portobello mix, roasted tofu, miso sesame ginger",
+    "price": 14.45,
+    "calories": 685,
+    "imageUrl": "URL_HERE",
+    "category": "Bowls"
+  },
+  {
+    "name": "Fish Taco",
+    "description": "Arugula, herbed quinoa, cilantro, shredded cabbage, tortilla chips, avocado, miso glazed salmon, lime cilantro jalapeno vinaigrette, sweetgreen hot sauce",
+    "price": 16.95,
+    "calories": 835,
+    "imageUrl": "URL_HERE",
+    "category": "Bowls"
+  },
+  {
+    "name": "Kale Caesar",
+    "description": "Chopped romaine, shredded kale, tomatoes, parmesan crisps, roasted chicken, shaved parmesan, caesar, lime squeeze",
+    "price": 13.75,
+    "calories": 510,
+    "imageUrl": "URL_HERE",
+    "category": "Salads"
+  },
+  {
+    "name": "Guacamole Greens",
+    "description": "Chopped romaine, spring mix, shredded cabbage, tomatoes, tortilla chips, pickled onions, avocado, roasted chicken, lime squeeze, lime cilantro jalapeno vinaigrette",
+    "price": 14.45,
+    "calories": 575,
+    "imageUrl": "URL_HERE",
+    "category": "Salads"
+  },
+  {
+    "name": "Hummus Crunch",
+    "description": "Chopped romaine, shredded kale, basil, cucumbers, shredded cabbage, tomatoes, za'atar breadcrumbs, chickpeas, pickled onions, hummus, pesto vinaigrette",
+    "price": 13.35,
+    "calories": 405,
+    "imageUrl": "URL_HERE",
+    "category": "Salads"
+  },
+  {
+    "name": "Buffalo Chicken",
+    "description": "Chopped romaine, shredded kale, cilantro, tomatoes, za'atar breadcrumbs, raw carrots, pickled onions, blue cheese, blackened chicken, caesar, sweetgreen hot sauce",
+    "price": 15.45,
+    "calories": 555,
+    "imageUrl": "URL_HERE",
+    "category": "Salads"
+  },
+  {
+    "name": "Super Green Goddess",
+    "description": "Shredded kale, baby spinach, roasted sweet potatoes, shredded cabbage, spicy broccoli, roasted almonds, chickpeas, raw carrots, green goddess ranch",
+    "price": 10.95,
+    "calories": 455,
+    "imageUrl": "URL_HERE",
+    "category": "Salads"
+  },
+  {
+    "name": "Garden Cobb",
+    "description": "Chopped romaine, spring mix, roasted sweet potatoes, roasted almonds, tomatoes, avocado, hard boiled egg, blue cheese, balsamic vinaigrette",
+    "price": 14.95,
+    "calories": 745,
+    "imageUrl": "URL_HERE",
+    "category": "Salads"
+  },
+  {
+    "name": "BBQ Chicken Salad",
+    "description": "Chopped romaine, shredded kale, shredded cabbage, tomatoes, tortilla chips, apples, pickled onions, blackened chicken, green goddess ranch, honey bbq sauce",
+    "price": 14.25,
+    "calories": 520,
+    "imageUrl": "URL_HERE",
+    "category": "Salads"
+  },
+  {
+    "name": "Ranchy Chicken + Rice",
+    "description": "Wild rice, cucumbers, parmesan crisps, roasted chicken, green goddess ranch",
+    "price": 8.25,
+    "calories": 540,
+    "imageUrl": "URL_HERE",
+    "category": "Kid's Meals"
+  },
+  {
+    "name": "Little Harvest",
+    "description": "Apples, warm roasted sweet potatoes, roasted chicken, balsamic vinaigrette",
+    "price": 8.25,
+    "calories": 425,
+    "imageUrl": "URL_HERE",
+    "category": "Kid's Meals"
+  },
+  {
+    "name": "Mini Mezze",
+    "description": "Cucumbers, tortilla chips, hummus, roasted chicken",
+    "price": 8.25,
+    "calories": 275,
+    "imageUrl": "URL_HERE",
+    "category": "Kid's Meals"
+  },
+  {
+    "name": "Rosemary Focaccia",
+    "description": "Freshly baked daily",
+    "price": 2.35,
+    "calories": 230,
+    "imageUrl": "URL_HERE",
+    "category": "Sides"
+  },
+  {
+    "name": "Hummus + Focaccia",
+    "description": "Freshly baked rosemary focaccia breadsticks with smooth hummus",
+    "price": 4.25,
+    "calories": 290,
+    "imageUrl": "URL_HERE",
+    "category": "Sides"
+  },
+  {
+    "name": "SG X Siete: Green Goddess Ranch Potato Chips",
+    "description": "Kettle-cooked and inspired by our Green Goddess Ranch dressing flavor, made with avocado oil and a hint of poblano. Only available at sweetgreen.",
+    "price": 2.85,
+    "calories": 220,
+    "imageUrl": "URL_HERE",
+    "category": "Sides"
+  },
+  {
+    "name": "Siete Sea Salt Potato Chips",
+    "description": "Kettle-cooked and made with sea salt and avocado oil for a light, salty crunch.",
+    "price": 2.85,
+    "calories": 210,
+    "imageUrl": "URL_HERE",
+    "category": "Sides"
+  },
+  {
+    "name": "Roasted Sweet Potatoes + Hot Honey Mustard",
+    "description": "Hot roasted sweet potatoes, hot honey sauce",
+    "price": 4.15,
+    "calories": 340,
+    "imageUrl": "URL_HERE",
+    "category": "Sides"
+  },
+  {
+    "name": "Roasted Sweet Potatoes + Green Goddess Ranch",
+    "description": "Hot roasted sweet potatoes, green goddess ranch",
+    "price": 4.15,
+    "calories": 340,
+    "imageUrl": "URL_HERE",
+    "category": "Sides"
+  },
+  {
+    "name": "Crispy Rice Treat",
+    "description": "Crispy organic brown rice, quinoa, and puffed millet—naturally sweetened with honey date caramel and just 6g of sugar.",
+    "price": 3.25,
+    "calories": 190,
+    "imageUrl": "URL_HERE",
+    "category": "Dessert"
+  },
+  {
+    "name": "Hu Cashews + Vanilla Bean Hunks",
+    "description": "Organic snackable dark chocolate covered cashews with a pinch of sea salt and no refined sugar.",
+    "price": 3.25,
+    "calories": 170,
+    "imageUrl": "URL_HERE",
+    "category": "Dessert"
+  },
+  {
+    "name": "Hu Salty Dark Chocolate Bar",
+    "description": "Organic dark chocolate with a pinch of sea salt and no refined sugar.",
+    "price": 6.25,
+    "calories": 380,
+    "imageUrl": "URL_HERE",
+    "category": "Dessert"
+  },
+  {
+    "name": "Still Water",
+    "description": "In an eco-friendly aluminum bottle for plastic free oceans",
+    "price": 2.75,
+    "calories": 0,
+    "imageUrl": "URL_HERE",
+    "category": "Beverages"
+  },
+  {
+    "name": "Sparkling Water",
+    "description": "In an eco-friendly aluminum bottle for plastic free oceans",
+    "price": 2.95,
+    "calories": 0,
+    "imageUrl": "URL_HERE",
+    "category": "Beverages"
+  },
+  {
+    "name": "OLIPOP Lemon Lime Soda",
+    "description": "Like a sweet slice of key lime pie with a fresh squeeze of lemon, this fresh new twist on a classic flavor has only 4g of sugar.",
+    "price": 3.75,
+    "calories": 50,
+    "imageUrl": "URL_HERE",
+    "category": "Beverages"
+  },
+  {
+    "name": "OLIPOP Vintage Cola",
+    "description": "Notes of vanilla, cinnamon and caramel create a classic old-fashioned flavor made with plant-based, natural ingredients and just 2g of sugar.",
+    "price": 3.75,
+    "calories": 35,
+    "imageUrl": "URL_HERE",
+    "category": "Beverages"
+  },
+  {
+    "name": "Spindrift Raspberry Lime",
+    "description": "Keep it fresh with Spindrift raspberry lime seltzer (2g sugar)",
+    "price": 3.25,
+    "calories": 5,
+    "imageUrl": "URL_HERE",
+    "category": "Beverages"
+  },
+  {
+    "name": "Spindrift Grapefruit",
+    "description": "Keep it fresh with Spindrift grapefruit seltzer (3g sugar)",
+    "price": 3.25,
+    "calories": 15,
+    "imageUrl": "URL_HERE",
+    "category": "Beverages"
+  },
+  {
+    "name": "Organic Hibiscus Berry Tea",
+    "description": "Refreshing crimson clover tea brightened with tangy hibiscus",
+    "price": 3.75,
+    "calories": 0,
+    "imageUrl": "URL_HERE",
+    "category": "Beverages"
+  },
+  {
+    "name": "Organic Jasmine Green Tea",
+    "description": "Antioxidant rich, with organic soba and wild grown yaupon",
+    "price": 3.75,
+    "calories": 0,
+    "imageUrl": "URL_HERE",
+    "category": "Beverages"
+  },
+  {
+    "name": "Harney & Sons Organic Lemonade",
+    "description": "A citrus refresher made with organic lemons + sweetened with organic maple syrup",
+    "price": 3.75,
+    "calories": 80,
+    "imageUrl": "URL_HERE",
+    "category": "Beverages"
+  },
+  {
+    "name": "Health-Ade Passionfruit Tangerine",
+    "description": "A fruity, tangy drink that’s great for the gut (11g sugar)",
+    "price": 4.15,
+    "calories": 50,
+    "imageUrl": "URL_HERE",
+    "category": "Beverages"
+  },
+  {
+    "name": "Health-Ade Pink Lady Apple",
+    "description": "A crisp and slightly sweet brew with a hint of cider (12g sugar)",
+    "price": 4.15,
+    "calories": 50,
+    "imageUrl": "URL_HERE",
+    "category": "Beverages"
   }
 ]

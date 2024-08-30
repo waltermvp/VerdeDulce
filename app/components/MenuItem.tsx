@@ -94,7 +94,6 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
             </View>
             {show && (
               <OrderButton
-                icon="food"
                 style={{ marginTop: spacing.xl, padding: spacing.md, width: "90%" }}
                 tx="landingScreen.order"
                 onPress={onPress}

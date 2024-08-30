@@ -1,100 +1,330 @@
 [
   {
-    "id": 1,
-    "name": "Guacamole Verde",
-    "price": 12.95,
-    "description": "La ensalada Guacamole Verde es una opción fresca y abundante que incluye aguacate, pollo asado, tomates, cebolla roja, chips de tortilla, queso cheddar blanco, todo aderezado con vinagreta de cilantro y jalapeño con lima.",
-    "calories": 555,
-    "carbohydrates": 30,
-    "protein": 30,
-    "fat": 36,
-    "ingredients": [
-      "Mesclun Orgánico",
-      "Aguacate",
-      "Pollo Asado",
-      "Tomates",
-      "Cebolla Roja",
-      "Chips de Tortilla",
-      "Queso Cheddar Blanco"
-    ],
-    "category": "Ensalada"
+    "name": "Filete de Ajo Caramelizado",
+    "description": "Arroz salvaje, brócoli picante, tomates, batatas asadas calientes, filete de ajo caramelizado, vinagreta de pesto",
+    "price": 17.65,
+    "calories": 860,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bowls"
   },
   {
-    "id": 2,
-    "name": "Tazón de Cosecha",
-    "price": 12.75,
-    "description": "Un bowl abundante y cálido que combina pollo asado, arroz salvaje orgánico, col rizada rallada, manzanas, batatas, almendras tostadas y queso de cabra con una vinagreta balsámica.",
+    "name": "Ensalada Chopped de Estilo Steakhouse",
+    "description": "Lechuga romana picada, quinoa con hierbas, col rallada, tomates, cebolla crujiente, queso azul, filete de ajo caramelizado, aderezo ranch de diosa verde",
+    "price": 17.15,
+    "calories": 815,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bowls"
+  },
+  {
+    "name": "Kale Caesar (con Filete)",
+    "description": "Lechuga romana picada, col rizada rallada, tomates, crujientes de parmesano, parmesano rallado, filete de ajo caramelizado, aderezo César, exprimido de lima",
+    "price": 16.45,
+    "calories": 720,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Ensaladas"
+  },
+  {
+    "name": "Pollo con Miel Picante",
+    "description": "Quinoa con hierbas, cebolla crujiente, pollo ennegrecido, batatas asadas calientes, ensalada de verduras, salsa de mostaza con miel picante",
+    "price": 15.95,
+    "calories": 835,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Platos de Proteína"
+  },
+  {
+    "name": "Salmón Glaseado con Miso",
+    "description": "Arroz blanco, pepinos, condimento de sésamo y nori, cebolla crujiente, cebolla encurtida, aguacate, salmón glaseado con miso, aderezo de anacardo picante",
+    "price": 16.95,
+    "calories": 930,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Platos de Proteína"
+  },
+  {
+    "name": "Harvest Bowl",
+    "description": "Col rizada rallada, arroz salvaje, batatas asadas, almendras asadas, manzanas, queso de cabra, pollo asado, vinagreta balsámica",
+    "price": 14.45,
+    "calories": 765,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bowls"
+  },
+  {
+    "name": "Crispy Rice Bowl",
+    "description": "Rúcula, arroz salvaje, cilantro, pepinos, col rallada, almendras asadas, arroz crujiente, zanahorias crudas, pollo ennegrecido, exprimido de lima, aderezo de anacardo picante",
+    "price": 15.45,
+    "calories": 640,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bowls"
+  },
+  {
+    "name": "Pollo Pesto Parm",
+    "description": "Espinacas tiernas, quinoa con hierbas, brócoli picante, tomates, pan rallado za'atar, pollo asado, parmesano rallado, vinagreta de pesto, salsa picante sweetgreen",
+    "price": 14.95,
+    "calories": 540,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bowls"
+  },
+  {
+    "name": "Pollo con Aguacate y Ranch",
+    "description": "Lechuga romana picada, arroz blanco, chips de tortilla, manzanas, cebolla encurtida, aguacate, pollo ennegrecido, aderezo ranch de diosa verde",
+    "price": 14.45,
     "calories": 705,
-    "carbohydrates": 68,
-    "protein": 43,
-    "fat": 32,
-    "ingredients": [
-      "Pollo Asado",
-      "Arroz Salvaje Orgánico",
-      "Col Rizada Rallada",
-      "Manzanas",
-      "Batatas",
-      "Almendras Tostadas",
-      "Queso de Cabra"
-    ],
-    "category": "Bowl"
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bowls"
   },
   {
-    "id": 4,
-    "name": "César de Kale",
-    "price": 11.95,
-    "description": "Esta clásica ensalada César se prepara con col rizada rallada, lechuga romana picada, pollo asado, tomates, crujientes de parmesano, parmesano rallado y aderezo César.",
-    "calories": 420,
-    "carbohydrates": 18,
-    "protein": 27,
-    "fat": 28,
-    "ingredients": [
-      "Col Rizada Rallada",
-      "Lechuga Romana Picada",
-      "Pollo Asado",
-      "Tomates",
-      "Crujientes de Parmesano",
-      "Parmesano Rallado"
-    ],
-    "category": "Ensalada"
-  },
-  {
-    "id": 6,
-    "name": "Pollo Pesto Parmesano",
-    "price": 13.75,
-    "description": "Una deliciosa combinación de pollo asado, garbanzos calientes, quinua caliente, col rizada rallada, brócoli picante, vinagreta de pesto, pan rallado, parmesano rallado y salsa picante.",
-    "calories": 710,
-    "carbohydrates": 47,
-    "protein": 46,
-    "fat": 37,
-    "ingredients": [
-      "Pollo Asado",
-      "Garbanzos Calientes",
-      "Quinua Caliente",
-      "Col Rizada Rallada",
-      "Brócoli Picante",
-      "Vinagreta de Pesto"
-    ],
-    "category": "Bowl"
-  },
-
-  {
-    "id": 10,
     "name": "Shroomami",
-    "price": 12.5,
-    "description": "El bowl Shroomami es una opción sabrosa que incluye una mezcla de portobello caliente, remolachas crudas, brotes de soja, albahaca, semillas de girasol picantes, arroz salvaje orgánico, col rizada rallada y aderezo de miso y jengibre.",
-    "calories": 660,
-    "carbohydrates": 74,
-    "protein": 21,
-    "fat": 28,
-    "ingredients": [
-      "Mezcla de Portobello",
-      "Remolachas Crudas",
-      "Brotes de Soja",
-      "Albahaca",
-      "Semillas de Girasol Picantes",
-      "Arroz Salvaje Orgánico"
-    ],
-    "category": "Bowl"
+    "description": "Col rizada rallada, arroz salvaje, albahaca, pepinos, col rallada, almendras asadas, mezcla de portobello caliente, tofu asado, aderezo de miso y jengibre",
+    "price": 14.45,
+    "calories": 685,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bowls"
+  },
+  {
+    "name": "Fish Taco",
+    "description": "Rúcula, quinoa con hierbas, cilantro, col rallada, chips de tortilla, aguacate, salmón glaseado con miso, vinagreta de lima y jalapeño con cilantro, salsa picante sweetgreen",
+    "price": 16.95,
+    "calories": 835,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bowls"
+  },
+  {
+    "name": "Kale Caesar",
+    "description": "Lechuga romana picada, col rizada rallada, tomates, crujientes de parmesano, pollo asado, parmesano rallado, aderezo César, exprimido de lima",
+    "price": 13.75,
+    "calories": 510,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Ensaladas"
+  },
+  {
+    "name": "Guacamole Greens",
+    "description": "Lechuga romana picada, mezcla de primavera, col rallada, tomates, chips de tortilla, cebolla encurtida, aguacate, pollo asado, exprimido de lima, vinagreta de lima y jalapeño con cilantro",
+    "price": 14.45,
+    "calories": 575,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Ensaladas"
+  },
+  {
+    "name": "Hummus Crunch",
+    "description": "Lechuga romana picada, col rizada rallada, albahaca, pepinos, col rallada, tomates, pan rallado za'atar, garbanzos, cebolla encurtida, hummus, vinagreta de pesto",
+    "price": 13.35,
+    "calories": 405,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Ensaladas"
+  },
+  {
+    "name": "Buffalo Chicken",
+    "description": "Lechuga romana picada, col rizada rallada, cilantro, tomates, pan rallado za'atar, zanahorias crudas, cebolla encurtida, queso azul, pollo ennegrecido, aderezo César, salsa picante sweetgreen",
+    "price": 15.45,
+    "calories": 555,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Ensaladas"
+  },
+  {
+    "name": "Super Green Goddess",
+    "description": "Col rizada rallada, espinacas tiernas, batatas asadas, col rallada, brócoli picante, almendras asadas, garbanzos, zanahorias crudas, aderezo ranch de diosa verde",
+    "price": 10.95,
+    "calories": 455,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Ensaladas"
+  },
+  {
+    "name": "Garden Cobb",
+    "description": "Lechuga romana picada, mezcla de primavera, batatas asadas, almendras asadas, tomates, aguacate, huevo duro, queso azul, vinagreta balsámica",
+    "price": 14.95,
+    "calories": 745,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Ensaladas"
+  },
+  {
+    "name": "Ensalada de Pollo BBQ",
+    "description": "Lechuga romana picada, col rizada rallada, col rallada, tomates, chips de tortilla, manzanas, cebolla encurtida, pollo ennegrecido, aderezo ranch de diosa verde, salsa bbq con miel",
+    "price": 14.25,
+    "calories": 520,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Ensaladas"
+  },
+  {
+    "name": "Pollo con Arroz y Aderezo Ranch para Niños",
+    "description": "Arroz salvaje, pepinos, crujientes de parmesano, pollo asado, aderezo ranch de diosa verde",
+    "price": 8.25,
+    "calories": 540,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Comidas para Niños"
+  },
+  {
+    "name": "Mini Harvest",
+    "description": "Manzanas, batatas asadas calientes, pollo asado, vinagreta balsámica",
+    "price": 8.25,
+    "calories": 425,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Comidas para Niños"
+  },
+  {
+    "name": "Mini Mezze",
+    "description": "Pepinos, chips de tortilla, hummus, pollo asado",
+    "price": 8.25,
+    "calories": 275,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Comidas para Niños"
+  },
+  {
+    "name": "Focaccia con Romero",
+    "description": "Recién horneado diariamente",
+    "price": 2.35,
+    "calories": 230,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Acompañamientos"
+  },
+  {
+    "name": "Hummus + Focaccia",
+    "description": "Bastones de pan focaccia con romero recién horneado con hummus suave",
+    "price": 4.25,
+    "calories": 290,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Acompañamientos"
+  },
+  {
+    "name": "SG X Siete: Papas Fritas con Sabor a Ranch de Diosa Verde",
+    "description": "Papas fritas estilo kettle inspiradas en nuestro aderezo ranch de diosa verde, hechas con aceite de aguacate y un toque de poblano. Solo disponible en Sweetgreen.",
+    "price": 2.85,
+    "calories": 220,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Acompañamientos"
+  },
+  {
+    "name": "Papas Fritas con Sal Marina de Siete",
+    "description": "Papas fritas estilo kettle hechas con sal marina y aceite de aguacate para un crujido ligero y salado.",
+    "price": 2.85,
+    "calories": 210,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Acompañamientos"
+  },
+  {
+    "name": "Batatas Asadas con Mostaza Picante y Miel",
+    "description": "Batatas asadas calientes, salsa de miel picante",
+    "price": 4.15,
+    "calories": 340,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Acompañamientos"
+  },
+  {
+    "name": "Batatas Asadas con Aderezo Ranch de Diosa Verde",
+    "description": "Batatas asadas calientes, aderezo ranch de diosa verde",
+    "price": 4.15,
+    "calories": 340,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Acompañamientos"
+  },
+  {
+    "name": "Postre de Arroz Crujiente",
+    "description": "Arroz integral orgánico crujiente, quinoa, y mijo inflado, endulzado naturalmente con caramelo de dátiles y miel, y solo 6g de azúcar.",
+    "price": 3.25,
+    "calories": 190,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Postres"
+  },
+  {
+    "name": "Hu: Anacardos Cubiertos de Chocolate Oscuro con Vainilla",
+    "description": "Anacardos cubiertos de chocolate oscuro orgánico con un toque de sal marina y sin azúcar refinada.",
+    "price": 3.25,
+    "calories": 170,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Postres"
+  },
+  {
+    "name": "Barra de Chocolate Oscuro con Sal de Hu",
+    "description": "Chocolate oscuro orgánico con un toque de sal marina y sin azúcar refinada.",
+    "price": 6.25,
+    "calories": 380,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Postres"
+  },
+  {
+    "name": "Agua Sin Gas",
+    "description": "En una botella de aluminio ecológica para océanos sin plástico",
+    "price": 2.75,
+    "calories": 0,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bebidas"
+  },
+  {
+    "name": "Agua con Gas",
+    "description": "En una botella de aluminio ecológica para océanos sin plástico",
+    "price": 2.95,
+    "calories": 0,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bebidas"
+  },
+  {
+    "name": "Soda OLIPOP de Limón y Lima",
+    "description": "Como una rebanada dulce de pastel de lima con un toque fresco de limón, este nuevo giro de un clásico sabor tiene solo 4g de azúcar.",
+    "price": 3.75,
+    "calories": 50,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bebidas"
+  },
+  {
+    "name": "Soda OLIPOP de Cola Vintage",
+    "description": "Notas de vainilla, canela y caramelo crean un sabor clásico a la antigua, hecho con ingredientes naturales de origen vegetal y solo 2g de azúcar.",
+    "price": 3.75,
+    "calories": 35,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bebidas"
+  },
+  {
+    "name": "Spindrift Frambuesa Lima",
+    "description": "Manténlo fresco con el agua mineral Spindrift de frambuesa y lima (2g de azúcar)",
+    "price": 3.25,
+    "calories": 5,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bebidas"
+  },
+  {
+    "name": "Spindrift Toronja",
+    "description": "Manténlo fresco con el agua mineral Spindrift de toronja (3g de azúcar)",
+    "price": 3.25,
+    "calories": 15,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bebidas"
+  },
+  {
+    "name": "Té Orgánico de Hibisco y Bayas",
+    "description": "Refrescante té de trébol carmesí realzado con hibisco agrio",
+    "price": 3.75,
+    "calories": 0,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bebidas"
+  },
+  {
+    "name": "Té Verde Orgánico de Jazmín",
+    "description": "Rico en antioxidantes, con soba orgánico y yaupon de cultivo silvestre",
+    "price": 3.75,
+    "calories": 0,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bebidas"
+  },
+  {
+    "name": "Limonada Orgánica de Harney & Sons",
+    "description": "Un refrescante cítrico hecho con limones orgánicos y endulzado con jarabe de arce orgánico",
+    "price": 3.75,
+    "calories": 80,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bebidas"
+  },
+  {
+    "name": "Health-Ade de Fruta de la Pasión y Mandarina",
+    "description": "Una bebida afrutada y agria que es excelente para el intestino (11g de azúcar)",
+    "price": 4.15,
+    "calories": 50,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bebidas"
+  },
+  {
+    "name": "Health-Ade de Manzana Pink Lady",
+    "description": "Una bebida crujiente y ligeramente dulce con un toque de sidra (12g de azúcar)",
+    "price": 4.15,
+    "calories": 50,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Bebidas"
   }
 ]

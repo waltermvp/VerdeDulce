@@ -29,7 +29,7 @@ export interface OrderButtonProps {
   /**
    * An optional style override useful for padding & margin.
    */
-  icon: keyof typeof Ionicons.glyphMap
+  icon?: keyof typeof Ionicons.glyphMap
 
   /**
    * Function to handle the press event of the order button.
