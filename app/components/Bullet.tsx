@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons"
 
 type BulletType = {
   title: string
-  links: [{ title: string; url: string; icon: string }]
+  links: [{ title: string; url: string; icon: keyof (typeof Ionicons)["glyphMap"] }]
 }
 
 export interface BulletProps {
@@ -27,8 +27,16 @@ export const Bullet = function Bullet(props: BulletProps) {
       {
         title: "Social",
         links: [
-          { title: "Facebook", url: "https://www.facebook.com/profile.php?id=61564202236840" },
-          { title: "Instagram", url: "https://www.instagram.com/verdedulce_" },
+          {
+            title: "Facebook",
+            url: "https://www.facebook.com/profile.php?id=61564202236840",
+            icon: "logo-facebook",
+          },
+          {
+            title: "Instagram",
+            url: "https://www.instagram.com/verdedulce_",
+            icon: "logo-instagram",
+          },
           // { title: "Example Llink", url: "google.com" },
           // { title: "Example Llink", url: "google.com" },
         ],
