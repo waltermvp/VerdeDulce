@@ -10,7 +10,7 @@ import { imageCDNURL } from "app/utils/linkbuilder"
 import { OrderButton } from "./OrderButton"
 import { useMediaQuery } from "react-responsive"
 
-const minHeight = 725
+const minHeight = 750
 export interface MenuItemProps {
   /**
    * An optional style override useful for padding & margin.

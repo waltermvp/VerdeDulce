@@ -46,7 +46,25 @@ export const Footer = observer(function Footer(props: FooterProps) {
           // borderColor: colors.palette.greenFont,
         }}
       >
-        <Bullet />
+        <Bullet
+          bullets={[
+            {
+              title: "Social",
+              links: [
+                {
+                  title: "Facebook",
+                  url: "https://www.facebook.com/profile.php?id=61564202236840",
+                  icon: "logo-facebook",
+                },
+                {
+                  title: "Instagram",
+                  url: "https://www.instagram.com/verdedulce_",
+                  icon: "logo-instagram",
+                },
+              ],
+            },
+          ]}
+        />
       </View>
     </View>
   )

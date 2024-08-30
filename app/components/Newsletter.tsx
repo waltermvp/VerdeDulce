@@ -116,7 +116,7 @@ export const Newsletter = observer(function Newsletter(props: NewsletterProps) {
         )}
         {status === "success" && (
           <View style={{ flexDirection: "row", alignItems: "center", paddingTop: spacing.lg }}>
-            <Text preset="subheading">Gracias por subscribirte.</Text>
+            <Text preset="subheading">Gracias por registrarte.</Text>
             <Ionicons
               style={{ marginLeft: spacing.md }}
               name="checkmark-circle-sharp"

@@ -1,12 +1,12 @@
 import * as React from "react"
-import { StyleProp, TextStyle, View, ViewStyle } from "react-native"
-import { observer } from "mobx-react-lite"
+import { Linking, StyleProp, TextStyle, View, ViewStyle, TouchableOpacity } from "react-native"
 import { colors, spacing, typography } from "app/theme"
 import { Text } from "app/components/Text"
+import { Ionicons } from "@expo/vector-icons"
 
 type BulletType = {
   title: string
-  links: [{ title: string; url: string }]
+  links: [{ title: string; url: string; icon: string }]
 }
 
 export interface BulletProps {
@@ -25,23 +25,23 @@ export const Bullet = function Bullet(props: BulletProps) {
     style,
     bullets = [
       {
-        title: "About Us",
+        title: "Social",
         links: [
-          { title: "Example Llink", url: "google.com" },
-          { title: "Example Llink", url: "google.com" },
-          { title: "Example Llink", url: "google.com" },
-          { title: "Example Llink", url: "google.com" },
+          { title: "Facebook", url: "https://www.facebook.com/profile.php?id=61564202236840" },
+          { title: "Instagram", url: "https://www.instagram.com/verdedulce_" },
+          // { title: "Example Llink", url: "google.com" },
+          // { title: "Example Llink", url: "google.com" },
         ],
       },
-      {
-        title: "About Us",
-        links: [
-          { title: "Example Llink", url: "google.com" },
-          { title: "Example Llink", url: "google.com" },
-          { title: "Example Llink", url: "google.com" },
-          { title: "Example Llink", url: "google.com" },
-        ],
-      },
+      // {
+      //   title: "About Us",
+      //   links: [
+      //     { title: "Example Llink", url: "google.com" },
+      //     { title: "Example Llink", url: "google.com" },
+      //     { title: "Example Llink", url: "google.com" },
+      //     { title: "Example Llink", url: "google.com" },
+      //   ],
+      // },
     ],
   } = props
   const $styles = [$container, style]
@@ -54,9 +54,19 @@ export const Bullet = function Bullet(props: BulletProps) {
             {bullet.title}
           </Text>
           {bullet.links.map((link, index) => (
-            <Text style={$text} key={index} preset="default">
-              {link.title}
-            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL(link.url)
+              }}
+              key={index}
+            >
+              <View style={{ flexDirection: "row", alignItems: "center", height: 44 }}>
+                <Text style={$text} key={index} preset="default">
+                  {link.title}
+                </Text>
+                <Ionicons style={{ paddingLeft: spacing.md }} size={32} name={link.icon} />
+              </View>
+            </TouchableOpacity>
           ))}
         </View>
       ))}
