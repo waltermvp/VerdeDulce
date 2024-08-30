@@ -84,16 +84,17 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
               <Bullets
                 style={{ marginTop: spacing.md }}
                 items={[
-                  { title: "860", subtitle: "CALORIES" },
-                  { title: "860", subtitle: "CALORIES" },
-                  { title: "860", subtitle: "CALORIES" },
-                  { title: "860", subtitle: "CALORIES" },
-                  { title: "860", subtitle: "CALORIES" },
+                  { title: item.calories, subtitle: "CALORIES" },
+                  { title: item.carbohydrates, subtitle: "CARBS" },
+                  { title: item.protein, subtitle: "PROTEIN" },
+                  { title: item.fat, subtitle: "GRASA" },
+                  // { title: "860", subtitle: "CALORIES" },
                 ]}
               />
             </View>
             {show && (
               <OrderButton
+                icon="food"
                 style={{ marginTop: spacing.xl, padding: spacing.md, width: "90%" }}
                 tx="landingScreen.order"
                 onPress={onPress}

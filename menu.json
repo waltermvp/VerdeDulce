@@ -1,9 +1,9 @@
 [
   {
     "id": 1,
-    "name": "Guacamole Greens",
+    "name": "Guacamole Verde",
     "price": 12.95,
-    "description": "La ensalada Guacamole Greens es una opción fresca y abundante que incluye mesclun orgánico, aguacate, pollo asado, tomates, cebolla roja, chips de tortilla, queso cheddar blanco, todo aderezado con vinagreta de cilantro y jalapeño con lima.",
+    "description": "La ensalada Guacamole Verde es una opción fresca y abundante que incluye mesclun orgánico, aguacate, pollo asado, tomates, cebolla roja, chips de tortilla, queso cheddar blanco, todo aderezado con vinagreta de cilantro y jalapeño con lima.",
     "calories": 555,
     "carbohydrates": 30,
     "protein": 30,

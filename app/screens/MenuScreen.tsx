@@ -116,13 +116,12 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
             message,
           )}&phone=${encodeURIComponent(phoneNumber)}`
           Linking.openURL(url).catch((err) => console.error("Failed to open WhatsApp", err))
-          e.preventDefault()
         }}
         onDelete={() => {
           // setItemIDToDelete(item.id)
           // showDialog()
         }}
-        show={isSmallScreen ? true : false}
+        show={true}
       />
     )
   }
