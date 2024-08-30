@@ -8,7 +8,8 @@
     "fat": 43,
     "url": "menu-pictures/SG_Web_Image_Plate_Caramelized_Garlic_Steak.png",
     "carbs": 75,
-    "category": "Tazones"
+    "category": "Tazones",
+    "activated": true
   },
   {
     "name": "Ensalada Picada Estilo Steakhouse",
@@ -19,7 +20,8 @@
     "fat": 48,
     "carbs": 32,
     "url": "menu-pictures/SG_Web_Image_Bowl_Steakhouse_Chopped.png",
-    "category": "Tazones"
+    "category": "Tazones",
+    "activated": true
   },
   {
     "name": "Kale César (Carne)",
@@ -30,7 +32,8 @@
     "fat": 50,
     "carbs": 13,
     "url": "menu-pictures/SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
-    "category": "Ensaladas"
+    "category": "Ensaladas",
+    "activated": false
   },
   {
     "name": "Pollo con Miel Picante",
@@ -41,7 +44,8 @@
     "fat": 37,
     "carbs": 84,
     "url": "menu-pictures/SG_Web_Image_Plate_Hot_Honey_Chicken.png",
-    "category": "Platos de Proteínas"
+    "category": "Platos de Proteínas",
+    "activated": false
   },
   {
     "name": "Salmón Glaseado con Miso",
@@ -52,7 +56,8 @@
     "fat": 51,
     "carbs": 75,
     "imageUrl": "URL_AQUÍ",
-    "category": "Platos de Proteínas"
+    "category": "Platos de Proteínas",
+    "activated": false
   },
   {
     "name": "Tazón de Cosecha",
@@ -63,7 +68,8 @@
     "fat": 32,
     "carbs": 61,
     "url": "menu-pictures/SG_Web_Image_Bowl_HarvestRET.png",
-    "category": "Tazones"
+    "category": "Tazones",
+    "activated": true
   },
   {
     "name": "Tazón de Arroz Crujiente",
@@ -74,9 +80,12 @@
     "fat": 35,
     "carbs": 64,
     "url": "menu-pictures/Crispy_Rice_Bowl.png",
-    "category": "Tazones"
+    "category": "Tazones",
+    "activated": false
   },
   {
+    "activated": false,
+
     "name": "Pollo Pesto Parmesano",
     "description": "Espinaca bebé, quinoa con hierbas, brócoli picante, tomates, pan rallado za'atar, pollo asado, parmesano rallado, vinagreta de pesto, salsa picante sweetgreen",
     "price": 14.95,
@@ -88,6 +97,7 @@
     "category": "Tazones"
   },
   {
+    "activated": false,
     "name": "Pollo con Aguacate y Ranch",
     "description": "Lechuga romana picada, arroz blanco, chips de tortilla, manzanas, cebollas en vinagre, aguacate, pollo ennegrecido, aderezo ranch diosa verde",
     "price": 14.45,
@@ -99,6 +109,7 @@
     "category": "Tazones"
   },
   {
+    "activated": false,
     "name": "Taco de Pescado",
     "description": "Rúcula, quinoa con hierbas, cilantro, col rallada, chips de tortilla, aguacate, salmón glaseado con miso, vinagreta de lima y cilantro jalapeño, salsa picante sweetgreen",
     "price": 16.95,
@@ -118,7 +129,8 @@
     "fat": 42,
     "carbs": 13,
     "url": "menu-pictures/SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
-    "category": "Ensaladas"
+    "category": "Ensaladas",
+    "activated": false
   },
   {
     "name": "Verdes con Guacamole",
@@ -129,9 +141,11 @@
     "fat": 42,
     "carbs": 35,
     "url": "menu-pictures/SG_Web_Image_Salad_Guacamole_Greens.png",
-    "category": "Ensaladas"
+    "category": "Ensaladas",
+    "activated": false
   },
   {
+    "activated": false,
     "name": "Crujiente de Hummus",
     "description": "Lechuga romana picada, col rizada rallada, albahaca, pepinos, col rallada, tomates, pan rallado za'atar, garbanzos, cebollas en vinagre, hummus, vinagreta de pesto",
     "price": 13.35,
@@ -143,6 +157,7 @@
     "category": "Ensaladas"
   },
   {
+    "activated": false,
     "name": "Pollo Búfalo",
     "description": "Lechuga romana picada, col rizada rallada, cilantro, tomates, pan rallado za'atar, zanahorias crudas, cebollas en vinagre, queso azul, pollo ennegrecido, aderezo César, salsa picante sweetgreen",
     "price": 15.45,
@@ -162,7 +177,8 @@
     "fat": 31,
     "carbs": 42,
     "url": "menu-pictures/SG_Web_Image_Salad_Super_Green_Goddess.png",
-    "category": "Ensaladas"
+    "category": "Ensaladas",
+    "activated": true
   },
   {
     "name": "Cobb de Jardín",
@@ -174,6 +190,7 @@
     "carbs": 36,
 
     "url": "menu-pictures/SG_Web_Image_Bowl_Garden_Cobb.png",
-    "category": "Ensaladas"
+    "category": "Ensaladas",
+    "activated": true
   }
 ]
