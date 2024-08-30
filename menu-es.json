@@ -99,17 +99,6 @@
     "category": "Tazones"
   },
   {
-    "name": "Shroomami",
-    "description": "Col rizada rallada, arroz salvaje, albahaca, pepinos, col rallada, almendras tostadas, mezcla de portobello caliente, tofu asado, jengibre sésamo miso",
-    "price": 14.45,
-    "calories": 685,
-    "protein": 18,
-    "fat": 35,
-    "carbs": 70,
-    "imageUrl": "URL_AQUÍ",
-    "category": "Tazones"
-  },
-  {
     "name": "Taco de Pescado",
     "description": "Rúcula, quinoa con hierbas, cilantro, col rallada, chips de tortilla, aguacate, salmón glaseado con miso, vinagreta de lima y cilantro jalapeño, salsa picante sweetgreen",
     "price": 16.95,
