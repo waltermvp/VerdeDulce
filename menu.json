@@ -79,25 +79,6 @@
     "category": "Ensalada"
   },
   {
-    "id": 5,
-    "name": "Fish Taco",
-    "price": 13.5,
-    "description": "La ensalada Fish Taco incluye trucha asada, repollo rallado, cilantro, chips de tortilla, quinua caliente, salsa picante Sweetgreen, crema y vinagreta de cilantro y jalapeño con lima.",
-    "calories": 530,
-    "carbohydrates": 52,
-    "protein": 26,
-    "fat": 23,
-    "ingredients": [
-      "Trucha Asada",
-      "Repollo Rallado",
-      "Cilantro",
-      "Chips de Tortilla",
-      "Quinua Caliente",
-      "Salsa Picante Sweetgreen"
-    ],
-    "category": "Ensalada"
-  },
-  {
     "id": 6,
     "name": "Chicken Pesto Parm",
     "price": 13.75,
