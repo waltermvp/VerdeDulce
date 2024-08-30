@@ -33,7 +33,7 @@
     "carbs": 13,
     "url": "menu-pictures/SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
     "category": "Ensaladas",
-    "activated": false
+    "activated": true
   },
   {
     "name": "Pollo con Miel Picante",
@@ -48,18 +48,6 @@
     "activated": false
   },
   {
-    "name": "Salmón Glaseado con Miso",
-    "description": "Arroz blanco, pepinos, condimento de sésamo y nori, cebollas crujientes, cebollas en vinagre, aguacate, salmón glaseado con miso, anacardo picante",
-    "price": 16.95,
-    "calories": 930,
-    "protein": 36,
-    "fat": 51,
-    "carbs": 75,
-    "imageUrl": "URL_AQUÍ",
-    "category": "Platos de Proteínas",
-    "activated": false
-  },
-  {
     "name": "Tazón de Cosecha",
     "description": "Col rizada rallada, arroz salvaje, batatas asadas, almendras tostadas, manzanas, queso de cabra, pollo asado, vinagreta balsámica",
     "price": 14.45,
@@ -69,7 +57,7 @@
     "carbs": 61,
     "url": "menu-pictures/SG_Web_Image_Bowl_HarvestRET.png",
     "category": "Tazones",
-    "activated": true
+    "activated": false
   },
   {
     "name": "Tazón de Arroz Crujiente",
@@ -106,18 +94,6 @@
     "fat": 39,
     "carbs": 61,
     "url": "menu-pictures/Chicken_Avocado_Ranch.png",
-    "category": "Tazones"
-  },
-  {
-    "activated": false,
-    "name": "Taco de Pescado",
-    "description": "Rúcula, quinoa con hierbas, cilantro, col rallada, chips de tortilla, aguacate, salmón glaseado con miso, vinagreta de lima y cilantro jalapeño, salsa picante sweetgreen",
-    "price": 16.95,
-    "calories": 835,
-    "protein": 34,
-    "fat": 50,
-    "carbs": 69,
-    "imageUrl": "URL_AQUÍ",
     "category": "Tazones"
   },
   {
@@ -178,7 +154,7 @@
     "carbs": 42,
     "url": "menu-pictures/SG_Web_Image_Salad_Super_Green_Goddess.png",
     "category": "Ensaladas",
-    "activated": true
+    "activated": false
   },
   {
     "name": "Cobb de Jardín",
@@ -191,6 +167,6 @@
 
     "url": "menu-pictures/SG_Web_Image_Bowl_Garden_Cobb.png",
     "category": "Ensaladas",
-    "activated": true
+    "activated": false
   }
 ]

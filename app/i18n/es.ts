@@ -3,6 +3,7 @@ import { Translations } from "./en"
 const es: Translations = {
   landingScreen: {
     order: "Ordena Ya",
+    comingSoon: "¡Próximamente!",
     name: "Verde Dulce",
     prompt: "Comida fresca y de alta calidad. Sostenible y de origen local.",
   },

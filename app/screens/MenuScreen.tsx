@@ -149,7 +149,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
           // itemContainerStyle={{ height: 500 }}
           // itemContainerStyle={{ height: 200 }}
           maxItemsPerRow={isSmallScreen ? 1 : 3}
-          sections={transformDataForSectionList(items.filter((item) => item.activated))}
+          sections={transformDataForSectionList(items)}
           renderItem={renderMenuItem}
           renderSectionHeader={renderSectionTitle}
         />

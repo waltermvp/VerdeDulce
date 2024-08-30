@@ -9,7 +9,6 @@ import { Badge } from "react-native-paper"
 import { imageCDNURL } from "app/utils/linkbuilder"
 import { OrderButton } from "./OrderButton"
 import { useMediaQuery } from "react-responsive"
-import { A } from "@expo/html-elements"
 
 const minHeight = 775
 export interface MenuItemProps {
@@ -32,6 +31,8 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
   const $styles = [$container, style]
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" })
   const url = imageCDNURL(item.url)
+
+  const activated = item.activated
   return (
     <Pressable
       // onPress={onPress}
@@ -39,6 +40,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
         return {
           backgroundColor: pressed ? colors.palette.neutral400 : undefined,
           borderRadius: 13,
+          opacity: activated ? 1 : 0.5,
         }
       }}
     >
@@ -105,19 +107,17 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
             </View>
             <View style={{ flex: 1 }}>
               {show && (
-                <A href="https://google.com">
-                  <OrderButton
-                    style={{
-                      marginTop: spacing.md,
-                      padding: spacing.md,
-                      // width: "90%",
-                      width: isSmallScreen ? 222 : 333,
-                      // bottom: spacing.xxxs,
-                    }}
-                    tx="landingScreen.order"
-                    onPress={onPress}
-                  />
-                </A>
+                <OrderButton
+                  style={{
+                    marginTop: spacing.md,
+                    padding: spacing.md,
+                    // width: "90%",
+                    width: isSmallScreen ? 222 : 333,
+                    // bottom: spacing.xxxs,
+                  }}
+                  tx={activated ? "landingScreen.order" : "landingScreen.comingSoon"}
+                  onPress={onPress}
+                />
               )}
             </View>
           </View>
