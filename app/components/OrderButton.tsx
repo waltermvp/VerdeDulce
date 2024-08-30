@@ -114,4 +114,6 @@ export const OrderButton = observer(function OrderButton(props: OrderButtonProps
 
 const $container: ViewStyle = {
   justifyContent: "center",
+  // width: 222,
+  // flex: 1,
 }

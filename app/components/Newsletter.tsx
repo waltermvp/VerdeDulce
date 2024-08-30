@@ -22,7 +22,7 @@ export const Newsletter = observer(function Newsletter(props: NewsletterProps) {
   const $styles = [$container, style]
 
   const {
-    createSignUpStore: { isSignInEnabled, signUp, email, setEmail, signUpLoading },
+    createSignUpStore: { isSignInEnabled, signUp, email, setEmail, signUpLoading, status },
   } = useStores()
 
   const [color, setColor] = React.useState(colors.palette.lightBackground)
@@ -45,7 +45,7 @@ export const Newsletter = observer(function Newsletter(props: NewsletterProps) {
   }
   return (
     <View style={$styles}>
-      <Snackbar
+      {/* <Snackbar
         visible={visible}
         // onDismiss={onDismissSnackBar}
         action={{
@@ -56,7 +56,7 @@ export const Newsletter = observer(function Newsletter(props: NewsletterProps) {
         }}
       >
         Hey there! I'm a Snackbar.
-      </Snackbar>
+      </Snackbar> */}
 
       <View>
         <Text preset="subheading" style={{ paddingBottom: spacing.md }}>
@@ -65,53 +65,66 @@ export const Newsletter = observer(function Newsletter(props: NewsletterProps) {
         <Text preset="default" style={{ paddingBottom: spacing.sm }}>
           Sign up for exclusive promos, new menu drops, store openings, and more.
         </Text>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <TextInput
-            mode="outlined"
-            placeholderTextColor={colors.palette.neutral400}
-            textColor={colors.palette.greenFont}
-            outlineStyle={{
-              borderColor: colors.palette.greenFont,
-              borderWidth: 1.5,
-              borderRadius: 14,
-            }}
-            theme={{
-              colors: {
-                primary: colors.palette.greenFont,
-                background: color,
-              },
-            }}
-            // style={{ borderColor: colors.palette.greenFont, borderWidth: 1 }}
-            placeholder="Email Address"
-            value={email}
-            onChangeText={setEmail}
-            onFocus={({ nativeEvent }) => console.log("focused", nativeEvent)}
-            onSubmitEditing={saveSignUp}
-            // right={
-            //   <Ionicons
-            //     // style={{ marginRight: 10, flex: 1, height: 32, width: 32, backgroundColor: "red" }}
-            //     name="arrow-forward-circle-sharp"
-            //     size={32}
-            //     color={colors.palette.greenFont}
-            //   />
-            // }
-          ></TextInput>
-          {signUpLoading ? (
-            <ActivityIndicator
-              color={colors.palette.greenFont}
-              style={{ paddingLeft: spacing.sm }}
-            />
-          ) : (
-            <TouchableOpacity onPress={isSignInEnabled ? saveSignUp : undefined}>
-              <Ionicons
-                // style={{ marginRight: 10, flex: 1, height: 32, width: 32, backgroundColor: "red" }}
-                name="arrow-forward-circle-sharp"
-                size={32}
-                color={isSignInEnabled ? colors.palette.greenFont : colors.palette.neutral400}
+        {status === "idle" && (
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <TextInput
+              mode="outlined"
+              placeholderTextColor={colors.palette.neutral400}
+              textColor={colors.palette.greenFont}
+              outlineStyle={{
+                borderColor: colors.palette.greenFont,
+                borderWidth: 1.5,
+                borderRadius: 14,
+              }}
+              theme={{
+                colors: {
+                  primary: colors.palette.greenFont,
+                  background: color,
+                },
+              }}
+              // style={{ borderColor: colors.palette.greenFont, borderWidth: 1 }}
+              placeholder="Email Address"
+              value={email}
+              onChangeText={setEmail}
+              onFocus={({ nativeEvent }) => console.log("focused", nativeEvent)}
+              onSubmitEditing={saveSignUp}
+              // right={
+              //   <Ionicons
+              //     // style={{ marginRight: 10, flex: 1, height: 32, width: 32, backgroundColor: "red" }}
+              //     name="arrow-forward-circle-sharp"
+              //     size={32}
+              //     color={colors.palette.greenFont}
+              //   />
+              // }
+            ></TextInput>
+            {signUpLoading ? (
+              <ActivityIndicator
+                color={colors.palette.greenFont}
+                style={{ paddingLeft: spacing.sm }}
               />
-            </TouchableOpacity>
-          )}
-        </View>
+            ) : (
+              <TouchableOpacity onPress={isSignInEnabled ? saveSignUp : undefined}>
+                <Ionicons
+                  // style={{ marginRight: 10, flex: 1, height: 32, width: 32, backgroundColor: "red" }}
+                  name="arrow-forward-circle-sharp"
+                  size={32}
+                  color={isSignInEnabled ? colors.palette.greenFont : colors.palette.neutral400}
+                />
+              </TouchableOpacity>
+            )}
+          </View>
+        )}
+        {status === "success" && (
+          <View style={{ flexDirection: "row", alignItems: "center", paddingTop: spacing.lg }}>
+            <Text preset="subheading">Gracias por subscribirte.</Text>
+            <Ionicons
+              style={{ marginLeft: spacing.md }}
+              name="checkmark-circle-sharp"
+              size={44}
+              color={colors.palette.greenFont}
+            />
+          </View>
+        )}
       </View>
     </View>
   )

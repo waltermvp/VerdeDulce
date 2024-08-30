@@ -18,7 +18,7 @@ export const NewsletterStoreModel = types
   .model("NewsletterStore")
   .props({
     email: "",
-    signInLoading: false,
+    status: "idle", // "idle" | "loading" | "error" | "success"
     signUpLoading: false,
 
     // Resending
@@ -42,8 +42,13 @@ export const NewsletterStoreModel = types
     async signUp(email: string) {
       store.setProp("signUpLoading", true)
       try {
-        await client.models.User.create({ email })
+        const result = await client.models.User.create(
+          { email, available: true },
+          { authMode: "apiKey" },
+        )
+        console.log("result", result)
         store.setProp("signUpLoading", false)
+        store.setProp("status", "success")
       } catch (error) {
         store.setProp("signUpLoading", false)
         throw error

@@ -121,6 +121,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
           // setItemIDToDelete(item.id)
           // showDialog()
         }}
+        show={isSmallScreen ? true : false}
       />
     )
   }

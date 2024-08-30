@@ -19,13 +19,14 @@ export interface MenuItemProps {
   showDelete?: boolean
   onDelete?: () => void
   onPress?: () => void
+  show: boolean
 }
 
 /**
  * Describe your component here
  */
 export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
-  const { style, item, showDelete = false, onDelete, onPress } = props
+  const { style, item, showDelete = false, onDelete, onPress, show = false } = props
   const $styles = [$container, style]
   console.log("MenuItem.tsx: item.url: ", item.url)
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" })
@@ -91,11 +92,13 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                 ]}
               />
             </View>
-            <OrderButton
-              style={{ marginTop: spacing.xl }}
-              tx="landingScreen.order"
-              onPress={onPress}
-            />
+            {show && (
+              <OrderButton
+                style={{ marginTop: spacing.xl, padding: spacing.md, width: "90%" }}
+                tx="landingScreen.order"
+                onPress={onPress}
+              />
+            )}
           </View>
         )
       }}
