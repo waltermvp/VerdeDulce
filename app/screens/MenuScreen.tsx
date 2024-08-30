@@ -36,7 +36,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
 
   const navigation = useNavigation()
   // const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" })
 
   // useEffect(() => {
   //   // if (!displayID) {
@@ -115,7 +115,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       <MenuHeader />
       {items1.length > 0 && (
         <SectionGrid
-          itemDimension={isSmallScreen ? 150 : 250}
+          itemDimension={isSmallScreen ? 250 : 250}
           sections={transformDataForSectionList(items1)}
           renderItem={renderMenuItem}
           renderSectionHeader={renderSectionTitle}
