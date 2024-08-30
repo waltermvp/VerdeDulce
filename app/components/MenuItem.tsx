@@ -31,7 +31,6 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
   const $styles = [$container, style]
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" })
   const url = imageCDNURL(item.url)
-
   return (
     <Pressable
       // onPress={onPress}

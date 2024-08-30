@@ -20,14 +20,13 @@ import { generateClient } from "aws-amplify/api"
 
 const width = Dimensions.get("window").width
 const sweetgreenMenu = require("menu-es.json")
-type Item = Schema["Item"]["type"]
 
 interface MenuScreenProps extends AppStackScreenProps<"Menu"> {}
 
 export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
-  const [items1, setItems] = useState<Item[]>(sweetgreenMenu)
+  const [items, setItems] = useState(sweetgreenMenu)
   const client = generateClient<Schema>()
   const [visible, setVisible] = React.useState(false)
   const [isSyncedLocal, setIsSyncedLocal] = useState(false)
@@ -131,7 +130,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   return (
     <Screen style={$root} preset="scroll">
       <MenuHeader />
-      {items1.length > 0 && (
+      {items.length > 0 && (
         <SectionGrid
           renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
           // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
@@ -146,7 +145,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
           // itemContainerStyle={{ height: 500 }}
           // itemContainerStyle={{ height: 200 }}
           maxItemsPerRow={isSmallScreen ? 1 : 3}
-          sections={transformDataForSectionList(items1)}
+          sections={transformDataForSectionList(items)}
           renderItem={renderMenuItem}
           renderSectionHeader={renderSectionTitle}
         />

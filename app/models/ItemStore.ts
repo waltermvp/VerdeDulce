@@ -164,7 +164,6 @@ export const transformDataForSectionList = (data) => {
   // Group items by their category
   const groupedData = data.reduce((acc, item) => {
     const category = item.category?.toLowerCase() // Assuming categories are distinct and well-defined
-    console.log("category", category)
     if (!acc[category]) {
       acc[category] = []
     }
@@ -178,13 +177,14 @@ export const transformDataForSectionList = (data) => {
       metadata: item.metadata,
       price: `$${item.price.toFixed(2)}`,
       calories: item.calories,
+      protein: item.protein,
+      fat: item.fat,
       url: item.url, // Extracting the filename from the URL for use in imageCDNURL
     })
     return acc
   }, {})
   // console.log(item, "item")
   // console.log(category, "category")
-  console.log("groupedData", groupedData)
 
   // const  sectionlistData = groupedData.map((category) => ({
   //   title: category,
@@ -196,6 +196,5 @@ export const transformDataForSectionList = (data) => {
     data: groupedData[category],
   }))
 
-  console.log("groupedFinal", groupedFinal)
   return groupedFinal
 }

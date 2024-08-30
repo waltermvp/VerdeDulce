@@ -59,7 +59,8 @@ const $container: ViewStyle = {
 }
 
 const $text: TextStyle = {
-  fontFamily: typography.primary.normal,
-  fontSize: 14,
+  fontFamily: typography.fonts.poppins.light,
+  fontSize: 20,
   color: colors.palette.greenFont,
+  marginTop: spacing.xxs,
 }
