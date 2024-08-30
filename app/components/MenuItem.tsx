@@ -106,7 +106,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
               {show && (
                 <OrderButton
                   style={{
-                    // marginTop: spacing.xl,
+                    marginTop: spacing.md,
                     padding: spacing.md,
                     width: "90%",
 
