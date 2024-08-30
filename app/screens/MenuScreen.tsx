@@ -96,7 +96,10 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   const renderSectionTitle = ({ section }: { section: any }) => {
     return (
       <View style={{ width: width, paddingLeft: spacing.sm }}>
-        <Text style={{ fontFamily: typography.fonts.poppins.semiBold }} preset="subheading">
+        <Text
+          style={{ fontFamily: typography.fonts.poppins.normal, fontSize: 36 }}
+          preset="subheading"
+        >
           {section.title.toUpperCase()}
         </Text>
       </View>

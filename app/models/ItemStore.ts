@@ -177,6 +177,7 @@ export const transformDataForSectionList = (data) => {
       metadata: item.metadata,
       price: `$${item.price.toFixed(2)}`,
       calories: item.calories,
+      carbs: item.calories,
       protein: item.protein,
       fat: item.fat,
       url: item.url, // Extracting the filename from the URL for use in imageCDNURL

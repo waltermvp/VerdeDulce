@@ -7,6 +7,7 @@
     "protein": 42,
     "fat": 43,
     "url": "menu-pictures/SG_Web_Image_Plate_Caramelized_Garlic_Steak.png",
+    "carbs": 75,
     "category": "Tazones"
   },
   {
@@ -16,6 +17,7 @@
     "calories": 815,
     "protein": 39,
     "fat": 48,
+    "carbs": 32,
     "url": "menu-pictures/SG_Web_Image_Bowl_Steakhouse_Chopped.png",
     "category": "Tazones"
   },
@@ -26,6 +28,7 @@
     "calories": 720,
     "protein": 38,
     "fat": 50,
+    "carbs": 13,
     "url": "menu-pictures/SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
     "category": "Ensaladas"
   },
@@ -36,7 +39,19 @@
     "calories": 835,
     "protein": 34,
     "fat": 37,
+    "carbs": 84,
     "url": "menu-pictures/SG_Web_Image_Plate_Hot_Honey_Chicken.png",
+    "category": "Platos de Proteínas"
+  },
+  {
+    "name": "Salmón Glaseado con Miso",
+    "description": "Arroz blanco, pepinos, condimento de sésamo y nori, cebollas crujientes, cebollas en vinagre, aguacate, salmón glaseado con miso, anacardo picante",
+    "price": 16.95,
+    "calories": 930,
+    "protein": 36,
+    "fat": 51,
+    "carbs": 75,
+    "imageUrl": "URL_AQUÍ",
     "category": "Platos de Proteínas"
   },
   {
@@ -46,6 +61,7 @@
     "calories": 765,
     "protein": 36,
     "fat": 32,
+    "carbs": 61,
     "url": "menu-pictures/SG_Web_Image_Bowl_HarvestRET.png",
     "category": "Tazones"
   },
@@ -56,6 +72,7 @@
     "calories": 640,
     "protein": 30,
     "fat": 35,
+    "carbs": 64,
     "url": "menu-pictures/Crispy_Rice_Bowl.png",
     "category": "Tazones"
   },
@@ -66,6 +83,7 @@
     "calories": 540,
     "protein": 33,
     "fat": 30,
+    "carbs": 35,
     "url": "menu-pictures/Chicken_Pesto_Parm.png",
     "category": "Tazones"
   },
@@ -76,7 +94,30 @@
     "calories": 705,
     "protein": 31,
     "fat": 39,
+    "carbs": 61,
     "url": "menu-pictures/Chicken_Avocado_Ranch.png",
+    "category": "Tazones"
+  },
+  {
+    "name": "Shroomami",
+    "description": "Col rizada rallada, arroz salvaje, albahaca, pepinos, col rallada, almendras tostadas, mezcla de portobello caliente, tofu asado, jengibre sésamo miso",
+    "price": 14.45,
+    "calories": 685,
+    "protein": 18,
+    "fat": 35,
+    "carbs": 70,
+    "imageUrl": "URL_AQUÍ",
+    "category": "Tazones"
+  },
+  {
+    "name": "Taco de Pescado",
+    "description": "Rúcula, quinoa con hierbas, cilantro, col rallada, chips de tortilla, aguacate, salmón glaseado con miso, vinagreta de lima y cilantro jalapeño, salsa picante sweetgreen",
+    "price": 16.95,
+    "calories": 835,
+    "protein": 34,
+    "fat": 50,
+    "carbs": 69,
+    "imageUrl": "URL_AQUÍ",
     "category": "Tazones"
   },
   {
@@ -86,6 +127,7 @@
     "calories": 510,
     "protein": 26,
     "fat": 42,
+    "carbs": 13,
     "url": "menu-pictures/SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
     "category": "Ensaladas"
   },
@@ -96,6 +138,7 @@
     "calories": 575,
     "protein": 31,
     "fat": 42,
+    "carbs": 35,
     "url": "menu-pictures/SG_Web_Image_Salad_Guacamole_Greens.png",
     "category": "Ensaladas"
   },
@@ -106,6 +149,7 @@
     "calories": 405,
     "protein": 12,
     "fat": 27,
+    "carbs": 36,
     "url": "menu-pictures/SG_Web_Image_Salad_Hummus_Crunch.png",
     "category": "Ensaladas"
   },
@@ -116,6 +160,7 @@
     "calories": 555,
     "protein": 34,
     "fat": 41,
+    "carbs": 25,
     "url": "menu-pictures/SG_Web_Image_Salad_Buffalo_Chicken.png",
     "category": "Ensaladas"
   },
@@ -126,6 +171,7 @@
     "calories": 455,
     "protein": 18,
     "fat": 31,
+    "carbs": 42,
     "url": "menu-pictures/SG_Web_Image_Salad_Super_Green_Goddess.png",
     "category": "Ensaladas"
   },
@@ -136,6 +182,8 @@
     "calories": 745,
     "protein": 31,
     "fat": 53,
+    "carbs": 36,
+
     "url": "menu-pictures/SG_Web_Image_Bowl_Garden_Cobb.png",
     "category": "Ensaladas"
   }

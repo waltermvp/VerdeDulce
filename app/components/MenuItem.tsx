@@ -81,7 +81,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                 transition={1000}
               />
               <View style={{ marginTop: spacing.md, paddingHorizontal: spacing.xxl }}>
-                <Text preset="subheading" style={{ fontFamily: typography.fonts.poppins.normal }}>
+                <Text preset="subheading" style={{ fontFamily: typography.fonts.poppins.light }}>
                   {item.name}
                 </Text>
                 <Text preset="default" style={{ fontFamily: typography.fonts.poppins.light }}>
@@ -94,7 +94,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                   style={{ marginTop: spacing.md }}
                   items={[
                     { title: item.calories, subtitle: "CALORIES" },
-                    { title: item.carbohydrates, subtitle: "CARBS" },
+                    { title: item.carbs, subtitle: "CARBS" },
                     { title: item.protein, subtitle: "PROTEIN" },
                     { title: item.fat, subtitle: "GRASA" },
                     // { title: "860", subtitle: "CALORIES" },
