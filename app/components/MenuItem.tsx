@@ -108,8 +108,8 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                   style={{
                     marginTop: spacing.md,
                     padding: spacing.md,
-                    width: "90%",
-
+                    // width: "90%",
+                    width: isSmallScreen ? 222 : 333,
                     // bottom: spacing.xxxs,
                   }}
                   tx="landingScreen.order"

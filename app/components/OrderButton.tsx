@@ -70,17 +70,21 @@ export const OrderButton = observer(function OrderButton(props: OrderButtonProps
       {({ hovered }) => {
         return (
           <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: hovered ? colors.palette.primary100 : colors.palette.greenFont,
+            style={[
+              $styles,
+              {
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: hovered ? colors.palette.primary100 : colors.palette.greenFont,
 
-              padding: isSmallScreen ? spacing.xs : spacing.sm,
-              borderRadius: 13,
-              borderBottomColor: colors.palette.neutral900,
-              borderBottomWidth: onHoverIn ? 2 : 0,
-            }}
+                padding: isSmallScreen ? spacing.xs : spacing.sm,
+                borderRadius: 13,
+                borderBottomColor: colors.palette.neutral900,
+                borderBottomWidth: onHoverIn ? 2 : 0,
+                // alignSelf: "center",
+              },
+            ]}
           >
             <Text
               tx={tx}
@@ -111,5 +115,6 @@ export const OrderButton = observer(function OrderButton(props: OrderButtonProps
 const $container: ViewStyle = {
   justifyContent: "center",
   // width: 222,
-  // flex: 1,
+  flex: 1,
+  height: 55,
 }
