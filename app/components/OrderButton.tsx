@@ -71,43 +71,43 @@ export const OrderButton = observer(function OrderButton(props: OrderButtonProps
         setOnHoverIn(false)
       }}
     >
-      {/* <Image
-      style={{ height: 48 * multiplier, width: 207 * multiplier }}
-      source={require("../../assets/images/WhatsAppButtonGreenLarge.svg")}
-    /> */}
-
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: colors.palette.greenFont,
-          padding: isSmallScreen ? spacing.xs : spacing.sm,
-          borderRadius: 13,
-          borderBottomColor: colors.palette.neutral900,
-          borderBottomWidth: onHoverIn ? 2 : 0,
-        }}
-      >
-        <Text
-          tx={tx}
-          preset="bold"
-          style={{
-            color: colors.palette.lightYellowGreen,
-            fontSize: isSmallScreen ? 12 : undefined,
-          }}
-        ></Text>
-        {!isSmallScreen && (
-          <Ionicons
+      {({ hovered }) => {
+        return (
+          <View
             style={{
-              // textDecorationLine: onHoverIn ? "underline" : undefined,
-              paddingLeft: isSmallScreen ? spacing.xs : spacing.sm,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: hovered ? colors.palette.primary100 : colors.palette.greenFont,
+
+              padding: isSmallScreen ? spacing.xs : spacing.sm,
+              borderRadius: 13,
+              borderBottomColor: colors.palette.neutral900,
+              borderBottomWidth: onHoverIn ? 2 : 0,
             }}
-            name={icon}
-            size={24}
-            color={colors.palette.lightYellowGreen}
-          />
-        )}
-      </View>
+          >
+            <Text
+              tx={tx}
+              preset="bold"
+              style={{
+                fontSize: isSmallScreen ? 12 : undefined,
+                color: !hovered ? colors.palette.primary100 : colors.palette.greenFont,
+              }}
+            ></Text>
+            {!isSmallScreen && (
+              <Ionicons
+                style={{
+                  // textDecorationLine: onHoverIn ? "underline" : undefined,
+                  paddingLeft: isSmallScreen ? spacing.xs : spacing.sm,
+                }}
+                name={icon}
+                size={24}
+                color={colors.palette.lightYellowGreen}
+              />
+            )}
+          </View>
+        )
+      }}
     </Pressable>
   )
 })

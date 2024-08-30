@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Pressable, StyleProp, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors, spacing } from "app/theme"
+import { colors, spacing, typography } from "app/theme"
 import { Text } from "app/components/Text"
 import { Image } from "expo-image"
 import { Bullets } from "./Bullets"
@@ -10,6 +10,7 @@ import { imageCDNURL } from "app/utils/linkbuilder"
 import { OrderButton } from "./OrderButton"
 import { useMediaQuery } from "react-responsive"
 
+const minHeight = 725
 export interface MenuItemProps {
   /**
    * An optional style override useful for padding & margin.
@@ -35,18 +36,23 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
   return (
     <Pressable
       // onPress={onPress}
-      style={({ focused, hovered, pressed }) => {
+      style={({ pressed }) => {
         return {
           backgroundColor: pressed ? colors.palette.neutral400 : undefined,
           borderRadius: 13,
         }
       }}
     >
-      {({ pressed }) => {
+      {({}) => {
         return (
           <View
             // style={[$styles, { backgroundColor: pressed ? colors.palette.darkTeal : undefined }]}
-            style={[$styles, { minHeight: isSmallScreen ? 500 : 825 }]}
+            style={[
+              $styles,
+              {
+                minHeight: isSmallScreen ? 500 : minHeight,
+              },
+            ]}
           >
             {showDelete && (
               <Badge
@@ -61,44 +67,58 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                 X
               </Badge>
             )}
-            <Image
-              style={{
-                // height: SIZE,
-                aspectRatio: 1,
-                width: "85%",
-                borderRadius: 9,
-                // borderColor: "red",  borderWidth: 2
-              }}
-              source={{ uri: url }}
-              onError={(e) => console.log("MenuItem.tsx: Image onError: ", e)}
-              // placeHolder={() => <PlaceholderMenu />}
-              contentFit="cover"
-              transition={1000}
-            />
-            <View style={{ marginTop: spacing.md, paddingHorizontal: spacing.xxl }}>
-              <Text preset="subheading">{item.name}</Text>
-              <Text preset="formLabel">{item.description}</Text>
-              {/* <Text style={styles.price} preset="bold">
+            <View style={{ flex: 8, alignItems: "center" }}>
+              <Image
+                style={{
+                  // height: SIZE,
+                  aspectRatio: 1,
+                  width: "85%",
+                  borderRadius: 9,
+                  // borderColor: "red",  borderWidth: 2
+                }}
+                source={{ uri: url }}
+                onError={(e) => console.log("MenuItem.tsx: Image onError: ", e)}
+                // placeHolder={() => <PlaceholderMenu />}
+                contentFit="cover"
+                transition={1000}
+              />
+              <View style={{ marginTop: spacing.md, paddingHorizontal: spacing.xxl }}>
+                <Text preset="subheading" style={{ fontFamily: typography.fonts.poppins.normal }}>
+                  {item.name}
+                </Text>
+                <Text preset="default" style={{ fontFamily: typography.fonts.poppins.light }}>
+                  {item.description}
+                </Text>
+                {/* <Text style={styles.price} preset="bold">
           {item.price}
         </Text> */}
-              <Bullets
-                style={{ marginTop: spacing.md }}
-                items={[
-                  { title: item.calories, subtitle: "CALORIES" },
-                  { title: item.carbohydrates, subtitle: "CARBS" },
-                  { title: item.protein, subtitle: "PROTEIN" },
-                  { title: item.fat, subtitle: "GRASA" },
-                  // { title: "860", subtitle: "CALORIES" },
-                ]}
-              />
+                <Bullets
+                  style={{ marginTop: spacing.md }}
+                  items={[
+                    { title: item.calories, subtitle: "CALORIES" },
+                    { title: item.carbohydrates, subtitle: "CARBS" },
+                    { title: item.protein, subtitle: "PROTEIN" },
+                    { title: item.fat, subtitle: "GRASA" },
+                    // { title: "860", subtitle: "CALORIES" },
+                  ]}
+                />
+              </View>
             </View>
-            {show && (
-              <OrderButton
-                style={{ marginTop: spacing.xl, padding: spacing.md, width: "90%" }}
-                tx="landingScreen.order"
-                onPress={onPress}
-              />
-            )}
+            <View style={{ flex: 1 }}>
+              {show && (
+                <OrderButton
+                  style={{
+                    // marginTop: spacing.xl,
+                    padding: spacing.md,
+                    width: "90%",
+
+                    // bottom: spacing.xxxs,
+                  }}
+                  tx="landingScreen.order"
+                  onPress={onPress}
+                />
+              )}
+            </View>
           </View>
         )
       }}
@@ -113,7 +133,7 @@ const $container: ViewStyle = {
   paddingVertical: spacing.lg,
   borderRadius: 13,
   //TODO: decresase hieight for smaller breakpoints
-  minHeight: 825,
+  minHeight: minHeight,
   // margin:200
   // backgroundColor: "red",
 }

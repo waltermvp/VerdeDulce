@@ -4,7 +4,7 @@ import { Dimensions, ViewStyle, View } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Footer, MenuHeader, MenuItem, OrderButton, Screen, Text } from "app/components"
 
-import { colors, spacing } from "app/theme"
+import { colors, spacing, typography } from "app/theme"
 import { useMediaQuery } from "react-responsive"
 import { useFocusEffect } from "@react-navigation/native"
 import { Linking } from "react-native" // Import Linking module
@@ -97,7 +97,9 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   const renderSectionTitle = ({ section }: { section: any }) => {
     return (
       <View style={{ width: width, paddingLeft: spacing.sm }}>
-        <Text preset="subheading">{section.title.toUpperCase()}</Text>
+        <Text style={{ fontFamily: typography.fonts.poppins.semiBold }} preset="subheading">
+          {section.title.toUpperCase()}
+        </Text>
       </View>
     )
   }

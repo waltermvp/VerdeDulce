@@ -91,7 +91,7 @@ const $fontWeightStyles = Object.entries(typography.primary).reduce((acc, [weigh
 const $baseStyle: StyleProp<TextStyle> = [
   $sizeStyles.sm,
   $fontWeightStyles.normal,
-  { color: colors.text, lineHeight: 18 },
+  { color: colors.text, lineHeight: 18, fontFamily: typography.fonts.poppins.normal },
 ]
 
 const $presets = {

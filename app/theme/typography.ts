@@ -18,6 +18,16 @@ import {
   OpenSans_700Bold as openSansBold,
 } from "@expo-google-fonts/open-sans"
 
+import {
+  Poppins_100Thin,
+  Poppins_100Thin_Italic,
+  Poppins_200ExtraLight,
+  Poppins_200ExtraLight_Italic,
+  Poppins_300Light,
+  Poppins_300Light_Italic,
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+} from "@expo-google-fonts/poppins"
 
 export const customFontsToLoad = {
   spaceGroteskLight,
@@ -30,9 +40,28 @@ export const customFontsToLoad = {
   openSansMedium,
   openSansSemiBold,
   openSansBold,
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+  Poppins_100Thin,
+  Poppins_100Thin_Italic,
+  Poppins_200ExtraLight,
+  Poppins_200ExtraLight_Italic,
+  Poppins_300Light_Italic,
+  Poppins_300Light,
 }
 
 const fonts = {
+  poppins: {
+    // Cross-platform Google font.
+    normal: "Poppins_400Regular",
+    semiBold: "Poppins_600SemiBold",
+    thin: "Poppins_100Thin",
+    thinItalic: "Poppins_100Thin_Italic",
+    extraLight: "Poppins_200ExtraLight",
+    extraLightItalic: "Poppins_200ExtraLight_Italic",
+    light: "Poppins_300Light",
+    lightItalic: "Poppins_300Light_Italic",
+  },
   openSans: {
     // Cross-platform Google font.
     light: "openSansLight",

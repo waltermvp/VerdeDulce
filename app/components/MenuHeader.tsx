@@ -41,8 +41,11 @@ export const MenuHeader = observer(function MenuHeader(props: MenuHeaderProps) {
           paddingVertical: spacing.lg,
           maxWidth: "75%",
           alignSelf: "center",
-          fontSize: 32,
-          lineHeight: 40,
+          fontSize: 38,
+          lineHeight: 44,
+          fontFamily: "poppins-thin",
+          fontWeight: "thin",
+          // fontStyle: "poppins",
           // paddingBottom: -20,
           // marginBottom: -20,
         }}
