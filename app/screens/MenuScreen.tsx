@@ -19,7 +19,7 @@ import { Schema } from "amplify/data/resource"
 import { generateClient } from "aws-amplify/api"
 
 const width = Dimensions.get("window").width
-const sweetgreenMenu = require("menu.json")
+const sweetgreenMenu = require("menu-es.json")
 type Item = Schema["Item"]["type"]
 
 interface MenuScreenProps extends AppStackScreenProps<"Menu"> {}

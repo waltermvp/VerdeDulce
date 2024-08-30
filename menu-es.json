@@ -21,7 +21,7 @@
   },
   {
     "id": 2,
-    "name": "Harvest Bowl",
+    "name": "Tazón de Cosecha",
     "price": 12.75,
     "description": "Un bowl abundante y cálido que combina pollo asado, arroz salvaje orgánico, col rizada rallada, manzanas, batatas, almendras tostadas y queso de cabra con una vinagreta balsámica.",
     "calories": 705,
@@ -40,28 +40,8 @@
     "category": "Bowl"
   },
   {
-    "id": 3,
-    "name": "Shroomami",
-    "price": 12.5,
-    "description": "El bowl Shroomami es una opción sabrosa que incluye una mezcla de portobello caliente, remolachas crudas, brotes de soja, albahaca, semillas de girasol picantes, arroz salvaje orgánico, col rizada rallada y aderezo de miso y jengibre.",
-    "calories": 660,
-    "carbohydrates": 74,
-    "protein": 21,
-    "fat": 28,
-    "ingredients": [
-      "Mezcla de Portobello",
-      "Remolachas Crudas",
-      "Brotes de Soja",
-      "Albahaca",
-      "Semillas de Girasol Picantes",
-      "Arroz Salvaje Orgánico",
-      "Col Rizada Rallada"
-    ],
-    "category": "Bowl"
-  },
-  {
     "id": 4,
-    "name": "Kale Caesar",
+    "name": "César de Kale",
     "price": 11.95,
     "description": "Esta clásica ensalada César se prepara con col rizada rallada, lechuga romana picada, pollo asado, tomates, crujientes de parmesano, parmesano rallado y aderezo César.",
     "calories": 420,
@@ -80,7 +60,7 @@
   },
   {
     "id": 6,
-    "name": "Chicken Pesto Parm",
+    "name": "Pollo Pesto Parmesano",
     "price": 13.75,
     "description": "Una deliciosa combinación de pollo asado, garbanzos calientes, quinua caliente, col rizada rallada, brócoli picante, vinagreta de pesto, pan rallado, parmesano rallado y salsa picante.",
     "calories": 710,
@@ -97,63 +77,7 @@
     ],
     "category": "Bowl"
   },
-  {
-    "id": 7,
-    "name": "Spicy Thai Salad",
-    "price": 12.5,
-    "description": "La ensalada Spicy Thai incluye rúcula orgánica, col rizada rallada, quinua caliente, pollo asado, brócoli picante, zanahorias crudas, albahaca, semillas de girasol picantes y aderezo de anacardo picante.",
-    "calories": 645,
-    "carbohydrates": 46,
-    "protein": 29,
-    "fat": 38,
-    "ingredients": [
-      "Rúcula Orgánica",
-      "Col Rizada Rallada",
-      "Quinua Caliente",
-      "Pollo Asado",
-      "Brócoli Picante",
-      "Zanahorias Crudas"
-    ],
-    "category": "Ensalada"
-  },
-  {
-    "id": 8,
-    "name": "Hummus Tahina",
-    "price": 12.25,
-    "description": "Una ensalada inspirada en el Mediterráneo con hummus casero, falafel de hierbas, lechuga romana picada orgánica, col rizada rallada, tomates, cebolla roja, pepino, pan rallado za'atar y yogur de tahini con pepino.",
-    "calories": 620,
-    "carbohydrates": 60,
-    "protein": 18,
-    "fat": 35,
-    "ingredients": [
-      "Hummus Casero",
-      "Falafel de Hierbas",
-      "Lechuga Romana Picada Orgánica",
-      "Col Rizada Rallada",
-      "Tomates",
-      "Cebolla Roja"
-    ],
-    "category": "Ensalada"
-  },
-  {
-    "id": 9,
-    "name": "Spicy Sabzi",
-    "price": 12.5,
-    "description": "Una ensalada picante y centrada en vegetales con espinacas tiernas orgánicas, col rizada rallada, quinua picante, remolachas crudas, brócoli picante, zanahorias, albahaca, brotes, aderezo de anacardo picante y un toque de lima.",
-    "calories": 670,
-    "carbohydrates": 74,
-    "protein": 17,
-    "fat": 35,
-    "ingredients": [
-      "Espinacas Tiernas Orgánicas",
-      "Col Rizada Rallada",
-      "Quinua Picante",
-      "Remolachas Crudas",
-      "Brócoli Picante",
-      "Zanahorias"
-    ],
-    "category": "Ensalada"
-  },
+
   {
     "id": 10,
     "name": "Shroomami",
