@@ -1,7 +1,7 @@
 [
   {
-    "name": "Carne de Ajo Caramelizado",
-    "description": "Arroz salvaje, brócoli picante, tomates, batatas asadas calientes, carne de ajo caramelizado, vinagreta de pesto",
+    "name": "Carne con Ajo Caramelizado",
+    "description": "Arroz integral, brócoli picante, tomates, camote, carne con ajo caramelizado, vinagreta de pesto",
     "price": 17.65,
     "calories": 860,
     "protein": 42,
@@ -13,7 +13,7 @@
   },
   {
     "name": "Ensalada Picada Estilo Steakhouse",
-    "description": "Lechuga romana picada, quinoa con hierbas, col rallada, tomates, cebollas crujientes, queso azul, carne de ajo caramelizado, aderezo ranch diosa verde",
+    "description": "Lechuga romana picada, quinoa con hierbas, col rallada, tomates, cebollas crujientes, queso azul, carne con ajo caramelizado, aderezo ranch",
     "price": 17.15,
     "calories": 815,
     "protein": 39,
@@ -24,8 +24,8 @@
     "activated": true
   },
   {
-    "name": "Kale César (Carne)",
-    "description": "Lechuga romana picada, col rizada rallada, tomates, crujientes de parmesano, parmesano rallado, carne de ajo caramelizado, aderezo César, rodaja de lima",
+    "name": "César de Col (Carne)",
+    "description": "Lechuga romana picada, col rizada rallada, tomates, crujientes de parmesano, parmesano rallado, carne con ajo caramelizado, aderezo César, rodaja de lima",
     "price": 16.45,
     "calories": 720,
     "protein": 38,
@@ -36,8 +36,8 @@
     "activated": true
   },
   {
-    "name": "Pollo con Miel Picante",
-    "description": "Quinoa con hierbas, cebollas crujientes, pollo ennegrecido, batatas asadas calientes, ensalada de verduras, salsa de mostaza con miel picante",
+    "name": "Pollo Picante con Miel",
+    "description": "Quinoa con hierbas, cebollas crujientes, pollo ennegrecido, camote, ensalada de verduras, salsa de mostaza con miel picante",
     "price": 15.95,
     "calories": 835,
     "protein": 34,
@@ -49,7 +49,7 @@
   },
   {
     "name": "Tazón de Cosecha",
-    "description": "Col rizada rallada, arroz salvaje, batatas asadas, almendras tostadas, manzanas, queso de cabra, pollo asado, vinagreta balsámica",
+    "description": "Col rizada rallada, arroz integral, camote, almendras tostadas, manzanas, queso de cabra, pollo asado, vinagreta balsámica",
     "price": 14.45,
     "calories": 765,
     "protein": 36,
@@ -59,23 +59,12 @@
     "category": "Tazones",
     "activated": false
   },
-  {
-    "name": "Tazón de Arroz Crujiente",
-    "description": "Rúcula, arroz salvaje, cilantro, pepinos, col rallada, almendras tostadas, arroz crujiente, zanahorias crudas, pollo ennegrecido, rodaja de lima, anacardo picante",
-    "price": 15.45,
-    "calories": 640,
-    "protein": 30,
-    "fat": 35,
-    "carbs": 64,
-    "url": "menu-pictures/Crispy_Rice_Bowl.png",
-    "category": "Tazones",
-    "activated": false
-  },
+
   {
     "activated": false,
 
-    "name": "Pollo Pesto Parmesano",
-    "description": "Espinaca bebé, quinoa con hierbas, brócoli picante, tomates, pan rallado za'atar, pollo asado, parmesano rallado, vinagreta de pesto, salsa picante sweetgreen",
+    "name": "Pollo a la Parmesana con Pesto",
+    "description": "Espinaca bebé, quinoa con hierbas, brócoli picante, tomates, pan rallado, pollo asado, parmesano rallado, vinagreta de pesto, salsa picante",
     "price": 14.95,
     "calories": 540,
     "protein": 33,
@@ -97,7 +86,7 @@
     "category": "Tazones"
   },
   {
-    "name": "Kale César",
+    "name": "César de Col",
     "description": "Lechuga romana picada, col rizada rallada, tomates, crujientes de parmesano, pollo asado, parmesano rallado, aderezo César, rodaja de lima",
     "price": 13.75,
     "calories": 510,
@@ -109,8 +98,8 @@
     "activated": false
   },
   {
-    "name": "Verdes con Guacamole",
-    "description": "Lechuga romana picada, mezcla de primavera, col rallada, tomates, chips de tortilla, cebollas en vinagre, aguacate, pollo asado, rodaja de lima, vinagreta de cilantro y lima jalapeño",
+    "name": "Guacamole Verde",
+    "description": "Lechuga romana picada, mezcla de lechuga verde, col rallada, tomates, chips de tortilla, cebollas encurtidas, aguacate, pollo asado, rodaja de lima, vinagreta de cilantro limon y jalapeño",
     "price": 14.45,
     "calories": 575,
     "protein": 31,
@@ -122,8 +111,8 @@
   },
   {
     "activated": false,
-    "name": "Crujiente de Hummus",
-    "description": "Lechuga romana picada, col rizada rallada, albahaca, pepinos, col rallada, tomates, pan rallado za'atar, garbanzos, cebollas en vinagre, hummus, vinagreta de pesto",
+    "name": "Hummus crujiente",
+    "description": "Lechuga romana picada, col rizada rallada, albahaca, pepinos, col rallada, tomates, pan rallado , garbanzos, cebollas encurtidas, hummus, vinagreta de pesto",
     "price": 13.35,
     "calories": 405,
     "protein": 12,
@@ -135,7 +124,7 @@
   {
     "activated": false,
     "name": "Pollo Búfalo",
-    "description": "Lechuga romana picada, col rizada rallada, cilantro, tomates, pan rallado za'atar, zanahorias crudas, cebollas en vinagre, queso azul, pollo ennegrecido, aderezo César, salsa picante sweetgreen",
+    "description": "Lechuga romana picada, col rizada rallada, cilantro, tomates, pan rallado, zanahorias crudas, cebollas encurtidas, queso azul, pollo ennegrecido, aderezo César, salsa picante",
     "price": 15.45,
     "calories": 555,
     "protein": 34,
@@ -145,8 +134,8 @@
     "category": "Ensaladas"
   },
   {
-    "name": "Súper Diosa Verde",
-    "description": "Col rizada rallada, espinaca bebé, batatas asadas, col rallada, brócoli picante, almendras tostadas, garbanzos, zanahorias crudas, aderezo ranch diosa verde",
+    "name": "Diosa Super Verde",
+    "description": "Col rizada rallada, espinaca bebé, camote, col rallada, brócoli picante, almendras tostadas, garbanzos, zanahorias crudas, aderezo ranch",
     "price": 10.95,
     "calories": 455,
     "protein": 18,
@@ -157,8 +146,8 @@
     "activated": false
   },
   {
-    "name": "Cobb de Jardín",
-    "description": "Lechuga romana picada, mezcla de primavera, batatas asadas, almendras tostadas, tomates, aguacate, huevo duro, queso azul, vinagreta balsámica",
+    "name": "Jardín Cobb",
+    "description": "Lechuga romana picada, mezcla de lechuga, camote, almendras tostadas, tomates, aguacate, huevo duro, queso azul, vinagreta balsámica",
     "price": 14.95,
     "calories": 745,
     "protein": 31,
