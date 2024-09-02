@@ -1,28 +1,28 @@
 import type { Schema } from "../resource"
 // import AWS from "aws-sdk"
 // import mjml2html from "mjml"
-const mjml2html = require("mjml")
+// const mjml2html = require("mjml")
 
-const sendEmail = () => {
-  console.log("sendEmail reached")
-  return mjml2html(`
-  <mjml>
-  <mj-body>
-    <mj-section>
-      <mj-column>
+// const sendEmail = () => {
+//   console.log("sendEmail reached")
+//   return mjml2html(`
+//   <mjml>
+//   <mj-body>
+//     <mj-section>
+//       <mj-column>
 
-        <mj-image width="100px" src="/assets/img/logo-small.png"></mj-image>
+//         <mj-image width="100px" src="/assets/img/logo-small.png"></mj-image>
 
-        <mj-divider border-color="#F45E43"></mj-divider>
+//         <mj-divider border-color="#F45E43"></mj-divider>
 
-        <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Hello World</mj-text>
+//         <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Hello World</mj-text>
 
-      </mj-column>
-    </mj-section>
-  </mj-body>
-</mjml>
-`)
-}
+//       </mj-column>
+//     </mj-section>
+//   </mj-body>
+// </mjml>
+// `)
+// }
 
 export const handler: Schema["registerUser"]["functionHandler"] = async (event, context) => {
   const start = performance.now()
@@ -40,8 +40,8 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (event, 
     Message: {
       Body: {
         Text: {
-          // Data: "Hello, this is a test email.", // Replace with the email content
-          Data: sendEmail().html,
+          Data: "Hello, this is a test email.", // Replace with the email content
+          // Data: sendEmail().html,
         },
       },
       Subject: {
