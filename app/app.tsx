@@ -42,12 +42,23 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 const prefix = Linking.createURL("/")
 const config = {
   screens: {
-    // Login: {
-    //   path: "",
-    // },
+    Login: {
+      path: "login",
+    },
     // Welcome: "welcome",
-    // MenuNav: {
-    Menu: "menu",
+    MenuNav: {
+      screens: {
+        Menu: {
+          path: "menu",
+        },
+        FAQ: {
+          path: "faq",
+        },
+      },
+    },
+    Viewer: {
+      path: "viewer",
+    },
     // //TODO: build out the menu item UI
     // // MenuItem: "menuItem/:id",
     Admin: "admin",
