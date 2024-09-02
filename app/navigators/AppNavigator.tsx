@@ -51,7 +51,8 @@ export type AppStackParamList = {
   Loyalty: undefined
   Scan: undefined
   Faq: undefined
-	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  Viewer: undefined
+  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 /**
@@ -79,6 +80,19 @@ const AppStack = observer(function AppStack() {
   //   // }
   // }, [isAuthenticated])
 
+  // return (
+  //   <Stack.Navigator
+  //     screenOptions={{ navigationBarColor: colors.background, headerShown: false }}
+  //     initialRouteName={true ? "MenuNav" : "Login"}
+  //   >
+  //     {/* return <MenuNavigator /> */}
+
+  //     <Stack.Group>
+  //       <Stack.Screen name="MenuNav" component={MenuNavigator} />
+  //     </Stack.Group>
+  //   </Stack.Navigator>
+  // )
+
   return (
     <Stack.Navigator
       screenOptions={{ navigationBarColor: colors.background, headerShown: false }}
@@ -88,27 +102,14 @@ const AppStack = observer(function AppStack() {
 
       <Stack.Group>
         <Stack.Screen name="MenuNav" component={MenuNavigator} />
-      </Stack.Group>
-    </Stack.Navigator>
-  )
-
-  return (
-    <Stack.Navigator
-      screenOptions={{ navigationBarColor: colors.background, headerShown: false }}
-      initialRouteName={true ? "MenuNav" : "Login"}
-    >
-      {/* return <MenuNavigator /> */}
-
-      <Stack.Group>
-        <Stack.Screen name="MenuNav" component={MenuNavigator} />
-        <Stack.Screen name="OrderNav" component={OrderNavigator} />
+        {/* <Stack.Screen name="OrderNav" component={OrderNavigator} /> */}
       </Stack.Group>
 
       <Stack.Group
         screenOptions={{ presentation: "card" }}
         // screenOptions={{ presentation: "fullScreenModal" }}
       >
-        <Stack.Screen name="Login" component={Screens.LoginScreen} />
+        {/* <Stack.Screen name="Login" component={Screens.LoginScreen} /> */}
         {/* <Stack.Screen name="Menu" component={Screens.MenuScreen} />
         <Stack.Screen name="Order" component={Screens.OrderScreen} />
         <Stack.Screen name="Admin" component={Screens.AdminScreen} /> */}
@@ -116,12 +117,15 @@ const AppStack = observer(function AppStack() {
       </Stack.Group>
 
       {/** 🔥 Your screens go here */}
+      <Stack.Screen name="Login" component={Screens.LoginScreen} />
+
       <Stack.Screen name="Account" component={Screens.AccountScreen} />
       <Stack.Screen name="Home" component={Screens.HomeScreen} />
       <Stack.Screen name="Loyalty" component={Screens.LoyaltyScreen} />
       <Stack.Screen name="Scan" component={Screens.ScanScreen} />
       <Stack.Screen name="Faq" component={Screens.FaqScreen} />
-			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      <Stack.Screen name="Viewer" component={Screens.ViewerScreen} />
+      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })
