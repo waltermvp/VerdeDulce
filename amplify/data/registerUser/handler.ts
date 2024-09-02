@@ -1,4 +1,6 @@
 import type { Schema } from "../resource"
+import * as ses from "aws-cdk-lib/aws-ses"
+
 // import AWS from "aws-sdk"
 // import mjml2html from "mjml"
 // const mjml2html = require("mjml")
