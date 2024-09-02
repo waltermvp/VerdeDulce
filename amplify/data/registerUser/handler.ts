@@ -1,5 +1,5 @@
 import type { Schema } from "../resource"
-import AWS from "aws-sdk"
+// import AWS from "aws-sdk"
 // import mjml2html from "mjml"
 const mjml2html = require("mjml")
 
@@ -30,7 +30,7 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (event, 
   console.log("loggin test :", email)
 
   // Create an instance of the AWS SES service
-  const ses = new AWS.SES()
+  // const ses = new AWS.SES()
 
   // Set up the parameters for the email
   const params = {
@@ -54,7 +54,7 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (event, 
   try {
     // Send the email using the AWS SES service
     // @ts-ignore: Unreachable code error
-    await ses.sendEmail(params).promise()
+    // await ses.sendEmail(params).promise()
     return {
       email: `Echoing content: ${event.arguments.email}`,
       executionDuration: performance.now() - start,
