@@ -4,7 +4,7 @@ import { ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { IntroEmail, Screen, Text } from "app/components"
 import { colors } from "app/theme"
-// import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 interface ViewerScreenProps extends AppStackScreenProps<"Viewer"> {}
@@ -14,10 +14,10 @@ export const ViewerScreen: FC<ViewerScreenProps> = observer(function ViewerScree
   // const { someStore, anotherStore } = useStores()
 
   // Pull in navigation via hook
-  // const navigation = useNavigation()
+  const navigation = useNavigation()
   return (
     <Screen style={$root} preset="scroll">
-      <IntroEmail />
+      <IntroEmail onPress={() => navigation.navigate("MenuNav", { screen: "Menu" })} />
     </Screen>
   )
 })

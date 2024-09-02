@@ -1,3 +1,15 @@
 {
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "aws-sdk": "^2.1687.0",
+    "mjml": "^4.15.3",
+    "mjml-core": "^4.15.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "uglify-js": "^3.19.3"
+  },
+  "devDependencies": {
+    "@types/mjml": "^4.7.4",
+    "@types/mjml-core": "^4.15.0"
+  }
 }

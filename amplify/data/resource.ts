@@ -1,4 +1,15 @@
-import { type ClientSchema, a, defineData } from "@aws-amplify/backend"
+import {
+  type ClientSchema,
+  a,
+  defineData,
+  defineFunction, // 1.Import "defineFunction" to create new functions
+} from "@aws-amplify/backend"
+
+// 2. define a function
+const registerUserFunction = defineFunction({
+  entry: "./registerUser/handler.ts",
+})
+
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
 adding a new "isDone" field as a boolean. The authorization rule below
@@ -27,6 +38,47 @@ const schema = a.schema({
       available: a.boolean(),
     })
     .authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
+
+  RegisterResponse: a.customType({
+    email: a.string(),
+    executionDuration: a.float(),
+  }),
+  registerUser: a
+    .mutation()
+    // arguments that this query accepts
+    .arguments({
+      email: a.string(),
+    })
+    // return type of the query
+    // .returns(a.ref "User"))
+    .returns(a.ref("RegisterResponse"))
+    .handler(
+      a.handler.function(registerUserFunction),
+      // a.handler.custom({
+      //   dataSource: a.ref("User"),
+      //   entry: "./registerUser.js",
+      // }),
+    )
+    // only allow signed-in users to call this API
+    .authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
+
+  // Post: a.model({
+  //   id: a.id(),
+  //   content: a.string(),
+  //   likes: a.integer()
+  // }),
+
+  // // 2. Define your mutation with the return type and, optionally, arguments
+  // likePost: a
+  //   .mutation()
+  //   // arguments that this query accepts
+  //   .arguments({
+  //     postId: a.string()
+  //   })
+  //   // return type of the query
+  //   .returns(a.ref('Post'))
+  //   // only allow signed-in users to call this API
+  //   .authorization(allow => [allow.authenticated()])
 })
 
 export type Schema = ClientSchema<typeof schema>

@@ -14,6 +14,10 @@ export interface OrderButtonProps {
    */
   style?: StyleProp<ViewStyle>
   /**
+   * An optional style override useful for padding & margin.
+   */
+  textStyle?: StyleProp<TextStyle>
+  /**
    * Text which is looked up via i18n.
    */
   tx?: TxKeyPath
@@ -44,7 +48,7 @@ export interface OrderButtonProps {
  * Describe your component here
  */
 export const OrderButton = observer(function OrderButton(props: OrderButtonProps) {
-  const { style, tx, text, icon, onPress } = props
+  const { style, tx, textStyle, text, icon, onPress } = props
   const [onHoverIn, setOnHoverIn] = React.useState(false)
 
   const $styles = [$container, style]
@@ -71,7 +75,6 @@ export const OrderButton = observer(function OrderButton(props: OrderButtonProps
         return (
           <View
             style={[
-              $styles,
               {
                 flexDirection: "row",
                 alignItems: "center",
@@ -84,17 +87,23 @@ export const OrderButton = observer(function OrderButton(props: OrderButtonProps
                 borderBottomWidth: onHoverIn ? 2 : 0,
                 // alignSelf: "center",
               },
+              $styles,
             ]}
           >
             <Text
               tx={tx}
               preset="bold"
-              style={{
-                fontSize: isSmallScreen ? 12 : undefined,
-                color: !hovered ? colors.palette.primary100 : colors.palette.greenFont,
-                textAlign: "center",
-              }}
-            ></Text>
+              style={[
+                {
+                  fontSize: isSmallScreen ? 12 : undefined,
+                  color: !hovered ? colors.palette.primary100 : colors.palette.greenFont,
+                  textAlign: "center",
+                },
+                textStyle,
+              ]}
+            >
+              {text}
+            </Text>
             {!isSmallScreen && (
               <Ionicons
                 style={{

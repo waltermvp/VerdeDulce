@@ -5,6 +5,7 @@ import { colors, spacing, typography } from "app/theme"
 
 import Constants from "expo-constants"
 import Markdown from "react-native-markdown-display"
+import { OrderButton } from "./OrderButton"
 const copy = `# ¡Bienvenido a verdedulce.com!
 ## **Fresco, Rápido, Sabroso – Tu Verde Diario**
 
@@ -31,15 +32,24 @@ export interface IntroEmailProps {
    * An optional style override useful for padding & margin.
    */
   style?: StyleProp<ViewStyle>
+
+  /**
+   * Function to handle the press event of the order button.
+   *
+   * @callback onPress
+   * @returns {void}
+   */
+  onPress?: () => void
 }
 
 /**
  * Describe your component here
  */
 export const IntroEmail = observer(function IntroEmail(props: IntroEmailProps) {
-  const { style } = props
+  const { style, onPress } = props
   const $styles = [$container, style]
   console.log(Constants.expoConfig)
+
   return (
     <View style={$styles}>
       <Markdown
@@ -70,8 +80,14 @@ export const IntroEmail = observer(function IntroEmail(props: IntroEmailProps) {
         }}
       >
         {copy}
+        {/* <OrderButton text="/???" /> */}
       </Markdown>
-
+      <OrderButton
+        style={{ backgroundColor: colors.palette.lightYellowGreen, borderRadius: 13 }}
+        text="Ordena Ya"
+        textStyle={{ color: colors.palette.greenFont }}
+        onPress={onPress}
+      />
       {/* <Text style={[$text, { alignSelf: "center" }]} preset="heading">
         {Constants.expoConfig?.name}
       </Text>
