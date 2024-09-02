@@ -42,10 +42,7 @@ export const NewsletterStoreModel = types
     async signUp(email: string) {
       store.setProp("signUpLoading", true)
       try {
-        const result = await client.mutations.registerUser(
-          { email: "walter.vargaspena@gmail.com" },
-          { authMode: "apiKey" },
-        )
+        const result = await client.mutations.registerUser({ email }, { authMode: "apiKey" })
 
         // create(
         //   { email, available: true },

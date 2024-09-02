@@ -39,7 +39,7 @@ const schema = a.schema({
     })
     .authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
 
-  EchoResponse: a.customType({
+  RegisterResponse: a.customType({
     email: a.string(),
     executionDuration: a.float(),
   }),
@@ -51,7 +51,7 @@ const schema = a.schema({
     })
     // return type of the query
     // .returns(a.ref "User"))
-    .returns(a.ref("EchoResponse"))
+    .returns(a.ref("RegisterResponse"))
     .handler(
       a.handler.function(registerUserFunction),
       // a.handler.custom({
