@@ -1,5 +1,7 @@
 import type { Schema } from "../resource"
-import * as ses from "aws-cdk-lib/aws-ses"
+import AWS from "aws-sdk"
+
+AWS.config.update({ region: "sa-east-1" })
 
 // import AWS from "aws-sdk"
 // import mjml2html from "mjml"
@@ -56,7 +58,11 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (event, 
   try {
     // Send the email using the AWS SES service
     // @ts-ignore: Unreachable code error
-    await ses.sendEmail(params).promise()
+    //   var sendPromise = new AWS.SES({ apiVersion: "2010-12-01" })
+    // .sendEmail(params)
+    // .promise();
+
+    await AWS.SES.sendEmail(params).promise()
     return {
       email: `Echoing content: ${event.arguments.email}`,
       executionDuration: performance.now() - start,
