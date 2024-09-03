@@ -49,8 +49,13 @@ export const NewsletterStoreModel = types
         //   { authMode: "apiKey" },
         // )
         console.log("result", result)
+        if (result.errors) {
+          store.setProp("status", "error")
+          // throw result.errors[0]
+        } else {
+          store.setProp("status", "success")
+        }
         store.setProp("signUpLoading", false)
-        store.setProp("status", "success")
       } catch (error) {
         store.setProp("signUpLoading", false)
         throw error

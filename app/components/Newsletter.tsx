@@ -68,7 +68,7 @@ export const Newsletter = observer(function Newsletter(props: NewsletterProps) {
           Regístrate para recibir promociones exclusivas, lanzamientos de nuevos menús, aperturas de
           tiendas y más
         </Text>
-        {status === "idle" && (
+        {(status === "idle" || status === "error") && (
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <TextInput
               mode="outlined"
@@ -125,6 +125,17 @@ export const Newsletter = observer(function Newsletter(props: NewsletterProps) {
               name="checkmark-circle-sharp"
               size={44}
               color={colors.palette.greenFont}
+            />
+          </View>
+        )}
+        {status === "error" && (
+          <View style={{ flexDirection: "row", alignItems: "center", paddingTop: spacing.lg }}>
+            <Text preset="default">Intenta Otra Vez</Text>
+            <Ionicons
+              style={{ marginLeft: spacing.md }}
+              name="close-circle-sharp"
+              size={32}
+              color={colors.palette.angry500}
             />
           </View>
         )}

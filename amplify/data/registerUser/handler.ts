@@ -1,9 +1,9 @@
 import type { Schema } from "../resource"
-import AWS from "aws-sdk"
+import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2" // ES Modules import
+const region = "sa-east-1"
+//import ses from amplify gen 2
+// AWS.config.update({ region: "sa-east-1" })
 
-AWS.config.update({ region: "sa-east-1" })
-
-// import AWS from "aws-sdk"
 // import mjml2html from "mjml"
 // const mjml2html = require("mjml")
 
@@ -31,11 +31,6 @@ AWS.config.update({ region: "sa-east-1" })
 export const handler: Schema["registerUser"]["functionHandler"] = async (event, context) => {
   const start = performance.now()
   const email = event.arguments.email
-  console.log("loggin test :", email)
-
-  // Create an instance of the AWS SES service
-  // const ses = new AWS.SES()
-
   // Set up the parameters for the email
   const params = {
     Destination: {
@@ -56,13 +51,30 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (event, 
   }
   console.log("params: ", params)
   try {
-    // Send the email using the AWS SES service
-    // @ts-ignore: Unreachable code error
-    //   var sendPromise = new AWS.SES({ apiVersion: "2010-12-01" })
-    // .sendEmail(params)
-    // .promise();
+    const client = new SESv2Client({ region })
 
-    await AWS.SES.sendEmail(params).promise()
+    const input = {
+      Destination: {
+        ToAddresses: [email],
+      },
+      Content: {
+        Simple: {
+          Body: {
+            Text: {
+              Data: "Hello, this is a test email.",
+            },
+          },
+          Subject: {
+            Data: "Test Email",
+          },
+        },
+      },
+      FromEmailAddress: "walter@epiphanyapps.com",
+    }
+    // @ts-ignore: Unreachable code error
+    const command = new SendEmailCommand(input)
+    const response = await client.send(command)
+
     return {
       email: `Echoing content: ${event.arguments.email}`,
       executionDuration: performance.now() - start,
