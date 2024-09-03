@@ -6,7 +6,8 @@ import {
 } from "@aws-amplify/backend"
 
 // 2. define a function
-const registerUserFunction = defineFunction({
+export const registerUserFunction = defineFunction({
+  name: "registerUser",
   entry: "./registerUser/handler.ts",
 })
 
@@ -54,6 +55,7 @@ const schema = a.schema({
     .returns(a.ref("RegisterResponse"))
     .handler(
       a.handler.function(registerUserFunction),
+
       // a.handler.custom({
       //   dataSource: a.ref("User"),
       //   entry: "./registerUser.js",
@@ -61,6 +63,13 @@ const schema = a.schema({
     )
     // only allow signed-in users to call this API
     .authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
+
+  // OrderStatus: a.enum(["OrderPending", "OrderShipped", "OrderDelivered"]),
+  // OrderStatusChange: a.customType({
+  //   orderId: a.id().required(),
+  //   status: a.ref("OrderStatus").required(),
+  //   message: a.string().required(),
+  // }),
 
   // Post: a.model({
   //   id: a.id(),
