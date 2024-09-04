@@ -6,10 +6,11 @@
     "calories": 860,
     "protein": 42,
     "fat": 43,
-    "url": "menu-pictures/SG_Web_Image_Plate_Caramelized_Garlic_Steak.png",
+    "url": "menu/2SG_Web_Image_Plate_Caramelized_Garlic_Steak.png",
     "carbs": 75,
     "category": "Tazones",
-    "activated": true
+    "activated": true,
+    "hidden": false
   },
   {
     "name": "Ensalada Picada Estilo Steakhouse",
@@ -19,9 +20,10 @@
     "protein": 39,
     "fat": 48,
     "carbs": 32,
-    "url": "menu-pictures/SG_Web_Image_Bowl_Steakhouse_Chopped.png",
+    "url": "SG_Web_Image_Bowl_Steakhouse_Chopped.png",
     "category": "Tazones",
-    "activated": true
+    "activated": true,
+    "hidden": false
   },
   {
     "name": "César de Col (Carne)",
@@ -31,9 +33,10 @@
     "protein": 38,
     "fat": 50,
     "carbs": 13,
-    "url": "menu-pictures/SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
+    "url": "SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
     "category": "Ensaladas",
-    "activated": true
+    "activated": true,
+    "hidden": false
   },
   {
     "name": "Pollo Picante con Miel",
@@ -43,9 +46,10 @@
     "protein": 34,
     "fat": 37,
     "carbs": 84,
-    "url": "menu-pictures/SG_Web_Image_Plate_Hot_Honey_Chicken.png",
+    "url": "SG_Web_Image_Plate_Hot_Honey_Chicken.png",
     "category": "Platos de Proteínas",
-    "activated": false
+    "activated": false,
+    "hidden": false
   },
   {
     "name": "Tazón de Cosecha",
@@ -55,14 +59,15 @@
     "protein": 36,
     "fat": 32,
     "carbs": 61,
-    "url": "menu-pictures/SG_Web_Image_Bowl_HarvestRET.png",
+    "url": "menu/SG_Web_Image_Bowl_HarvestA.png",
     "category": "Tazones",
-    "activated": false
+    "activated": false,
+    "hidden": false
   },
 
   {
-    "activated": false,
-
+    "activated": true,
+    "hidden": false,
     "name": "Pollo a la Parmesana con Pesto",
     "description": "Espinaca bebé, quinoa con hierbas, brócoli picante, tomates, pan rallado, pollo asado, parmesano rallado, vinagreta de pesto, salsa picante",
     "price": 14.95,
@@ -70,11 +75,11 @@
     "protein": 33,
     "fat": 30,
     "carbs": 35,
-    "url": "menu-pictures/Chicken_Pesto_Parm.png",
+    "url": "SG_Web_Image_Bowl_Chicken_Pesto_Parm.png",
     "category": "Tazones"
   },
   {
-    "activated": false,
+    "activated": true,
     "name": "Pollo con Aguacate y Ranch",
     "description": "Lechuga romana picada, arroz blanco, chips de tortilla, manzanas, cebollas en vinagre, aguacate, pollo ennegrecido, aderezo ranch diosa verde",
     "price": 14.45,
@@ -82,8 +87,9 @@
     "protein": 31,
     "fat": 39,
     "carbs": 61,
-    "url": "menu-pictures/Chicken_Avocado_Ranch.png",
-    "category": "Tazones"
+    "url": "SG_Web_Image_Bowl_Chicken_Avocado_Ranch.png",
+    "category": "Tazones",
+    "hidden": false
   },
   {
     "name": "César de Col",
@@ -93,9 +99,10 @@
     "protein": 26,
     "fat": 42,
     "carbs": 13,
-    "url": "menu-pictures/SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
+    "url": "SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
     "category": "Ensaladas",
-    "activated": false
+    "activated": true,
+    "hidden": false
   },
   {
     "name": "Guacamole Verde",
@@ -105,12 +112,13 @@
     "protein": 31,
     "fat": 42,
     "carbs": 35,
-    "url": "menu-pictures/SG_Web_Image_Salad_Guacamole_Greens.png",
+    "url": "SG_Web_Image_Salad_Guacamole_Greens.png",
     "category": "Ensaladas",
-    "activated": false
+    "activated": true,
+    "hidden": false
   },
   {
-    "activated": false,
+    "activated": true,
     "name": "Hummus crujiente",
     "description": "Lechuga romana picada, col rizada rallada, albahaca, pepinos, col rallada, tomates, pan rallado , garbanzos, cebollas encurtidas, hummus, vinagreta de pesto",
     "price": 13.35,
@@ -118,11 +126,12 @@
     "protein": 12,
     "fat": 27,
     "carbs": 36,
-    "url": "menu-pictures/SG_Web_Image_Salad_Hummus_Crunch.png",
-    "category": "Ensaladas"
+    "url": "SG_Web_Image_Salad_Hummus_Crunch.png",
+    "category": "Ensaladas",
+    "hidden": false
   },
   {
-    "activated": false,
+    "activated": true,
     "name": "Pollo Búfalo",
     "description": "Lechuga romana picada, col rizada rallada, cilantro, tomates, pan rallado, zanahorias crudas, cebollas encurtidas, queso azul, pollo ennegrecido, aderezo César, salsa picante",
     "price": 15.45,
@@ -130,8 +139,9 @@
     "protein": 34,
     "fat": 41,
     "carbs": 25,
-    "url": "menu-pictures/SG_Web_Image_Salad_Buffalo_Chicken.png",
-    "category": "Ensaladas"
+    "url": "SG_Web_Image_Salad_Buffalo_Chicken.png",
+    "category": "Ensaladas",
+    "hidden": false
   },
   {
     "name": "Diosa Super Verde",
@@ -141,9 +151,10 @@
     "protein": 18,
     "fat": 31,
     "carbs": 42,
-    "url": "menu-pictures/SG_Web_Image_Salad_Super_Green_Goddess.png",
+    "url": "SG_Web_Image_Salad_Super_Green_Goddess.png",
     "category": "Ensaladas",
-    "activated": false
+    "activated": true,
+    "hidden": false
   },
   {
     "name": "Jardín Cobb",
@@ -154,8 +165,9 @@
     "fat": 53,
     "carbs": 36,
 
-    "url": "menu-pictures/SG_Web_Image_Bowl_Garden_Cobb.png",
+    "url": "SG_Web_Image_Bowl_Garden_Cobb.png",
     "category": "Ensaladas",
-    "activated": false
+    "activated": true,
+    "hidden": false
   }
 ]
