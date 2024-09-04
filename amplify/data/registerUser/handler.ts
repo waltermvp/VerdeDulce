@@ -1,5 +1,6 @@
 import type { Schema } from "../resource"
 import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2" // ES Modules import
+
 import { TReaderDocument } from "@usewaypoint/email-builder"
 import { renderToStaticMarkup } from "@usewaypoint/email-builder"
 const region = "sa-east-1"
