@@ -1,64 +1,10 @@
 import type { Schema } from "../resource"
 import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2" // ES Modules import
-import { TReaderDocument } from "@usewaypoint/email-builder"
-import { renderToStaticMarkup } from "@usewaypoint/email-builder"
+import { renderToStaticMarkup, TReaderDocument } from "@usewaypoint/email-builder"
+
 const region = "sa-east-1"
-//import ses from amplify gen 2
-// AWS.config.update({ region: "sa-east-1" })
-
-// const mjml = require("mjml")
-// const mjml2html = require("mjml")
-
-// const sendEmail = () => {
-//   console.log("sendEmail reached")
-//   return mjml2html(`
-//   <mjml>
-//   <mj-body>
-//     <mj-section>
-//       <mj-column>
-
-//         <mj-image width="100px" src="/assets/img/logo-small.png"></mj-image>
-
-//         <mj-divider border-color="#F45E43"></mj-divider>
-
-//         <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Hello World</mj-text>
-
-//       </mj-column>
-//     </mj-section>
-//   </mj-body>
-// </mjml>
-// `)
-// }
 
 const CONFIGURATION: TReaderDocument = {
-  // root: {
-  //   type: "EmailLayout",
-  //   data: {
-  //     backdropColor: "#F8F8F8",
-  //     canvasColor: "#FFFFFF",
-  //     textColor: "#242424",
-  //     fontFamily: "MODERN_SANS",
-  //     childrenIds: ["block-1709578146127"],
-  //   },
-  // },
-  // "block-1709578146127": {
-  //   type: "Text",
-  //   data: {
-  //     style: {
-  //       fontWeight: "normal",
-  //       padding: {
-  //         top: 16,
-  //         bottom: 16,
-  //         right: 24,
-  //         left: 24,
-  //       },
-  //     },
-  //     props: {
-  //       text: "Hello world",
-  //     },
-  //   },
-  // },
-
   root: {
     type: "EmailLayout",
     data: {
