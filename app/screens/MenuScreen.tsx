@@ -37,7 +37,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   const navigation = useNavigation()
   // const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" })
-
+  console.log("items", imageCDNURL("VerdeDulce_logo.png"))
   // useEffect(() => {
   //   // if (!displayID) {
   //   //   // setMode(MODE.MISSING_UDID)
