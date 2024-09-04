@@ -54,9 +54,9 @@ export const IntroEmail = observer(function IntroEmail(props: IntroEmailProps) {
     <View style={$styles}>
       <Markdown
         style={{
-          heading1: { fontSize: spacing.xxl },
-          heading3: { fontSize: spacing.xl },
-          body: { fontSize: spacing.md, fontFamily: typography.fonts.poppins.semiBold },
+          heading1: { fontSize: spacing.xxxl },
+          heading3: { fontSize: spacing.xxl },
+          body: { fontSize: spacing.lg, fontFamily: typography.fonts.poppins.semiBold },
           text: { color: "white", fontFamily: typography.fonts.poppins.light },
 
           list_item: {
