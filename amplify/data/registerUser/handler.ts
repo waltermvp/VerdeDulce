@@ -250,7 +250,7 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (event, 
     }
     // @ts-ignore: Unreachable code error
     const command = new SendEmailCommand(input)
-    const response = await client.send(command)
+    // const response = await client.send(command)
 
     return {
       email: `Echoing content: ${event.arguments.email}`,
