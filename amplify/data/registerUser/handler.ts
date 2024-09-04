@@ -1,11 +1,10 @@
 import type { Schema } from "../resource"
+import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2" // ES Modules import
+import { renderToStaticMarkup, TReaderDocument } from "@usewaypoint/email-builder"
 
-const { SESv2Client, SendEmailCommand } = require("@aws-sdk/client-sesv2") // ES Modules import
-// const { TReaderDocument } = require("@usewaypoint/email-builder")
-const { renderToStaticMarkup } = require("@usewaypoint/email-builder")
 const region = "sa-east-1"
 
-const CONFIGURATION = {
+const CONFIGURATION: TReaderDocument = {
   root: {
     type: "EmailLayout",
     data: {
