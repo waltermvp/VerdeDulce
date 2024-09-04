@@ -6,7 +6,7 @@
     "calories": 860,
     "protein": 42,
     "fat": 43,
-    "url": "menu/2SG_Web_Image_Plate_Caramelized_Garlic_Steak.png",
+    "url": "menu/Garlic_Steak.png",
     "carbs": 75,
     "category": "Tazones",
     "activated": true,
@@ -20,7 +20,7 @@
     "protein": 39,
     "fat": 48,
     "carbs": 32,
-    "url": "SG_Web_Image_Bowl_Steakhouse_Chopped.png",
+    "url": "menu/SG_Web_Image_Bowl_Steakhouse_Chopped.png",
     "category": "Tazones",
     "activated": true,
     "hidden": false
@@ -33,7 +33,7 @@
     "protein": 38,
     "fat": 50,
     "carbs": 13,
-    "url": "SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
+    "url": "menu/SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
     "category": "Ensaladas",
     "activated": true,
     "hidden": false
@@ -46,9 +46,9 @@
     "protein": 34,
     "fat": 37,
     "carbs": 84,
-    "url": "SG_Web_Image_Plate_Hot_Honey_Chicken.png",
+    "url": "menu/SG_Web_Image_Plate_Hot_Honey_Chicken.png",
     "category": "Platos de Proteínas",
-    "activated": false,
+    "activated": true,
     "hidden": false
   },
   {
@@ -61,7 +61,7 @@
     "carbs": 61,
     "url": "menu/SG_Web_Image_Bowl_HarvestA.png",
     "category": "Tazones",
-    "activated": false,
+    "activated": true,
     "hidden": false
   },
 
@@ -75,7 +75,7 @@
     "protein": 33,
     "fat": 30,
     "carbs": 35,
-    "url": "SG_Web_Image_Bowl_Chicken_Pesto_Parm.png",
+    "url": "menu/SG_Web_Image_Bowl_Chicken_Pesto_Parm.png",
     "category": "Tazones"
   },
   {
@@ -87,7 +87,7 @@
     "protein": 31,
     "fat": 39,
     "carbs": 61,
-    "url": "SG_Web_Image_Bowl_Chicken_Avocado_Ranch.png",
+    "url": "menu/SG_Web_Image_Bowl_Chicken_Avocado_Ranch.png",
     "category": "Tazones",
     "hidden": false
   },
@@ -99,7 +99,7 @@
     "protein": 26,
     "fat": 42,
     "carbs": 13,
-    "url": "SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
+    "url": "menu/SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
     "category": "Ensaladas",
     "activated": true,
     "hidden": false
@@ -112,7 +112,7 @@
     "protein": 31,
     "fat": 42,
     "carbs": 35,
-    "url": "SG_Web_Image_Salad_Guacamole_Greens.png",
+    "url": "menu/SG_Web_Image_Salad_Guacamole_Greens.png",
     "category": "Ensaladas",
     "activated": true,
     "hidden": false
@@ -126,7 +126,7 @@
     "protein": 12,
     "fat": 27,
     "carbs": 36,
-    "url": "SG_Web_Image_Salad_Hummus_Crunch.png",
+    "url": "menu/SG_Web_Image_Salad_Hummus_Crunch.png",
     "category": "Ensaladas",
     "hidden": false
   },
@@ -139,7 +139,7 @@
     "protein": 34,
     "fat": 41,
     "carbs": 25,
-    "url": "SG_Web_Image_Salad_Buffalo_Chicken.png",
+    "url": "menu/SG_Web_Image_Salad_Buffalo_Chicken.png",
     "category": "Ensaladas",
     "hidden": false
   },
@@ -151,7 +151,7 @@
     "protein": 18,
     "fat": 31,
     "carbs": 42,
-    "url": "SG_Web_Image_Salad_Super_Green_Goddess.png",
+    "url": "menu/SG_Web_Image_Salad_Super_Green_Goddess.png",
     "category": "Ensaladas",
     "activated": true,
     "hidden": false
@@ -165,7 +165,7 @@
     "fat": 53,
     "carbs": 36,
 
-    "url": "SG_Web_Image_Bowl_Garden_Cobb.png",
+    "url": "menu/SG_Web_Image_Bowl_Garden_Cobb.png",
     "category": "Ensaladas",
     "activated": true,
     "hidden": false
