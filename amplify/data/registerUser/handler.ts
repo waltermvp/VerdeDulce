@@ -50,6 +50,7 @@ const CONFIGURATION: TReaderDocument = {
     data: {
       style: {
         fontWeight: "bold",
+        color: "#FFFF",
         padding: {
           top: 0,
           bottom: 16,
