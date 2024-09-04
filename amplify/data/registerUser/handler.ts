@@ -68,6 +68,8 @@ const CONFIGURATION: TReaderDocument = {
     data: {
       style: {
         fontWeight: "normal",
+        color: "#FFFF",
+
         padding: {
           top: 0,
           bottom: 16,
@@ -85,6 +87,8 @@ const CONFIGURATION: TReaderDocument = {
     data: {
       style: {
         fontWeight: "normal",
+        color: "#FFFF",
+
         padding: {
           top: 0,
           bottom: 16,
@@ -102,6 +106,8 @@ const CONFIGURATION: TReaderDocument = {
     data: {
       style: {
         fontWeight: "bold",
+        color: "#FFFF",
+
         padding: {
           top: 0,
           bottom: 16,
@@ -120,6 +126,8 @@ const CONFIGURATION: TReaderDocument = {
     data: {
       style: {
         fontWeight: "normal",
+        color: "#FFFF",
+
         padding: {
           top: 0,
           bottom: 16,
@@ -151,9 +159,9 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
         },
       },
       props: {
-        url: "https://d1iiu589g39o6c.cloudfront.net/live/platforms/platform_A9wwKSL6EV6orh6f/images/wptemplateimage_oWB821TUkDXvr2f4/Screenshot%202023-11-22%20at%2011.51.30%20AM.png",
+        url: "https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQxcHR2cnZsb2Fob2pkLW1hLWR1bGNlZHJpdmVidWNrZXRhMGFjMDNmMi15c2tvZWxkeWl4aXIiLCJrZXkiOiJTR19XZWJfSW1hZ2VfQm93bF9DaGlja2VuX1Blc3RvX1Bhcm0ucG5nIiwiZWRpdHMiOnsiY29udGVudE1vZGVyYXRpb24iOmZhbHNlLCJyZXNpemUiOnsid2lkdGgiOjIwMCwiaGVpZ2h0IjoyMDAsImZpdCI6ImNvdmVyIn0sInJvdGF0ZSI6MH19",
         alt: "Video thumbnail",
-        linkHref: "https://capture.dropbox.com/NBQEmoCKKP9RGBWr",
+        linkHref: "https://verdedulce.com",
         contentAlignment: "middle",
       },
     },
