@@ -1,7 +1,8 @@
 {
   "type": "module",
   "dependencies": {
+    "@aws-sdk/client-sesv2": "^3.637.0",
+    "@usewaypoint/email-builder": "^0.0.8"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
