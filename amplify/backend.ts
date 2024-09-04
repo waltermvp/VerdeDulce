@@ -26,7 +26,7 @@ const email = EmailIdentity.fromEmailIdentityName(
   "EmailIdentity",
   // your email configured for use in SES
   // process.env.EMAIL,
-  "walter@epiphanypps.com",
+  "walter@epiphanyapps.com",
 )
 
 cfnUserPool.emailConfiguration = {
