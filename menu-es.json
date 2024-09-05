@@ -89,7 +89,7 @@
     "carbs": 61,
     "url": "menu/SG_Web_Image_Bowl_Chicken_Avocado_Ranch.png",
     "category": "Tazones",
-    "hidden": false
+    "hidden": true
   },
   {
     "name": "César de Col",

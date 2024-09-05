@@ -26,7 +26,9 @@ interface MenuScreenProps extends AppStackScreenProps<"Menu"> {}
 export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
-  const [items, setItems] = useState(sweetgreenMenu)
+  const [items, setItems] = useState(
+    sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true),
+  )
   const client = generateClient<Schema>()
   const [visible, setVisible] = React.useState(false)
   const [isSyncedLocal, setIsSyncedLocal] = useState(false)
@@ -37,7 +39,8 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   const navigation = useNavigation()
   // const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" })
-  console.log("items", imageCDNURL("VerdeDulce_logo.png"))
+  console.log(" ", imageCDNURL("menu/Hot_Honey_Chicken.png"))
+  console.log(" ", imageCDNURL("VerdeDulce_logo_with_border.png"))
   // useEffect(() => {
   //   // if (!displayID) {
   //   //   // setMode(MODE.MISSING_UDID)
