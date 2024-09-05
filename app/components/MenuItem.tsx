@@ -34,7 +34,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
   const url = imageCDNURL(item.url)
 
   const activated = item.activated
-  const number = 1629
+  const number = item.price
   const dollars = (number / 100).toLocaleString("en-US", { style: "currency", currency: "USD" })
   const CTA = activated
     ? translate("landingScreen.order") + " " + dollars
