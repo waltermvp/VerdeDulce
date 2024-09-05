@@ -138,6 +138,10 @@ export const transformData = (data) => {
       name: item.name,
       description: item.description,
       // price: `$${item.price?.toFixed(2)}`,
+      carbs: item.carbs,
+      fat: item.fat,
+      protein: item.protein,
+      calories: item.calories,
       price: item.price,
       url: item.url, //imageCDNURL(item.url.split("/").pop()), // Extracting the filename from the URL for use in imageCDNURL
     })
@@ -179,7 +183,7 @@ export const transformDataForSectionList = (data) => {
       // price: `$${item.price.toFixed(2)}`,
       price: item.price,
       calories: item.calories,
-      carbs: item.calories,
+      carbs: item.carbs,
       protein: item.protein,
       activated: item.activated,
       fat: item.fat,
