@@ -196,6 +196,7 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
         },
       },
       props: {
+        // @ts-ignore: Unreachable code error
         buttonBackgroundColor: "#ebfe72",
         borderRadius: 13,
         buttonStyle: "rectangle",
