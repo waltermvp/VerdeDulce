@@ -6,7 +6,7 @@
     "calories": 860,
     "protein": 42,
     "fat": 43,
-    "url": "menu/Garlic_Steak.png",
+    "url": "menu/CarmelGarlic.png",
     "carbs": 75,
     "category": "Tazones",
     "activated": true,
@@ -20,7 +20,7 @@
     "protein": 39,
     "fat": 48,
     "carbs": 32,
-    "url": "menu/SG_Web_Image_Bowl_Steakhouse_Chopped.png",
+    "url": "menu/Bowl_Steakhouse_Chopped.png",
     "category": "Tazones",
     "activated": true,
     "hidden": false
@@ -46,7 +46,7 @@
     "protein": 34,
     "fat": 37,
     "carbs": 84,
-    "url": "menu/SG_Web_Image_Plate_Hot_Honey_Chicken.png",
+    "url": "menu/Hot_Honey_Chicken.png",
     "category": "Platos de Proteínas",
     "activated": true,
     "hidden": false
@@ -59,7 +59,7 @@
     "protein": 36,
     "fat": 32,
     "carbs": 61,
-    "url": "menu/SG_Web_Image_Bowl_HarvestA.png",
+    "url": "menu/Bowl_Harvest.png",
     "category": "Tazones",
     "activated": true,
     "hidden": false
