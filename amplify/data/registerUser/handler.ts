@@ -20,8 +20,11 @@ const CONFIGURATION: TReaderDocument = {
         "block-1709571228549",
         "block-1709571247550",
         "block-1709571281151",
-        "block-1709571302968",
+        "block-1709571281153",
+        "block-1709571281154",
         "block-1709571282795",
+        "block-1709571282796",
+        "block-1709571302968",
       ],
     },
   },
@@ -135,14 +138,7 @@ const CONFIGURATION: TReaderDocument = {
         },
       },
       props: {
-        text: `1. Ve a [verdedulce.com](https://verdedulce.com/)  y pide tu ensalada: Explora nuestro menú y personaliza tu comida según tus gustos y necesidades dietéticas.
-2.	Mezcla Tu Ensalada: Agita bien con nuestros ingredientes frescos y aderezos.
-3.	Disfruta Tu Ensalada: Saborea los sabores de Verde Dulce, sabiendo que estás haciendo una elección saludable y sostenible.
-
-¡Únete a Nosotros Hoy!
-
-Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una experiencia fresca y sabrosa.
-`,
+        text: `1. Ve a [verdedulce.com](https://verdedulce.com/)  y pide tu ensalada: Explora nuestro menú y personaliza tu comida según tus gustos y necesidades dietéticas.`,
       },
     },
   },
@@ -159,11 +155,71 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
         },
       },
       props: {
-        text: "If you ever need help, just reply to this email and one of us will get back to you shortly. We’re here to help.",
+        text: "2.	Mezcla Tu Ensalada: Agita bien con nuestros ingredientes frescos y aderezos.",
+      },
+    },
+  },
+  "block-1709571281153": {
+    type: "Text",
+    data: {
+      style: {
+        fontWeight: "normal",
+        padding: {
+          top: 16,
+          bottom: 16,
+          right: 24,
+          left: 24,
+        },
+      },
+      props: {
+        text: `3.	Disfruta Tu Ensalada: Saborea los sabores de Verde Dulce, sabiendo que estás haciendo una elección saludable y sostenible.
+        ¡Únete a Nosotros Hoy!
+
+Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una experiencia fresca y sabrosa.
+`,
+      },
+    },
+  },
+  "block-1709571281154": {
+    type: "Text",
+    data: {
+      style: {
+        fontWeight: "normal",
+        padding: {
+          top: 16,
+          bottom: 16,
+          right: 24,
+          left: 24,
+        },
+      },
+      props: {
+        text: `3.	Disfruta Tu Ensalada: Saborea los sabores de Verde Dulce, sabiendo que estás haciendo una elección saludable y sostenible.`,
       },
     },
   },
   "block-1709571282795": {
+    type: "Text",
+    data: {
+      style: {
+        fontWeight: "normal",
+
+        padding: {
+          top: 16,
+          bottom: 40,
+          right: 24,
+          left: 24,
+        },
+      },
+      props: {
+        text: `¡Únete a Nosotros Hoy!
+
+Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una experiencia fresca y sabrosa.
+`,
+      },
+    },
+  },
+
+  "block-1709571282796": {
     type: "Image",
     data: {
       style: {
