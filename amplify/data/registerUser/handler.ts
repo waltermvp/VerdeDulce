@@ -19,10 +19,10 @@ const CONFIGURATION: TReaderDocument = {
         "block-1709571234315",
         "block-1709571228549",
         "block-1709571247550",
-        "block-1709571258507",
+        // "block-1709571258507",
         "block-1709571281151",
         "block-1709571302968",
-        "block-1709571282795",
+        // "block-1709571282795",
       ],
     },
   },
@@ -183,25 +183,25 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
       },
     },
   },
-  "block-1709571282795": {
-    type: "Image",
-    data: {
-      style: {
-        padding: {
-          top: 16,
-          bottom: 40,
-          right: 24,
-          left: 24,
-        },
-      },
-      props: {
-        url: "https://d1iiu589g39o6c.cloudfront.net/live/platforms/platform_A9wwKSL6EV6orh6f/images/wptemplateimage_cAK8FpmBEGoSRNi3/Screenshot%202023-11-22%20at%2011.48.53%20AM.png",
-        alt: "Illustration",
-        linkHref: null,
-        contentAlignment: "middle",
-      },
-    },
-  },
+  // "block-1709571282795": {
+  //   type: "Image",
+  //   data: {
+  //     style: {
+  //       padding: {
+  //         top: 16,
+  //         bottom: 40,
+  //         right: 24,
+  //         left: 24,
+  //       },
+  //     },
+  //     props: {
+  //       url: "https://d1iiu589g39o6c.cloudfront.net/live/platforms/platform_A9wwKSL6EV6orh6f/images/wptemplateimage_cAK8FpmBEGoSRNi3/Screenshot%202023-11-22%20at%2011.48.53%20AM.png",
+  //       alt: "Illustration",
+  //       linkHref: null,
+  //       contentAlignment: "middle",
+  //     },
+  //   },
+  // },
   "block-1709571302968": {
     type: "Button",
     data: {
