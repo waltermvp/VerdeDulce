@@ -118,7 +118,6 @@ const CONFIGURATION: TReaderDocument = {
       },
     },
   },
-
   "block-1709571247550": {
     type: "Text",
     data: {
