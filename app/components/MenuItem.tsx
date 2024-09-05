@@ -9,6 +9,7 @@ import { Badge } from "react-native-paper"
 import { imageCDNURL } from "app/utils/linkbuilder"
 import { OrderButton } from "./OrderButton"
 import { useMediaQuery } from "react-responsive"
+import { translate } from "app/i18n"
 
 const minHeight = 775
 export interface MenuItemProps {
@@ -33,6 +34,12 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
   const url = imageCDNURL(item.url)
 
   const activated = item.activated
+  const number = 1629
+  const dollars = (number / 100).toLocaleString("en-US", { style: "currency", currency: "USD" })
+  const CTA = activated
+    ? translate("landingScreen.order") + " " + dollars
+    : translate("landingScreen.comingSoon") + dollars
+
   return (
     <Pressable
       // onPress={onPress}
@@ -90,9 +97,12 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                 <Text preset="default" style={{ fontFamily: typography.fonts.poppins.light }}>
                   {item.description}
                 </Text>
-                {/* <Text style={styles.price} preset="bold">
-          {item.price}
-        </Text> */}
+                {/* <Text
+                  style={{ alignSelf: "center", padding: spacing.md, fontSize: spacing.xl }}
+                  preset="bold"
+                >
+                  {dollars}
+                </Text> */}
                 <Bullets
                   style={{ marginTop: spacing.md }}
                   items={[
@@ -115,7 +125,8 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                     width: isSmallScreen ? 222 : 333,
                     // bottom: spacing.xxxs,
                   }}
-                  tx={activated ? "landingScreen.order" : "landingScreen.comingSoon"}
+                  // tx={activated ? "landingScreen.order" : "landingScreen.comingSoon"}
+                  text={CTA}
                   onPress={onPress}
                 />
               )}

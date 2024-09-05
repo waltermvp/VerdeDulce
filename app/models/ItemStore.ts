@@ -137,7 +137,8 @@ export const transformData = (data) => {
       id: item.id,
       name: item.name,
       description: item.description,
-      price: `$${item.price?.toFixed(2)}`,
+      // price: `$${item.price?.toFixed(2)}`,
+      price: item.price,
       url: item.url, //imageCDNURL(item.url.split("/").pop()), // Extracting the filename from the URL for use in imageCDNURL
     })
     return acc
@@ -175,7 +176,8 @@ export const transformDataForSectionList = (data) => {
       available: item.available,
       category: item.category,
       metadata: item.metadata,
-      price: `$${item.price.toFixed(2)}`,
+      // price: `$${item.price.toFixed(2)}`,
+      price: item.price,
       calories: item.calories,
       carbs: item.calories,
       protein: item.protein,
