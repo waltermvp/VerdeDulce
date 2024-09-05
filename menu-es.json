@@ -123,6 +123,7 @@
     "price": 825,
     "calories": 520,
     "protein": 22,
+    "category": "Ensaladas",
     "fat": 28,
     "carbs": 38,
     "name": "Ensalada de Pollo a la BBQ",
@@ -179,6 +180,19 @@
 
     "url": "menu/SG_Web_Image_Bowl_Garden_Cobb.png",
     "category": "Ensaladas",
+    "activated": true,
+    "hidden": false
+  },
+  {
+    "name": "Te de Jamaica",
+    "description": "Infusión de flores de jamaica, endulzada al gusto",
+    "price": 125,
+    "calories": 0,
+    "protein": 0,
+    "fat": 0,
+    "carbs": 0,
+    "url": "menu/Agua-de-Jamaica-Drink.jpg",
+    "category": "Bebidas",
     "activated": true,
     "hidden": false
   }
