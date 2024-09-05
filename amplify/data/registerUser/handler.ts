@@ -195,7 +195,7 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
         },
       },
       props: {
-        url: "https://d1iiu589g39o6c.cloudfront.net/live/platforms/platform_A9wwKSL6EV6orh6f/images/wptemplateimage_cAK8FpmBEGoSRNi3/Screenshot%202023-11-22%20at%2011.48.53%20AM.png",
+        url: "https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQxcHR2cnZsb2Fob2pkLW1hLWR1bGNlZHJpdmVidWNrZXRhMGFjMDNmMi15c2tvZWxkeWl4aXIiLCJrZXkiOiJtZW51L0hvdF9Ib25leV9DaGlja2VuLnBuZyIsImVkaXRzIjp7ImNvbnRlbnRNb2RlcmF0aW9uIjpmYWxzZSwicmVzaXplIjp7IndpZHRoIjoyMDAsImhlaWdodCI6MjAwLCJmaXQiOiJjb3ZlciJ9LCJyb3RhdGUiOjB9fQ==",
         alt: "Illustration",
         linkHref: null,
         contentAlignment: "middle",
