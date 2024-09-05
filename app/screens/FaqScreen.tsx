@@ -101,18 +101,13 @@ export const FaqScreen: FC<FaqScreenProps> = observer(function FaqScreen() {
         <View style={$item}>
           <Text text="¿En qué áreas ofrecen entrega?" preset="subheading" style={$title} />
           <Text
-            text="Nuestro servicio de entrega está disponible dentro de un radio específico de cada una de nuestras ubicaciones. Puedes verificar si entregamos en tu área ingresando tu dirección en nuestro sitio web o aplicación."
+            text="Hacemos entregas a las parrocias 12 de Marzo, 18 de octubre, Portoviejo, y Andres de Vera."
             style={$content}
           />
         </View>
         <View style={$item}>
           <Text text=" ¿Cuáles son sus horarios de atención?" preset="subheading" style={$title} />
-          <Text
-            text="Nuestros horarios de atención varían según la ubicación, pero la mayoría de
-        nuestras tiendas están abiertas de 10:00 AM a 9:00 PM, los siete días de la semana. Puedes
-        consultar los horarios específicos de tu Verde Dulce local en nuestro sitio web."
-            style={$content}
-          />
+          <Text text="Estamos abiertos de 11:00 AM a 7:00 PM, Lunes a Viernes." style={$content} />
         </View>
         <View style={$item}>
           <Text
