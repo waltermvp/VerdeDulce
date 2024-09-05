@@ -138,7 +138,7 @@ const CONFIGURATION: TReaderDocument = {
         },
       },
       props: {
-        text: `1. Ve a [verdedulce.com](https://verdedulce.com/)  y pide tu ensalada: Explora nuestro menú y personaliza tu comida según tus gustos y necesidades dietéticas.`,
+        text: `1. Ve a verdedulce.com y pide tu ensalada: Explora nuestro menú y personaliza tu comida según tus gustos y necesidades dietéticas.`,
       },
     },
   },
@@ -243,7 +243,6 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
     data: {
       style: {
         fontSize: 14,
-        color: "#000000",
         padding: {
           top: 16,
           bottom: 24,
@@ -254,11 +253,8 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
       props: {
         // @ts-ignore: Unreachable code error
         buttonBackgroundColor: "#ebfe72",
-        // color: "#000000",
-        buttonBorderRadius: 13,
+        buttonStyle: "rounded",
         buttonTextColor: "#000000",
-        // borderRadius: 13,
-        buttonStyle: "rectangle",
         text: "Ordena Ya",
         url: "https://www.verdedulce.com",
       },
