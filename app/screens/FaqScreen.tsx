@@ -101,7 +101,7 @@ export const FaqScreen: FC<FaqScreenProps> = observer(function FaqScreen() {
         <View style={$item}>
           <Text text="¿En qué áreas ofrecen entrega?" preset="subheading" style={$title} />
           <Text
-            text="Hacemos entregas a las parrocias 12 de Marzo, 18 de octubre, Portoviejo, y Andres de Vera."
+            text="Hacemos servicio a domicilio, a las parrocias 12 de Marzo, 18 de octubre, Portoviejo, y Andres de Vera."
             style={$content}
           />
         </View>
