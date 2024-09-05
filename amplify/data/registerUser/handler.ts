@@ -207,6 +207,7 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
     data: {
       style: {
         fontSize: 14,
+        color: "#000000",
         padding: {
           top: 16,
           bottom: 24,
@@ -216,6 +217,7 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
       },
       props: {
         buttonBackgroundColor: "#ebfe72",
+        borderRadius: 13,
         buttonStyle: "rectangle",
         text: "Ordena Ya",
         url: "https://www.verdedulce.com",
