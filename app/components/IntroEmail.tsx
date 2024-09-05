@@ -6,15 +6,18 @@ import { colors, spacing, typography } from "app/theme"
 import Constants from "expo-constants"
 import Markdown from "react-native-markdown-display"
 import { OrderButton } from "./OrderButton"
-const copy = `# ¡Bienvenido a verdedulce.com!
-## **Fresco, Rápido, Sabroso – Tu Verde Diario**
+import { Image } from "expo-image"
+import { imageCDNURL } from "app/utils/linkbuilder"
+// ### Nuestro Compromiso con la Sostenibilidad:
 
+// Nos importa nuestro planeta tanto como tu salud. Por eso usamos empaques ecológicos, incluyendo bowls de cartón reciclado y bolsas sostenibles. Cada comida que disfrutas en Verde Dulce ayuda a tener un impacto positivo.
+
+const copy = `# ¡Bienvenido a verdedulce.com!
+
+## **Fresco, Rápido, Sabroso – Tu Verde Diario**
 
 En Verde Dulce, creemos en ofrecer comidas frescas, saludables y deliciosas que te harán sentir bien. Nuestro menú está diseñado para brindarte opciones nutritivas y llenas de sabor, perfectas para un almuerzo rápido o una cena satisfactoria.
 
-### Nuestro Compromiso con la Sostenibilidad:
-
-Nos importa nuestro planeta tanto como tu salud. Por eso usamos empaques ecológicos, incluyendo bowls de cartón reciclado y bolsas sostenibles. Cada comida que disfrutas en Verde Dulce ayuda a tener un impacto positivo.
 
 ### Cómo Funciona:
 
@@ -50,18 +53,24 @@ export const IntroEmail = observer(function IntroEmail(props: IntroEmailProps) {
   const $styles = [$container, style]
   console.log(Constants.expoConfig)
 
+  console.log("Constants.expoConfig", imageCDNURL("noun-salad-7152021-white.png"))
   return (
     <View style={$styles}>
       <Markdown
         style={{
-          heading1: { fontSize: spacing.xxxl },
-          heading3: { fontSize: spacing.xxl },
-          body: { fontSize: spacing.lg, fontFamily: typography.fonts.poppins.semiBold },
-          text: { color: "white", fontFamily: typography.fonts.poppins.light },
+          heading1: { fontSize: spacing.lg, fontFamily: typography.fonts.poppins.extraLight },
+          // heading2: { fontSize: spacing.lg, fontFamily: typography.fonts.poppins.extraLight },
+          body: { fontSize: spacing.sm, fontFamily: typography.fonts.poppins.light },
+          text: {
+            color: "white",
+            // fontFamily: typography.fonts.poppins.semiBold,
+            // fontSize: spacing.sm,
+          },
 
           list_item: {
             paddingVertical: spacing.xxs,
             fontFamily: typography.fonts.poppins.semiBold,
+            fontSize: spacing.md,
           },
           // inline: { backgroundColor: "red", color: "red" },
           ordered_list: {
@@ -82,6 +91,15 @@ export const IntroEmail = observer(function IntroEmail(props: IntroEmailProps) {
         {copy}
         {/* <OrderButton text="/???" /> */}
       </Markdown>
+      <Image
+        style={{
+          width: 125,
+          height: 125,
+          alignSelf: "center",
+          marginVertical: spacing.lg,
+        }}
+        source={{ uri: imageCDNURL("noun-salad-white-7152021.svg") }}
+      />
       <OrderButton
         style={{ backgroundColor: colors.palette.lightYellowGreen, borderRadius: 13 }}
         text="Ordena Ya"
