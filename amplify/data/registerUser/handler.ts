@@ -19,8 +19,10 @@ const CONFIGURATION: TReaderDocument = {
         "block-1709571234315",
         "block-1709571228549",
         "block-1709571247550",
+        "block-1709571258507",
         "block-1709571281151",
         "block-1709571302968",
+        "block-1709571282795",
       ],
     },
   },
@@ -118,6 +120,7 @@ const CONFIGURATION: TReaderDocument = {
       },
     },
   },
+
   "block-1709571247550": {
     type: "Text",
     data: {
@@ -144,6 +147,25 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
       },
     },
   },
+  "block-1709571258507": {
+    type: "Image",
+    data: {
+      style: {
+        padding: {
+          top: 16,
+          bottom: 16,
+          right: 24,
+          left: 24,
+        },
+      },
+      props: {
+        url: "https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQxcHR2cnZsb2Fob2pkLW1hLWR1bGNlZHJpdmVidWNrZXRhMGFjMDNmMi15c2tvZWxkeWl4aXIiLCJrZXkiOiJTR19XZWJfSW1hZ2VfQm93bF9DaGlja2VuX1Blc3RvX1Bhcm0ucG5nIiwiZWRpdHMiOnsiY29udGVudE1vZGVyYXRpb24iOmZhbHNlLCJyZXNpemUiOnsid2lkdGgiOjIwMCwiaGVpZ2h0IjoyMDAsImZpdCI6ImNvdmVyIn0sInJvdGF0ZSI6MH19",
+        alt: "Video thumbnail",
+        linkHref: "https://verdedulce.com",
+        contentAlignment: "middle",
+      },
+    },
+  },
   "block-1709571281151": {
     type: "Text",
     data: {
@@ -161,6 +183,25 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
       },
     },
   },
+  "block-1709571282795": {
+    type: "Image",
+    data: {
+      style: {
+        padding: {
+          top: 16,
+          bottom: 40,
+          right: 24,
+          left: 24,
+        },
+      },
+      props: {
+        url: "https://d1iiu589g39o6c.cloudfront.net/live/platforms/platform_A9wwKSL6EV6orh6f/images/wptemplateimage_cAK8FpmBEGoSRNi3/Screenshot%202023-11-22%20at%2011.48.53%20AM.png",
+        alt: "Illustration",
+        linkHref: null,
+        contentAlignment: "middle",
+      },
+    },
+  },
   "block-1709571302968": {
     type: "Button",
     data: {
@@ -175,7 +216,6 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
       },
       props: {
         buttonBackgroundColor: "#ebfe72",
-        color: "#000000",
         buttonStyle: "rectangle",
         text: "Ordena Ya",
         url: "https://www.verdedulce.com",
