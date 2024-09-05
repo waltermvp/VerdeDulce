@@ -19,7 +19,6 @@ const CONFIGURATION: TReaderDocument = {
         "block-1709571234315",
         "block-1709571228549",
         "block-1709571247550",
-        "block-1709571258507",
         "block-1709571281151",
         "block-1709571302968",
         "block-1709571282795",
@@ -144,25 +143,6 @@ const CONFIGURATION: TReaderDocument = {
 
 Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una experiencia fresca y sabrosa.
 `,
-      },
-    },
-  },
-  "block-1709571258507": {
-    type: "Image",
-    data: {
-      style: {
-        padding: {
-          top: 16,
-          bottom: 16,
-          right: 24,
-          left: 24,
-        },
-      },
-      props: {
-        url: "https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQxcHR2cnZsb2Fob2pkLW1hLWR1bGNlZHJpdmVidWNrZXRhMGFjMDNmMi15c2tvZWxkeWl4aXIiLCJrZXkiOiJTR19XZWJfSW1hZ2VfQm93bF9DaGlja2VuX1Blc3RvX1Bhcm0ucG5nIiwiZWRpdHMiOnsiY29udGVudE1vZGVyYXRpb24iOmZhbHNlLCJyZXNpemUiOnsid2lkdGgiOjIwMCwiaGVpZ2h0IjoyMDAsImZpdCI6ImNvdmVyIn0sInJvdGF0ZSI6MH19",
-        alt: "Video thumbnail",
-        linkHref: "https://verdedulce.com",
-        contentAlignment: "middle",
       },
     },
   },
