@@ -250,7 +250,7 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (event, 
             },
           },
           Subject: {
-            Data: "Test Email",
+            Data: "¡Bienvenido a verdedulce.com!",
           },
         },
       },
