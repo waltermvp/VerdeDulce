@@ -237,7 +237,7 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (event, 
           },
         },
       },
-      FromEmailAddress: "walter@epiphanyapps.com",
+      FromEmailAddress: "contact@verdedulce.com",
     }
     // @ts-ignore: Unreachable code error
     const command = new SendEmailCommand(input)
