@@ -1,25 +1,35 @@
-import React, { FC, useEffect, useState } from "react"
-import { observer } from "mobx-react-lite"
-import { Dimensions, ViewStyle, View } from "react-native"
-import { AppStackScreenProps } from "app/navigators"
-import { Footer, MenuHeader, MenuItem, OrderButton, Screen, Text } from "app/components"
+import React, { FC, useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
+import { Dimensions, ViewStyle, View } from "react-native";
+// import { AppStackScreenProps } from "app/navigators"
+import {
+  Footer,
+  MenuHeader,
+  MenuItem,
+  OrderButton,
+  Screen,
+  Text,
+} from "../../app/components";
 
-import { colors, spacing, typography } from "app/theme"
-import { useMediaQuery } from "react-responsive"
-import { useFocusEffect } from "@react-navigation/native"
-import { Linking } from "react-native" // Import Linking module
-import { useNavigation } from "@react-navigation/native"
-import { imageCDNURL } from "app/utils/linkbuilder"
+import { colors, spacing, typography } from "../../app/theme";
+import { useMediaQuery } from "react-responsive";
+import { useFocusEffect } from "@react-navigation/native";
+import { Linking } from "react-native"; // Import Linking module
+import { useNavigation } from "@react-navigation/native";
+import { imageCDNURL } from "../../app/utils/linkbuilder";
 // import Config from "../config"
-import { translate } from "app/i18n"
-import { SectionGrid } from "react-native-super-grid"
-import { transformData, transformDataForSectionList } from "app/models/ItemStore"
-// import { useStores } from "app/models"
-import { Schema } from "amplify/data/resource"
-import { generateClient } from "aws-amplify/api"
+import { translate } from "../../app/i18n";
+import { SectionGrid } from "react-native-super-grid";
+import {
+  transformData,
+  transformDataForSectionList,
+} from "../../app/models/ItemStore";
+// import { useStores } from "../../app/models"
+import { Schema } from "../../amplify/data/resource";
+import { generateClient } from "aws-amplify/api";
 
-const width = Dimensions.get("window").width
-const sweetgreenMenu = require("menu-es.json")
+const width = Dimensions.get("window").width;
+import sweetgreenMenu from "../../menu-es.json";
 
 interface MenuScreenProps extends AppStackScreenProps<"Menu"> {}
 
@@ -27,20 +37,20 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
   const [items, setItems] = useState(
-    sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true),
-  )
-  const client = generateClient<Schema>()
-  const [visible, setVisible] = React.useState(false)
-  const [isSyncedLocal, setIsSyncedLocal] = useState(false)
-  const showDialog = () => setVisible(true)
+    sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true)
+  );
+  const client = generateClient<Schema>();
+  const [visible, setVisible] = React.useState(false);
+  const [isSyncedLocal, setIsSyncedLocal] = useState(false);
+  const showDialog = () => setVisible(true);
 
-  const hideDialog = () => setVisible(false)
+  const hideDialog = () => setVisible(false);
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   // const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" })
-  console.log(" ", imageCDNURL("menu/Hot_Honey_Chicken.png"))
-  console.log(" ", imageCDNURL("VerdeDulce_logo_with_border.png"))
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
+  console.log(" ", imageCDNURL("menu/Hot_Honey_Chicken.png"));
+  console.log(" ", imageCDNURL("VerdeDulce_logo_with_border.png"));
   // useEffect(() => {
   //   // if (!displayID) {
   //   //   // setMode(MODE.MISSING_UDID)
@@ -81,20 +91,22 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
               onPress={() => {
                 // navigation.navigate("OrderNav", { screen: "Home" })
                 // return
-                const phoneNumber = "+593963021783" // Replace with the actual phone number
+                const phoneNumber = "+593963021783"; // Replace with the actual phone number
 
-                const message = translate("menuScreen.orderMessage") // Replace with the actual message
+                const message = translate("menuScreen.orderMessage"); // Replace with the actual message
                 const url = `whatsapp://send?text=${encodeURIComponent(
-                  message,
-                )}&phone=${encodeURIComponent(phoneNumber)}`
-                Linking.openURL(url).catch((err) => console.error("Failed to open WhatsApp", err))
+                  message
+                )}&phone=${encodeURIComponent(phoneNumber)}`;
+                Linking.openURL(url).catch((err) =>
+                  console.error("Failed to open WhatsApp", err)
+                );
               }}
             />
-          )
+          );
         },
-      })
-    }, [navigation]),
-  )
+      });
+    }, [navigation])
+  );
 
   const renderSectionTitle = ({ section }: { section: any }) => {
     return (
@@ -106,8 +118,8 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
           {section.title.toUpperCase()}
         </Text>
       </View>
-    )
-  }
+    );
+  };
 
   const renderMenuItem = ({ item }: { item: any }) => {
     return (
@@ -115,14 +127,18 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
         item={item}
         // showDelete={true}
         onPress={async () => {
-          const phoneNumber = "+593963021783" // Replace with the actual phone number
+          const phoneNumber = "+593963021783"; // Replace with the actual phone number
 
-          const message = translate("menuScreen.orderMenuItemMessage", { item: item.name }) // Replace with the actual message
+          const message = translate("menuScreen.orderMenuItemMessage", {
+            item: item.name,
+          }); // Replace with the actual message
 
           const url = `whatsapp://send?text=${encodeURIComponent(
-            message,
-          )}&phone=${encodeURIComponent(phoneNumber)}`
-          await Linking.openURL(url).catch((err) => console.error("Failed to open WhatsApp", err))
+            message
+          )}&phone=${encodeURIComponent(phoneNumber)}`;
+          await Linking.openURL(url).catch((err) =>
+            console.error("Failed to open WhatsApp", err)
+          );
           // e.prevent
         }}
         onDelete={() => {
@@ -131,15 +147,17 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
         }}
         show={true}
       />
-    )
-  }
+    );
+  };
 
   return (
     <Screen style={$root} preset="scroll">
       <MenuHeader />
       {items.length > 0 && (
         <SectionGrid
-          renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
+          renderSectionFooter={() => (
+            <View style={{ height: spacing.xl }}></View>
+          )}
           // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
           stickySectionHeadersEnabled={true}
           contentContainerStyle={{
@@ -159,12 +177,12 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       )}
       <Footer />
     </Screen>
-  )
-})
+  );
+});
 
 const $root: ViewStyle = {
   flex: 1,
   // borderWidth: 3,
   // borderColor: "pink",
   backgroundColor: colors.palette.lightBackground,
-}
+};

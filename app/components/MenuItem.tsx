@@ -1,44 +1,54 @@
-import * as React from "react"
-import { Pressable, StyleProp, View, ViewStyle } from "react-native"
-import { observer } from "mobx-react-lite"
-import { colors, spacing, typography } from "app/theme"
-import { Text } from "app/components/Text"
-import { Image } from "expo-image"
-import { Bullets } from "./Bullets"
-import { Badge } from "react-native-paper"
-import { imageCDNURL } from "app/utils/linkbuilder"
-import { OrderButton } from "./OrderButton"
-import { useMediaQuery } from "react-responsive"
-import { translate } from "app/i18n"
+import * as React from "react";
+import { Pressable, StyleProp, View, ViewStyle } from "react-native";
+import { observer } from "mobx-react-lite";
+import { colors, spacing, typography } from "../../app/theme";
+import { Text } from "../../app/components/Text";
+import { Image } from "expo-image";
+import { Bullets } from "./Bullets";
+import { Badge } from "react-native-paper";
+import { imageCDNURL } from "../../app/utils/linkbuilder";
+import { OrderButton } from "./OrderButton";
+import { useMediaQuery } from "react-responsive";
+import { translate } from "../../app/i18n";
 
-const minHeight = 775
+const minHeight = 775;
 export interface MenuItemProps {
   /**
    * An optional style override useful for padding & margin.
    */
-  style?: StyleProp<ViewStyle>
-  item: any
-  showDelete?: boolean
-  onDelete?: () => void
-  onPress?: () => void
-  show: boolean
+  style?: StyleProp<ViewStyle>;
+  item: any;
+  showDelete?: boolean;
+  onDelete?: () => void;
+  onPress?: () => void;
+  show: boolean;
 }
 
 /**
  * Describe your component here
  */
 export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
-  const { style, item, showDelete = false, onDelete, onPress, show = false } = props
-  const $styles = [$container, style]
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" })
-  const url = imageCDNURL(item.url)
+  const {
+    style,
+    item,
+    showDelete = false,
+    onDelete,
+    onPress,
+    show = false,
+  } = props;
+  const $styles = [$container, style];
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
+  const url = imageCDNURL(item.url);
 
-  const activated = item.activated
-  const number = item.price
-  const dollars = (number / 100).toLocaleString("en-US", { style: "currency", currency: "USD" })
+  const activated = item.activated;
+  const number = item.price;
+  const dollars = (number / 100).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
   const CTA = activated
     ? translate("landingScreen.order") + " " + dollars
-    : translate("landingScreen.comingSoon") + dollars
+    : translate("landingScreen.comingSoon") + dollars;
 
   return (
     <Pressable
@@ -48,7 +58,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
           backgroundColor: pressed ? colors.palette.neutral400 : undefined,
           borderRadius: 13,
           opacity: activated ? 1 : 0.5,
-        }
+        };
       }}
     >
       {({}) => {
@@ -90,11 +100,22 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                 contentFit="cover"
                 transition={1000}
               />
-              <View style={{ marginTop: spacing.md, paddingHorizontal: spacing.xxl }}>
-                <Text preset="subheading" style={{ fontFamily: typography.fonts.poppins.light }}>
+              <View
+                style={{
+                  marginTop: spacing.md,
+                  paddingHorizontal: spacing.xxl,
+                }}
+              >
+                <Text
+                  preset="subheading"
+                  style={{ fontFamily: typography.fonts.poppins.light }}
+                >
                   {item.name}
                 </Text>
-                <Text preset="default" style={{ fontFamily: typography.fonts.poppins.light }}>
+                <Text
+                  preset="default"
+                  style={{ fontFamily: typography.fonts.poppins.light }}
+                >
                   {item.description}
                 </Text>
                 {/* <Text
@@ -132,11 +153,11 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
               )}
             </View>
           </View>
-        )
+        );
       }}
     </Pressable>
-  )
-})
+  );
+});
 
 const $container: ViewStyle = {
   flex: 1,
@@ -148,4 +169,4 @@ const $container: ViewStyle = {
   minHeight: minHeight,
   // margin:200
   // backgroundColor: "red",
-}
+};
