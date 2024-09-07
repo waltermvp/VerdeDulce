@@ -9,6 +9,8 @@ import { ThemedView } from "@/components/ThemedView";
 import { FaqScreen } from "../screens/FaqScreen";
 
 export default function TabTwoScreen() {
+  return <FaqScreen />;
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
