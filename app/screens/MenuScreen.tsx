@@ -11,12 +11,28 @@ import { Linking } from "react-native" // Import Linking module
 import { useNavigation } from "@react-navigation/native"
 import { imageCDNURL } from "app/utils/linkbuilder"
 // import Config from "../config"
-import { translate } from "app/i18n"
-import { SectionGrid } from "react-native-super-grid"
 import { transformData, transformDataForSectionList } from "app/models/ItemStore"
 // import { useStores } from "app/models"
 import { Schema } from "amplify/data/resource"
 import { generateClient } from "aws-amplify/api"
+import { translate } from "../../app/i18n"
+import { SectionGrid } from "react-native-super-grid"
+import { Amplify } from "aws-amplify"
+import { record } from "aws-amplify/analytics"
+import outputs from "../../amplify_outputs.json"
+// Amplify.configure({
+//   ...Amplify.getConfig(),
+//   analytics: outputs.analytics,
+// });
+Amplify.configure({
+  ...Amplify.getConfig(),
+  Analytics: {
+    Pinpoint: {
+      appId: outputs.analytics.amazon_pinpoint.app_id,
+      region: outputs.analytics.amazon_pinpoint.aws_region,
+    },
+  },
+})
 
 const width = Dimensions.get("window").width
 const sweetgreenMenu = require("menu-es.json")
@@ -83,6 +99,9 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
                 // return
                 const phoneNumber = "+593963021783" // Replace with the actual phone number
 
+                record({
+                  name: "orderNow",
+                })
                 const message = translate("menuScreen.orderMessage") // Replace with the actual message
                 const url = `whatsapp://send?text=${encodeURIComponent(
                   message,
@@ -115,6 +134,11 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
         item={item}
         // showDelete={true}
         onPress={async () => {
+          record({
+            name: "orderNow",
+            attributes: { name: item.name },
+          })
+
           const phoneNumber = "+593963021783" // Replace with the actual phone number
 
           const message = translate("menuScreen.orderMenuItemMessage", { item: item.name }) // Replace with the actual message
