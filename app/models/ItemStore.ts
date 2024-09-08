@@ -144,6 +144,7 @@ export const transformData = (data) => {
       calories: item.calories,
       price: item.price,
       url: item.url, //imageCDNURL(item.url.split("/").pop()), // Extracting the filename from the URL for use in imageCDNURL
+      itemURL: item.url,
     })
     return acc
   }, {})
@@ -188,6 +189,7 @@ export const transformDataForSectionList = (data) => {
       activated: item.activated,
       fat: item.fat,
       url: item.url, // Extracting the filename from the URL for use in imageCDNURL
+      itemURL: item.itemURL,
     })
     return acc
   }, {})

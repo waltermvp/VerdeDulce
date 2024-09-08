@@ -116,12 +116,15 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
         // showDelete={true}
         onPress={async () => {
           const phoneNumber = "+593963021783" // Replace with the actual phone number
-
-          const message = translate("menuScreen.orderMenuItemMessage", { item: item.name }) // Replace with the actual message
-
-          const url = `whatsapp://send?text=${encodeURIComponent(
-            message,
-          )}&phone=${encodeURIComponent(phoneNumber)}`
+          console.log("item", item.itemURL)
+          const message = translate("menuScreen.orderMenuItemMessage", {
+            item: item.name,
+          }) // Replace with the actual message
+          console.log("message", message)
+          // const url = `whatsapp://send?text=${encodeURIComponent(
+          //   message + " " + item.itemURL,
+          // )}&phone=${encodeURIComponent(phoneNumber)}`
+          const url = item.itemURL
           await Linking.openURL(url).catch((err) => console.error("Failed to open WhatsApp", err))
           // e.prevent
         }}

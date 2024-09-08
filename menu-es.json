@@ -10,7 +10,8 @@
     "carbs": 89,
     "category": "Tazones",
     "activated": true,
-    "hidden": false
+    "hidden": false,
+    "itemURL": "https://wa.me/c/593963021783"
   },
   {
     "name": "Ensalada Picada Estilo Steakhouse",
@@ -23,7 +24,8 @@
     "url": "menu/Bowl_Steakhouse_Chopped.png",
     "category": "Tazones",
     "activated": true,
-    "hidden": false
+    "hidden": false,
+    "itemURL": "https://wa.me/c/593963021783"
   },
   {
     "name": "César de Col (Carne)",
@@ -36,7 +38,8 @@
     "url": "menu/SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
     "category": "Ensaladas",
     "activated": true,
-    "hidden": false
+    "hidden": false,
+    "itemURL": "https://wa.me/c/593963021783"
   },
   {
     "name": "Pollo Picante con Miel",
@@ -49,7 +52,8 @@
     "url": "menu/Hot_Honey_Chicken.png",
     "category": "Platos de Proteínas",
     "activated": true,
-    "hidden": false
+    "hidden": false,
+    "itemURL": "https://wa.me/c/593963021783"
   },
   {
     "name": "Tazón de Cosecha",
@@ -62,7 +66,8 @@
     "url": "menu/Bowl_Harvest.png",
     "category": "Tazones",
     "activated": true,
-    "hidden": false
+    "hidden": false,
+    "itemURL": "https://wa.me/c/593963021783"
   },
 
   {
@@ -76,7 +81,8 @@
     "fat": 21,
     "carbs": 40,
     "url": "menu/SG_Web_Image_Bowl_Chicken_Pesto_Parm.png",
-    "category": "Tazones"
+    "category": "Tazones",
+    "itemURL": "https://wa.me/c/593963021783"
   },
   {
     "activated": true,
@@ -89,7 +95,8 @@
     "carbs": 61,
     "url": "menu/SG_Web_Image_Bowl_Chicken_Avocado_Ranch.png",
     "category": "Tazones",
-    "hidden": true
+    "hidden": true,
+    "itemURL": "https://wa.me/c/593963021783"
   },
   {
     "name": "César de Col",
@@ -102,7 +109,8 @@
     "url": "menu/SG_Web_Image_Salad_Kale_Caesar_Chicken.png",
     "category": "Ensaladas",
     "activated": true,
-    "hidden": false
+    "hidden": false,
+    "itemURL": "https://wa.me/c/593963021783"
   },
   {
     "name": "Guacamole Verde",
@@ -115,7 +123,8 @@
     "url": "menu/SG_Web_Image_Salad_Guacamole_Greens.png",
     "category": "Ensaladas",
     "activated": true,
-    "hidden": false
+    "hidden": false,
+    "itemURL": "https://wa.me/c/593963021783"
   },
   {
     "activated": true,
@@ -128,7 +137,8 @@
     "carbs": 38,
     "name": "Ensalada de Pollo a la BBQ",
     "description": "Pollo ennegrecido, col rallada, cebollas encurtidas, tomates, manzanas, chips de tortilla, lechuga romana picada, col rizada rallada, salsa BBQ con miel, ranch con diosa verde.",
-    "url": "menu/SG_Web_Image_Salad_BBQ_Chicken.png"
+    "url": "menu/SG_Web_Image_Salad_BBQ_Chicken.png",
+    "itemURL": "https://wa.me/c/593963021783"
   },
   {
     "activated": true,
@@ -141,7 +151,8 @@
     "carbs": 42,
     "url": "menu/SG_Web_Image_Salad_Hummus_Crunch.png",
     "category": "Ensaladas",
-    "hidden": false
+    "hidden": false,
+    "itemURL": "https://wa.me/c/593963021783"
   },
   {
     "activated": true,
@@ -154,7 +165,8 @@
     "carbs": 32,
     "url": "menu/SG_Web_Image_Salad_Buffalo_Chicken.png",
     "category": "Ensaladas",
-    "hidden": false
+    "hidden": false,
+    "itemURL": "https://wa.me/c/593963021783"
   },
   {
     "name": "Diosa Super Verde",
@@ -167,7 +179,8 @@
     "url": "menu/SG_Web_Image_Salad_Super_Green_Goddess.png",
     "category": "Ensaladas",
     "activated": true,
-    "hidden": false
+    "hidden": false,
+    "itemURL": "https://wa.me/c/593963021783"
   },
   {
     "name": "Jardín Cobb",
@@ -181,7 +194,8 @@
     "url": "menu/SG_Web_Image_Bowl_Garden_Cobb.png",
     "category": "Ensaladas",
     "activated": true,
-    "hidden": false
+    "hidden": false,
+    "itemURL": "https://wa.me/c/593963021783"
   },
   {
     "name": "Te de Jamaica",
@@ -194,6 +208,7 @@
     "url": "menu/Agua-de-Jamaica-Drink.jpg",
     "category": "Bebidas",
     "activated": true,
-    "hidden": false
+    "hidden": false,
+    "itemURL": "https://wa.me/c/593963021783"
   }
 ]
