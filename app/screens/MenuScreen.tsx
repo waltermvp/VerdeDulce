@@ -94,19 +94,19 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
             <OrderButton
               tx="landingScreen.order"
               icon="logo-whatsapp"
-              onPress={() => {
+              onPress={async () => {
                 // navigation.navigate("OrderNav", { screen: "Home" })
                 // return
-                const phoneNumber = "+593963021783" // Replace with the actual phone number
+                // const phoneNumber = "+593963021783" // Replace with the actual phone number
 
                 record({
                   name: "orderNow",
                 })
-                const message = translate("menuScreen.orderMessage") // Replace with the actual message
-                const url = `whatsapp://send?text=${encodeURIComponent(
-                  message,
-                )}&phone=${encodeURIComponent(phoneNumber)}`
-                Linking.openURL(url).catch((err) => console.error("Failed to open WhatsApp", err))
+                // const message = translate("menuScreen.orderMessage") // Replace with the actual message
+                const url = "https://wa.me/c/593963021783"
+                await Linking.openURL(url).catch((err) =>
+                  console.error("Failed to open WhatsApp", err),
+                )
               }}
             />
           )
@@ -139,13 +139,16 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
             attributes: { name: item.name },
           })
 
-          const phoneNumber = "+593963021783" // Replace with the actual phone number
-
-          const message = translate("menuScreen.orderMenuItemMessage", { item: item.name }) // Replace with the actual message
-
-          const url = `whatsapp://send?text=${encodeURIComponent(
-            message,
-          )}&phone=${encodeURIComponent(phoneNumber)}`
+          // const phoneNumber = "+593963021783" // Replace with the actual phone number
+          // console.log("item", item.itemURL)
+          // const message = translate("menuScreen.orderMenuItemMessage", {
+          //   item: item.name,
+          // }) // Replace with the actual message
+          // console.log("message", message)
+          // const url = `whatsapp://send?text=${encodeURIComponent(
+          //   message + " " + item.itemURL,
+          // )}&phone=${encodeURIComponent(phoneNumber)}`
+          const url = item.itemURL
           await Linking.openURL(url).catch((err) => console.error("Failed to open WhatsApp", err))
           // e.prevent
         }}
