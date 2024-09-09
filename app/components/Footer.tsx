@@ -4,13 +4,16 @@ import { observer } from "mobx-react-lite"
 import { colors, spacing, typography } from "app/theme"
 import { Text } from "app/components/Text"
 import { Newsletter } from "./Newsletter"
-import { Bullets } from "./Bullets"
 import { Bullet } from "./Bullet"
 import { QrCodeSvg } from "react-native-qr-svg"
 import { Image } from "expo-image"
 import { imageCDNURL } from "app/utils/linkbuilder"
+import { useMediaQuery } from "react-responsive"
+
 const SIZE = 125
+const SIZE_SMALL = SIZE / 2
 const ICON_SIZE = SIZE / 4.75
+const ICON_SIZE_SMALL = ICON_SIZE / 2
 const CONTENT = "https://wa.me/c/593963021783"
 
 export interface FooterProps {
@@ -27,6 +30,7 @@ export interface FooterProps {
 export const Footer = observer(function Footer(props: FooterProps) {
   const { style, onPressQr } = props
   const $styles = [$container, style]
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" })
 
   return (
     <View style={$styles}>
@@ -77,13 +81,16 @@ export const Footer = observer(function Footer(props: FooterProps) {
         <View style={{ flex: 1 }}>
           <Pressable onPress={onPressQr}>
             <QrCodeSvg
-              style={styles.qr}
+              style={isSmallScreen ? { padding: spacing.xs, alignSelf: "flex-end" } : styles.qr}
               value={CONTENT}
-              frameSize={SIZE}
+              frameSize={isSmallScreen ? SIZE_SMALL : SIZE}
               contentCells={5}
               content={
                 <Image
-                  style={{ width: ICON_SIZE, height: ICON_SIZE }}
+                  style={{
+                    width: isSmallScreen ? ICON_SIZE_SMALL : ICON_SIZE,
+                    height: isSmallScreen ? ICON_SIZE_SMALL : ICON_SIZE,
+                  }}
                   source={{ uri: imageCDNURL("VerdeDulce_logo.png") }}
                 />
               }
@@ -91,15 +98,7 @@ export const Footer = observer(function Footer(props: FooterProps) {
               dotColor="#ffff"
               contentStyle={styles.box}
             />
-            <Text
-              style={{
-                fontStyle: typography.fonts.poppins.light,
-                alignSelf: "flex-end",
-                padding: spacing.md,
-              }}
-            >
-              &copy; 2024 VerdeDulce. All rights reserved.
-            </Text>
+            <Text style={$reserved}>&copy; 2024 VerdeDulce. All rights reserved.</Text>
           </Pressable>
         </View>
       </View>
@@ -136,3 +135,10 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
   },
 })
+
+const $reserved: TextStyle = {
+  fontFamily: typography.fonts.poppins.light,
+  alignSelf: "flex-end",
+  paddingTop: spacing.sm,
+  textAlign: "right",
+}
