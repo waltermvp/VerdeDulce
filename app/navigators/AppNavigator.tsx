@@ -52,7 +52,8 @@ export type AppStackParamList = {
   Scan: undefined
   Faq: undefined
   Viewer: undefined
-  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  Qr: undefined
+	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 /**
@@ -125,7 +126,8 @@ const AppStack = observer(function AppStack() {
       <Stack.Screen name="Scan" component={Screens.ScanScreen} />
       <Stack.Screen name="Faq" component={Screens.FaqScreen} />
       <Stack.Screen name="Viewer" component={Screens.ViewerScreen} />
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      <Stack.Screen name="Qr" component={Screens.QrScreen} />
+			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })

@@ -34,7 +34,6 @@ import { Amplify } from "aws-amplify"
 import amplifyOutputs from "../amplify_outputs.json"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { PaperProvider } from "react-native-paper"
-
 Amplify.configure(amplifyOutputs)
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
@@ -63,6 +62,9 @@ const config = {
     // // MenuItem: "menuItem/:id",
     Admin: "admin",
     Order: "order",
+    Qr: {
+      path: "qr",
+    },
     // },
     // Menu: "menu",
     // //TODO: build out the menu item UI
