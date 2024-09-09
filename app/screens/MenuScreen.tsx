@@ -184,7 +184,12 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
           renderSectionHeader={renderSectionTitle}
         />
       )}
-      <Footer />
+      <Footer
+        onPressQr={() => {
+          console.log("onPressQR")
+          navigation.navigate("Qr")
+        }}
+      />
     </Screen>
   )
 })

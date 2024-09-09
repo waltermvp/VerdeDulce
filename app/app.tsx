@@ -58,13 +58,14 @@ const config = {
     Viewer: {
       path: "viewer",
     },
+    Qr: {
+      path: "qr",
+    },
+
     // //TODO: build out the menu item UI
     // // MenuItem: "menuItem/:id",
     Admin: "admin",
     Order: "order",
-    Qr: {
-      path: "qr",
-    },
     // },
     // Menu: "menu",
     // //TODO: build out the menu item UI
