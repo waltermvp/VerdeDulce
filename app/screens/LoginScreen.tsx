@@ -1,6 +1,13 @@
-import { observer } from "mobx-react-lite"
-import React, { type ComponentType, type FC, useEffect, useMemo, useRef, useState } from "react"
-import { Alert, TextInput, type TextStyle, type ViewStyle } from "react-native"
+import { observer } from "mobx-react-lite";
+import React, {
+  type ComponentType,
+  type FC,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { Alert, TextInput, type TextStyle, type ViewStyle } from "react-native";
 import {
   Button,
   Icon,
@@ -8,12 +15,12 @@ import {
   Text,
   TextField,
   // TextFieldAccessoryProps,
-} from "../components"
-import { useStores } from "../models"
-import {  AppStackScreenProps } from "../navigators"
-import { colors, spacing } from "../theme"
-import { useRoute } from "@react-navigation/native"
-import type { TextFieldAccessoryProps } from "../components/TextField"
+} from "../../components";
+import { useStores } from "../models";
+import { AppStackScreenProps } from "../navigators";
+import { colors, spacing } from "../theme";
+import { useRoute } from "@react-navigation/native";
+import type { TextFieldAccessoryProps } from "../../components/TextField";
 // import { resendSignUpCode } from 'aws-amplify/auth';
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
@@ -24,23 +31,26 @@ enum LoginMode {
   CONFIRM = "confirm",
 }
 
-export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_props) {
+export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(
+  _props
+) {
   // const route = useRoute<RouteProp<AppStackParamList, 'Login'>>();
-  const route: { params?: { mode?: LoginMode } } = useRoute()
-  const mode = route.params?.mode === LoginMode.LOGIN ? LoginMode.LOGIN : LoginMode.SIGNUP
-  const [loginMode, setLoginMode] = useState<LoginMode>(mode)
-  const authPasswordInput = useRef<TextInput>(null)
-  const authConfirmPasswordInput = useRef<TextInput>(null)
+  const route: { params?: { mode?: LoginMode } } = useRoute();
+  const mode =
+    route.params?.mode === LoginMode.LOGIN ? LoginMode.LOGIN : LoginMode.SIGNUP;
+  const [loginMode, setLoginMode] = useState<LoginMode>(mode);
+  const authPasswordInput = useRef<TextInput>(null);
+  const authConfirmPasswordInput = useRef<TextInput>(null);
   // const authVenueNameInput = useRef<TextInput>(null)
 
-  const authConfirmCodeInput = useRef<TextInput>(null)
+  const authConfirmCodeInput = useRef<TextInput>(null);
 
   // const [authPassword, setAuthPassword] = useState("")
   // const [authConfirmPassword, setAuthConfirmPassword] = useState("")
-  const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true)
+  const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true);
 
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [attemptsCount, setAttemptsCount] = useState(0)
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [attemptsCount, setAttemptsCount] = useState(0);
   const {
     authenticationStore: {
       // Sign In
@@ -74,15 +84,15 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       resendLoading,
       handleResendConfirmCode, // Currently used for inviting users to the app via a share/ invite
     },
-  } = useStores()
+  } = useStores();
 
   useEffect(() => {
     // Here is where you could fetch credentials from keychain or storage
     // and pre-fill the form fields.
     try {
-      refreshAuthStatus()
+      refreshAuthStatus();
     } catch (error) {
-      console.log("error", error)
+      console.log("error", error);
     }
 
     // if (route.params?.shareid) {
@@ -92,77 +102,78 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
     return () => {
       // setAuthPassword("")
       // setAuthEmail("")
-    }
-  }, [refreshAuthStatus])
+    };
+  }, [refreshAuthStatus]);
 
   useEffect(() => {
     if (loginMode === LoginMode.CONFIRM) {
-      authConfirmCodeInput.current?.focus()
+      authConfirmCodeInput.current?.focus();
     }
-  }, [loginMode])
+  }, [loginMode]);
 
   useEffect(() => {
     if (loginMode == LoginMode.CONFIRM && authConfirmCode?.length == 6) {
-      confirmCode()
+      confirmCode();
     }
-  }, [authConfirmCode])
+  }, [authConfirmCode]);
 
-  const error = isSubmitted ? loginValidationError : ""
+  const error = isSubmitted ? loginValidationError : "";
   // var errors = [];
 
   async function login() {
-    console.log("login called")
-    setIsSubmitted(true)
-    setAttemptsCount(attemptsCount + 1)
+    console.log("login called");
+    setIsSubmitted(true);
+    setAttemptsCount(attemptsCount + 1);
 
-    if (loginValidationError) return
+    if (loginValidationError) return;
 
     // Make a request to your server to get an authentication token.
     // If successful, reset the fields and set the token.
     try {
-      await handleLogin()
+      await handleLogin();
     } catch (error) {
-      Alert.alert("Whoops", JSON.stringify(error || "An error occurred"))
+      Alert.alert("Whoops", JSON.stringify(error || "An error occurred"));
     }
   }
 
   async function signUp() {
-    if (signUpValidationError) return
+    if (signUpValidationError) return;
     try {
-      await handleSignUp()
-      setLoginMode(LoginMode.CONFIRM)
+      await handleSignUp();
+      setLoginMode(LoginMode.CONFIRM);
     } catch (errorr) {
       // Remove the type annotation from the catch clause variable
-      Alert.alert("Whoops", JSON.stringify(errorr || "An error occurred"))
+      Alert.alert("Whoops", JSON.stringify(errorr || "An error occurred"));
     }
   }
 
   async function confirmCode() {
-    console.log("confirmCode")
+    console.log("confirmCode");
     try {
-      await handleConfirmCode()
+      await handleConfirmCode();
     } catch (error) {
-      console.log("error", error)
+      console.log("error", error);
       // console.log('error', error.message);
-      Alert.alert("Whoops", JSON.stringify(error || "An error occurred"))
+      Alert.alert("Whoops", JSON.stringify(error || "An error occurred"));
     }
   }
 
-  const PasswordRightAccessory: ComponentType<TextFieldAccessoryProps> = useMemo(
-    () =>
-      function PasswordRightAccessory(props: TextFieldAccessoryProps) {
-        return (
-          <Icon
-            icon={isAuthPasswordHidden ? "view" : "hidden"}
-            color={colors.palette.neutral800}
-            containerStyle={props.style}
-            size={20}
-            onPress={() => setIsAuthPasswordHidden(!isAuthPasswordHidden)}
-          />
-        )
-      },
-    [isAuthPasswordHidden],
-  )
+  const PasswordRightAccessory: ComponentType<TextFieldAccessoryProps> =
+    useMemo(
+      () =>
+        function PasswordRightAccessory(props: TextFieldAccessoryProps) {
+          return (
+            <Icon
+              icon={isAuthPasswordHidden ? "view" : "hidden"}
+              color={colors.palette.neutral800}
+              containerStyle={props.style}
+              size={20}
+              onPress={() => setIsAuthPasswordHidden(!isAuthPasswordHidden)}
+            />
+          );
+        },
+      [isAuthPasswordHidden]
+    );
   // const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
 
   return (
@@ -179,10 +190,24 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
     >
       {loginMode === LoginMode.LOGIN && (
         <>
-          <Text testID="login-heading" tx="loginScreen.signIn" preset="heading" style={$signIn} />
-          <Text tx="loginScreen.enterDetails" preset="subheading" style={$enterDetails} />
+          <Text
+            testID="login-heading"
+            tx="loginScreen.signIn"
+            preset="heading"
+            style={$signIn}
+          />
+          <Text
+            tx="loginScreen.enterDetails"
+            preset="subheading"
+            style={$enterDetails}
+          />
           {attemptsCount > 2 && (
-            <Text tx="loginScreen.hint" size="sm" weight="light" style={$hint} />
+            <Text
+              tx="loginScreen.hint"
+              size="sm"
+              weight="light"
+              style={$hint}
+            />
           )}
 
           <TextField
@@ -196,7 +221,13 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
             labelTx="loginScreen.emailFieldLabel"
             placeholderTx="loginScreen.emailFieldPlaceholder"
             helper={error}
-            status={error ? "error" : undefined || !signInLoading ? undefined : "disabled"}
+            status={
+              error
+                ? "error"
+                : undefined || !signInLoading
+                ? undefined
+                : "disabled"
+            }
             onSubmitEditing={() => authPasswordInput.current?.focus()}
             returnKeyType="next"
           />
@@ -214,7 +245,13 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
             placeholderTx="loginScreen.passwordFieldPlaceholder"
             onSubmitEditing={login}
             RightAccessory={PasswordRightAccessory}
-            status={error ? "error" : undefined || !signInLoading ? undefined : "disabled"}
+            status={
+              error
+                ? "error"
+                : undefined || !signInLoading
+                ? undefined
+                : "disabled"
+            }
             returnKeyType="done"
           />
 
@@ -251,8 +288,17 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
             }}
           /> */}
 
-          <Text testID="login-heading" tx="signUpScreen.signIn" preset="heading" style={$signIn} />
-          <Text tx="signUpScreen.enterDetailsSignUp" preset="subheading" style={$enterDetails} />
+          <Text
+            testID="login-heading"
+            tx="signUpScreen.signIn"
+            preset="heading"
+            style={$signIn}
+          />
+          <Text
+            tx="signUpScreen.enterDetailsSignUp"
+            preset="subheading"
+            style={$enterDetails}
+          />
           {/* // {attemptsCount > 2 && (
           //   <Text tx="loginScreen.hint" size="sm" weight="light" style={$hint} />
           // )} */}
@@ -269,7 +315,13 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
             placeholderTx="loginScreen.emailFieldPlaceholder"
             helper={error}
             onSubmitEditing={() => authPasswordInput.current?.focus()}
-            status={error ? "error" : undefined || signUpLoading ? "disabled" : undefined}
+            status={
+              error
+                ? "error"
+                : undefined || signUpLoading
+                ? "disabled"
+                : undefined
+            }
           />
           {/* <TextField
             ref={authVenueNameInput}
@@ -296,7 +348,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
             labelTx="loginScreen.passwordFieldLabel"
             placeholderTx="loginScreen.passwordFieldPlaceholder"
             onSubmitEditing={() => {
-              authConfirmPasswordInput.current?.focus()
+              authConfirmPasswordInput.current?.focus();
             }}
             RightAccessory={PasswordRightAccessory}
             status={signUpLoading ? "disabled" : undefined}
@@ -312,9 +364,9 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
             secureTextEntry={isAuthPasswordHidden}
             labelTx="loginScreen.passwordFieldLabel"
             placeholderTx="loginScreen.passwordFieldPlaceholder"
-            onSubmitEditing={()=>{
-              if(isSignUpEnabled){
-                signUp()                
+            onSubmitEditing={() => {
+              if (isSignUpEnabled) {
+                signUp();
               }
             }}
             RightAccessory={PasswordRightAccessory}
@@ -336,10 +388,10 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
             style={$linkButton}
             preset="link"
             onPress={() => {
-              setAuthEmail("")
-              setAuthPassword(undefined)
-              setAuthConfirmPassword(undefined)
-              setLoginMode(LoginMode.LOGIN)
+              setAuthEmail("");
+              setAuthPassword(undefined);
+              setAuthConfirmPassword(undefined);
+              setLoginMode(LoginMode.LOGIN);
             }}
             disabled={!!signUpLoading}
           />
@@ -347,8 +399,17 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       )}
       {loginMode === LoginMode.CONFIRM && (
         <>
-          <Text testID="login-heading" tx="signUpScreen.confirm" preset="heading" style={$signIn} />
-          <Text tx="signUpScreen.confirmCodeDetails" preset="subheading" style={$enterDetails} />
+          <Text
+            testID="login-heading"
+            tx="signUpScreen.confirm"
+            preset="heading"
+            style={$signIn}
+          />
+          <Text
+            tx="signUpScreen.confirmCodeDetails"
+            preset="subheading"
+            style={$enterDetails}
+          />
           {/* // {attemptsCount > 2 && (
           //   <Text tx="loginScreen.hint" size="sm" weight="light" style={$hint} />
           // )} */}
@@ -386,54 +447,55 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
             loading={resendLoading}
             disabled={resendLoading}
             onPress={() => {
-              handleResendConfirmCode(authEmail)
+              handleResendConfirmCode(authEmail);
             }}
           />
         </>
       )}
     </Screen>
-  )
-})
+  );
+});
 
 const $screenContentContainer: ViewStyle = {
   paddingVertical: spacing.xxl,
   paddingHorizontal: spacing.lg,
-}
+};
 
 const $signIn: TextStyle = {
   marginBottom: spacing.sm,
-}
+};
 
 const $enterDetails: TextStyle = {
   marginBottom: spacing.lg,
-}
+};
 
 const $hint: TextStyle = {
   color: colors.tint,
   marginBottom: spacing.md,
-}
+};
 
 const $textField: ViewStyle = {
   marginBottom: spacing.lg,
-}
+};
 
 const $tapButton: ViewStyle = {
   marginTop: spacing.xs,
-}
+};
 
 const $linkButton: ViewStyle = {
   marginTop: spacing.xs,
   alignSelf: "flex-end",
-}
+};
 
 function makeid(length: number) {
-  let result = ""
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-  const charactersLength = characters.length
-  let counter = 0
+  let result = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charactersLength = characters.length;
+  let counter = 0;
   while (counter < length) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength))
-    counter += 1
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
   }
-  return result
+  return result;
 }

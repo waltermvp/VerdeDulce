@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { observer } from "mobx-react-lite";
 import { StyleSheet, ViewStyle } from "react-native";
-import { Screen } from "../../app/components";
+import { Screen } from "../../components";
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 import { QrCodeSvg } from "react-native-qr-svg";

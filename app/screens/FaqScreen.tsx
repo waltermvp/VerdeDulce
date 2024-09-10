@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { observer } from "mobx-react-lite";
 import { ViewStyle, View, Linking, TextStyle } from "react-native";
 // import { AppStackScreenProps } from "../../app/navigators";
-import { Footer, OrderButton, Screen, Text } from "../../app/components";
+import { Footer, OrderButton, Screen, Text } from "../../components";
 import { colors, spacing, typography } from "../../app/theme";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 // import { useStores } from "../../app/models"

@@ -1,9 +1,9 @@
 {
   "auth": {
-    "user_pool_id": "us-east-1_LwrcmCNdF",
+    "user_pool_id": "us-east-1_IOaZuVL28",
     "aws_region": "us-east-1",
-    "user_pool_client_id": "17vnaop0evovehlj8flfabgo9d",
-    "identity_pool_id": "us-east-1:fa0d8dbc-e114-4878-80df-d1749996c170",
+    "user_pool_client_id": "162hp3ve7q3bu6gsbeociah8md",
+    "identity_pool_id": "us-east-1:231e8bc2-b97e-40e3-b7a2-8e8967ebd8f2",
     "mfa_methods": [],
     "standard_required_attributes": [
       "email"
@@ -25,9 +25,9 @@
     "unauthenticated_identities_enabled": true
   },
   "data": {
-    "url": "https://2ndujt5yyrc2pbenbwxseb3tvu.appsync-api.us-east-1.amazonaws.com/graphql",
+    "url": "https://lm5dvkzj7zeltmswhf3g4y4lku.appsync-api.us-east-1.amazonaws.com/graphql",
     "aws_region": "us-east-1",
-    "api_key": "da2-mbgjhrlwznfj5ev5u7rdes7s6i",
+    "api_key": "da2-lx5kwmwfjzdjhjk4wi3vfinkxe",
     "default_authorization_type": "AMAZON_COGNITO_USER_POOLS",
     "authorization_types": [
       "API_KEY",
@@ -305,7 +305,20 @@
   },
   "storage": {
     "aws_region": "us-east-1",
-    "bucket_name": "amplify-verdedulce-walter-dulcedrivebucketa0ac03f2-wwwkqxo25a6j"
+    "bucket_name": "amplify-d1ptvrvloahojd-ma-dulcedrivebucketa0ac03f2-yskoeldyixir",
+    "buckets": [
+      {
+        "name": "dulceDrive",
+        "bucket_name": "amplify-d1ptvrvloahojd-ma-dulcedrivebucketa0ac03f2-yskoeldyixir",
+        "aws_region": "us-east-1"
+      }
+    ]
   },
-  "version": "1"
+  "version": "1.1",
+  "analytics": {
+    "amazon_pinpoint": {
+      "app_id": "9a4e5d180d13427bacc8c53c5d318d9c",
+      "aws_region": "us-east-1"
+    }
+  }
 }

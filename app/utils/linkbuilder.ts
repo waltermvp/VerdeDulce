@@ -37,6 +37,7 @@ const $presets = {
 
   thumbnail: [$baseStyle, $fontWeightStyles.bold] as StyleProp<ImageStyle>,
   tv: [$baseStyle, { height: 16, width: 9 }] as StyleProp<ImageStyle>,
+  og: [$baseStyle] as StyleProp<ImageStyle>,
 
   // heading: [$baseStyle, $sizeStyles.xxl, $fontWeightStyles.bold] as StyleProp<ImageStyle>,
 
@@ -67,6 +68,10 @@ export const imageCDNURL = (
     case "tv":
       width = 16 * 100;
       height = 9 * 100;
+      break;
+    case "og":
+      width = 300;
+      height = 200;
       break;
     default:
       width = 200;

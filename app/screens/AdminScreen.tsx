@@ -17,7 +17,7 @@ import {
   PlaceholderMenu,
   Screen,
   Text,
-} from "../../app/components";
+} from "../../components";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { useStores } from "../../app/models";
 import { useMediaQuery } from "react-responsive";
