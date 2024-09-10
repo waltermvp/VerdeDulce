@@ -1,17 +1,16 @@
-import React, { FC } from "react"
-import { observer } from "mobx-react-lite"
-import { StyleSheet, ViewStyle } from "react-native"
-import { AppStackScreenProps } from "app/navigators"
-import { Screen } from "app/components"
+import React, { FC } from "react";
+import { observer } from "mobx-react-lite";
+import { StyleSheet, ViewStyle } from "react-native";
+import { Screen } from "../../app/components";
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
-import { QrCodeSvg } from "react-native-qr-svg"
-import { Image } from "expo-image"
-import { imageCDNURL } from "app/utils/linkbuilder"
-import { colors } from "app/theme"
-const SIZE = 300
-const ICON_SIZE = SIZE / 4.75
-const CONTENT = "https://wa.me/c/593963021783"
+import { QrCodeSvg } from "react-native-qr-svg";
+import { Image } from "expo-image";
+import { imageCDNURL } from "../../app/utils/linkbuilder";
+import { colors } from "../../app/theme";
+const SIZE = 300;
+const ICON_SIZE = SIZE / 4.75;
+const CONTENT = "https://wa.me/c/593963021783";
 
 interface QrScreenProps extends AppStackScreenProps<"Qr"> {}
 
@@ -66,13 +65,13 @@ export const QrScreen: FC<QrScreenProps> = observer(function QrScreen() {
       {/* <QrCodeSvg style={styles.qr} renderer={plainRenderer} value={CONTENT} frameSize={SIZE} /> */}
       {/* <QrCodeSvg style={styles.qr} renderer={customRenderer} value={CONTENT} frameSize={SIZE} /> */}
     </Screen>
-  )
-})
+  );
+});
 
 const $root: ViewStyle = {
   flex: 1,
   backgroundColor: colors.palette.greenFont,
-}
+};
 
 const styles = StyleSheet.create({
   root: {
@@ -96,4 +95,4 @@ const styles = StyleSheet.create({
   qr: {
     padding: 15,
   },
-})
+});

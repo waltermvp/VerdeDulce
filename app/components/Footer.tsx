@@ -1,13 +1,13 @@
 import * as React from "react"
 import { Pressable, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
-import { colors, spacing, typography } from "app/theme"
-import { Text } from "app/components/Text"
+import { colors, spacing, typography } from "../../app/theme"
+import { Text } from "../../app/components/Text"
 import { Newsletter } from "./Newsletter"
 import { Bullet } from "./Bullet"
 import { QrCodeSvg } from "react-native-qr-svg"
 import { Image } from "expo-image"
-import { imageCDNURL } from "app/utils/linkbuilder"
+import { imageCDNURL } from "../../app/utils/linkbuilder"
 import { useMediaQuery } from "react-responsive"
 
 const SIZE = 125
@@ -103,8 +103,8 @@ export const Footer = observer(function Footer(props: FooterProps) {
         </View>
       </View>
     </View>
-  )
-})
+  );
+});
 
 const $container: ViewStyle = {
   justifyContent: "center",

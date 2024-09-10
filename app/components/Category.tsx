@@ -1,37 +1,50 @@
-import * as React from "react"
-import { Dimensions, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native"
-import { observer } from "mobx-react-lite"
-import { colors, spacing, typography } from "app/theme"
-import { Text } from "app/components/Text"
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize"
-import { SimpleMenuItem } from "./SimpleMenuItem"
+import * as React from "react";
+import {
+  Dimensions,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  View,
+  ViewStyle,
+} from "react-native";
+import { observer } from "mobx-react-lite";
+import { colors, spacing, typography } from "../../app/theme";
+import { Text } from "../../app/components/Text";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { SimpleMenuItem } from "./SimpleMenuItem";
 
 type Category = {
-  id: string
-  title: string
-  data: []
-}
+  id: string;
+  title: string;
+  data: [];
+};
 export interface CategoryProps {
   /**
    * An optional style override useful for padding & margin.
    */
-  style?: StyleProp<ViewStyle>
-  category: Category
+  style?: StyleProp<ViewStyle>;
+  category: Category;
 }
 
 /**
  * Describe your component here
  */
 export const Category = observer(function Category(props: CategoryProps) {
-  const { style, category } = props
-  const $styles = [$container, style]
+  const { style, category } = props;
+  const $styles = [$container, style];
 
   return (
     <View style={$styles}>
       <Text preset="subheading" style={styles.title}>
         {category.title}
       </Text>
-      <View style={{ flex: 1, alignContent: "flex-start", justifyContent: "flex-start" }}>
+      <View
+        style={{
+          flex: 1,
+          alignContent: "flex-start",
+          justifyContent: "flex-start",
+        }}
+      >
         {category.data.map((item: any, index: number) => (
           <SimpleMenuItem
             key={item.name}
@@ -43,8 +56,8 @@ export const Category = observer(function Category(props: CategoryProps) {
         ))}
       </View>
     </View>
-  )
-})
+  );
+});
 
 const $container: ViewStyle = {
   flex: 1,
@@ -52,7 +65,7 @@ const $container: ViewStyle = {
   // justifyContent: "flex-start",
   alignItems: "center",
   // backgroundColor: "red",
-}
+};
 
 const styles = StyleSheet.create({
   title: {
@@ -74,4 +87,4 @@ const styles = StyleSheet.create({
     fontSize: RFValue(13), // second argument is standardScreenHeight(optional),
     color: colors.palette.greenFont,
   },
-})
+});

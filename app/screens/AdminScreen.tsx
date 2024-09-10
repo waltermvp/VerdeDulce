@@ -1,7 +1,14 @@
-import React, { FC, useEffect, useLayoutEffect, useState } from "react"
-import { observer } from "mobx-react-lite"
-import { SectionList, ViewStyle, FlatList, View, Alert, Dimensions } from "react-native"
-import { AppStackScreenProps } from "app/navigators"
+import React, { FC, useEffect, useLayoutEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
+import {
+  SectionList,
+  ViewStyle,
+  FlatList,
+  View,
+  Alert,
+  Dimensions,
+} from "react-native";
+// import { AppStackScreenProps } from "../../app/navigators"
 import {
   Button,
   CreateItem,
@@ -10,26 +17,26 @@ import {
   PlaceholderMenu,
   Screen,
   Text,
-} from "app/components"
-import { useFocusEffect, useNavigation } from "@react-navigation/native"
-import { useStores } from "app/models"
-import { useMediaQuery } from "react-responsive"
-import { spacing } from "app/theme"
+} from "../../app/components";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useStores } from "../../app/models";
+import { useMediaQuery } from "react-responsive";
+import { spacing } from "../../app/theme";
 // import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query"
-import { generateClient } from "aws-amplify/data"
-import { Schema } from "amplify/data/resource"
-import { Dialog, Portal } from "react-native-paper"
-import { translate } from "app/i18n"
-import { SectionGrid } from "react-native-super-grid"
-import { transformDataForSectionList } from "app/models/ItemStore"
-type Item = Schema["Item"]["type"]
+import { generateClient } from "aws-amplify/data";
+import { Schema } from "../../amplify/data/resource";
+import { Dialog, Portal } from "react-native-paper";
+import { translate } from "../../app/i18n";
+import { SectionGrid } from "react-native-super-grid";
+import { transformDataForSectionList } from "../../app/models/ItemStore";
+type Item = Schema["Item"]["type"];
 
 interface AdminScreenProps extends AppStackScreenProps<"Admin"> {}
 /**
  * Returns a random number between min (inclusive) and max (exclusive)
  */
 function getRandomArbitrary(min, max) {
-  return Math.random() * (max - min) + min
+  return Math.random() * (max - min) + min;
 }
 
 /**
@@ -40,233 +47,245 @@ function getRandomArbitrary(min, max) {
  * Using Math.round() will give you a non-uniform distribution!
  */
 function getRandomInt(min: number, max: number) {
-  min = Math.ceil(min)
-  max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min + 1)) + min
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 //TODO: Add sort order to sections
 type CreateItemInput = {
-  name: string
-  category: string
-  description: string
-  price: number
-  calories: number
-  url: string
-}
+  name: string;
+  category: string;
+  description: string;
+  price: number;
+  calories: number;
+  url: string;
+};
 
-export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen() {
-  const navigation = useNavigation()
-  // const queryClient = new QueryClient()
+export const AdminScreen: FC<AdminScreenProps> = observer(
+  function AdminScreen() {
+    const navigation = useNavigation();
+    // const queryClient = new QueryClient()
 
-  const {
-    createItemStore: { createItemReady },
-  } = useStores()
+    const {
+      createItemStore: { createItemReady },
+    } = useStores();
 
-  const [data, setData] = useState<CreateItemInput | null>(null)
-  const [items, setItems] = useState<Item[]>([])
-  const client = generateClient<Schema>()
-  const [visible, setVisible] = React.useState(false)
-  const [itemIDToDelete, setItemIDToDelete] = React.useState<string | null>(null)
-  const isBigScreen = useMediaQuery({ query: "(min-width: 769px)" })
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
-  const numberOfColumns = isSmallScreen ? 1 : isBigScreen ? 3 : 2
-  const [isSyncedLocal, setIsSyncedLocal] = useState(false)
-  const showDialog = () => setVisible(true)
+    const [data, setData] = useState<CreateItemInput | null>(null);
+    const [items, setItems] = useState<Item[]>([]);
+    const client = generateClient<Schema>();
+    const [visible, setVisible] = React.useState(false);
+    const [itemIDToDelete, setItemIDToDelete] = React.useState<string | null>(
+      null
+    );
+    const isBigScreen = useMediaQuery({ query: "(min-width: 769px)" });
+    const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" });
+    const numberOfColumns = isSmallScreen ? 1 : isBigScreen ? 3 : 2;
+    const [isSyncedLocal, setIsSyncedLocal] = useState(false);
+    const showDialog = () => setVisible(true);
 
-  const hideDialog = () => setVisible(false)
+    const hideDialog = () => setVisible(false);
 
-  const createItemMutation = async () => {
-    try {
-      const createResult = await client.models.Item.create(
-        {
-          name: data?.name,
+    const createItemMutation = async () => {
+      try {
+        const createResult = await client.models.Item.create(
+          {
+            name: data?.name,
 
-          category: data?.category,
+            category: data?.category,
 
-          description: data?.description,
-          price: data?.price,
-          calories: data?.calories,
-          url: data.url,
+            description: data?.description,
+            price: data?.price,
+            calories: data?.calories,
+            url: data.url,
+          },
+          { authMode: "userPool" }
+        );
+        hideDialog();
+        console.log("createResult", createResult);
+      } catch (error) {
+        console.log("errorrr:", error);
+        Alert.alert("Error", JSON.stringify(error, null, 2));
+        hideDialog();
+      }
+    };
+    const deleteItemMutation = async (id: string) => {
+      try {
+        await client.models.Item.delete(
+          {
+            id,
+          },
+          { authMode: "userPool" }
+        );
+        hideDialog();
+      } catch (error) {
+        console.log("errorrr:", error);
+        Alert.alert("Error", JSON.stringify(error, null, 2));
+        hideDialog();
+      }
+    };
+
+    useEffect(() => {
+      // if (!displayID) {
+      //   // setMode(MODE.MISSING_UDID)
+      //   return
+      // }
+
+      const sub = client.models.Item.observeQuery({
+        // filter: { displayId: { eq: displayID } },
+        authMode: "apiKey",
+      }).subscribe({
+        next: ({ items, isSynced }) => {
+          setIsSyncedLocal(isSynced);
+          if (isSynced) {
+            const transformed = transformDataForSectionList(items);
+            console.log("transformed", transformed);
+            setItems(transformed);
+
+            // setSlideCount(items.length)
+          }
         },
-        { authMode: "userPool" },
-      )
-      hideDialog()
-      console.log("createResult", createResult)
-    } catch (error) {
-      console.log("errorrr:", error)
-      Alert.alert("Error", JSON.stringify(error, null, 2))
-      hideDialog()
-    }
-  }
-  const deleteItemMutation = async (id: string) => {
-    try {
-      await client.models.Item.delete(
-        {
-          id,
+      });
+      return () => {
+        sub.unsubscribe();
+      };
+    }, []);
+
+    const {
+      authenticationStore: { isAuthenticated },
+    } = useStores();
+
+    // useFocusEffect(
+    //   React.useCallback(() => {
+    //     navigation.setOptions({
+    //       headerRight: () => {
+    //         return <OrderButton tx="landingScreen.name" icon="add" onPress={showDialog} />
+    //       },
+    //     })
+    //   }, [navigation]),
+    // )
+    useLayoutEffect(() => {
+      navigation.setOptions({
+        headerRight: () => {
+          return (
+            <OrderButton
+              tx="landingScreen.name"
+              icon="add"
+              onPress={showDialog}
+            />
+          );
         },
-        { authMode: "userPool" },
-      )
-      hideDialog()
-    } catch (error) {
-      console.log("errorrr:", error)
-      Alert.alert("Error", JSON.stringify(error, null, 2))
-      hideDialog()
-    }
-  }
+      });
+    }, [navigation]);
+    // const { isPending, error, data } = useQuery({
+    //   queryKey: ["repoData"],
+    //   queryFn: () => fetch("https://api.github.com/repos/TanStack/query").then((res) => res.json()),
+    // })
 
-  useEffect(() => {
-    // if (!displayID) {
-    //   // setMode(MODE.MISSING_UDID)
-    //   return
-    // }
+    // if (isPending) return "Loading..."
 
-    const sub = client.models.Item.observeQuery({
-      // filter: { displayId: { eq: displayID } },
-      authMode: "apiKey",
-    }).subscribe({
-      next: ({ items, isSynced }) => {
-        setIsSyncedLocal(isSynced)
-        if (isSynced) {
-          const transformed = transformDataForSectionList(items)
-          console.log("transformed", transformed)
-          setItems(transformed)
+    // if (error) return "An error has occurred: " + error.message
 
-          // setSlideCount(items.length)
-        }
-      },
-    })
-    return () => {
-      sub.unsubscribe()
-    }
-  }, [])
-
-  const {
-    authenticationStore: { isAuthenticated },
-  } = useStores()
-
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     navigation.setOptions({
-  //       headerRight: () => {
-  //         return <OrderButton tx="landingScreen.name" icon="add" onPress={showDialog} />
-  //       },
-  //     })
-  //   }, [navigation]),
-  // )
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => {
-        return <OrderButton tx="landingScreen.name" icon="add" onPress={showDialog} />
-      },
-    })
-  }, [navigation])
-  // const { isPending, error, data } = useQuery({
-  //   queryKey: ["repoData"],
-  //   queryFn: () => fetch("https://api.github.com/repos/TanStack/query").then((res) => res.json()),
-  // })
-
-  // if (isPending) return "Loading..."
-
-  // if (error) return "An error has occurred: " + error.message
-
-  const renderMenuItem = ({ item }) => {
-    return (
-      <MenuItem
-        item={item}
-        showDelete={true}
-        onDelete={() => {
-          setItemIDToDelete(item.id)
-          showDialog()
-        }}
-      />
-    )
-  }
-  const renderSectionTitle = ({ section }) => {
-    return <Text preset="heading">{section.title}</Text>
-  }
-  if (!isSyncedLocal) {
-    return (
-      <Screen style={$root} preset="scroll">
-        <PlaceholderMenu />
-      </Screen>
-    )
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <Screen style={$root} preset="scroll">
-        <Button
-          text="Login"
-          onPress={() => {
-            navigation.navigate("Login")
+    const renderMenuItem = ({ item }) => {
+      return (
+        <MenuItem
+          item={item}
+          showDelete={true}
+          onDelete={() => {
+            setItemIDToDelete(item.id);
+            showDialog();
           }}
         />
-      </Screen>
-    )
-  }
+      );
+    };
+    const renderSectionTitle = ({ section }) => {
+      return <Text preset="heading">{section.title}</Text>;
+    };
+    if (!isSyncedLocal) {
+      return (
+        <Screen style={$root} preset="scroll">
+          <PlaceholderMenu />
+        </Screen>
+      );
+    }
 
-  console.log("createItemReady", createItemReady, "!!")
+    if (!isAuthenticated) {
+      return (
+        <Screen style={$root} preset="scroll">
+          <Button
+            text="Login"
+            onPress={() => {
+              navigation.navigate("Login");
+            }}
+          />
+        </Screen>
+      );
+    }
 
-  return (
-    <Screen style={$root} preset="scroll">
-      <View>
-        <Portal>
-          {/* <CreateItemDialog
+    console.log("createItemReady", createItemReady, "!!");
+
+    return (
+      <Screen style={$root} preset="scroll">
+        <View>
+          <Portal>
+            {/* <CreateItemDialog
             visible={visible}
             hideDialog={hideDialog}
             enabled={!createItemReady}
             setData={setData}
             onCreate={createItemMutation}
           /> */}
-          <Dialog visible={visible} onDismiss={hideDialog}>
-            <Dialog.Title>
-              {!itemIDToDelete
-                ? translate("adminScreen.title")
-                : translate("adminScreen.titleDelete")}
-            </Dialog.Title>
-            <Dialog.ScrollArea>
-              <Text preset="default">
+            <Dialog visible={visible} onDismiss={hideDialog}>
+              <Dialog.Title>
                 {!itemIDToDelete
-                  ? translate("adminScreen.subtitle")
-                  : translate("adminScreen.subtitleDelete")}
-              </Text>
-              {!itemIDToDelete && <CreateItem setData={setData} />}
-            </Dialog.ScrollArea>
+                  ? translate("adminScreen.title")
+                  : translate("adminScreen.titleDelete")}
+              </Dialog.Title>
+              <Dialog.ScrollArea>
+                <Text preset="default">
+                  {!itemIDToDelete
+                    ? translate("adminScreen.subtitle")
+                    : translate("adminScreen.subtitleDelete")}
+                </Text>
+                {!itemIDToDelete && <CreateItem setData={setData} />}
+              </Dialog.ScrollArea>
 
-            <Dialog.Actions>
-              <Button onPress={hideDialog}>{translate("common.cancel")}</Button>
-              <Button
-                disabled={!itemIDToDelete ? !createItemReady : false}
-                disabledStyle={{ opacity: 0.06 }}
-                onPress={
-                  !itemIDToDelete
-                    ? createItemMutation
-                    : () => {
-                        if (itemIDToDelete) {
-                          deleteItemMutation(itemIDToDelete)
+              <Dialog.Actions>
+                <Button onPress={hideDialog}>
+                  {translate("common.cancel")}
+                </Button>
+                <Button
+                  disabled={!itemIDToDelete ? !createItemReady : false}
+                  disabledStyle={{ opacity: 0.06 }}
+                  onPress={
+                    !itemIDToDelete
+                      ? createItemMutation
+                      : () => {
+                          if (itemIDToDelete) {
+                            deleteItemMutation(itemIDToDelete);
+                          }
                         }
-                      }
-                }
-              >
-                {itemIDToDelete
-                  ? translate("adminScreen.subtitleDelete")
-                  : translate("adminScreen.title")}
-              </Button>
-            </Dialog.Actions>
-          </Dialog>
-        </Portal>
-      </View>
+                  }
+                >
+                  {itemIDToDelete
+                    ? translate("adminScreen.subtitleDelete")
+                    : translate("adminScreen.title")}
+                </Button>
+              </Dialog.Actions>
+            </Dialog>
+          </Portal>
+        </View>
 
-      {items.length > 0 && (
-        <SectionGrid
-          sections={items}
-          renderItem={renderMenuItem}
-          renderSectionHeader={renderSectionTitle}
-        />
-      )}
-    </Screen>
-  )
-})
+        {items.length > 0 && (
+          <SectionGrid
+            sections={items}
+            renderItem={renderMenuItem}
+            renderSectionHeader={renderSectionTitle}
+          />
+        )}
+      </Screen>
+    );
+  }
+);
 
 // type CreateItemInput = {
 //   name: string
@@ -280,7 +299,7 @@ export const AdminScreen: FC<AdminScreenProps> = observer(function AdminScreen()
 const $root: ViewStyle = {
   flex: 1,
   padding: spacing.sm,
-}
+};
 
 // const transformData = (data) => {
 //   // Group items by their category

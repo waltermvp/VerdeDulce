@@ -1,12 +1,12 @@
-import React, { FC } from "react"
-import { observer } from "mobx-react-lite"
-import { ViewStyle, View, Linking, TextStyle } from "react-native"
-import { AppStackScreenProps } from "app/navigators"
-import { Footer, OrderButton, Screen, Text } from "app/components"
-import { colors, spacing, typography } from "app/theme"
-import { useFocusEffect, useNavigation } from "@react-navigation/native"
-// import { useStores } from "app/models"
-import { translate } from "app/i18n"
+import React, { FC } from "react";
+import { observer } from "mobx-react-lite";
+import { ViewStyle, View, Linking, TextStyle } from "react-native";
+// import { AppStackScreenProps } from "../../app/navigators";
+import { Footer, OrderButton, Screen, Text } from "../../app/components";
+import { colors, spacing, typography } from "../../app/theme";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+// import { useStores } from "../../app/models"
+import { translate } from "../../app/i18n";
 
 interface FaqScreenProps extends AppStackScreenProps<"Faq"> {}
 
@@ -15,7 +15,7 @@ export const FaqScreen: FC<FaqScreenProps> = observer(function FaqScreen() {
   // const { someStore, anotherStore } = useStores()
 
   // Pull in navigation via hook
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   useFocusEffect(
     React.useCallback(() => {
       navigation.setOptions({
@@ -27,20 +27,22 @@ export const FaqScreen: FC<FaqScreenProps> = observer(function FaqScreen() {
               onPress={() => {
                 // navigation.navigate("OrderNav", { screen: "Home" })
                 // return
-                const phoneNumber = "+593963021783" // Replace with the actual phone number
+                const phoneNumber = "+593963021783"; // Replace with the actual phone number
 
-                const message = translate("menuScreen.orderMessage") // Replace with the actual message
+                const message = translate("menuScreen.orderMessage"); // Replace with the actual message
                 const url = `whatsapp://send?text=${encodeURIComponent(
-                  message,
-                )}&phone=${encodeURIComponent(phoneNumber)}`
-                Linking.openURL(url).catch((err) => console.error("Failed to open WhatsApp", err))
+                  message
+                )}&phone=${encodeURIComponent(phoneNumber)}`;
+                Linking.openURL(url).catch((err) =>
+                  console.error("Failed to open WhatsApp", err)
+                );
               }}
             />
-          )
+          );
         },
-      })
-    }, [navigation]),
-  )
+      });
+    }, [navigation])
+  );
 
   return (
     <Screen style={$root} preset="scroll">
@@ -56,25 +58,44 @@ export const FaqScreen: FC<FaqScreenProps> = observer(function FaqScreen() {
           }}
         />
         <View style={$item}>
-          <Text text="¿Qué es Verde Dulce?" preset="subheading" style={$title} />
+          <Text
+            text="¿Qué es Verde Dulce?"
+            preset="subheading"
+            style={$title}
+          />
           <Text
             text="Verde Dulce es un restaurante de comida rápida y saludable que se enfoca en comidas frescas, nutritivas y sostenibles. Nos especializamos en ensaladas personalizables, bowls de granos y platos de temporada, elaborados con ingredientes locales para ofrecerte opciones saludables y sabrosas."
             style={$content}
           />
         </View>
         <View style={$item}>
-          <Text text="Cuales son los metodos de pago?" preset="subheading" style={$title} />
-          <Text text="Aceptamos efectivo y tranferencia por Pichincha." style={$content} />
+          <Text
+            text="Cuales son los metodos de pago?"
+            preset="subheading"
+            style={$title}
+          />
+          <Text
+            text="Aceptamos efectivo y tranferencia por Pichincha."
+            style={$content}
+          />
         </View>
         <View style={$item}>
-          <Text text="¿Cómo puedo hacer un pedido?" preset="subheading" style={$title} />
+          <Text
+            text="¿Cómo puedo hacer un pedido?"
+            preset="subheading"
+            style={$title}
+          />
           <Text
             text="Puedes pedir a través de nuestro sitio web en verdedulce.com. Clique en el boton de ordenar y gestiona su orden por whatsapp."
             style={$content}
           />
         </View>
         <View style={$item}>
-          <Text text="Puedo personalizar mi pedido?" preset="subheading" style={$title} />
+          <Text
+            text="Puedo personalizar mi pedido?"
+            preset="subheading"
+            style={$title}
+          />
           <Text
             text="¡Por supuesto! Puedes armar tu propio bowl o ensalada eligiendo entre una variedad de hojas verdes, granos, proteínas y toppings. También ofrecemos una selección de aderezos caseros para realzar tu comida."
             style={$content}
@@ -92,22 +113,37 @@ export const FaqScreen: FC<FaqScreenProps> = observer(function FaqScreen() {
           />
         </View>
         <View style={$item}>
-          <Text text="¿Ofrecen servicios de catering?" preset="subheading" style={$title} />
+          <Text
+            text="¿Ofrecen servicios de catering?"
+            preset="subheading"
+            style={$title}
+          />
           <Text
             text="Sí, Verde Dulce ofrece catering para eventos, reuniones y fiestas. Puedes elegir de nuestro menú o trabajar con nosotros para crear un menú personalizado que se adapte a las necesidades de tu evento. Visita nuestra página de catering para más detalles y para hacer un pedido."
             style={$content}
           />
         </View>
         <View style={$item}>
-          <Text text="¿En qué áreas ofrecen entrega?" preset="subheading" style={$title} />
+          <Text
+            text="¿En qué áreas ofrecen entrega?"
+            preset="subheading"
+            style={$title}
+          />
           <Text
             text="Hacemos servicio a domicilio, a las parrocias 12 de Marzo, 18 de octubre, Portoviejo, y Andres de Vera."
             style={$content}
           />
         </View>
         <View style={$item}>
-          <Text text=" ¿Cuáles son sus horarios de atención?" preset="subheading" style={$title} />
-          <Text text="Estamos abiertos de 11:00 AM a 7:00 PM, Lunes a Viernes." style={$content} />
+          <Text
+            text=" ¿Cuáles son sus horarios de atención?"
+            preset="subheading"
+            style={$title}
+          />
+          <Text
+            text="Estamos abiertos de 11:00 AM a 7:00 PM, Lunes a Viernes."
+            style={$content}
+          />
         </View>
         <View style={$item}>
           <Text
@@ -126,13 +162,13 @@ export const FaqScreen: FC<FaqScreenProps> = observer(function FaqScreen() {
       </View>
       <Footer />
     </Screen>
-  )
-})
+  );
+});
 
 const $root: ViewStyle = {
   flex: 1,
   backgroundColor: colors.palette.lightBackground,
-}
+};
 
 const $item: ViewStyle = {
   flexDirection: "column",
@@ -140,7 +176,7 @@ const $item: ViewStyle = {
   borderBottomWidth: 0.5,
   borderBottomColor: colors.palette.veryDarkGreen,
   paddingBottom: spacing.md,
-}
+};
 /*
 
         9. ¿Qué prácticas sostenibles sigue Verde Dulce? La sostenibilidad es fundamental para
@@ -162,5 +198,5 @@ const $item: ViewStyle = {
 
 */
 
-const $title: TextStyle = { fontFamily: typography.fonts.poppins.semiBold }
-const $content: TextStyle = { fontFamily: typography.fonts.poppins.light }
+const $title: TextStyle = { fontFamily: typography.fonts.poppins.semiBold };
+const $content: TextStyle = { fontFamily: typography.fonts.poppins.light };
