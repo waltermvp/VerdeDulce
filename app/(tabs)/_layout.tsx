@@ -15,13 +15,16 @@ const ICON_SIZE_SMALL = ICON_SIZE / 2;
 const CONTENT = "https://wa.me/c/593963021783";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
-  const CTA = translate("landingScreen.order");
+  // const colorScheme = useColorScheme();
+  // const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
+  // const CTA = translate("landingScreen.order");
 
   return (
     <Tabs
       screenOptions={{
+        headerStyle: {
+          backgroundColor: colors.palette.lightBackground,
+        },
         tabBarActiveBackgroundColor: colors.palette.greenFont,
         tabBarActiveTintColor: colors.palette.lightYellowGreen, //Colors[colorScheme ?? "light"].tint,
         tabBarInactiveTintColor: colors.palette.greenFont,
@@ -59,12 +62,24 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="test"
+        options={{
+          title: "Test",
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? "close" : "close-outline"}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="account"
         options={{
           title: "Account",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? "bar-chart" : "bar-chart-outline"}
+              name={focused ? "person-circle" : "person-circle-outline"}
               color={color}
             />
           ),

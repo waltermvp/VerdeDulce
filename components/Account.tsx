@@ -17,7 +17,7 @@ export interface AccountProps {
 /**
  * Describe your component here
  */
-export const Account = observer(function Account(props: AccountProps) {
+export default function Account(props: AccountProps) {
   const { style, email } = props;
   const $styles = [$container, style];
 
@@ -27,7 +27,7 @@ export const Account = observer(function Account(props: AccountProps) {
       <Text style={$text}>{email}</Text>
     </View>
   );
-});
+}
 
 const $container: ViewStyle = {
   justifyContent: "center",
