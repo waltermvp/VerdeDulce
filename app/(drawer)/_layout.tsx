@@ -79,9 +79,7 @@ export default function TabLayout() {
                   dotColor="#ffff"
                   contentStyle={styles.box}
                 />
-                <Text style={$reserved}>
-                  &copy; 2024 verdedulce. All rights reserved.
-                </Text>
+                <Text style={$reserved}>&copy; 2024 verdedulce</Text>
               </Pressable>
             </View>
           </DrawerContentScrollView>

@@ -109,9 +109,7 @@ export const Footer = observer(function Footer(props: FooterProps) {
               dotColor="#ffff"
               contentStyle={styles.box}
             />
-            <Text style={$reserved}>
-              &copy; 2024 VerdeDulce. All rights reserved.
-            </Text>
+            <Text style={$reserved}>&copy; 2024 VerdeDulce</Text>
           </Pressable>
         </View>
       </View>
