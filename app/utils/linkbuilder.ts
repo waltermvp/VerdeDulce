@@ -38,7 +38,7 @@ const $presets = {
   thumbnail: [$baseStyle, $fontWeightStyles.bold] as StyleProp<ImageStyle>,
   tv: [$baseStyle, { height: 16, width: 9 }] as StyleProp<ImageStyle>,
   og: [$baseStyle] as StyleProp<ImageStyle>,
-
+  none: [],
   // heading: [$baseStyle, $sizeStyles.xxl, $fontWeightStyles.bold] as StyleProp<ImageStyle>,
 
   // subheading: [$baseStyle, $sizeStyles.lg, $fontWeightStyles.medium] as StyleProp<ImageStyle>,
@@ -73,13 +73,15 @@ export const imageCDNURL = (
       width = 300;
       height = 200;
       break;
+    case "none":
+      break;
     default:
       width = 200;
       height = 200;
       break;
   }
 
-  const variables = {
+  let variables = {
     bucket: amplifyOutputs.storage.bucket_name,
     key: thumbnailURL,
     edits: {
@@ -93,6 +95,10 @@ export const imageCDNURL = (
       rotate: Number(rotation),
     },
   };
+
+  if (preset == "none") {
+    delete variables?.edits?.resize;
+  }
 
   const imageRequest = JSON.stringify(variables);
   const encodedObject = btoa(imageRequest);

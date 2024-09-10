@@ -7,7 +7,23 @@ import { colors, spacing, typography } from "../theme";
 import { StyleSheet, TextStyle } from "react-native";
 import { useMediaQuery } from "react-responsive";
 import { translate } from "../i18n";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
+function getHeaderTitle(route) {
+  // If the focused route is not found, we need to assume it's the initial screen
+  // This can happen during if there hasn't been any navigation inside the screen
+  // In our case, it's "Feed" as that's the first screen inside the navigator
+  const routeName = getFocusedRouteNameFromRoute(route) ?? "Feed";
+  console.log("route name", routeName);
+  switch (routeName) {
+    case "index":
+      return "Home";
+    case "Profile":
+      return "My profile";
+    case "Account":
+      return "My account";
+  }
+}
 const SIZE = 100;
 const SIZE_SMALL = SIZE / 2;
 const ICON_SIZE = SIZE / 4.75;
@@ -21,10 +37,13 @@ export default function TabLayout() {
 
   return (
     <Tabs
+      initialRouteName="(home)"
       screenOptions={{
+        headerShown: false,
         headerStyle: {
           backgroundColor: colors.palette.lightBackground,
         },
+        tabBarInactiveBackgroundColor: colors.palette.lightBackground,
         tabBarActiveBackgroundColor: colors.palette.greenFont,
         tabBarActiveTintColor: colors.palette.lightYellowGreen, //Colors[colorScheme ?? "light"].tint,
         tabBarInactiveTintColor: colors.palette.greenFont,
@@ -32,12 +51,26 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
+        name="(home)"
+        options={({ route }) => ({
+          title: "Home",
+          headerTitle: getHeaderTitle(route),
+
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? "home" : "home-outline"}
+              color={color}
+            />
+          ),
+        })}
+      />
+      <Tabs.Screen
         initialParams={{
           showHeader: "true",
           showFooter: "true",
           menuType: "homepage",
         }}
-        name="index"
+        name="menu"
         options={{
           title: "Menu",
           tabBarIcon: ({ color, focused }) => (
@@ -62,24 +95,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="test"
+        name="gift"
         options={{
-          title: "Test",
+          title: "Gift",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? "close" : "close-outline"}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="account"
-        options={{
-          title: "Account",
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "person-circle" : "person-circle-outline"}
+              name={focused ? "gift" : "gift-outline"}
               color={color}
             />
           ),

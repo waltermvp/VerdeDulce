@@ -38,7 +38,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
   } = props;
   const $styles = [$container, style];
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
-  const url = imageCDNURL(item.url);
+  const url = imageCDNURL(item.url, "none");
 
   const activated = item.activated;
   const number = item.price;

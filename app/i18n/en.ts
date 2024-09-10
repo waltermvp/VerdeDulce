@@ -64,7 +64,8 @@ const en = {
   emptyStateComponent: {
     generic: {
       heading: "So empty... so sad",
-      content: "No data found yet. Try clicking the button to refresh or reload the app.",
+      content:
+        "No data found yet. Try clicking the button to refresh or reload the app.",
       button: "Let's try this again",
     },
   },
@@ -91,7 +92,8 @@ const en = {
       "Have an idea to make Ignite even better? We're happy to hear that! We're always looking for others who want to help us build the best React Native tooling out there. Join us over on GitHub to join us in building the future of Ignite.",
     contributeToIgniteLink: "Contribute to Ignite",
     theLatestInReactNativeTitle: "The latest in React Native",
-    theLatestInReactNative: "We're here to keep you current on all React Native has to offer.",
+    theLatestInReactNative:
+      "We're here to keep you current on all React Native has to offer.",
     reactNativeRadioLink: "React Native Radio",
     reactNativeNewsletterLink: "React Native Newsletter",
     reactNativeLiveLink: "React Native Live",
@@ -142,7 +144,8 @@ const en = {
       favoriteIcon: "Episode not favorited",
       unfavoriteIcon: "Episode favorited",
       publishLabel: "Published {{date}}",
-      durationLabel: "Duration: {{hours}} hours {{minutes}} minutes {{seconds}} seconds",
+      durationLabel:
+        "Duration: {{hours}} hours {{minutes}} minutes {{seconds}} seconds",
     },
     noFavoritesEmptyState: {
       heading: "This looks a bit empty",
@@ -164,7 +167,29 @@ const en = {
     venueNamePlaceholder: "Ingresa el nombre del lugar",
     tapSignUp: "Toca para registrarte",
   },
-}
+  signUpScreen: {
+    signIn: "Sign Up",
+    login: "Login",
+    confirm: "Confirm Code",
+    enterDetails: "Enter your details to Sign up for GlanceMenu.",
+    enterDetailsSignUp: "Enter your details below to sign up to Glance.",
+    emailFieldLabel: "Email",
+    passwordFieldLabel: "Password",
+    nameFieldLabel: "Name",
+    emailFieldPlaceholder: "Enter your email address",
+    passwordFieldPlaceholder: "Super secret password here",
+    codePlaceholder: "Super secret code here",
+    loginPlaceholder: "Enter your password",
+    codeLabel: "Super secret code here",
+    tapToSignUp: "Tap to sign up!",
+    tapToLogin: "Tap to log in",
+    tapToConfirm: "Tap to confirm!",
+    hint: "Hint: you can use any email address and your favorite password :)",
+    confirmCodeDetails:
+      "Please check your email for the confirmation code, then enter it below.",
+    resendCode: "Resend Code",
+  },
+};
 
-export default en
-export type Translations = typeof en
+export default en;
+export type Translations = typeof en;

@@ -5,11 +5,12 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Text } from "@/components";
-import { MenuScreen } from "./menu";
+
+import Home from "./home";
 
 export default function HomeScreen() {
   // return <Text>Home</Text>;
-  return <MenuScreen />;
+  return <Home />;
 }
 
 const styles = StyleSheet.create({

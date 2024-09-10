@@ -63,7 +63,7 @@ export const OrderButton = observer(function OrderButton(
           flexDirection: "row",
           alignItems: "center",
         },
-        $styles,
+        // $styles,
       ]}
       onPress={onPress}
       onHoverIn={() => {
@@ -88,7 +88,7 @@ export const OrderButton = observer(function OrderButton(
                 padding: isSmallScreen ? spacing.xs : spacing.sm,
                 borderRadius: 13,
                 borderBottomColor: colors.palette.neutral900,
-                borderBottomWidth: onHoverIn ? 2 : 0,
+                // borderBottomWidth: onHoverIn ? 2 : 0,
                 // alignSelf: "center",
               },
               $styles,
@@ -131,6 +131,7 @@ export const OrderButton = observer(function OrderButton(
 const $container: ViewStyle = {
   justifyContent: "center",
   // width: 222,
-  flex: 1,
+
   height: 55,
+  // alignSelf: "center",
 };

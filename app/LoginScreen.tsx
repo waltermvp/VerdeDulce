@@ -15,14 +15,145 @@ import {
   Text,
   TextField,
   // TextFieldAccessoryProps,
-} from "../../components";
-import { useStores } from "../models";
-import { AppStackScreenProps } from "../navigators";
-import { colors, spacing } from "../theme";
+} from "../components";
+import { useStores } from "./models";
+import { colors, spacing } from "./theme";
 import { useRoute } from "@react-navigation/native";
-import type { TextFieldAccessoryProps } from "../../components/TextField";
+import type { TextFieldAccessoryProps } from "../components/TextField";
 // import { resendSignUpCode } from 'aws-amplify/auth';
+import { Amplify } from "aws-amplify";
+// import { Auth } from "aws-amplify";
+import outputs from "../amplify_outputs.json";
 
+Amplify.configure({
+  Auth: {
+    Cognito: {
+      userPoolId: outputs.auth.user_pool_id,
+      userPoolClientId: outputs.auth.user_pool_client_id,
+    },
+  },
+});
+
+// Example usage of Amplify Auth
+// async function handleLogin() {
+//   try {
+//     const user = await Auth.signIn(authEmail, authPassword);
+//     console.log("User logged in:", user);
+//     // Handle successful login
+//   } catch (error) {
+//     console.log("Login error:", error);
+//     // Handle login error
+//   }
+// }
+
+// async function handleSignUp() {
+//   try {
+//     const user = await Auth.signUp({
+//       username: authEmail,
+//       password: authPassword,
+//     });
+//     console.log("User signed up:", user);
+//     // Handle successful sign up
+//   } catch (error) {
+//     console.log("Sign up error:", error);
+//     // Handle sign up error
+//   }
+// }
+
+// async function handleConfirmCode() {
+//   try {
+//     await Auth.confirmSignUp(authEmail, authConfirmCode);
+//     console.log("Code confirmed");
+//     // Handle successful code confirmation
+//   } catch (error) {
+//     console.log("Code confirmation error:", error);
+//     // Handle code confirmation error
+//   }
+// }
+
+// async function handleResendConfirmCode(email) {
+//   try {
+//     await Auth.resendSignUp(email);
+//     console.log("Code resent");
+//     // Handle successful code resend
+//   } catch (error) {
+//     console.log("Code resend error:", error);
+//     // Handle code resend error
+//   }
+// }
+
+// // Update the respective functions in the LoginScreen component with the new functions
+
+// // ...
+
+// const {
+//   authenticationStore: {
+//     // ...
+//     handleLogin,
+//     handleSignUp,
+//     handleConfirmCode,
+//     handleResendConfirmCode,
+//     // ...
+//   },
+// } = useStores();
+
+// // ...
+
+// // Update the login, signUp, confirmCode, and resendCode functions in the LoginScreen component with the new functions
+
+// async function login() {
+//   console.log("login called");
+//   setIsSubmitted(true);
+//   setAttemptsCount(attemptsCount + 1);
+
+//   if (loginValidationError) return;
+
+//   try {
+//     await handleLogin();
+//   } catch (error) {
+//     Alert.alert("Whoops", JSON.stringify(error || "An error occurred"));
+//   }
+// }
+
+// async function signUp() {
+//   if (signUpValidationError) return;
+//   try {
+//     await handleSignUp();
+//     setLoginMode(LoginMode.CONFIRM);
+//   } catch (errorr) {
+//     Alert.alert("Whoops", JSON.stringify(errorr || "An error occurred"));
+//   }
+// }
+
+// async function confirmCode() {
+//   console.log("confirmCode");
+//   try {
+//     await handleConfirmCode();
+//   } catch (error) {
+//     console.log("error", error);
+//     Alert.alert("Whoops", JSON.stringify(error || "An error occurred"));
+//   }
+// }
+
+// ...
+
+// Update the resendConfirmCode function in the LoginScreen component with the new function
+
+{
+  /* <Button
+  testID="login-button"
+  tx="signUpScreen.resendCode"
+  style={$linkButton}
+  preset="link"
+  loading={resendLoading}
+  disabled={resendLoading}
+  onPress={() => {
+    // handleResendConfirmCode(authEmail);
+  }}
+/>;
+ */
+}
+// ...
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
 enum LoginMode {
@@ -30,10 +161,8 @@ enum LoginMode {
   SIGNUP = "signup",
   CONFIRM = "confirm",
 }
-
-export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(
-  _props
-) {
+//
+export default observer(function LoginScreen() {
   // const route = useRoute<RouteProp<AppStackParamList, 'Login'>>();
   const route: { params?: { mode?: LoginMode } } = useRoute();
   const mode =

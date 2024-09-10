@@ -4,6 +4,10 @@ import { observer } from "mobx-react-lite";
 import { colors, typography } from "../app/theme";
 import { Text } from "./Text";
 import { AccountItem } from "./AccountItem";
+import { useStores } from "@/app/models";
+import { LineItem } from "./LineItem";
+import { MenuItemSmall } from "./MenuItemSmall";
+import { ListItem } from "./ListItem";
 
 export interface AccountProps {
   /**
@@ -17,20 +21,30 @@ export interface AccountProps {
 /**
  * Describe your component here
  */
-export default function Account(props: AccountProps) {
+export const Account = function Account(props: AccountProps) {
   const { style, email } = props;
   const $styles = [$container, style];
+  const {
+    authenticationStore: { isAuthenticated, authEmail },
+  } = useStores();
 
   return (
     <View style={$styles}>
-      <AccountItem title="Account" icon="person" />
-      <Text style={$text}>{email}</Text>
+      <View style={{ flex: 1 }}>
+        {/* <MenuItemSmall description="ddd" /> */}
+        <ListItem text="ddd" />
+      </View>
+      <View style={{ flex: 1 }}>
+        {/* <AccountItem title="Account" icon="person" /> */}
+        <Text style={$text}>{email}</Text>
+      </View>
     </View>
   );
-}
+};
 
 const $container: ViewStyle = {
   justifyContent: "center",
+  flexDirection: "row",
 };
 
 const $text: TextStyle = {

@@ -50,7 +50,7 @@ const sweetgreenMenu = require("../../menu-es.json");
 const itemDimension = 555;
 const itemHeight = 222;
 
-export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
+export default observer(function MenuScreen() {
   const route = useRoute();
 
   const { showHeader, showFooter, menuType } = route?.params;
