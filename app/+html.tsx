@@ -22,10 +22,7 @@ export default function Root({ children }: PropsWithChildren) {
           content="verdedulce, comida fresca y de alta calidad"
         />
         <meta property="og:url" content="https://www.verdedulce.com/" />
-        <meta
-          property="og:description"
-          content="verdedulce, comida fresca y de alta calidad"
-        />
+        <meta property="og:description" content="Ordena Ya!" />
         <meta
           property="og:image"
           content="https://dta56yysqj9ke.cloudfront.net/eyJidWNrZXQiOiJhbXBsaWZ5LWQxcHR2cnZsb2Fob2pkLW1hLWR1bGNlZHJpdmVidWNrZXRhMGFjMDNmMi15c2tvZWxkeWl4aXIiLCJrZXkiOiJWZXJkZUR1bGNlX2xvZ28ucG5nIiwiZWRpdHMiOnsiY29udGVudE1vZGVyYXRpb24iOmZhbHNlLCJyZXNpemUiOnsid2lkdGgiOjMwMCwiaGVpZ2h0IjoyMDAsImZpdCI6ImNvdmVyIn0sInJvdGF0ZSI6MH19"
