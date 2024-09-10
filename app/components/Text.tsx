@@ -96,6 +96,10 @@ const $baseStyle: StyleProp<TextStyle> = [
 
 const $presets = {
   default: $baseStyle,
+  default2: [
+    $baseStyle,
+    { fontFamily: typography.fonts.poppins.Poppins_500Medium },
+  ] as StyleProp<TextStyle>,
 
   bold: [$baseStyle, $fontWeightStyles.bold] as StyleProp<TextStyle>,
 
