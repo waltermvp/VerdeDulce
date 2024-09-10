@@ -82,7 +82,7 @@ export const imageCDNURL = (
   }
 
   let variables = {
-    bucket: amplifyOutputs.storage.bucket_name,
+    bucket: "amplify-d1ptvrvloahojd-ma-dulcedrivebucketa0ac03f2-yskoeldyixir", //amplifyOutputs.storage.bucket_name,
     key: thumbnailURL,
     edits: {
       contentModeration: moderated,
