@@ -100,12 +100,13 @@ export default function TabLayout() {
           // header: () => null,
           headerTitleStyle: {
             color: colors.palette.greenFont,
-            fontFamily: typography.fonts.poppins.semiBold,
+            fontFamily: typography.fonts.poppins.Poppins_400Regular,
             fontSize: spacing.xl,
           },
           headerTitle: "verdedulce",
           headerStyle: {
             // backgroundColor: Colors[colorScheme ?? "light"].tint,
+            fontfamily: typography.fonts.poppins.semiBold,
             backgroundColor: colors.palette.lightBackground,
           },
           headerLeft: ({ pressColor }) => (
