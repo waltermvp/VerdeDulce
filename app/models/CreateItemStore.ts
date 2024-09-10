@@ -1,11 +1,10 @@
-import { Instance, SnapshotOut, types } from "mobx-state-tree"
-import { api } from "../services/api"
-import { Item, ItemModel } from "./Item"
-import { withSetPropAction } from "./helpers/withSetPropAction"
-import { useEffect } from "react"
-import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query"
-import { Schema } from "amplify/data/resource"
-import { generateClient } from "aws-amplify/api"
+import { Instance, SnapshotOut, types } from "mobx-state-tree";
+// import { api } from "../services/api"
+import { Item, ItemModel } from "./Item";
+import { withSetPropAction } from "./helpers/withSetPropAction";
+import { useEffect } from "react";
+import { Schema } from "../../amplify/data/resource";
+import { generateClient } from "aws-amplify/api";
 
 // type Item = Schema["Item"]["type"]
 
@@ -34,13 +33,14 @@ export const CreateItemStoreModel = types
       // }
     },
     setData(data: any) {
-      const { name, category, description, price, calories, url } = data
-      typeof name !== "undefined" && store.setProp("name", name)
-      typeof category !== "undefined" && store.setProp("category", category)
-      typeof description !== "undefined" && store.setProp("description", description)
-      typeof price !== "undefined" && store.setProp("price", price)
-      typeof calories !== "undefined" && store.setProp("calories", calories)
-      typeof url !== "undefined" && store.setProp("url", url)
+      const { name, category, description, price, calories, url } = data;
+      typeof name !== "undefined" && store.setProp("name", name);
+      typeof category !== "undefined" && store.setProp("category", category);
+      typeof description !== "undefined" &&
+        store.setProp("description", description);
+      typeof price !== "undefined" && store.setProp("price", price);
+      typeof calories !== "undefined" && store.setProp("calories", calories);
+      typeof url !== "undefined" && store.setProp("url", url);
       // store.setProp("url", data.url)
     },
     // addFavorite(item: Item) {
@@ -53,12 +53,18 @@ export const CreateItemStoreModel = types
 
   .views((store) => ({
     get createItemReady() {
-      return true
+      return true;
       return !!(
-        (store.name && store.category && store.description && store.price && store.calories)
+        (
+          store.name &&
+          store.category &&
+          store.description &&
+          store.price &&
+          store.calories
+        )
         //  &&
         // store.url
-      )
+      );
     },
     // get episodesForList() {
     //   return store.favoritesOnly ? store.favorites : store.items
@@ -76,20 +82,15 @@ export const CreateItemStoreModel = types
     //     store.addFavorite(item)
     //   }
     // },
-  }))
+  }));
 
-export interface CreateItemStore extends Instance<typeof CreateItemStoreModel> {}
-export interface CreateItemStoreSnapshot extends SnapshotOut<typeof CreateItemStoreModel> {}
+export interface CreateItemStore
+  extends Instance<typeof CreateItemStoreModel> {}
+export interface CreateItemStoreSnapshot
+  extends SnapshotOut<typeof CreateItemStoreModel> {}
 
 export const useReactQuerySubscription = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: Infinity,
-      },
-    },
-  })
-  const client = generateClient<Schema>()
+  const client = generateClient<Schema>();
 
   useEffect(() => {
     const sub = client.models.Item.observeQuery({
@@ -97,7 +98,7 @@ export const useReactQuerySubscription = () => {
       authMode: "apiKey",
     }).subscribe({
       next: ({ items, isSynced }) => {
-        console.log("Items.observeQuery items", items.length, isSynced)
+        console.log("Items.observeQuery items", items.length, isSynced);
         if (isSynced) {
           // const data = JSON.parse(items)
           // console.log("data", items)
@@ -106,7 +107,7 @@ export const useReactQuerySubscription = () => {
           // queryClient.invalidateQueries({ queryKey })
         }
       },
-    })
+    });
 
     // websocket.onmessage = (event) => {
     //   const data = JSON.parse(event.data)
@@ -121,10 +122,10 @@ export const useReactQuerySubscription = () => {
     //   })
     // }
     return () => {
-      sub.unsubscribe()
-    }
-  }, [queryClient])
-}
+      sub.unsubscribe();
+    };
+  }, [client]);
+};
 
 // useEffect(() => {
 //   if (!displayID) {

@@ -1,13 +1,13 @@
-import * as React from "react"
-import { StyleProp, TextStyle, View, ViewStyle } from "react-native"
-import { observer } from "mobx-react-lite"
-import { colors, spacing, typography } from "app/theme"
+import * as React from "react";
+import { StyleProp, TextStyle, View, ViewStyle } from "react-native";
+import { observer } from "mobx-react-lite";
+import { colors, spacing, typography } from "../../app/theme";
 
-import Constants from "expo-constants"
-import Markdown from "react-native-markdown-display"
-import { OrderButton } from "./OrderButton"
-import { Image } from "expo-image"
-import { imageCDNURL } from "app/utils/linkbuilder"
+import Constants from "expo-constants";
+import Markdown from "react-native-markdown-display";
+import { OrderButton } from "./OrderButton";
+import { Image } from "expo-image";
+import { imageCDNURL } from "../../app/utils/linkbuilder";
 // ### Nuestro Compromiso con la Sostenibilidad:
 
 // Nos importa nuestro planeta tanto como tu salud. Por eso usamos empaques ecológicos, incluyendo bowls de cartón reciclado y bolsas sostenibles. Cada comida que disfrutas en Verde Dulce ayuda a tener un impacto positivo.
@@ -28,13 +28,13 @@ En Verde Dulce, creemos en ofrecer comidas frescas, saludables y deliciosas que 
 ¡Únete a Nosotros Hoy!
 
 Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una experiencia fresca y sabrosa.
-`
+`;
 
 export interface IntroEmailProps {
   /**
    * An optional style override useful for padding & margin.
    */
-  style?: StyleProp<ViewStyle>
+  style?: StyleProp<ViewStyle>;
 
   /**
    * Function to handle the press event of the order button.
@@ -42,25 +42,34 @@ export interface IntroEmailProps {
    * @callback onPress
    * @returns {void}
    */
-  onPress?: () => void
+  onPress?: () => void;
 }
 
 /**
  * Describe your component here
  */
 export const IntroEmail = observer(function IntroEmail(props: IntroEmailProps) {
-  const { style, onPress } = props
-  const $styles = [$container, style]
-  console.log(Constants.expoConfig)
+  const { style, onPress } = props;
+  const $styles = [$container, style];
+  console.log(Constants.expoConfig);
 
-  console.log("Constants.expoConfig", imageCDNURL("noun-salad-7152021-white.png"))
+  console.log(
+    "Constants.expoConfig",
+    imageCDNURL("noun-salad-7152021-white.png")
+  );
   return (
     <View style={$styles}>
       <Markdown
         style={{
-          heading1: { fontSize: spacing.lg, fontFamily: typography.fonts.poppins.extraLight },
+          heading1: {
+            fontSize: spacing.lg,
+            fontFamily: typography.fonts.poppins.extraLight,
+          },
           // heading2: { fontSize: spacing.lg, fontFamily: typography.fonts.poppins.extraLight },
-          body: { fontSize: spacing.sm, fontFamily: typography.fonts.poppins.light },
+          body: {
+            fontSize: spacing.sm,
+            fontFamily: typography.fonts.poppins.light,
+          },
           text: {
             color: "white",
             // fontFamily: typography.fonts.poppins.semiBold,
@@ -101,7 +110,10 @@ export const IntroEmail = observer(function IntroEmail(props: IntroEmailProps) {
         source={{ uri: imageCDNURL("noun-salad-white-7152021.svg") }}
       />
       <OrderButton
-        style={{ backgroundColor: colors.palette.lightYellowGreen, borderRadius: 13 }}
+        style={{
+          backgroundColor: colors.palette.lightYellowGreen,
+          borderRadius: 13,
+        }}
         text="Ordena Ya"
         textStyle={{ color: colors.palette.greenFont }}
         onPress={onPress}
@@ -150,22 +162,22 @@ export const IntroEmail = observer(function IntroEmail(props: IntroEmailProps) {
         fresca y sabrosa.
       </Text> */}
     </View>
-  )
-})
+  );
+});
 
 const $container: ViewStyle = {
   justifyContent: "center",
   padding: spacing.sm,
-}
+};
 
 const $headerText: TextStyle = {
   // textAlign: "center",
   color: colors.palette.neutral100,
   padding: spacing.xs,
-}
+};
 
 const $text: TextStyle = {
   // textAlign: "center",
   color: colors.palette.neutral100,
   // padding: spacing.xxs,
-}
+};

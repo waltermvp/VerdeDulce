@@ -1,32 +1,36 @@
-import * as React from "react"
-import { StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native"
-import { observer } from "mobx-react-lite"
-import { colors, spacing, typography } from "app/theme"
-import { Text } from "app/components/Text"
-import { useMediaQuery } from "react-responsive"
-import { useFontScaling } from "app/utils/fontScaling"
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize"
+import * as React from "react";
+import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import { observer } from "mobx-react-lite";
+import { colors, spacing, typography } from "../../app/theme";
+import { Text } from "../../app/components/Text";
+import { useMediaQuery } from "react-responsive";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 export interface MenuItemSmallProps {
   /**
    * An optional style override useful for padding & margin.
    */
-  style?: StyleProp<ViewStyle>
-  name: string
-  description: string
-  price: number
+  style?: StyleProp<ViewStyle>;
+  name: string;
+  description: string;
+  price: number;
 }
 
 /**
  * Describe your component here
  */
-export const MenuItemSmall = observer(function MenuItemSmall(props: MenuItemSmallProps) {
-  const { style, name, description, price } = props
-  const $styles = [$container, style]
-  const number = price
-  const dollars = (number / 100).toLocaleString("en-US", { style: "currency", currency: "USD" })
-  const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" })
+export const MenuItemSmall = observer(function MenuItemSmall(
+  props: MenuItemSmallProps
+) {
+  const { style, name, description, price } = props;
+  const $styles = [$container, style];
+  const number = price;
+  const dollars = (number / 100).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" });
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
 
   // minimumFontScale: allowFontScaling ? MIN_FONT_SCALE : 1, // This prevents the font from getting too small.
   // maxFontSizeMultiplier: allowFontScaling ? MAX_FONT_SCALE : 1, // This prevents the font from getting too big.
@@ -34,7 +38,13 @@ export const MenuItemSmall = observer(function MenuItemSmall(props: MenuItemSmal
 
   return (
     <View style={$styles}>
-      <View style={{ flex: 3.5, paddingBottom: spacing.md, justifyContent: "flex-start" }}>
+      <View
+        style={{
+          flex: 3.5,
+          paddingBottom: spacing.md,
+          justifyContent: "flex-start",
+        }}
+      >
         <Text preset="bold" style={styles.title}>
           {name}
         </Text>
@@ -48,8 +58,8 @@ export const MenuItemSmall = observer(function MenuItemSmall(props: MenuItemSmal
         </Text>
       </View>
     </View>
-  )
-})
+  );
+});
 
 const $container: ViewStyle = {
   flex: 1,
@@ -63,8 +73,8 @@ const $container: ViewStyle = {
 
   flexDirection: "row",
   // width: "100%",
-}
-console.log("spacing.lg", RFPercentage(2))
+};
+console.log("spacing.lg", RFPercentage(2));
 const styles = StyleSheet.create({
   welcome: {
     fontSize: RFValue(24), // second argument is standardScreenHeight(optional),
@@ -91,4 +101,4 @@ const styles = StyleSheet.create({
     fontSize: RFValue(13), // second argument is standardScreenHeight(optional),
     color: colors.palette.greenFont,
   },
-})
+});

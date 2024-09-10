@@ -1,7 +1,6 @@
-import React, { FC, useEffect, useState } from "react"
-import { observer } from "mobx-react-lite"
-import { Dimensions, ViewStyle, View } from "react-native"
-import { AppStackScreenProps, MenuNavigatorParamList } from "app/navigators"
+import React, { FC, useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
+import { Dimensions, ViewStyle, View } from "react-native";
 import {
   Footer,
   MenuHeader,
@@ -11,24 +10,27 @@ import {
   Screen,
   SimpleMenu,
   Text,
-} from "app/components"
+} from "../../app/components";
 
-import { colors, spacing, typography } from "app/theme"
-import { useMediaQuery } from "react-responsive"
-import { RouteProp, useFocusEffect } from "@react-navigation/native"
-import { Linking } from "react-native" // Import Linking module
-import { useNavigation, useRoute } from "@react-navigation/native"
-import { imageCDNURL } from "app/utils/linkbuilder"
+import { colors, spacing, typography } from "../../app/theme";
+import { useMediaQuery } from "react-responsive";
+import { RouteProp, useFocusEffect } from "@react-navigation/native";
+import { Linking } from "react-native"; // Import Linking module
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { imageCDNURL } from "../../app/utils/linkbuilder";
 // import Config from "../config"
-import { transformData, transformDataForSectionList } from "app/models/ItemStore"
+import {
+  // transformData,
+  transformDataForSectionList,
+} from "../../app/models/ItemStore";
 // import { useStores } from "app/models"
-import { Schema } from "amplify/data/resource"
-import { generateClient } from "aws-amplify/api"
-import { translate } from "../../app/i18n"
-import { SectionGrid } from "react-native-super-grid"
-import { Amplify } from "aws-amplify"
-import { record } from "aws-amplify/analytics"
-import outputs from "../../amplify_outputs.json"
+// import { Schema } from "../../amplify/data/resource";
+// import { generateClient } from "aws-amplify/api";
+import { translate } from "../../app/i18n";
+import { SectionGrid } from "react-native-super-grid";
+import { Amplify } from "aws-amplify";
+import { record } from "aws-amplify/analytics";
+import outputs from "../../amplify_outputs.json";
 // Amplify.configure({
 //   ...Amplify.getConfig(),
 //   analytics: outputs.analytics,
@@ -41,25 +43,25 @@ Amplify.configure({
       region: outputs.analytics.amazon_pinpoint.aws_region,
     },
   },
-})
+});
 
-const width = Dimensions.get("window").width
-const sweetgreenMenu = require("menu-es.json")
-const itemDimension = 555
-const itemHeight = 222
+const width = Dimensions.get("window").width;
+const sweetgreenMenu = require("../../menu-es.json");
+const itemDimension = 555;
+const itemHeight = 222;
 interface MenuScreenProps extends AppStackScreenProps<"Menu"> {}
 
 export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
-  const route = useRoute<RouteProp<MenuNavigatorParamList, "Menu">>()
+  const route = useRoute<RouteProp<MenuNavigatorParamList, "Menu">>();
 
-  const { showHeader, showFooter, menuType } = route?.params
+  const { showHeader, showFooter, menuType } = route?.params;
   // route.params.menuType
-  const showHeaderBool = showHeader === "true"
-  const showFooterBool = showFooter === "true"
+  const showHeaderBool = showHeader === "true";
+  const showFooterBool = showFooter === "true";
 
   const [items, setItems] = useState(
-    sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true),
-  )
+    sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true)
+  );
 
   // const client = generateClient<Schema>()
   // const [visible, setVisible] = React.useState(false)
@@ -68,11 +70,11 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
 
   // const hideDialog = () => setVisible(false)
 
-  const navigation = useNavigation()
-  const isHugeScreen = useMediaQuery({ query: "(min-width: 768px)" })
-  const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" })
-  console.log("is big screen", isBigScreen)
+  const navigation = useNavigation();
+  const isHugeScreen = useMediaQuery({ query: "(min-width: 768px)" });
+  const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" });
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
+  console.log("is big screen", isBigScreen);
   // console.log(" ", imageCDNURL("menu/Hot_Honey_Chicken.png"))
   // console.log(" ", imageCDNURL("VerdeDulce_logo_with_border.png"))
   // useEffect(() => {
@@ -119,19 +121,19 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
 
                 record({
                   name: "orderNow",
-                })
+                });
                 // const message = translate("menuScreen.orderMessage") // Replace with the actual message
-                const url = "https://wa.me/c/593963021783"
+                const url = "https://wa.me/c/593963021783";
                 await Linking.openURL(url).catch((err) =>
-                  console.error("Failed to open WhatsApp", err),
-                )
+                  console.error("Failed to open WhatsApp", err)
+                );
               }}
             />
-          )
+          );
         },
-      })
-    }, [navigation]),
-  )
+      });
+    }, [navigation])
+  );
 
   const renderSectionTitle = ({ section }: { section: any }) => (
     <View style={{ width: width, paddingLeft: spacing.sm }}>
@@ -149,14 +151,16 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
         {section.title.toUpperCase()}
       </Text>
     </View>
-  )
+  );
 
   return (
     <Screen style={$root} preset="scroll">
       {showHeaderBool && <MenuHeader />}
       {menuType === "homepage" && (
         <SectionGrid
-          renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
+          renderSectionFooter={() => (
+            <View style={{ height: spacing.xl }}></View>
+          )}
           // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
           stickySectionHeadersEnabled={true}
           contentContainerStyle={{
@@ -177,7 +181,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
                 record({
                   name: "orderNow",
                   attributes: { name: item.name },
-                })
+                });
 
                 // const phoneNumber = "+593963021783" // Replace with the actual phone number
                 // console.log("item", item.itemURL)
@@ -188,10 +192,10 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
                 // const url = `whatsapp://send?text=${encodeURIComponent(
                 //   message + " " + item.itemURL,
                 // )}&phone=${encodeURIComponent(phoneNumber)}`
-                const url = item.itemURL
+                const url = item.itemURL;
                 await Linking.openURL(url).catch((err) =>
-                  console.error("Failed to open WhatsApp", err),
-                )
+                  console.error("Failed to open WhatsApp", err)
+                );
                 // e.prevent
               }}
               onDelete={() => {
@@ -207,7 +211,9 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       {menuType === "menu" && (
         <View>
           <SectionGrid
-            renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
+            renderSectionFooter={() => (
+              <View style={{ height: spacing.xl }}></View>
+            )}
             // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
             stickySectionHeadersEnabled={true}
             contentContainerStyle={{
@@ -226,7 +232,11 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
             maxItemsPerRow={4}
             sections={transformDataForSectionList(items).slice(0, 2)}
             renderItem={({ item }) => (
-              <MenuItemSmall name={item.name} price={item.price} description={item.description} />
+              <MenuItemSmall
+                name={item.name}
+                price={item.price}
+                description={item.description}
+              />
             )}
             renderSectionHeader={renderSectionTitle}
           />
@@ -239,7 +249,9 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
             }}
           >
             <SectionGrid
-              renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
+              renderSectionFooter={() => (
+                <View style={{ height: spacing.xl }}></View>
+              )}
               // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
               stickySectionHeadersEnabled={true}
               contentContainerStyle={{
@@ -257,12 +269,18 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
               maxItemsPerRow={4}
               sections={transformDataForSectionList(items).slice(2, 3)}
               renderItem={({ item }) => (
-                <MenuItemSmall name={item.name} price={item.price} description={item.description} />
+                <MenuItemSmall
+                  name={item.name}
+                  price={item.price}
+                  description={item.description}
+                />
               )}
               renderSectionHeader={renderSectionTitle}
             />
             <SectionGrid
-              renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
+              renderSectionFooter={() => (
+                <View style={{ height: spacing.xl }}></View>
+              )}
               // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
               stickySectionHeadersEnabled={true}
               contentContainerStyle={
@@ -283,25 +301,31 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
               maxItemsPerRow={4}
               sections={transformDataForSectionList(items).slice(3, 4)}
               renderItem={({ item }) => (
-                <MenuItemSmall name={item.name} price={item.price} description={item.description} />
+                <MenuItemSmall
+                  name={item.name}
+                  price={item.price}
+                  description={item.description}
+                />
               )}
               renderSectionHeader={renderSectionTitle}
             />
           </View>
         </View>
       )}
-      {menuType === "simpleMenu" && <SimpleMenu categories={transformDataForSectionList(items)} />}
+      {menuType === "simpleMenu" && (
+        <SimpleMenu categories={transformDataForSectionList(items)} />
+      )}
       {showFooterBool && (
         <Footer
           onPressQr={() => {
-            console.log("onPressQR")
-            navigation.navigate("Qr")
+            console.log("onPressQR");
+            navigation.navigate("Qr");
           }}
         />
       )}
     </Screen>
-  )
-})
+  );
+});
 
 const $root: ViewStyle = {
   // flex: 1,
@@ -309,4 +333,4 @@ const $root: ViewStyle = {
   // borderColor: "pink",
   backgroundColor: colors.palette.lightBackground,
   flexWrap: "wrap",
-}
+};

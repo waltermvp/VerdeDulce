@@ -1,39 +1,39 @@
-import * as React from "react"
-import { StyleProp, TextStyle, View, ViewStyle, Pressable } from "react-native"
-import { observer } from "mobx-react-lite"
-import { colors, spacing, typography } from "app/theme"
-import { Text } from "app/components/Text"
-import { useMediaQuery } from "react-responsive"
-import { Ionicons } from "@expo/vector-icons"
-import { isRTL, translate, TxKeyPath } from "../i18n"
-import i18n from "i18n-js"
+import * as React from "react";
+import { StyleProp, TextStyle, View, ViewStyle, Pressable } from "react-native";
+import { observer } from "mobx-react-lite";
+import { colors, spacing, typography } from "../../app/theme";
+import { Text } from "../../app/components/Text";
+import { useMediaQuery } from "react-responsive";
+import { Ionicons } from "@expo/vector-icons";
+import { isRTL, translate, TxKeyPath } from "../i18n";
+import i18n from "i18n-js";
 
 export interface OrderButtonProps {
   /**
    * An optional style override useful for padding & margin.
    */
-  style?: StyleProp<ViewStyle>
+  style?: StyleProp<ViewStyle>;
   /**
    * An optional style override useful for padding & margin.
    */
-  textStyle?: StyleProp<TextStyle>
+  textStyle?: StyleProp<TextStyle>;
   /**
    * Text which is looked up via i18n.
    */
-  tx?: TxKeyPath
+  tx?: TxKeyPath;
   /**
    * The text to display if not using `tx` or nested components.
    */
-  text?: string
+  text?: string;
   /**
    * Optional options to pass to i18n. Useful for interpolation
    * as well as explicitly setting locale or translation fallbacks.
    */
-  txOptions?: i18n.TranslateOptions
+  txOptions?: i18n.TranslateOptions;
   /**
    * An optional style override useful for padding & margin.
    */
-  icon?: keyof typeof Ionicons.glyphMap
+  icon?: keyof typeof Ionicons.glyphMap;
 
   /**
    * Function to handle the press event of the order button.
@@ -41,18 +41,20 @@ export interface OrderButtonProps {
    * @callback onPress
    * @returns {void}
    */
-  onPress?: () => void
+  onPress?: () => void;
 }
 
 /**
  * Describe your component here
  */
-export const OrderButton = observer(function OrderButton(props: OrderButtonProps) {
-  const { style, tx, textStyle, text, icon, onPress } = props
-  const [onHoverIn, setOnHoverIn] = React.useState(false)
+export const OrderButton = observer(function OrderButton(
+  props: OrderButtonProps
+) {
+  const { style, tx, textStyle, text, icon, onPress } = props;
+  const [onHoverIn, setOnHoverIn] = React.useState(false);
 
-  const $styles = [$container, style]
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" })
+  const $styles = [$container, style];
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" });
   return (
     <Pressable
       style={[
@@ -65,10 +67,10 @@ export const OrderButton = observer(function OrderButton(props: OrderButtonProps
       ]}
       onPress={onPress}
       onHoverIn={() => {
-        setOnHoverIn(true)
+        setOnHoverIn(true);
       }}
       onHoverOut={() => {
-        setOnHoverIn(false)
+        setOnHoverIn(false);
       }}
     >
       {({ hovered }) => {
@@ -79,7 +81,9 @@ export const OrderButton = observer(function OrderButton(props: OrderButtonProps
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: hovered ? colors.palette.primary100 : colors.palette.greenFont,
+                backgroundColor: hovered
+                  ? colors.palette.primary100
+                  : colors.palette.greenFont,
 
                 padding: isSmallScreen ? spacing.xs : spacing.sm,
                 borderRadius: 13,
@@ -95,8 +99,10 @@ export const OrderButton = observer(function OrderButton(props: OrderButtonProps
               preset="bold"
               style={[
                 {
-                  fontSize: isSmallScreen ? 12 : undefined,
-                  color: !hovered ? colors.palette.primary100 : colors.palette.greenFont,
+                  fontSize: isSmallScreen ? 18 : undefined,
+                  color: !hovered
+                    ? colors.palette.primary100
+                    : colors.palette.greenFont,
                   textAlign: "center",
                 },
                 textStyle,
@@ -116,15 +122,15 @@ export const OrderButton = observer(function OrderButton(props: OrderButtonProps
               />
             )}
           </View>
-        )
+        );
       }}
     </Pressable>
-  )
-})
+  );
+});
 
 const $container: ViewStyle = {
   justifyContent: "center",
   // width: 222,
   flex: 1,
   height: 55,
-}
+};

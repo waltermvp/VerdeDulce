@@ -1,12 +1,10 @@
-import { Instance, SnapshotOut, types } from "mobx-state-tree"
-import { api } from "../services/api"
-import { Item, ItemModel } from "./Item"
-import { withSetPropAction } from "./helpers/withSetPropAction"
-import { useEffect } from "react"
-import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query"
-import { Schema } from "amplify/data/resource"
-import { generateClient } from "aws-amplify/api"
-import { imageCDNURL } from "app/utils/linkbuilder"
+import { Instance, SnapshotOut, types } from "mobx-state-tree";
+import { Item, ItemModel } from "./Item";
+import { withSetPropAction } from "./helpers/withSetPropAction";
+import { useEffect } from "react";
+import { Schema } from "../../amplify/data/resource";
+import { generateClient } from "aws-amplify/api";
+import { imageCDNURL } from "../../app/utils/linkbuilder";
 
 // type Item = Schema["Item"]["type"]
 
@@ -28,43 +26,44 @@ export const EpisodeStoreModel = types
       // }
     },
     addFavorite(item: Item) {
-      store.favorites.push(item)
+      store.favorites.push(item);
     },
     removeFavorite(item: Item) {
-      store.favorites.remove(item)
+      store.favorites.remove(item);
     },
   }))
   .views((store) => ({
     get episodesForList() {
-      return store.favoritesOnly ? store.favorites : store.items
+      return store.favoritesOnly ? store.favorites : store.items;
     },
 
     hasFavorite(item: Item) {
-      return store.favorites.includes(item)
+      return store.favorites.includes(item);
     },
   }))
   .actions((store) => ({
     toggleFavorite(item: Item) {
       if (store.hasFavorite(item)) {
-        store.removeFavorite(item)
+        store.removeFavorite(item);
       } else {
-        store.addFavorite(item)
+        store.addFavorite(item);
       }
     },
-  }))
+  }));
 
 export interface EpisodeStore extends Instance<typeof EpisodeStoreModel> {}
-export interface EpisodeStoreSnapshot extends SnapshotOut<typeof EpisodeStoreModel> {}
+export interface EpisodeStoreSnapshot
+  extends SnapshotOut<typeof EpisodeStoreModel> {}
 
 export const useReactQuerySubscription = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: Infinity,
-      },
-    },
-  })
-  const client = generateClient<Schema>()
+  // const queryClient = new QueryClient({
+  //   defaultOptions: {
+  //     queries: {
+  //       staleTime: Infinity,
+  //     },
+  //   },
+  // });
+  const client = generateClient<Schema>();
 
   useEffect(() => {
     const sub = client.models.Item.observeQuery({
@@ -72,16 +71,16 @@ export const useReactQuerySubscription = () => {
       authMode: "apiKey",
     }).subscribe({
       next: ({ items, isSynced }) => {
-        console.log("Items.observeQuery items", items.length, isSynced)
+        console.log("Items.observeQuery items", items.length, isSynced);
         if (isSynced) {
           // const data = JSON.parse(items)
-          console.log("data", items)
-          console.log("data", typeof items)
-          const queryKey = [...items.entity, data.id].filter(Boolean)
-          queryClient.invalidateQueries({ queryKey })
+          console.log("data", items);
+          console.log("data", typeof items);
+          // const queryKey = [...items.entity, data.id].filter(Boolean);
+          // queryClient.invalidateQueries({ queryKey });
         }
       },
-    })
+    });
 
     // websocket.onmessage = (event) => {
     //   const data = JSON.parse(event.data)
@@ -96,10 +95,10 @@ export const useReactQuerySubscription = () => {
     //   })
     // }
     return () => {
-      sub.unsubscribe()
-    }
-  }, [queryClient])
-}
+      sub.unsubscribe();
+    };
+  }, [client]);
+};
 
 // useEffect(() => {
 //   if (!displayID) {
@@ -128,9 +127,9 @@ export const transformData = (data) => {
   const groupedData = data.reduce((acc, item) => {
     // console.log("item", item)
     // console.log("item", item[0])
-    const category = item.category?.toLowerCase() // Assuming categories are distinct and well-defined
+    const category = item.category?.toLowerCase(); // Assuming categories are distinct and well-defined
     if (!acc[category]) {
-      acc[category] = []
+      acc[category] = [];
     }
 
     acc[category].push({
@@ -162,16 +161,16 @@ export const transformData = (data) => {
         })),
       },
     ],
-  }))
+  }));
 
-  return final
-}
+  return final;
+};
 export const transformDataForSectionList = (data) => {
   // Group items by their category
   const groupedData = data.reduce((acc, item) => {
-    const category = item.category?.toLowerCase() // Assuming categories are distinct and well-defined
+    const category = item.category?.toLowerCase(); // Assuming categories are distinct and well-defined
     if (!acc[category]) {
-      acc[category] = []
+      acc[category] = [];
     }
 
     acc[category].push({
@@ -204,7 +203,7 @@ export const transformDataForSectionList = (data) => {
   const groupedFinal = Object.keys(groupedData).map((category) => ({
     title: category,
     data: groupedData[category],
-  }))
+  }));
 
-  return groupedFinal
-}
+  return groupedFinal;
+};
