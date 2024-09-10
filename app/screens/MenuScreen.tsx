@@ -9,6 +9,7 @@ import {
   MenuItemSmall,
   OrderButton,
   Screen,
+  SimpleMenu,
   Text,
 } from "app/components"
 
@@ -44,15 +45,17 @@ Amplify.configure({
 
 const width = Dimensions.get("window").width
 const sweetgreenMenu = require("menu-es.json")
-
+const itemDimension = 555
+const itemHeight = 222
 interface MenuScreenProps extends AppStackScreenProps<"Menu"> {}
 
 export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   const route = useRoute<RouteProp<MenuNavigatorParamList, "Menu">>()
 
-  const { showHeader, menuType } = route?.params
+  const { showHeader, showFooter, menuType } = route?.params
   // route.params.menuType
   const showHeaderBool = showHeader === "true"
+  const showFooterBool = showFooter === "true"
 
   const [items, setItems] = useState(
     sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true),
@@ -66,6 +69,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   // const hideDialog = () => setVisible(false)
 
   const navigation = useNavigation()
+  const isHugeScreen = useMediaQuery({ query: "(min-width: 768px)" })
   const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" })
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" })
   console.log("is big screen", isBigScreen)
@@ -129,18 +133,23 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
     }, [navigation]),
   )
 
-  const renderSectionTitle = ({ section }: { section: any }) => {
-    return (
-      <View style={{ width: width, paddingLeft: spacing.sm }}>
-        <Text
-          style={{ fontFamily: typography.fonts.poppins.normal, fontSize: 36 }}
-          preset="subheading"
-        >
-          {section.title.toUpperCase()}
-        </Text>
-      </View>
-    )
-  }
+  const renderSectionTitle = ({ section }: { section: any }) => (
+    <View style={{ width: width, paddingLeft: spacing.sm }}>
+      <Text
+        style={{
+          fontFamily: typography.fonts.poppins.normal,
+          fontSize: 36,
+          textDecorationColor: colors.palette.greenFont,
+          // color: colors.palette.greenFont,
+          // @ts-ignore
+          textDecoration: "underline",
+        }}
+        preset="subheading"
+      >
+        {section.title.toUpperCase()}
+      </Text>
+    </View>
+  )
 
   return (
     <Screen style={$root} preset="scroll">
@@ -196,41 +205,108 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
         />
       )}
       {menuType === "menu" && (
-        <SectionGrid
-          renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
-          // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
-          stickySectionHeadersEnabled={true}
-          contentContainerStyle={
-            {
+        <View>
+          <SectionGrid
+            renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
+            // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
+            stickySectionHeadersEnabled={true}
+            contentContainerStyle={{
+              flexWrap: "wrap",
               // margin: spacing.xxl,
               // paddingHorizontal: spacing.xxs,
               // alignItems: "center",
-            }
-          }
-          itemDimension={isBigScreen ? 225 : 350}
-          // itemContainerStyle={{ height: 500 }}
-          // itemContainerStyle={{ height: 200 }}
-          maxItemsPerRow={isBigScreen ? 2 : 1}
-          sections={transformDataForSectionList(items)}
-          renderItem={({ item }) => (
-            <MenuItemSmall name={item.name} price={item.price} description={item.description} />
-          )}
-          renderSectionHeader={renderSectionTitle}
+              // rowGap: 100
+              // gap: 100,
+              // columnGap: 100,
+            }}
+            // itemDimension={itemDimension}
+            itemContainerStyle={{ width: itemDimension, height: itemHeight }}
+            // itemContainerStyle={{ height: 200 }}
+            // maxItemsPerRow={isHugeScreen ? 5 : isBigScreen ? 2 : 1}
+            maxItemsPerRow={4}
+            sections={transformDataForSectionList(items).slice(0, 2)}
+            renderItem={({ item }) => (
+              <MenuItemSmall name={item.name} price={item.price} description={item.description} />
+            )}
+            renderSectionHeader={renderSectionTitle}
+          />
+          <View
+            style={{
+              flexDirection: "row",
+              // backgroundColor: "red",
+              // alignItems: "flex-start",
+              // flex: 1,
+            }}
+          >
+            <SectionGrid
+              renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
+              // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
+              stickySectionHeadersEnabled={true}
+              contentContainerStyle={{
+                flexWrap: "wrap",
+                width: width / 2.75,
+                // margin: spacing.xxl,
+                // paddingHorizontal: spacing.xxs,
+                // alignItems: "center",
+                // rowGap: 100
+                // gap: 100,
+                // columnGap: 100,
+              }}
+              itemContainerStyle={{ width: itemDimension, height: itemHeight }}
+              // maxItemsPerRow={isHugeScreen ? 5 : isBigScreen ? 2 : 1}
+              maxItemsPerRow={4}
+              sections={transformDataForSectionList(items).slice(2, 3)}
+              renderItem={({ item }) => (
+                <MenuItemSmall name={item.name} price={item.price} description={item.description} />
+              )}
+              renderSectionHeader={renderSectionTitle}
+            />
+            <SectionGrid
+              renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
+              // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
+              stickySectionHeadersEnabled={true}
+              contentContainerStyle={
+                {
+                  // marginLeft: -spacing.lg,
+                  // flexWrap: "wrap",
+                  // margin: spacing.xxl,
+                  // paddingHorizontal: spacing.xxs,
+                  // alignItems: "center",
+                  // rowGap: 100
+                  // gap: 100,
+                  // columnGap: 100,
+                  // height: width,
+                }
+              }
+              itemContainerStyle={{ width: itemDimension, height: itemHeight }}
+              // maxItemsPerRow={isHugeScreen ? 5 : isBigScreen ? 2 : 1}
+              maxItemsPerRow={4}
+              sections={transformDataForSectionList(items).slice(3, 4)}
+              renderItem={({ item }) => (
+                <MenuItemSmall name={item.name} price={item.price} description={item.description} />
+              )}
+              renderSectionHeader={renderSectionTitle}
+            />
+          </View>
+        </View>
+      )}
+      {menuType === "simpleMenu" && <SimpleMenu categories={transformDataForSectionList(items)} />}
+      {showFooterBool && (
+        <Footer
+          onPressQr={() => {
+            console.log("onPressQR")
+            navigation.navigate("Qr")
+          }}
         />
       )}
-      <Footer
-        onPressQr={() => {
-          console.log("onPressQR")
-          navigation.navigate("Qr")
-        }}
-      />
     </Screen>
   )
 })
 
 const $root: ViewStyle = {
-  flex: 1,
+  // flex: 1,
   // borderWidth: 3,
   // borderColor: "pink",
   backgroundColor: colors.palette.lightBackground,
+  flexWrap: "wrap",
 }

@@ -16,9 +16,10 @@ import { translate } from "app/i18n"
 // import { useStores } from "app/models"
 import { observer } from "mobx-react-lite"
 
-type menuType = "homepage" | "menu"
+type menuType = "homepage" | "menu" | "simpleMenu"
+
 export type MenuNavigatorParamList = {
-  Menu: { showHeader: string; menuType: menuType }
+  Menu: { showHeader: string; menuType: menuType; showFooter: string }
   FAQ: undefined
   // Order: undefined
   // Admin: undefined
@@ -97,7 +98,7 @@ export const MenuNavigator = observer(() => {
       <Drawer.Screen
         name="Menu"
         component={MenuScreen}
-        initialParams={{ menuType: "homepage", showHeader: true }}
+        initialParams={{ menuType: "homepage", showHeader: true, showFooter: true }}
       />
       <Drawer.Screen name="FAQ" component={FaqScreen} />
       {/* <Drawer.Screen name="Order" component={OrderScreen} /> */}

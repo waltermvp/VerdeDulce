@@ -18,6 +18,8 @@ import {
   OpenSans_700Bold as openSansBold,
 } from "@expo-google-fonts/open-sans"
 
+export * from "@expo-google-fonts/poppins"
+
 import {
   Poppins_100Thin,
   Poppins_100Thin_Italic,
@@ -26,7 +28,17 @@ import {
   Poppins_300Light,
   Poppins_300Light_Italic,
   Poppins_400Regular,
+  Poppins_400Regular_Italic,
+  Poppins_500Medium,
+  Poppins_500Medium_Italic,
   Poppins_600SemiBold,
+  Poppins_600SemiBold_Italic,
+  Poppins_700Bold,
+  Poppins_700Bold_Italic,
+  Poppins_800ExtraBold,
+  Poppins_800ExtraBold_Italic,
+  Poppins_900Black,
+  Poppins_900Black_Italic,
 } from "@expo-google-fonts/poppins"
 
 export const customFontsToLoad = {
@@ -40,6 +52,17 @@ export const customFontsToLoad = {
   openSansMedium,
   openSansSemiBold,
   openSansBold,
+  Poppins_400Regular_Italic,
+  Poppins_500Medium,
+  Poppins_500Medium_Italic,
+  Poppins_600SemiBold_Italic,
+  Poppins_700Bold,
+  Poppins_700Bold_Italic,
+  Poppins_800ExtraBold,
+  Poppins_800ExtraBold_Italic,
+  Poppins_900Black,
+  Poppins_900Black_Italic,
+
   Poppins_400Regular,
   Poppins_600SemiBold,
   Poppins_100Thin,
@@ -53,6 +76,25 @@ export const customFontsToLoad = {
 const fonts = {
   poppins: {
     // Cross-platform Google font.
+    Poppins_100Thin: "Poppins_100Thin",
+    Poppins_100Thin_Italic: "Poppins_100Thin_Italic",
+    Poppins_200ExtraLight: "Poppins_200ExtraLight",
+    Poppins_200ExtraLight_Italic: "Poppins_200ExtraLight_Italic",
+    Poppins_300Light: "Poppins_300Light",
+    Poppins_300Light_Italic: "Poppins_300Light_Italic",
+    Poppins_400Regular: "Poppins_400Regular",
+
+    Poppins_400Regular_Italic: "Poppins_400Regular_Italic",
+    Poppins_500Medium: "Poppins_500Medium",
+    Poppins_500Medium_Italic: "Poppins_500Medium_Italic",
+    Poppins_600SemiBold: "Poppins_600SemiBold",
+    Poppins_600SemiBold_Italic: "Poppins_600SemiBold_Italic",
+    Poppins_700Bold: "Poppins_700Bold",
+    Poppins_700Bold_Italic: "Poppins_700Bold_Italic",
+    Poppins_800ExtraBold: "Poppins_800ExtraBold",
+    Poppins_800ExtraBold_Italic: "Poppins_800ExtraBold_Italic",
+    Poppins_900Black: "Poppins_900Black",
+    Poppins_900Black_Italic: "Poppins_900Black_Italic",
     normal: "Poppins_400Regular",
     semiBold: "Poppins_600SemiBold",
     thin: "Poppins_100Thin",
@@ -61,6 +103,15 @@ const fonts = {
     extraLightItalic: "Poppins_200ExtraLight_Italic",
     light: "Poppins_300Light",
     lightItalic: "Poppins_300Light_Italic",
+
+    medium: "Poppins_500Medium",
+    mediumItalic: "Poppins_500Medium_Italic",
+    bold: "Poppins_700Bold",
+    boldItalic: "Poppins_700Bold_Italic",
+    extraBold: "Poppins_800ExtraBold",
+    extraBoldItalic: "Poppins_800ExtraBold_Italic",
+    black: "Poppins_900Black",
+    blackItalic: "Poppins_900Black_Italic",
   },
   openSans: {
     // Cross-platform Google font.
