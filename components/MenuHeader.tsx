@@ -43,7 +43,7 @@ export const MenuHeader = observer(function MenuHeader(props: MenuHeaderProps) {
           alignSelf: "center",
           fontSize: 38,
           lineHeight: 44,
-          fontFamily: typography.fonts.poppins.light,
+          fontFamily: typography.fonts.poppins.Poppins_300Light,
           fontWeight: "thin",
           // fontStyle: "poppins",
           // paddingBottom: -20,

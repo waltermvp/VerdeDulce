@@ -157,12 +157,12 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
     <View style={{ width: width, paddingLeft: spacing.sm }}>
       <Text
         style={{
-          fontFamily: typography.fonts.poppins.normal,
-          fontSize: 36,
+          fontSize: spacing.xl,
+
           textDecorationColor: colors.palette.greenFont,
-          // color: colors.palette.greenFont,
-          // @ts-ignore
-          textDecoration: "underline",
+          fontFamily: typography.fonts.poppins.Poppins_200ExtraLight_Italic,
+          fontWeight: "bold",
+          color: colors.palette.greenFont,
         }}
         preset="subheading"
       >

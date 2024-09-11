@@ -61,11 +61,17 @@ export default function RootLayout() {
             }}
           />
 
-          <Stack.Screen
+          {/* <Stack.Screen
             name="account"
             initialParams={{ accountID: "123456789" }}
             options={{
               title: "Account Info",
+            }}
+          /> */}
+          <Stack.Screen
+            name="viewer"
+            options={{
+              title: "Viewer",
             }}
           />
         </Stack>

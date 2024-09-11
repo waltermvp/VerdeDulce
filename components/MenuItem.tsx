@@ -19,6 +19,7 @@ export interface MenuItemProps {
   style?: StyleProp<ViewStyle>;
   item: any;
   showDelete?: boolean;
+  showStats?: boolean;
   onDelete?: () => void;
   onPress?: () => void;
   show: boolean;
@@ -35,6 +36,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
     onDelete,
     onPress,
     show = false,
+    showStats = true,
   } = props;
   const $styles = [$container, style];
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
@@ -124,16 +126,18 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                 >
                   {dollars}
                 </Text> */}
-                <Bullets
-                  style={{ marginTop: spacing.md }}
-                  items={[
-                    { title: item.calories, subtitle: "CALORIES" },
-                    { title: item.carbs, subtitle: "CARBS" },
-                    { title: item.protein, subtitle: "PROTEIN" },
-                    { title: item.fat, subtitle: "GRASA" },
-                    // { title: "860", subtitle: "CALORIES" },
-                  ]}
-                />
+                {showStats && (
+                  <Bullets
+                    style={{ marginTop: spacing.md }}
+                    items={[
+                      { title: item.calories, subtitle: "CALORIES" },
+                      { title: item.carbs, subtitle: "CARBS" },
+                      { title: item.protein, subtitle: "PROTEIN" },
+                      { title: item.fat, subtitle: "GRASA" },
+                      // { title: "860", subtitle: "CALORIES" },
+                    ]}
+                  />
+                )}
               </View>
             </View>
             <View style={{ flex: 1 }}>
