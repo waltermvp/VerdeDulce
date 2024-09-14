@@ -72,6 +72,7 @@ export default function RootLayout() {
             name="viewer"
             options={{
               title: "Viewer",
+              headerShown: false,
             }}
           />
         </Stack>

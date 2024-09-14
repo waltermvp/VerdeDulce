@@ -29,3 +29,4 @@ export * from "./Category";
 export * from "./LineItem";
 export * from "./SimpleMenu";
 export * from "./SimpleMenuItem";
+export * from "./Ad";

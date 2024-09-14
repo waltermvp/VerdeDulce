@@ -1,4 +1,4 @@
-import { Tabs } from "expo-router";
+import { Link, Tabs } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
 import React from "react";
@@ -18,6 +18,7 @@ import { useMediaQuery } from "react-responsive";
 import { imageCDNURL } from "../utils/linkbuilder";
 import { OrderButton, Text } from "../../components";
 import { translate } from "../i18n";
+
 const SIZE = 100;
 const SIZE_SMALL = SIZE / 2;
 const ICON_SIZE = SIZE / 4.75;
@@ -97,16 +98,14 @@ export default function TabLayout() {
           drawerActiveTintColor: colors.palette.greenFont,
           headerShown: true,
           headerTitleAlign: "center",
-          // header: () => null,
           headerTitleStyle: {
             color: colors.palette.greenFont,
             fontFamily: typography.fonts.poppins.Poppins_400Regular,
             fontSize: spacing.xl,
           },
-          headerTitle: "verdedulce",
           headerStyle: {
             // backgroundColor: Colors[colorScheme ?? "light"].tint,
-            fontfamily: typography.fonts.poppins.semiBold,
+            // fontfamily: typography.fonts.poppins.semiBold,
             backgroundColor: colors.palette.lightBackground,
           },
           headerLeft: ({ pressColor }) => (
@@ -120,14 +119,25 @@ export default function TabLayout() {
             />
           ),
           headerTintColor: Colors[colorScheme ?? "light"].background,
+          headerTitle: () => (
+            <Link href={"/"}>
+              <Text
+                preset="midHeading"
+                style={{
+                  color: colors.palette.greenFont,
+                  fontFamily: typography.fonts.poppins.semiBold,
+                }}
+              >
+                verdedulce
+              </Text>
+            </Link>
+          ),
         })}
       >
         <Drawer.Screen
           name="index"
           initialParams={{
-            showHeader: "true",
             showFooter: "true",
-            menuType: "homepage",
           }}
           options={{
             title: "Menu",

@@ -32,6 +32,8 @@ import { Amplify } from "aws-amplify";
 import { record } from "aws-amplify/analytics";
 import outputs from "../../amplify_outputs.json";
 import { Link } from "expo-router";
+const strategy = process.env.MARKETING_STRATEGY;
+
 // Amplify.configure({
 //   ...Amplify.getConfig(),
 //   analytics: outputs.analytics,
@@ -50,11 +52,9 @@ const width = Dimensions.get("window").width;
 const sweetgreenMenu = require("../../menu-es.json");
 const itemDimension = 555;
 const itemHeight = 222;
-interface MenuScreenProps extends AppStackScreenProps<"Menu"> {}
 
 export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
-  const route = useRoute<RouteProp<MenuNavigatorParamList, "Menu">>();
-
+  const route = useRoute();
   const { showHeader, showFooter, menuType } = route?.params;
 
   // const showHeader = route?.params?.showHeader;
@@ -112,39 +112,41 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   // }, [])
 
   //TODO: localize
+
+  const whatsappStrategy = strategy === "whatsapp";
+
   useFocusEffect(
     React.useCallback(() => {
       navigation.setOptions({
         headerRight: () => {
           return (
-            <Link href={"/(tabs)"} asChild>
-              {/* <PResse */}
+            <Link href={!whatsappStrategy ? "/(tabs)" : "/"} asChild>
               <OrderButton
-                tx="landingScreen.order"
-                icon="logo-whatsapp"
-                // onPress={async () => {
-                //   // navigation.navigate("OrderNav", { screen: "Home" })
+                tx={
+                  whatsappStrategy
+                    ? "landingScreen.order"
+                    : "landingScreen.order"
+                }
+                icon="arrow-forward"
+                onPress={async () => {
+                  if (strategy === "whatsapp") {
+                    console.log("apiUrl", strategy);
+                    const phoneNumber = "+593963021783"; // Replace with the actual phone number
 
-                //   navigation.navigate("(tabs)", {
-                //     screen: "OrderScreen",
-                //     params: {
-                //       showFooter: "true",
-                //       showHeader: "true",
-                //       menuType: "menu",
-                //     },
-                //   });
-                // return
-                // const phoneNumber = "+593963021783" // Replace with the actual phone number
-
-                // record({
-                //   name: "orderNow",
-                // });
-                // // const message = translate("menuScreen.orderMessage") // Replace with the actual message
-                // const url = "https://wa.me/c/593963021783";
-                // await Linking.openURL(url).catch((err) =>
-                //   console.error("Failed to open WhatsApp", err)
-                // );
-                // }}
+                    record({
+                      name: "orderNow",
+                      attributes: { stragety: "whatsapp" },
+                    });
+                    // const message = translate("menuScreen.orderMessage") // Replace with the actual message
+                    const url = "https://wa.me/c/593963021783";
+                    await Linking.openURL(url).catch((err) =>
+                      console.error("Failed to open WhatsApp", err)
+                    );
+                  } else if (strategy === "sweetgreen") {
+                  } else {
+                  }
+                }}
+                style={{ marginRight: spacing.sm }}
               />
             </Link>
           );
@@ -158,11 +160,8 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       <Text
         style={{
           fontSize: spacing.xl,
-
-          textDecorationColor: colors.palette.greenFont,
           fontFamily: typography.fonts.poppins.Poppins_200ExtraLight_Italic,
           fontWeight: "bold",
-          color: colors.palette.greenFont,
         }}
         preset="subheading"
       >
@@ -173,60 +172,57 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
 
   return (
     <Screen style={$root} preset="scroll">
-      {showHeaderBool && <MenuHeader />}
-      {menuType === "homepage" && (
-        <SectionGrid
-          renderSectionFooter={() => (
-            <View style={{ height: spacing.xl }}></View>
-          )}
-          // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
-          stickySectionHeadersEnabled={true}
-          contentContainerStyle={{
-            // margin: spacing.xxl,
-            // paddingHorizontal: spacing.xxs,
+      <MenuHeader />
 
-            alignItems: "center",
-          }}
-          itemDimension={isSmallScreen ? 225 : 350}
-          // itemContainerStyle={{ height: 200 }}
-          maxItemsPerRow={isSmallScreen ? 1 : 3}
-          sections={transformDataForSectionList(items)}
-          renderItem={({ item }) => (
-            <MenuItem
-              item={item}
-              // showDelete={true}
-              onPress={async () => {
-                record({
-                  name: "orderNow",
-                  attributes: { name: item.name },
-                });
+      <SectionGrid
+        renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
+        // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
+        stickySectionHeadersEnabled={true}
+        contentContainerStyle={{
+          // margin: spacing.xxl,
+          // paddingHorizontal: spacing.xxs,
 
-                // const phoneNumber = "+593963021783" // Replace with the actual phone number
-                // console.log("item", item.itemURL)
-                // const message = translate("menuScreen.orderMenuItemMessage", {
-                //   item: item.name,
-                // }) // Replace with the actual message
-                // console.log("message", message)
-                // const url = `whatsapp://send?text=${encodeURIComponent(
-                //   message + " " + item.itemURL,
-                // )}&phone=${encodeURIComponent(phoneNumber)}`
-                const url = item.itemURL;
-                await Linking.openURL(url).catch((err) =>
-                  console.error("Failed to open WhatsApp", err)
-                );
-                // e.prevent
-              }}
-              onDelete={() => {
-                // setItemIDToDelete(item.id)
-                // showDialog()
-              }}
-              show={true}
-            />
-          )}
-          renderSectionHeader={renderSectionTitle}
-        />
-      )}
-      {menuType === "menu" && (
+          alignItems: "center",
+        }}
+        itemDimension={isSmallScreen ? 225 : 350}
+        // itemContainerStyle={{ height: 200 }}
+        maxItemsPerRow={isSmallScreen ? 1 : 3}
+        sections={transformDataForSectionList(items)}
+        renderItem={({ item }) => (
+          <MenuItem
+            item={item}
+            // showDelete={true}
+            onPress={async () => {
+              record({
+                name: "orderNow",
+                attributes: { name: item.name },
+              });
+
+              // const phoneNumber = "+593963021783" // Replace with the actual phone number
+              // console.log("item", item.itemURL)
+              // const message = translate("menuScreen.orderMenuItemMessage", {
+              //   item: item.name,
+              // }) // Replace with the actual message
+              // console.log("message", message)
+              // const url = `whatsapp://send?text=${encodeURIComponent(
+              //   message + " " + item.itemURL,
+              // )}&phone=${encodeURIComponent(phoneNumber)}`
+              const url = item.itemURL;
+              await Linking.openURL(url).catch((err) =>
+                console.error("Failed to open WhatsApp", err)
+              );
+              // e.prevent
+            }}
+            onDelete={() => {
+              // setItemIDToDelete(item.id)
+              // showDialog()
+            }}
+            show={true}
+          />
+        )}
+        renderSectionHeader={renderSectionTitle}
+      />
+      {/* {menuType === "menu" && (
         <View>
           <SectionGrid
             renderSectionFooter={() => (
@@ -332,7 +328,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       )}
       {menuType === "simpleMenu" && (
         <SimpleMenu categories={transformDataForSectionList(items)} />
-      )}
+      )} */}
       {showFooterBool && (
         <Footer
           onPressQr={() => {

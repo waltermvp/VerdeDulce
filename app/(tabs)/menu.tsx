@@ -50,16 +50,16 @@ const sweetgreenMenu = require("../../menu-es.json");
 const itemDimension = 555;
 const itemHeight = 222;
 
+//TODO: This menu needs to be able to add to cart!
 export default observer(function MenuScreen() {
   const route = useRoute();
 
-  const { showHeader, showFooter, menuType } = route?.params;
+  const { showFooter, menuType } = route?.params;
 
   // const showHeader = route?.params?.showHeader;
   // const showFooter = route?.params?.showFooter;
   // const menuType = route?.params?.menuType;
   // route.params.menuType
-  const showHeaderBool = showHeader === "true";
   const showFooterBool = showFooter === "true";
 
   const [items, setItems] = useState(
@@ -149,15 +149,14 @@ export default observer(function MenuScreen() {
   );
 
   const renderSectionTitle = ({ section }: { section: any }) => (
-    <View style={{ width: width, paddingLeft: spacing.sm }}>
+    <View style={{ width: width }}>
       <Text
         style={{
-          fontFamily: typography.fonts.poppins.normal,
-          fontSize: 36,
+          fontFamily: typography.fonts.poppins.Poppins_200ExtraLight_Italic,
+          fontSize: 26,
+          lineHeight: 29,
           textDecorationColor: colors.palette.greenFont,
-          // color: colors.palette.greenFont,
-          // @ts-ignore
-          textDecoration: "underline",
+          color: "rgb(14, 21, 14)",
         }}
         preset="subheading"
       >
@@ -168,60 +167,53 @@ export default observer(function MenuScreen() {
 
   return (
     <Screen style={$root} preset="scroll">
-      {showHeaderBool && <MenuHeader />}
-      {menuType === "homepage" && (
-        <SectionGrid
-          renderSectionFooter={() => (
-            <View style={{ height: spacing.xl }}></View>
-          )}
-          // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
-          stickySectionHeadersEnabled={true}
-          contentContainerStyle={{
-            // margin: spacing.xxl,
-            // paddingHorizontal: spacing.xxs,
+      <SectionGrid
+        renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
+        // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
+        stickySectionHeadersEnabled={true}
+        contentContainerStyle={{
+          alignItems: "center",
+        }}
+        // itemDimension={isSmallScreen ? 225 : 350}
+        // itemContainerStyle={{ height: 200 }}
+        maxItemsPerRow={isSmallScreen ? 1 : 3}
+        sections={transformDataForSectionList(items)}
+        renderItem={({ item }) => (
+          <MenuItem
+            preset="menu"
+            item={item}
+            // showDelete={true}
+            onPress={async () => {
+              record({
+                name: "orderNow",
+                attributes: { name: item.name },
+              });
 
-            alignItems: "center",
-          }}
-          itemDimension={isSmallScreen ? 225 : 350}
-          // itemContainerStyle={{ height: 200 }}
-          maxItemsPerRow={isSmallScreen ? 1 : 3}
-          sections={transformDataForSectionList(items)}
-          renderItem={({ item }) => (
-            <MenuItem
-              item={item}
-              // showDelete={true}
-              onPress={async () => {
-                record({
-                  name: "orderNow",
-                  attributes: { name: item.name },
-                });
-
-                // const phoneNumber = "+593963021783" // Replace with the actual phone number
-                // console.log("item", item.itemURL)
-                // const message = translate("menuScreen.orderMenuItemMessage", {
-                //   item: item.name,
-                // }) // Replace with the actual message
-                // console.log("message", message)
-                // const url = `whatsapp://send?text=${encodeURIComponent(
-                //   message + " " + item.itemURL,
-                // )}&phone=${encodeURIComponent(phoneNumber)}`
-                const url = item.itemURL;
-                await Linking.openURL(url).catch((err) =>
-                  console.error("Failed to open WhatsApp", err)
-                );
-                // e.prevent
-              }}
-              onDelete={() => {
-                // setItemIDToDelete(item.id)
-                // showDialog()
-              }}
-              show={true}
-            />
-          )}
-          renderSectionHeader={renderSectionTitle}
-        />
-      )}
-      {menuType === "menu" && (
+              // const phoneNumber = "+593963021783" // Replace with the actual phone number
+              // console.log("item", item.itemURL)
+              // const message = translate("menuScreen.orderMenuItemMessage", {
+              //   item: item.name,
+              // }) // Replace with the actual message
+              // console.log("message", message)
+              // const url = `whatsapp://send?text=${encodeURIComponent(
+              //   message + " " + item.itemURL,
+              // )}&phone=${encodeURIComponent(phoneNumber)}`
+              const url = item.itemURL;
+              await Linking.openURL(url).catch((err) =>
+                console.error("Failed to open WhatsApp", err)
+              );
+              // e.prevent
+            }}
+            onDelete={() => {
+              // setItemIDToDelete(item.id)
+              // showDialog()
+            }}
+            show={true}
+          />
+        )}
+        renderSectionHeader={renderSectionTitle}
+      />
+      {/* {menuType === "menu" && (
         <View>
           <SectionGrid
             renderSectionFooter={() => (
@@ -327,7 +319,7 @@ export default observer(function MenuScreen() {
       )}
       {menuType === "simpleMenu" && (
         <SimpleMenu categories={transformDataForSectionList(items)} />
-      )}
+      )} */}
       {showFooterBool && (
         <Footer
           onPressQr={() => {
@@ -345,5 +337,6 @@ const $root: ViewStyle = {
   // borderWidth: 3,
   // borderColor: "pink",
   backgroundColor: colors.palette.lightBackground,
-  flexWrap: "wrap",
+  // flexWrap: "wrap",
+  padding: spacing.md,
 };
