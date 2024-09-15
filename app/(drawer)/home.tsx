@@ -1,10 +1,16 @@
 import React, { FC, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { Dimensions, ViewStyle, View } from "react-native";
+import {
+  Dimensions,
+  ViewStyle,
+  View,
+  SectionList,
+  FlatList,
+} from "react-native";
 import {
   Footer,
   MenuHeader,
-  MenuItem,
+  HomeItem,
   MenuItemSmall,
   OrderButton,
   Screen,
@@ -20,6 +26,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { imageCDNURL } from "../utils/linkbuilder";
 // import Config from "../config"
 import {
+  transformData,
   // transformData,
   transformDataForSectionList,
 } from "../models/ItemStore";
@@ -32,12 +39,11 @@ import { Amplify } from "aws-amplify";
 import { record } from "aws-amplify/analytics";
 import outputs from "../../amplify_outputs.json";
 import { Link } from "expo-router";
+import Home from "../(tabs)/(home)/home";
 const strategy = process.env.MARKETING_STRATEGY;
 
-// Amplify.configure({
-//   ...Amplify.getConfig(),
-//   analytics: outputs.analytics,
-// });
+// TODO: - 768 contains two columns anything larger is three
+
 Amplify.configure({
   ...Amplify.getConfig(),
   Analytics: {
@@ -76,11 +82,11 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   // const hideDialog = () => setVisible(false)
 
   const navigation = useNavigation();
-  const isHugeScreen = useMediaQuery({ query: "(min-width: 768px)" });
   const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" });
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 480px)" });
   console.log("is big screen", isBigScreen);
-
+  const numColumns = isBigScreen ? 3 : isSmallScreen ? 1 : 2;
+  console.log("maxItemsPerRow", numColumns);
   // console.log(" ", imageCDNURL("menu/Hot_Honey_Chicken.png"));
   console.log(" ", imageCDNURL("VerdeDulce_logo.png", "og"));
   // useEffect(() => {
@@ -154,9 +160,65 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       });
     }, [navigation])
   );
+  const renderSection = ({ item }) => {
+    return (
+      <FlatList
+        style={
+          {
+            // flex: 1,
+            // borderWidth: 2,
+            // backgroundColor: "brown",
+            //MARK: Needed for 1 column state
+            // alignItems: "center",
+          }
+        }
+        contentContainerStyle={
+          {
+            // flex: 1,
+            // width: "100%",
+            // padding: spacing.md,
+            // paddingTop: 100,
+          }
+        }
+        columnWrapperStyle={
+          numColumns > 1 && { rowGap: 50, columnGap: 50, gap: 50 }
+        }
+        key={numColumns}
+        data={item.list}
+        numColumns={numColumns}
+        renderItem={({ item }) => (
+          <HomeItem
+            preset="default"
+            item={item}
+            // showDelete={true}
+            onPress={async () => {
+              record({
+                name: "orderNow",
+                attributes: { name: item.name },
+              });
+
+              const url = item.itemURL;
+              await Linking.openURL(url).catch((err) =>
+                console.error("Failed to open WhatsApp", err)
+              );
+              // e.prevent
+            }}
+            onDelete={() => {
+              // setItemIDToDelete(item.id)
+              // showDialog()
+            }}
+          />
+        )}
+        keyExtractor={keyExtractor}
+      />
+    );
+  };
+  const keyExtractor = (item) => {
+    return item.name;
+  };
 
   const renderSectionTitle = ({ section }: { section: any }) => (
-    <View style={{ width: width, paddingLeft: spacing.sm }}>
+    <View style={{ marginBottom: spacing.md }}>
       <Text
         style={{
           fontSize: spacing.xl,
@@ -171,55 +233,30 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   );
 
   return (
-    <Screen style={$root} preset="scroll">
+    <Screen
+      style={$root}
+      preset="scroll"
+      // ScrollViewProps={
+      //   numColumns === 1
+      //     ? { contentContainerStyle: { alignItems: "center" } }
+      //     : { contentContainerStyle: { alignItems: "" } }
+      // }
+    >
       <MenuHeader />
 
-      <SectionGrid
-        renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
-        // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
+      <SectionList
         stickySectionHeadersEnabled={true}
         contentContainerStyle={{
-          // margin: spacing.xxl,
-          // paddingHorizontal: spacing.xxs,
-
-          alignItems: "center",
+          marginHorizontal: numColumns > 1 ? spacing.xl : spacing.md,
+          justifyContent: "center",
         }}
-        itemDimension={isSmallScreen ? 225 : 350}
+        // getItemLayout={}
+        // itemDimension={isSmallScreen ? 225 : 350}
         // itemContainerStyle={{ height: 200 }}
-        maxItemsPerRow={isSmallScreen ? 1 : 3}
-        sections={transformDataForSectionList(items)}
-        renderItem={({ item }) => (
-          <MenuItem
-            item={item}
-            // showDelete={true}
-            onPress={async () => {
-              record({
-                name: "orderNow",
-                attributes: { name: item.name },
-              });
-
-              // const phoneNumber = "+593963021783" // Replace with the actual phone number
-              // console.log("item", item.itemURL)
-              // const message = translate("menuScreen.orderMenuItemMessage", {
-              //   item: item.name,
-              // }) // Replace with the actual message
-              // console.log("message", message)
-              // const url = `whatsapp://send?text=${encodeURIComponent(
-              //   message + " " + item.itemURL,
-              // )}&phone=${encodeURIComponent(phoneNumber)}`
-              const url = item.itemURL;
-              await Linking.openURL(url).catch((err) =>
-                console.error("Failed to open WhatsApp", err)
-              );
-              // e.prevent
-            }}
-            onDelete={() => {
-              // setItemIDToDelete(item.id)
-              // showDialog()
-            }}
-            show={true}
-          />
-        )}
+        // maxItemsPerRow={maxItemsPerRow}
+        // sections={transformDataForSectionList(items)}
+        sections={transformData(items)}
+        renderItem={renderSection}
         renderSectionHeader={renderSectionTitle}
       />
       {/* {menuType === "menu" && (
@@ -346,5 +383,5 @@ const $root: ViewStyle = {
   // borderWidth: 3,
   // borderColor: "pink",
   backgroundColor: colors.palette.lightBackground,
-  flexWrap: "wrap",
+  // flexWrap: "wrap",
 };

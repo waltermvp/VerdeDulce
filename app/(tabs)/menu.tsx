@@ -74,10 +74,13 @@ export default observer(function MenuScreen() {
   // const hideDialog = () => setVisible(false)
 
   const navigation = useNavigation();
-  const isHugeScreen = useMediaQuery({ query: "(min-width: 768px)" });
-  const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" });
+  const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 });
+  const isBigScreen = useMediaQuery({ minWidth: 768 });
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 });
+  const isPortrait = useMediaQuery({ orientation: "portrait" });
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
   console.log("is big screen", isBigScreen);
+  // console.log("is isSmallScreen", isSmallScreen);
 
   // console.log(" ", imageCDNURL("menu/Hot_Honey_Chicken.png"));
   console.log(" ", imageCDNURL("VerdeDulce_logo.png", "og"));
@@ -92,7 +95,7 @@ export default observer(function MenuScreen() {
   //     authMode: "apiKey",
   //   }).subscribe({
   //     next: ({ items, isSynced }) => {
-  //       setIsSyncedLocal(isSynced)
+  //       setIsSyncedLocal(isSynced)papcka
   //       if (isSynced) {
   //         if (items.length > 0) {
   //           const transformed = transformDataForSectionList(items)
@@ -149,14 +152,24 @@ export default observer(function MenuScreen() {
   );
 
   const renderSectionTitle = ({ section }: { section: any }) => (
-    <View style={{ width: width }}>
+    <View
+      style={{
+        // backgroundColor: "red",
+        width: "100%",
+        alignItems: "flex-start",
+        alignSelf: "flex-end",
+        justifyContent: "center",
+      }}
+    >
       <Text
         style={{
+          textAlign: "left",
           fontFamily: typography.fonts.poppins.Poppins_200ExtraLight_Italic,
           fontSize: 26,
           lineHeight: 29,
           textDecorationColor: colors.palette.greenFont,
           color: "rgb(14, 21, 14)",
+          // backgroundColor: "red",
         }}
         preset="subheading"
       >
