@@ -54,14 +54,6 @@ const itemHeight = 222;
 export default observer(function MenuScreen() {
   const route = useRoute();
 
-  const { showFooter, menuType } = route?.params;
-
-  // const showHeader = route?.params?.showHeader;
-  // const showFooter = route?.params?.showFooter;
-  // const menuType = route?.params?.menuType;
-  // route.params.menuType
-  const showFooterBool = showFooter === "true";
-
   const [items, setItems] = useState(
     sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true)
   );
@@ -126,11 +118,6 @@ export default observer(function MenuScreen() {
 
                 navigation.navigate("(tabs)", {
                   screen: "OrderScreen",
-                  params: {
-                    showFooter: "true",
-                    showHeader: "true",
-                    menuType: "menu",
-                  },
                 });
                 // return
                 // const phoneNumber = "+593963021783" // Replace with the actual phone number
@@ -333,14 +320,13 @@ export default observer(function MenuScreen() {
       {menuType === "simpleMenu" && (
         <SimpleMenu categories={transformDataForSectionList(items)} />
       )} */}
-      {showFooterBool && (
-        <Footer
-          onPressQr={() => {
-            console.log("onPressQR");
-            navigation.navigate("Qr");
-          }}
-        />
-      )}
+
+      <Footer
+        onPressQr={() => {
+          console.log("onPressQR");
+          navigation.navigate("Qr");
+        }}
+      />
     </Screen>
   );
 });

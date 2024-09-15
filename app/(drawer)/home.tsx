@@ -61,14 +61,6 @@ const itemHeight = 222;
 
 export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   const route = useRoute();
-  const { showHeader, showFooter, menuType } = route?.params;
-
-  // const showHeader = route?.params?.showHeader;
-  // const showFooter = route?.params?.showFooter;
-  // const menuType = route?.params?.menuType;
-  // route.params.menuType
-  const showHeaderBool = showHeader === "true";
-  const showFooterBool = showFooter === "true";
 
   const [items, setItems] = useState(
     sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true)
@@ -243,7 +235,6 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       // }
     >
       <MenuHeader />
-
       <SectionList
         stickySectionHeadersEnabled={true}
         contentContainerStyle={{
@@ -366,14 +357,13 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       {menuType === "simpleMenu" && (
         <SimpleMenu categories={transformDataForSectionList(items)} />
       )} */}
-      {showFooterBool && (
-        <Footer
-          onPressQr={() => {
-            console.log("onPressQR");
-            navigation.navigate("Qr");
-          }}
-        />
-      )}
+
+      <Footer
+        onPressQr={() => {
+          console.log("onPressQR");
+          navigation.navigate("Qr");
+        }}
+      />
     </Screen>
   );
 });
