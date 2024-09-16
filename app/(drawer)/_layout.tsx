@@ -43,12 +43,12 @@ export default function TabLayout() {
             /> */}
             <OrderButton
               style={{
-                padding: spacing.md,
+                margin: spacing.md,
               }}
               text={CTA}
               onPress={() => Linking.openURL("https://wa.me/c/593963021783")}
             />
-            <View
+            {/* <View
               {...props}
               style={{
                 margin: spacing.md,
@@ -82,7 +82,7 @@ export default function TabLayout() {
                 />
                 <Text style={$reserved}>&copy; 2024 verdedulce</Text>
               </Pressable>
-            </View>
+            </View> */}
           </DrawerContentScrollView>
         )}
         screenOptions={({ navigation }) => ({
