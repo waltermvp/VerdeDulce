@@ -137,9 +137,6 @@ export default function TabLayout() {
       >
         <Drawer.Screen
           name="index"
-          initialParams={{
-            showFooter: "true",
-          }}
           options={{
             title: "Menu",
             drawerIcon: ({ color, focused }) => (

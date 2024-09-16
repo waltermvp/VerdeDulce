@@ -64,9 +64,6 @@ export default function TabLayout() {
         })}
       />
       <Tabs.Screen
-        initialParams={{
-          showFooter: "true",
-        }}
         name="menu"
         options={{
           headerShown: true,
