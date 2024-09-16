@@ -210,10 +210,14 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   };
 
   const renderSectionTitle = ({ section }: { section: any }) => (
-    <View style={{ marginBottom: spacing.md }}>
+    <View
+      style={{
+        marginBottom: spacing.md,
+      }}
+    >
       <Text
         style={{
-          fontSize: spacing.xl,
+          fontSize: spacing.lg,
           fontFamily: typography.fonts.poppins.Poppins_200ExtraLight_Italic,
           fontWeight: "bold",
         }}

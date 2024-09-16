@@ -55,7 +55,6 @@ export default function TabLayout() {
         options={({ route }) => ({
           title: "Home",
           headerTitle: getHeaderTitle(route),
-
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "home" : "home-outline"}

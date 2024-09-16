@@ -18,6 +18,7 @@ const palette = {
   lightYellowGreen: "#ebfe72",
   paleBlue: "#dae8e9",
   greenFont: "#0B3E35",
+  darkKale: "#0E150E",
 
   neutral100: "#FFFFFF",
   neutral200: "#F4F2F1",

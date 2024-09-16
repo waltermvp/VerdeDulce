@@ -16,6 +16,8 @@ import { QrCodeSvg } from "react-native-qr-svg";
 import { Image } from "expo-image";
 import { imageCDNURL } from "../app/utils/linkbuilder";
 import { useMediaQuery } from "react-responsive";
+import { Marquee } from "./Marquee";
+import { Link } from "expo-router";
 
 const SIZE = 125;
 const SIZE_SMALL = SIZE / 2;
@@ -38,79 +40,85 @@ export const Footer = observer(function Footer(props: FooterProps) {
   const { style, onPressQr } = props;
   const $styles = [$container, style];
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
+  const [hovering, setHovering] = React.useState(false);
 
   return (
     <View style={$styles}>
-      <View
-        style={{
-          flex: 1,
-          borderTopWidth: 1,
-          borderBottomWidth: 1,
-          borderColor: colors.palette.greenFont,
-          padding: spacing.xxxl,
-        }}
-      >
+      <View style={$newsletterContainer}>
         <Newsletter />
       </View>
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: colors.palette.footerGreen,
-          alignItems: "space-between",
-          padding: spacing.xl,
-          flexDirection: "row",
-
-          // borderTopWidth: 1,
-          // borderBottomWidth: 1,
-          // borderColor: colors.palette.greenFont,
-        }}
-      >
-        <Bullet
-          bullets={[
-            {
-              title: "Social",
-              links: [
-                {
-                  title: "Facebook",
-                  url: "https://www.facebook.com/profile.php?id=61564202236840",
-                  icon: "logo-facebook",
-                },
-                {
-                  title: "Instagram",
-                  url: "https://www.instagram.com/verdedulce_",
-                  icon: "logo-instagram",
-                },
-              ],
-            },
-          ]}
-        />
-        {/* add copyright information */}
-        <View style={{ flex: 1 }}>
-          <Pressable onPress={onPressQr}>
-            <QrCodeSvg
-              style={
-                isSmallScreen
-                  ? { padding: spacing.xs, alignSelf: "flex-end" }
-                  : styles.qr
-              }
-              value={CONTENT}
-              frameSize={isSmallScreen ? SIZE_SMALL : SIZE}
-              contentCells={5}
-              content={
-                <Image
-                  style={{
-                    width: isSmallScreen ? ICON_SIZE_SMALL : ICON_SIZE,
-                    height: isSmallScreen ? ICON_SIZE_SMALL : ICON_SIZE,
-                  }}
-                  source={{ uri: imageCDNURL("VerdeDulce_logo.png") }}
-                />
-              }
-              backgroundColor={colors.palette.greenFont}
-              dotColor="#ffff"
-              contentStyle={styles.box}
-            />
-            <Text style={$reserved}>&copy; 2024 VerdeDulce</Text>
+      <View style={{ backgroundColor: colors.palette.footerGreen }}>
+        <Link href={"/(tabs)"} asChild>
+          <Pressable
+            onHoverIn={() => setHovering(true)}
+            onHoverOut={() => setHovering(false)}
+          >
+            <View style={$marquee}>
+              <Marquee duration={20000} reverse>
+                <Text
+                  preset="heading"
+                  style={hovering ? $marqueeTextUL : $marqueeText}
+                >
+                  Presentamos el Bistec con Ajo Caramelizado. Pruébalo hoy en
+                  uno de nuestros tres nuevos platos del menú.​
+                </Text>
+              </Marquee>
+            </View>
           </Pressable>
+        </Link>
+        <View
+          style={{
+            alignItems: "flex-start",
+            padding: spacing.md,
+          }}
+        >
+          <Bullet
+            bullets={[
+              {
+                title: "Social",
+                links: [
+                  {
+                    title: "Facebook",
+                    url: "https://www.facebook.com/profile.php?id=61564202236840",
+                    icon: "logo-facebook",
+                  },
+                  {
+                    title: "Instagram",
+                    url: "https://www.instagram.com/verdedulce_",
+                    icon: "logo-instagram",
+                  },
+                ],
+              },
+            ]}
+          />
+          {/* add copyright information */}
+          <View style={{ flex: 1 }}>
+            <Pressable onPress={onPressQr}>
+              <QrCodeSvg
+                style={
+                  isSmallScreen
+                    ? { padding: spacing.xs, alignSelf: "flex-end" }
+                    : styles.qr
+                }
+                value={CONTENT}
+                frameSize={isSmallScreen ? SIZE_SMALL : SIZE}
+                contentCells={5}
+                content={
+                  <Image
+                    style={{
+                      width: isSmallScreen ? ICON_SIZE_SMALL : ICON_SIZE,
+                      height: isSmallScreen ? ICON_SIZE_SMALL : ICON_SIZE,
+                    }}
+                    source={{ uri: imageCDNURL("VerdeDulce_logo.png") }}
+                  />
+                }
+                backgroundColor={colors.palette.greenFont}
+                dotColor="#ffff"
+                contentStyle={styles.box}
+              />
+              <Text style={$reserved}>&copy; 2024 VerdeDulce</Text>
+            </Pressable>
+          </View>
         </View>
       </View>
     </View>
@@ -152,4 +160,37 @@ const $reserved: TextStyle = {
   alignSelf: "flex-end",
   paddingTop: spacing.sm,
   textAlign: "right",
+};
+const $newsletterContainer: ViewStyle = {
+  flex: 1,
+  borderTopWidth: 1,
+  // borderBottomWidth: 1,
+  borderColor: colors.palette.greenFont,
+  padding: spacing.xxxl,
+};
+const $marquee: ViewStyle = {
+  flex: 1,
+  flexDirection: "row",
+  paddingVertical: spacing.lg,
+  // borderColor: "red",
+  // borderWidth: 2,
+};
+const $marqueeText: TextStyle = {
+  // flex: 1,
+  fontSize: spacing.xl + spacing.sm,
+  fontFamily: typography.fonts.poppins.normal,
+  letterSpacing: -spacing.xxxs,
+  // Margin whitsepace
+  marginRight: spacing.xxl,
+  color: colors.palette.darkKale,
+};
+const $marqueeTextUL: TextStyle = {
+  // flex: 1,
+  fontSize: spacing.xl + spacing.sm,
+  fontFamily: typography.fonts.poppins.normal,
+  letterSpacing: -spacing.xxxs,
+  // Margin whitsepace
+  marginRight: spacing.xxl,
+  color: colors.palette.darkKale,
+  textDecorationLine: "underline",
 };
