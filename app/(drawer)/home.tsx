@@ -41,10 +41,10 @@ import outputs from "../../amplify_outputs.json";
 import { Href, Link } from "expo-router";
 import Home from "../(tabs)/(home)/home";
 const strategy = process.env.EXPO_PUBLIC_MARKETING_STRATEGY;
-const URL = process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL
-  ? process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL
-  : "";
-
+const URL = (process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL as Href)
+  ? (process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL as Href)
+  : ("" as Href);
+console.log("process.env", process.env);
 // TODO: - 768 contains two columns anything larger is three
 
 Amplify.configure({
