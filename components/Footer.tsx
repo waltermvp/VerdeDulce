@@ -18,6 +18,7 @@ import { imageCDNURL } from "../app/utils/linkbuilder";
 import { useMediaQuery } from "react-responsive";
 import { Marquee } from "./Marquee";
 import { Link } from "expo-router";
+const strategy = process.env.MARKETING_STRATEGY;
 
 const SIZE = 125;
 const SIZE_SMALL = SIZE / 2;
@@ -41,6 +42,7 @@ export const Footer = observer(function Footer(props: FooterProps) {
   const $styles = [$container, style];
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
   const [hovering, setHovering] = React.useState(false);
+  const whatsappStrategy = strategy === "whatsapp";
 
   return (
     <View style={$styles}>
@@ -48,7 +50,7 @@ export const Footer = observer(function Footer(props: FooterProps) {
         <Newsletter />
       </View>
       <View style={{ backgroundColor: colors.palette.footerGreen }}>
-        <Link href={"/(tabs)"} asChild>
+        <Link href={!whatsappStrategy ? url : "/(tabs)"} asChild>
           <Pressable
             onHoverIn={() => setHovering(true)}
             onHoverOut={() => setHovering(false)}
