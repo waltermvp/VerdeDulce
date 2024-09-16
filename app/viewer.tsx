@@ -20,7 +20,7 @@ import { QrCodeSvg } from "react-native-qr-svg";
 import { imageCDNURL } from "./utils/linkbuilder";
 import { Ionicons } from "@expo/vector-icons";
 const height = Dimensions.get("window").height;
-const MARKETING_STRATEGY = "AD";
+const EXPO_PUBLIC_MARKETING_STRATEGY = "AD";
 const SIZE = 225;
 const ICON_SIZE = SIZE / 4.75;
 const CONTENT = "https://wa.me/c/593963021783";
@@ -69,14 +69,10 @@ export interface IntroEmailProps {
 export default observer(function IntroEmail(props: IntroEmailProps) {
   const { style, onPress } = props;
   const $styles = [$container, style];
-  console.log(MARKETING_STRATEGY);
-  console.log(MARKETING_STRATEGY);
-  console.log(MARKETING_STRATEGY);
-  console.log(MARKETING_STRATEGY);
 
   return (
     <Screen style={$styles} preset="scroll">
-      {MARKETING_STRATEGY === "whatsapp" && (
+      {EXPO_PUBLIC_MARKETING_STRATEGY === "whatsapp" && (
         <View style={$styles}>
           <Markdown
             style={{
@@ -127,8 +123,8 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
         </View>
       )}
 
-      {MARKETING_STRATEGY === "sweetgreen" && <></>}
-      {MARKETING_STRATEGY === "AD" && (
+      {EXPO_PUBLIC_MARKETING_STRATEGY === "sweetgreen" && <></>}
+      {EXPO_PUBLIC_MARKETING_STRATEGY === "AD" && (
         <View
           style={{
             flexDirection: "row",

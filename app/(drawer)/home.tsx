@@ -40,10 +40,11 @@ import { record } from "aws-amplify/analytics";
 import outputs from "../../amplify_outputs.json";
 import { Href, Link } from "expo-router";
 import Home from "../(tabs)/(home)/home";
-const strategy = process.env.MARKETING_STRATEGY;
-const URL = process.env.WHATSAPP_CATALOG_URL
-  ? process.env.WHATSAPP_CATALOG_URL
+const strategy = process.env.EXPO_PUBLIC_MARKETING_STRATEGY;
+const URL = process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL
+  ? process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL
   : "";
+
 // TODO: - 768 contains two columns anything larger is three
 
 Amplify.configure({
@@ -84,7 +85,6 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   //TODO: localize
 
   const whatsappStrategy = strategy === "whatsapp";
-
   useFocusEffect(
     React.useCallback(() => {
       navigation.setOptions({
