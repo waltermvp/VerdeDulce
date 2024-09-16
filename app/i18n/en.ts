@@ -3,7 +3,7 @@ const en = {
     name: "Verde Dulce",
     order: "Order",
     comingSoon: "Coming Soon!",
-    prompt: "Fresh, high quality. Sourced sustanably and locally.",
+    prompt: "Fresh, high quality. Sourced locally.",
   },
   common: {
     ok: "OK!",

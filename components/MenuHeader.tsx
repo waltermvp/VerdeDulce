@@ -42,10 +42,10 @@ export const MenuHeader = observer(function MenuHeader(props: MenuHeaderProps) {
             preset="headingLG"
             style={{
               textAlign: "center",
-              paddingVertical: spacing.xxxl,
+              paddingVertical: spacing.xxl,
               maxWidth: "75%",
               alignSelf: "center",
-              // fontSize: 38,
+              fontSize: 40,
               lineHeight: 44,
               fontFamily: typography.fonts.poppins.Poppins_300Light,
               fontWeight: "thin",

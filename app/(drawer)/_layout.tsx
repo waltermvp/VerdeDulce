@@ -110,8 +110,9 @@ export default function TabLayout() {
           },
           headerLeft: ({ pressColor }) => (
             <Ionicons
-              name="menu"
-              size={44}
+              style={{ marginLeft: spacing.sm }}
+              name="menu-outline"
+              size={32}
               color={colors.palette.greenFont}
               onPress={() => {
                 navigation.toggleDrawer();
