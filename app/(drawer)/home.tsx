@@ -38,10 +38,12 @@ import { SectionGrid } from "react-native-super-grid";
 import { Amplify } from "aws-amplify";
 import { record } from "aws-amplify/analytics";
 import outputs from "../../amplify_outputs.json";
-import { Link } from "expo-router";
+import { Href, Link } from "expo-router";
 import Home from "../(tabs)/(home)/home";
 const strategy = process.env.MARKETING_STRATEGY;
-
+const URL = process.env.WHATSAPP_CATALOG_URL
+  ? process.env.WHATSAPP_CATALOG_URL
+  : "";
 // TODO: - 768 contains two columns anything larger is three
 
 Amplify.configure({
@@ -79,36 +81,6 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
   console.log("is big screen", isBigScreen);
   const numColumns = isBigScreen ? 3 : isSmallScreen ? 1 : 2;
   console.log("maxItemsPerRow", numColumns);
-  // console.log(" ", imageCDNURL("menu/Hot_Honey_Chicken.png"));
-  console.log(" ", imageCDNURL("VerdeDulce_logo.png", "og"));
-  // useEffect(() => {
-  //   // if (!displayID) {
-  //   //   // setMode(MODE.MISSING_UDID)
-  //   //   return
-  //   // }
-
-  //   const sub = client.models.Item.observeQuery({
-  //     // filter: { displayId: { eq: displayID } },
-  //     authMode: "apiKey",
-  //   }).subscribe({
-  //     next: ({ items, isSynced }) => {
-  //       setIsSyncedLocal(isSynced)
-  //       if (isSynced) {
-  //         if (items.length > 0) {
-  //           const transformed = transformDataForSectionList(items)
-  //           console.log("transformed", transformed)
-  //           setItems(transformed)
-  //         }
-
-  //         // setSlideCount(items.length)
-  //       }
-  //     },
-  //   })
-  //   return () => {
-  //     sub.unsubscribe()
-  //   }
-  // }, [])
-
   //TODO: localize
 
   const whatsappStrategy = strategy === "whatsapp";
@@ -118,7 +90,7 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
       navigation.setOptions({
         headerRight: () => {
           return (
-            <Link href={!whatsappStrategy ? "/(tabs)" : "/"} asChild>
+            <Link href={whatsappStrategy ? URL : "/(tabs)"} asChild>
               <OrderButton
                 tx={
                   whatsappStrategy
@@ -126,24 +98,6 @@ export const MenuScreen: FC<MenuScreenProps> = observer(function MenuScreen() {
                     : "landingScreen.order"
                 }
                 icon="arrow-forward"
-                onPress={async () => {
-                  if (strategy === "whatsapp") {
-                    console.log("apiUrl", strategy);
-                    const phoneNumber = "+593963021783"; // Replace with the actual phone number
-
-                    record({
-                      name: "orderNow",
-                      attributes: { stragety: "whatsapp" },
-                    });
-                    // const message = translate("menuScreen.orderMessage") // Replace with the actual message
-                    const url = "https://wa.me/c/593963021783";
-                    await Linking.openURL(url).catch((err) =>
-                      console.error("Failed to open WhatsApp", err)
-                    );
-                  } else if (strategy === "sweetgreen") {
-                  } else {
-                  }
-                }}
                 style={{ marginRight: spacing.sm }}
               />
             </Link>
