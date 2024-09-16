@@ -19,7 +19,9 @@ import { useMediaQuery } from "react-responsive";
 import { Marquee } from "./Marquee";
 import { Link } from "expo-router";
 const strategy = process.env.MARKETING_STRATEGY;
-const URL = process.env.WHATSAPP_CATALOG_URL;
+const URL = process.env.WHATSAPP_CATALOG_URL
+  ? process.env.WHATSAPP_CATALOG_URL
+  : "https://wa.me/c/593963021783";
 const SIZE = 125;
 const SIZE_SMALL = SIZE / 2;
 const ICON_SIZE = SIZE / 4.75;
