@@ -91,16 +91,16 @@ export const OrderButton = observer(function OrderButton(
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: !onHoverIn
-              ? colors.palette.primary100
+            backgroundColor: onHoverIn
+              ? colors.palette.lightBackground
               : colors.palette.greenFont,
 
             padding: isSmallScreen ? spacing.xxs : spacing.xs,
             borderRadius: 13,
-            borderWidth: 3,
-            borderColor: !onHoverIn
+            borderWidth: 1,
+            borderColor: onHoverIn
               ? colors.palette.greenFont
-              : colors.palette.lightYellowGreen,
+              : colors.palette.lightBackground,
             //       ? colors.palette.greenFont
             //       : colors.palette.lightYellowGreen,
             //     // alignSelf: "center",
@@ -114,7 +114,7 @@ export const OrderButton = observer(function OrderButton(
           style={[
             {
               fontSize: isSmallScreen ? 18 : undefined,
-              color: onHoverIn
+              color: !onHoverIn
                 ? colors.palette.primary100
                 : colors.palette.greenFont,
               textAlign: "center",
@@ -133,7 +133,7 @@ export const OrderButton = observer(function OrderButton(
             name={icon}
             size={24}
             color={
-              !onHoverIn
+              onHoverIn
                 ? colors.palette.greenFont
                 : colors.palette.lightYellowGreen
             }

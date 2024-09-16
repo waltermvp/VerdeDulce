@@ -60,6 +60,11 @@ const palette = {
 
   overlay20: "rgba(25, 16, 21, 0.2)",
   overlay50: "rgba(25, 16, 21, 0.5)",
+
+  orderButtonTextColor: "#E6FF55",
+  orderButtonHoverColor: "transparent",
+  orderButtonHoverTextColor: "#0E150E",
+  orderButtonHoverBorderColor: "#0E150E",
 } as const;
 
 export const colors = {
