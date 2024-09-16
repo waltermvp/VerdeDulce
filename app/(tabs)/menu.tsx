@@ -50,17 +50,9 @@ const sweetgreenMenu = require("../../menu-es.json");
 const itemDimension = 555;
 const itemHeight = 222;
 
+//TODO: This menu needs to be able to add to cart!
 export default observer(function MenuScreen() {
   const route = useRoute();
-
-  const { showHeader, showFooter, menuType } = route?.params;
-
-  // const showHeader = route?.params?.showHeader;
-  // const showFooter = route?.params?.showFooter;
-  // const menuType = route?.params?.menuType;
-  // route.params.menuType
-  const showHeaderBool = showHeader === "true";
-  const showFooterBool = showFooter === "true";
 
   const [items, setItems] = useState(
     sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true)
@@ -74,10 +66,13 @@ export default observer(function MenuScreen() {
   // const hideDialog = () => setVisible(false)
 
   const navigation = useNavigation();
-  const isHugeScreen = useMediaQuery({ query: "(min-width: 768px)" });
-  const isBigScreen = useMediaQuery({ query: "(min-width: 768px)" });
+  const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 });
+  const isBigScreen = useMediaQuery({ minWidth: 768 });
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 });
+  const isPortrait = useMediaQuery({ orientation: "portrait" });
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
   console.log("is big screen", isBigScreen);
+  // console.log("is isSmallScreen", isSmallScreen);
 
   // console.log(" ", imageCDNURL("menu/Hot_Honey_Chicken.png"));
   console.log(" ", imageCDNURL("VerdeDulce_logo.png", "og"));
@@ -92,7 +87,7 @@ export default observer(function MenuScreen() {
   //     authMode: "apiKey",
   //   }).subscribe({
   //     next: ({ items, isSynced }) => {
-  //       setIsSyncedLocal(isSynced)
+  //       setIsSyncedLocal(isSynced)papcka
   //       if (isSynced) {
   //         if (items.length > 0) {
   //           const transformed = transformDataForSectionList(items)
@@ -123,11 +118,6 @@ export default observer(function MenuScreen() {
 
                 navigation.navigate("(tabs)", {
                   screen: "OrderScreen",
-                  params: {
-                    showFooter: "true",
-                    showHeader: "true",
-                    menuType: "menu",
-                  },
                 });
                 // return
                 // const phoneNumber = "+593963021783" // Replace with the actual phone number
@@ -149,15 +139,24 @@ export default observer(function MenuScreen() {
   );
 
   const renderSectionTitle = ({ section }: { section: any }) => (
-    <View style={{ width: width, paddingLeft: spacing.sm }}>
+    <View
+      style={{
+        // backgroundColor: "red",
+        width: "100%",
+        alignItems: "flex-start",
+        alignSelf: "flex-end",
+        justifyContent: "center",
+      }}
+    >
       <Text
         style={{
-          fontFamily: typography.fonts.poppins.normal,
-          fontSize: 36,
+          textAlign: "left",
+          fontFamily: typography.fonts.poppins.Poppins_200ExtraLight_Italic,
+          fontSize: 26,
+          lineHeight: 29,
           textDecorationColor: colors.palette.greenFont,
-          // color: colors.palette.greenFont,
-          // @ts-ignore
-          textDecoration: "underline",
+          color: "rgb(14, 21, 14)",
+          // backgroundColor: "red",
         }}
         preset="subheading"
       >
@@ -168,60 +167,53 @@ export default observer(function MenuScreen() {
 
   return (
     <Screen style={$root} preset="scroll">
-      {showHeaderBool && <MenuHeader />}
-      {menuType === "homepage" && (
-        <SectionGrid
-          renderSectionFooter={() => (
-            <View style={{ height: spacing.xl }}></View>
-          )}
-          // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
-          stickySectionHeadersEnabled={true}
-          contentContainerStyle={{
-            // margin: spacing.xxl,
-            // paddingHorizontal: spacing.xxs,
+      <SectionGrid
+        renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
+        // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
+        stickySectionHeadersEnabled={true}
+        contentContainerStyle={{
+          alignItems: "center",
+        }}
+        // itemDimension={isSmallScreen ? 225 : 350}
+        // itemContainerStyle={{ height: 200 }}
+        maxItemsPerRow={isSmallScreen ? 1 : 3}
+        sections={transformDataForSectionList(items)}
+        renderItem={({ item }) => (
+          <MenuItem
+            preset="menu"
+            item={item}
+            // showDelete={true}
+            onPress={async () => {
+              record({
+                name: "orderNow",
+                attributes: { name: item.name },
+              });
 
-            alignItems: "center",
-          }}
-          itemDimension={isSmallScreen ? 225 : 350}
-          // itemContainerStyle={{ height: 200 }}
-          maxItemsPerRow={isSmallScreen ? 1 : 3}
-          sections={transformDataForSectionList(items)}
-          renderItem={({ item }) => (
-            <MenuItem
-              item={item}
-              // showDelete={true}
-              onPress={async () => {
-                record({
-                  name: "orderNow",
-                  attributes: { name: item.name },
-                });
-
-                // const phoneNumber = "+593963021783" // Replace with the actual phone number
-                // console.log("item", item.itemURL)
-                // const message = translate("menuScreen.orderMenuItemMessage", {
-                //   item: item.name,
-                // }) // Replace with the actual message
-                // console.log("message", message)
-                // const url = `whatsapp://send?text=${encodeURIComponent(
-                //   message + " " + item.itemURL,
-                // )}&phone=${encodeURIComponent(phoneNumber)}`
-                const url = item.itemURL;
-                await Linking.openURL(url).catch((err) =>
-                  console.error("Failed to open WhatsApp", err)
-                );
-                // e.prevent
-              }}
-              onDelete={() => {
-                // setItemIDToDelete(item.id)
-                // showDialog()
-              }}
-              show={true}
-            />
-          )}
-          renderSectionHeader={renderSectionTitle}
-        />
-      )}
-      {menuType === "menu" && (
+              // const phoneNumber = "+593963021783" // Replace with the actual phone number
+              // console.log("item", item.itemURL)
+              // const message = translate("menuScreen.orderMenuItemMessage", {
+              //   item: item.name,
+              // }) // Replace with the actual message
+              // console.log("message", message)
+              // const url = `whatsapp://send?text=${encodeURIComponent(
+              //   message + " " + item.itemURL,
+              // )}&phone=${encodeURIComponent(phoneNumber)}`
+              const url = item.itemURL;
+              await Linking.openURL(url).catch((err) =>
+                console.error("Failed to open WhatsApp", err)
+              );
+              // e.prevent
+            }}
+            onDelete={() => {
+              // setItemIDToDelete(item.id)
+              // showDialog()
+            }}
+            show={true}
+          />
+        )}
+        renderSectionHeader={renderSectionTitle}
+      />
+      {/* {menuType === "menu" && (
         <View>
           <SectionGrid
             renderSectionFooter={() => (
@@ -327,15 +319,14 @@ export default observer(function MenuScreen() {
       )}
       {menuType === "simpleMenu" && (
         <SimpleMenu categories={transformDataForSectionList(items)} />
-      )}
-      {showFooterBool && (
-        <Footer
-          onPressQr={() => {
-            console.log("onPressQR");
-            navigation.navigate("Qr");
-          }}
-        />
-      )}
+      )} */}
+
+      <Footer
+        onPressQr={() => {
+          console.log("onPressQR");
+          navigation.navigate("Qr");
+        }}
+      />
     </Screen>
   );
 });
@@ -345,5 +336,6 @@ const $root: ViewStyle = {
   // borderWidth: 3,
   // borderColor: "pink",
   backgroundColor: colors.palette.lightBackground,
-  flexWrap: "wrap",
+  // flexWrap: "wrap",
+  padding: spacing.md,
 };

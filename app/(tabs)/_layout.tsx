@@ -66,12 +66,11 @@ export default function TabLayout() {
       />
       <Tabs.Screen
         initialParams={{
-          showHeader: "true",
           showFooter: "true",
-          menuType: "homepage",
         }}
         name="menu"
         options={{
+          headerShown: true,
           title: "Menu",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon

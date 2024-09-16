@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Pressable, StyleProp, View, ViewStyle } from "react-native";
+import { Pressable, StyleProp, TextStyle, View, ViewStyle } from "react-native";
 import { observer } from "mobx-react-lite";
 import { colors, spacing, typography } from "../app/theme";
 import { Text } from "./Text";
@@ -11,6 +11,8 @@ import { OrderButton } from "./OrderButton";
 import { useMediaQuery } from "react-responsive";
 import { translate } from "../app/i18n";
 
+type Presets = keyof typeof $presets;
+
 const minHeight = 775;
 export interface MenuItemProps {
   /**
@@ -19,10 +21,9 @@ export interface MenuItemProps {
   style?: StyleProp<ViewStyle>;
   item: any;
   showDelete?: boolean;
-  showStats?: boolean;
   onDelete?: () => void;
   onPress?: () => void;
-  show: boolean;
+  preset: Presets;
 }
 
 /**
@@ -35,10 +36,11 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
     showDelete = false,
     onDelete,
     onPress,
-    show = false,
-    showStats = true,
+    preset = "default",
   } = props;
-  const $styles = [$container, style];
+
+  const $styles = [$container, $presets[preset], style];
+
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
   const url = imageCDNURL(item.url, "none");
 
@@ -52,6 +54,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
     ? translate("landingScreen.order") + " " + dollars
     : translate("landingScreen.comingSoon") + dollars;
 
+  const showStats = preset !== "menu" ? true : false;
   return (
     <Pressable
       // onPress={onPress}
@@ -126,7 +129,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                 >
                   {dollars}
                 </Text> */}
-                {showStats && (
+                {showStats ? (
                   <Bullets
                     style={{ marginTop: spacing.md }}
                     items={[
@@ -137,11 +140,32 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                       // { title: "860", subtitle: "CALORIES" },
                     ]}
                   />
+                ) : (
+                  <View
+                    style={{
+                      alignSelf: "flex-start",
+                      // justifyContent: "center",
+                      flexDirection: "row",
+                      borderWidth: 1.5,
+                      borderRadius: 5,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontFamily: typography.fonts.poppins.light,
+                        fontSize: 16,
+                        // color: colors.palette.greenFont,
+                        marginVertical: spacing.xxs,
+                      }}
+                    >
+                      {dollars} - {item.calories} CAL
+                    </Text>
+                  </View>
                 )}
               </View>
             </View>
-            <View style={{ flex: 1 }}>
-              {show && (
+            {/* <View style={{ flex: 1 }}>
+              {preset !== "default" && (
                 <OrderButton
                   style={{
                     marginTop: spacing.md,
@@ -155,7 +179,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                   onPress={onPress}
                 />
               )}
-            </View>
+            </View> */}
           </View>
         );
       }}
@@ -165,12 +189,50 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
 
 const $container: ViewStyle = {
   flex: 1,
-  backgroundColor: "rgba(232, 220, 198, 1)",
   alignItems: "center",
   paddingVertical: spacing.lg,
   borderRadius: 13,
   //TODO: decresase hieight for smaller breakpoints
-  minHeight: minHeight,
   // margin:200
   // backgroundColor: "red",
+};
+
+const $fontWeightStyles = Object.entries(typography.primary).reduce(
+  (acc, [weight, fontFamily]) => {
+    return { ...acc, [weight]: { fontFamily } };
+  },
+  {}
+) as Record<Weights, TextStyle>;
+
+const $sizeStyles = {
+  xxxl: { fontSize: 52, lineHeight: 52 } satisfies TextStyle,
+  xxl: { fontSize: 36, lineHeight: 44 } satisfies TextStyle,
+  xl: { fontSize: 24, lineHeight: 34 } satisfies TextStyle,
+  lg: { fontSize: 20, lineHeight: 32 } satisfies TextStyle,
+  md: { fontSize: 18, lineHeight: 26 } satisfies TextStyle,
+  sm: { fontSize: 16, lineHeight: 24 } satisfies TextStyle,
+  xs: { fontSize: 14, lineHeight: 21 } satisfies TextStyle,
+  xxs: { fontSize: 12, lineHeight: 18 } satisfies TextStyle,
+};
+
+const $baseStyle: StyleProp<ViewStyle> = [
+  // $sizeStyles.sm,
+  // $fontWeightStyles.normal,
+  // backgr
+
+  {
+    backgroundColor: "transparent",
+    // color: colors.text,
+    // lineHeight: 18,
+    // fontFamily: typography.fonts.poppins.normal,
+  },
+];
+
+const $presets = {
+  default: $baseStyle,
+  menu: [
+    $baseStyle,
+    { backgroundColor: "rgba(232, 220, 198, 1)" },
+    $fontWeightStyles.bold,
+  ] as StyleProp<TextStyle>,
 };

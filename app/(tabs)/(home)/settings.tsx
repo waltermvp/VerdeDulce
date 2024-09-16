@@ -34,8 +34,7 @@ export default function Settings() {
   const navigation = useNavigation();
 
   const signOutFunction = async () => {
-    console.log("???");
-    navigation.navigate("LoginScreen");
+    signOut();
   };
 
   const signInFunction = async () => {

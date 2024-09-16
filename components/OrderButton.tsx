@@ -57,14 +57,26 @@ export const OrderButton = observer(function OrderButton(
   const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" });
   return (
     <Pressable
-      style={[
-        {
-          marginRight: isSmallScreen ? spacing.xs : spacing.lg,
-          flexDirection: "row",
-          alignItems: "center",
-        },
-        // $styles,
-      ]}
+      // style={({ pressed }) => [
+      //   {
+      //     flexDirection: "row",
+      //     alignItems: "center",
+
+      //     justifyContent: "center",
+      //     backgroundColor: onHoverIn
+      //       ? colors.palette.primary100
+      //       : colors.palette.greenFont,
+
+      //     // borderRadius: 13,
+      //     borderWidth: 3,
+      //     borderColor: onHoverIn
+      //       ? colors.palette.greenFont
+      //       : colors.palette.lightYellowGreen,
+      //     // alignSelf: "center",
+      //   },
+
+      //   $styles,
+      // ]}
       onPress={onPress}
       onHoverIn={() => {
         setOnHoverIn(true);
@@ -73,57 +85,61 @@ export const OrderButton = observer(function OrderButton(
         setOnHoverIn(false);
       }}
     >
-      {({ hovered }) => {
-        return (
-          <View
-            style={[
-              {
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: hovered
-                  ? colors.palette.primary100
-                  : colors.palette.greenFont,
+      <View
+        style={[
+          {
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: !onHoverIn
+              ? colors.palette.primary100
+              : colors.palette.greenFont,
 
-                padding: isSmallScreen ? spacing.xs : spacing.sm,
-                borderRadius: 13,
-                borderBottomColor: colors.palette.neutral900,
-                // borderBottomWidth: onHoverIn ? 2 : 0,
-                // alignSelf: "center",
-              },
-              $styles,
-            ]}
-          >
-            <Text
-              tx={tx}
-              preset="bold"
-              style={[
-                {
-                  fontSize: isSmallScreen ? 18 : undefined,
-                  color: !hovered
-                    ? colors.palette.primary100
-                    : colors.palette.greenFont,
-                  textAlign: "center",
-                },
-                textStyle,
-              ]}
-            >
-              {text}
-            </Text>
-            {!isSmallScreen && (
-              <Ionicons
-                style={{
-                  // textDecorationLine: onHoverIn ? "underline" : undefined,
-                  paddingLeft: isSmallScreen ? spacing.xs : spacing.sm,
-                }}
-                name={icon}
-                size={24}
-                color={colors.palette.lightYellowGreen}
-              />
-            )}
-          </View>
-        );
-      }}
+            padding: isSmallScreen ? spacing.xxs : spacing.xs,
+            borderRadius: 13,
+            borderWidth: 3,
+            borderColor: !onHoverIn
+              ? colors.palette.greenFont
+              : colors.palette.lightYellowGreen,
+            //       ? colors.palette.greenFont
+            //       : colors.palette.lightYellowGreen,
+            //     // alignSelf: "center",
+          },
+          $styles,
+        ]}
+      >
+        <Text
+          tx={tx}
+          preset="bold"
+          style={[
+            {
+              fontSize: isSmallScreen ? 18 : undefined,
+              color: onHoverIn
+                ? colors.palette.primary100
+                : colors.palette.greenFont,
+              textAlign: "center",
+            },
+            textStyle,
+          ]}
+        >
+          {text}
+        </Text>
+        {!isSmallScreen && (
+          <Ionicons
+            style={{
+              // textDecorationLine: onHoverIn ? "underline" : undefined,
+              paddingLeft: isSmallScreen ? spacing.xs : spacing.sm,
+            }}
+            name={icon}
+            size={24}
+            color={
+              !onHoverIn
+                ? colors.palette.greenFont
+                : colors.palette.lightYellowGreen
+            }
+          />
+        )}
+      </View>
     </Pressable>
   );
 });

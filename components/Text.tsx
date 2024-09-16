@@ -135,6 +135,12 @@ const $presets = {
     $fontWeightStyles.bold,
   ] as StyleProp<TextStyle>,
 
+  midHeading: [
+    $baseStyle,
+    $sizeStyles.xl,
+    $fontWeightStyles.bold,
+  ] as StyleProp<TextStyle>,
+
   subheading: [
     $baseStyle,
     $sizeStyles.lg,

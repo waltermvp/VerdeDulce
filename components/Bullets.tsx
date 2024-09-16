@@ -60,7 +60,7 @@ const $container: ViewStyle = {
 
 const $text: TextStyle = {
   fontFamily: typography.fonts.poppins.light,
-  fontSize: 20,
+  // fontSize: 20,
   color: colors.palette.greenFont,
   marginTop: spacing.xxs,
 };
