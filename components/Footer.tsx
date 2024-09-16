@@ -19,7 +19,7 @@ import { useMediaQuery } from "react-responsive";
 import { Marquee } from "./Marquee";
 import { Link } from "expo-router";
 const strategy = process.env.MARKETING_STRATEGY;
-
+const URL = process.env.WHATSAPP_CATALOG_URL;
 const SIZE = 125;
 const SIZE_SMALL = SIZE / 2;
 const ICON_SIZE = SIZE / 4.75;
@@ -50,7 +50,7 @@ export const Footer = observer(function Footer(props: FooterProps) {
         <Newsletter />
       </View>
       <View style={{ backgroundColor: colors.palette.footerGreen }}>
-        <Link href={!whatsappStrategy ? url : "/(tabs)"} asChild>
+        <Link href={!whatsappStrategy ? URL : "/(tabs)"} asChild>
           <Pressable
             onHoverIn={() => setHovering(true)}
             onHoverOut={() => setHovering(false)}
