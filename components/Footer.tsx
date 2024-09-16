@@ -17,11 +17,11 @@ import { Image } from "expo-image";
 import { imageCDNURL } from "../app/utils/linkbuilder";
 import { useMediaQuery } from "react-responsive";
 import { Marquee } from "./Marquee";
-import { Link } from "expo-router";
+import { Href, Link } from "expo-router";
 const strategy = process.env.EXPO_PUBLIC_MARKETING_STRATEGY;
-const URL = process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL
-  ? process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL
-  : "https://wa.me/c/593963021783";
+const URL = (process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL as Href)
+  ? (process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL as Href)
+  : ("https://wa.me/c/593963021783" as Href);
 const SIZE = 125;
 const SIZE_SMALL = SIZE / 2;
 const ICON_SIZE = SIZE / 4.75;
@@ -33,14 +33,13 @@ export interface FooterProps {
    * An optional style override useful for padding & margin.
    */
   style?: StyleProp<ViewStyle>;
-  onPressQr?: () => void;
 }
 
 /**
  * Describe your component here
  */
 export const Footer = observer(function Footer(props: FooterProps) {
-  const { style, onPressQr } = props;
+  const { style } = props;
   const $styles = [$container, style];
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
   const [hovering, setHovering] = React.useState(false);
@@ -97,31 +96,33 @@ export const Footer = observer(function Footer(props: FooterProps) {
           />
           {/* add copyright information */}
           <View style={{ flex: 1 }}>
-            <Pressable onPress={onPressQr}>
-              <QrCodeSvg
-                style={
-                  isSmallScreen
-                    ? { padding: spacing.xs, alignSelf: "flex-end" }
-                    : styles.qr
-                }
-                value={CONTENT}
-                frameSize={isSmallScreen ? SIZE_SMALL : SIZE}
-                contentCells={5}
-                content={
-                  <Image
-                    style={{
-                      width: isSmallScreen ? ICON_SIZE_SMALL : ICON_SIZE,
-                      height: isSmallScreen ? ICON_SIZE_SMALL : ICON_SIZE,
-                    }}
-                    source={{ uri: imageCDNURL("VerdeDulce_logo.png") }}
-                  />
-                }
-                backgroundColor={colors.palette.greenFont}
-                dotColor="#ffff"
-                contentStyle={styles.box}
-              />
-              <Text style={$reserved}>&copy; 2024 VerdeDulce</Text>
-            </Pressable>
+            <Link href={URL} asChild>
+              <Pressable>
+                <QrCodeSvg
+                  style={
+                    isSmallScreen
+                      ? { padding: spacing.xs, alignSelf: "flex-end" }
+                      : styles.qr
+                  }
+                  value={CONTENT}
+                  frameSize={isSmallScreen ? SIZE_SMALL : SIZE}
+                  contentCells={5}
+                  content={
+                    <Image
+                      style={{
+                        width: isSmallScreen ? ICON_SIZE_SMALL : ICON_SIZE,
+                        height: isSmallScreen ? ICON_SIZE_SMALL : ICON_SIZE,
+                      }}
+                      source={{ uri: imageCDNURL("VerdeDulce_logo.png") }}
+                    />
+                  }
+                  backgroundColor={colors.palette.greenFont}
+                  dotColor="#ffff"
+                  contentStyle={styles.box}
+                />
+                <Text style={$reserved}>&copy; 2024 VerdeDulce</Text>
+              </Pressable>
+            </Link>
           </View>
         </View>
       </View>
@@ -180,7 +181,6 @@ const $marquee: ViewStyle = {
   // borderWidth: 2,
 };
 const $marqueeText: TextStyle = {
-  // flex: 1,
   fontSize: spacing.xl + spacing.sm,
   fontFamily: typography.fonts.poppins.normal,
   letterSpacing: -spacing.xxxs,
