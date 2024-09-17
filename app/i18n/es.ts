@@ -1,8 +1,8 @@
-import { Translations } from "./en"
+import { Translations } from "./en";
 
 const es: Translations = {
   landingScreen: {
-    order: "Ordena Ya",
+    order: "Ordena",
     comingSoon: "¡Próximamente!",
     name: "Verde Dulce",
     prompt: "Comida fresca y de alta calidad. Sostenible y de origen local.",
@@ -88,7 +88,8 @@ const es: Translations = {
       "Have an idea to make Ignite even better? We're happy to hear that! We're always looking for others who want to help us build the best React Native tooling out there. Join us over on GitHub to join us in building the future of Ignite.",
     contributeToIgniteLink: "Contribute to Ignite",
     theLatestInReactNativeTitle: "The latest in React Native",
-    theLatestInReactNative: "We're here to keep you current on all React Native has to offer.",
+    theLatestInReactNative:
+      "We're here to keep you current on all React Native has to offer.",
     reactNativeRadioLink: "React Native Radio",
     reactNativeNewsletterLink: "React Native Newsletter",
     reactNativeLiveLink: "React Native Live",
@@ -139,7 +140,8 @@ const es: Translations = {
       favoriteIcon: "Episode not favorited",
       unfavoriteIcon: "Episode favorited",
       publishLabel: "Published {{date}}",
-      durationLabel: "Duration: {{hours}} hours {{minutes}} minutes {{seconds}} seconds",
+      durationLabel:
+        "Duration: {{hours}} hours {{minutes}} minutes {{seconds}} seconds",
     },
     noFavoritesEmptyState: {
       heading: "This looks a bit empty",
@@ -147,20 +149,30 @@ const es: Translations = {
         "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
     },
   },
-  loginScreen: {
-    signIn: "Iniciar sesión",
+  signUpScreen: {
+    signIn: "Registrarse",
+    login: "Iniciar sesión",
+    confirm: "Confirmar código",
     enterDetails:
       "Ingresa tus detalles abajo para desbloquear información ultrasecreta. Nunca adivinarás lo que tenemos esperando. O quizás sí; no es ciencia espacial.",
+    enterDetailsSignUp:
+      "Ingresa tus detalles abajo para registrarte en Glance.",
     emailFieldLabel: "Correo electrónico",
     passwordFieldLabel: "Contraseña",
+    nameFieldLabel: "Nombre",
     emailFieldPlaceholder: "Ingresa tu dirección de correo electrónico",
     passwordFieldPlaceholder: "Contraseña supersecreta aquí",
-    tapToSignIn: "¡Toca para iniciar sesión!",
+    codePlaceholder: "Código supersecreto aquí",
+    loginPlaceholder: "Ingresa tu contraseña",
+    codeLabel: "Código supersecreto aquí",
+    tapToSignUp: "Toca para registrarte",
+    tapToLogin: "Toca para iniciar sesión",
+    tapToConfirm: "Toca para confirmar",
     hint: "Consejo: puedes usar cualquier dirección de correo y tu contraseña favorita :)",
-    venueName: "Nombre del lugar",
-    venueNamePlaceholder: "Ingresa el nombre del lugar",
-    tapSignUp: "Toca para registrarte",
+    confirmCodeDetails:
+      "Por favor, revisa tu correo para el código de confirmación, luego ingrésalo abajo.",
+    resendCode: "Reenviar código",
   },
-}
+};
 
-export default es
+export default es;
