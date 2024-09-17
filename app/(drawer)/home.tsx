@@ -35,6 +35,7 @@ const URL = (process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL as Href)
   ? (process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL as Href)
   : ("https://wa.me/c/593963021783" as Href);
 console.log("process.env", process.env);
+console.log("process.env", Config);
 // TODO: - 768 contains two columns anything larger is three
 Amplify.configure({
   ...Amplify.getConfig(),

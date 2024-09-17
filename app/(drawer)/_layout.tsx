@@ -20,9 +20,9 @@ import { OrderButton, Text } from "../../components";
 import { translate } from "../i18n";
 
 const SIZE = 100;
-const SIZE_SMALL = SIZE / 2;
+// const SIZE_SMALL = SIZE / 2;
 const ICON_SIZE = SIZE / 4.75;
-const ICON_SIZE_SMALL = ICON_SIZE / 2;
+// const ICON_SIZE_SMALL = ICON_SIZE / 2;
 const CONTENT = "https://wa.me/c/593963021783";
 
 export default function TabLayout() {
@@ -46,7 +46,7 @@ export default function TabLayout() {
                 margin: spacing.md,
               }}
               text={CTA}
-              onPress={() => Linking.openURL("https://wa.me/c/593963021783")}
+              onPress={() => Linking.openURL(CONTENT)}
             />
             {/* <View
               {...props}
