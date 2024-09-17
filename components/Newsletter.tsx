@@ -12,6 +12,7 @@ import { Text } from "./Text";
 import { ActivityIndicator, Snackbar, TextInput } from "react-native-paper";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useStores } from "../app/models";
+import { record } from "aws-amplify/analytics";
 
 export interface NewsletterProps {
   /**
@@ -47,6 +48,7 @@ export const Newsletter = observer(function Newsletter(props: NewsletterProps) {
 
   const saveSignUp = async () => {
     try {
+      record({ name: "newsletter_signup", attributes: { email } });
       await signUp(email);
       setEmail("");
       setColor(colors.palette.lightBackground);
