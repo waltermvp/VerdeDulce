@@ -9,6 +9,7 @@ import { colors, spacing, typography } from "../theme";
 import { Ionicons } from "@expo/vector-icons";
 import {
   DrawerContentScrollView,
+  DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { Linking, Pressable, StyleSheet, TextStyle, View } from "react-native";
@@ -18,6 +19,7 @@ import { useMediaQuery } from "react-responsive";
 import { imageCDNURL } from "../utils/linkbuilder";
 import { OrderButton, Text } from "../../components";
 import { translate } from "../i18n";
+import { List } from "react-native-paper";
 
 const SIZE = 100;
 // const SIZE_SMALL = SIZE / 2;
@@ -37,10 +39,14 @@ export default function TabLayout() {
         drawerContent={(props) => (
           <DrawerContentScrollView {...props}>
             <DrawerItemList {...props} />
-            {/* <DrawerItem
-              label="Help"
-              onPress={() => Linking.openURL("https://mywebsite.com/help")}
-            /> */}
+            {/* <Link href={"/"}>
+              <DrawerItem
+                label="Menu"
+                labelStyle={$drawerLabelStyle}
+                // onPress={() => Linking.openURL("https://mywebsite.com/help")}
+                {...props}
+              />
+            </Link> */}
             <OrderButton
               style={{
                 margin: spacing.md,
@@ -90,11 +96,7 @@ export default function TabLayout() {
             backgroundColor: colors.palette.lightBackground,
             width: 240,
           },
-          drawerLabelStyle: {
-            color: colors.palette.greenFont,
-            fontFamily: typography.fonts.poppins.semiBold,
-            fontSize: spacing.lg,
-          },
+          drawerLabelStyle: $drawerLabelStyle,
           drawerActiveTintColor: colors.palette.greenFont,
           headerShown: true,
           headerTitleAlign: "center",
@@ -196,4 +198,10 @@ const $reserved: TextStyle = {
   color: colors.palette.greenFont,
   paddingTop: spacing.sm,
   textAlign: "left",
+};
+
+const $drawerLabelStyle: TextStyle = {
+  color: colors.palette.greenFont,
+  fontFamily: typography.fonts.poppins.semiBold,
+  fontSize: spacing.lg,
 };
