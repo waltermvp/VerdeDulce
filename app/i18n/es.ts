@@ -5,7 +5,7 @@ const es: Translations = {
     order: "Ordena",
     comingSoon: "¡Próximamente!",
     name: "Verde Dulce",
-    prompt: "Comida fresca y de alta calidad. Sostenible y de origen local.",
+    prompt: "Comida fresca y de alta calidad. De origen local.",
   },
   common: {
     ok: "¡OK!",
