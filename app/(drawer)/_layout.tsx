@@ -1,25 +1,19 @@
-import { Link, Tabs } from "expo-router";
+import { Link } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
 import React from "react";
-import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { colors, spacing, typography } from "../theme";
 import { Ionicons } from "@expo/vector-icons";
 import {
   DrawerContentScrollView,
-  DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { Linking, Pressable, StyleSheet, TextStyle, View } from "react-native";
-import { QrCodeSvg } from "react-native-qr-svg";
-import { Image } from "expo-image";
+import { Linking, StyleSheet, TextStyle } from "react-native";
 import { useMediaQuery } from "react-responsive";
-import { imageCDNURL } from "../utils/linkbuilder";
 import { OrderButton, Text } from "../../components";
 import { translate } from "../i18n";
-import { List } from "react-native-paper";
 
 const SIZE = 100;
 // const SIZE_SMALL = SIZE / 2;
@@ -29,7 +23,6 @@ const CONTENT = "https://wa.me/c/593963021783";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
   const CTA = translate("landingScreen.order");
 
   return (
@@ -39,14 +32,6 @@ export default function TabLayout() {
         drawerContent={(props) => (
           <DrawerContentScrollView {...props}>
             <DrawerItemList {...props} />
-            {/* <Link href={"/"}>
-              <DrawerItem
-                label="Menu"
-                labelStyle={$drawerLabelStyle}
-                // onPress={() => Linking.openURL("https://mywebsite.com/help")}
-                {...props}
-              />
-            </Link> */}
             <OrderButton
               style={{
                 margin: spacing.md,
@@ -54,41 +39,6 @@ export default function TabLayout() {
               text={CTA}
               onPress={() => Linking.openURL(CONTENT)}
             />
-            {/* <View
-              {...props}
-              style={{
-                margin: spacing.md,
-                alignItems: "flex-start",
-                justifyContent: "flex-start",
-              }}
-            >
-              <Pressable
-                onPress={() => Linking.openURL("https://wa.me/c/593963021783")}
-              >
-                <QrCodeSvg
-                  style={[
-                    styles.qr,
-                    { padding: spacing.xs, alignSelf: "flex-start" },
-                  ]}
-                  value={CONTENT}
-                  frameSize={isSmallScreen ? SIZE_SMALL : SIZE}
-                  contentCells={5}
-                  content={
-                    <Image
-                      style={{
-                        width: isSmallScreen ? ICON_SIZE_SMALL : ICON_SIZE,
-                        height: isSmallScreen ? ICON_SIZE_SMALL : ICON_SIZE,
-                      }}
-                      source={{ uri: imageCDNURL("VerdeDulce_logo.png") }}
-                    />
-                  }
-                  backgroundColor={colors.palette.greenFont}
-                  dotColor="#ffff"
-                  contentStyle={styles.box}
-                />
-                <Text style={$reserved}>&copy; 2024 verdedulce</Text>
-              </Pressable>
-            </View> */}
           </DrawerContentScrollView>
         )}
         screenOptions={({ navigation }) => ({
@@ -192,13 +142,6 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
   },
 });
-
-const $reserved: TextStyle = {
-  fontFamily: typography.fonts.poppins.boldItalic,
-  color: colors.palette.greenFont,
-  paddingTop: spacing.sm,
-  textAlign: "left",
-};
 
 const $drawerLabelStyle: TextStyle = {
   color: colors.palette.greenFont,
