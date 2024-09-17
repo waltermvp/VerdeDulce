@@ -1,8 +1,11 @@
-import type { Schema } from "../resource"
-import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2" // ES Modules import
-import { renderToStaticMarkup, TReaderDocument } from "@usewaypoint/email-builder"
+import type { Schema } from "../resource";
+import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2"; // ES Modules import
+import {
+  renderToStaticMarkup,
+  TReaderDocument,
+} from "@usewaypoint/email-builder";
 
-const region = "sa-east-1"
+const region = "sa-east-1";
 
 const CONFIGURATION: TReaderDocument = {
   root: {
@@ -260,15 +263,18 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
       },
     },
   },
-}
+};
 
-export const handler: Schema["registerUser"]["functionHandler"] = async (event, context) => {
-  const start = performance.now()
-  const email = event.arguments.email
+export const handler: Schema["registerUser"]["functionHandler"] = async (
+  event,
+  context
+) => {
+  const start = performance.now();
+  const email = event.arguments.email;
   // Set up the parameters for the email
   try {
-    const client = new SESv2Client({ region })
-    const string = renderToStaticMarkup(CONFIGURATION, { rootBlockId: "root" })
+    const client = new SESv2Client({ region });
+    const string = renderToStaticMarkup(CONFIGURATION, { rootBlockId: "root" });
 
     const input = {
       Destination: {
@@ -293,17 +299,18 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (event, 
         },
       },
       FromEmailAddress: "contact@verdedulce.com",
-    }
+    };
+    console.log("will send :", input);
     // @ts-ignore: Unreachable code error
-    const command = new SendEmailCommand(input)
-    const response = await client.send(command)
+    const command = new SendEmailCommand(input);
+    const response = await client.send(command);
 
     return {
       email: `Echoing content: ${event.arguments.email}`,
       executionDuration: performance.now() - start,
-    }
+    };
   } catch (error) {
-    console.error("Error sending email:", error)
-    throw error
+    console.error("Error sending email:", error);
+    throw error;
   }
-}
+};
