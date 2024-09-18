@@ -144,9 +144,10 @@ export const transformData = (data) => {
       price: item.price,
       url: item.url, //imageCDNURL(item.url.split("/").pop()), // Extracting the filename from the URL for use in imageCDNURL
       itemURL: item.url,
-    })
-    return acc
-  }, {})
+      slug: item.slug,
+    });
+    return acc;
+  }, {});
 
   // Transform the grouped data into the desired structure
   const final = Object.entries(groupedData).map(([key, list], index) => ({
@@ -189,9 +190,10 @@ export const transformDataForSectionList = (data) => {
       fat: item.fat,
       url: item.url, // Extracting the filename from the URL for use in imageCDNURL
       itemURL: item.itemURL,
-    })
-    return acc
-  }, {})
+      slug: item.slug,
+    });
+    return acc;
+  }, {});
   // console.log(item, "item")
   // console.log(category, "category")
 

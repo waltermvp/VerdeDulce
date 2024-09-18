@@ -10,6 +10,7 @@ import { imageCDNURL } from "../app/utils/linkbuilder";
 import { OrderButton } from "./OrderButton";
 import { useMediaQuery } from "react-responsive";
 import { translate } from "../app/i18n";
+import { Href, Link } from "expo-router";
 
 type Presets = keyof typeof $presets;
 
@@ -24,6 +25,7 @@ export interface MenuItemProps {
   onDelete?: () => void;
   onPress?: () => void;
   preset: Presets;
+  href: Href;
 }
 
 /**
@@ -37,6 +39,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
     onDelete,
     onPress,
     preset = "default",
+    href = "/",
   } = props;
 
   const $styles = [$container, $presets[preset], style];
@@ -56,91 +59,84 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
 
   const showStats = preset !== "menu" ? true : false;
   return (
-    <Pressable
-      // onPress={onPress}
-      style={({ pressed }) => {
-        return {
-          backgroundColor: pressed ? colors.palette.neutral400 : undefined,
-          borderRadius: 13,
-          opacity: activated ? 1 : 0.5,
-        };
-      }}
-    >
-      {({}) => {
-        return (
-          <View
-            // style={[$styles, { backgroundColor: pressed ? colors.palette.darkTeal : undefined }]}
-            style={[
-              $styles,
-              {
-                minHeight: isSmallScreen ? 500 : minHeight,
-              },
-            ]}
-          >
-            {showDelete && (
-              <Badge
-                style={{
-                  alignSelf: "flex-end",
+    <Link href={href} asChild push>
+      <Pressable
+        style={({ pressed }) => {
+          return {
+            backgroundColor: pressed ? colors.palette.neutral400 : undefined,
+            borderRadius: 13,
+            opacity: activated ? 1 : 0.5,
+          };
+        }}
+      >
+        {({}) => {
+          return (
+            <View
+              // style={[$styles, { backgroundColor: pressed ? colors.palette.darkTeal : undefined }]
+              style={[
+                $styles,
+                {
+                  minHeight: isSmallScreen ? 500 : minHeight,
+                },
+              ]}
+            >
+              {showDelete && (
+                <Badge
+                  style={{
+                    alignSelf: "flex-end",
 
-                  marginBottom: -spacing.xs,
-                  zIndex: 9,
-                }}
-                onPress={onDelete}
-              >
-                X
-              </Badge>
-            )}
-            <View style={{ flex: 8, alignItems: "center" }}>
-              <Image
-                style={{
-                  // height: SIZE,
-                  aspectRatio: 1,
-                  width: "85%",
-                  borderRadius: 9,
-                  // borderColor: "red",  borderWidth: 2
-                }}
-                source={{ uri: url }}
-                onError={(e) => console.log("MenuItem.tsx: Image onError: ", e)}
-                // placeHolder={() => <PlaceholderMenu />}
-                contentFit="cover"
-                transition={1000}
-              />
-              <View
-                style={{
-                  marginTop: spacing.md,
-                  paddingHorizontal: spacing.xxl,
-                }}
-              >
-                <Text
-                  preset="subheading"
-                  style={{ fontFamily: typography.fonts.poppins.light }}
+                    marginBottom: -spacing.xs,
+                    zIndex: 9,
+                  }}
+                  onPress={onDelete}
                 >
-                  {item.name}
-                </Text>
-                <Text
-                  preset="default"
-                  style={{ fontFamily: typography.fonts.poppins.light }}
+                  X
+                </Badge>
+              )}
+              <View style={{ flex: 8, alignItems: "center" }}>
+                <Image
+                  style={{
+                    // height: SIZE,
+                    aspectRatio: 1,
+                    width: "85%",
+                    borderRadius: 9,
+                    // borderColor: "red",  borderWidth: 2
+                  }}
+                  source={{ uri: url }}
+                  onError={(e) =>
+                    console.log("MenuItem.tsx: Image onError: ", e)
+                  }
+                  // placeHolder={() => <PlaceholderMenu />}
+                  contentFit="cover"
+                  transition={1000}
+                />
+                <View
+                  style={{
+                    marginTop: spacing.md,
+                    paddingHorizontal: spacing.xxl,
+                  }}
                 >
-                  {item.description}
-                </Text>
-                {/* <Text
+                  <Text
+                    preset="subheading"
+                    style={{ fontFamily: typography.fonts.poppins.light }}
+                  >
+                    {item.name}
+                  </Text>
+                  <Text
+                    preset="default"
+                    style={{
+                      fontFamily: typography.fonts.poppins.light,
+                      marginTop: spacing.sm,
+                    }}
+                  >
+                    {item.description}
+                  </Text>
+                  {/* <Text
                   style={{ alignSelf: "center", padding: spacing.md, fontSize: spacing.xl }}
                   preset="bold"
                 >
                   {dollars}
                 </Text> */}
-                {showStats ? (
-                  <Bullets
-                    style={{ marginTop: spacing.md }}
-                    items={[
-                      { title: item.calories, subtitle: "CALORIES" },
-                      { title: item.carbs, subtitle: "CARBS" },
-                      { title: item.protein, subtitle: "PROTEIN" },
-                      { title: item.fat, subtitle: "GRASA" },
-                      // { title: "860", subtitle: "CALORIES" },
-                    ]}
-                  />
-                ) : (
                   <View
                     style={{
                       alignSelf: "flex-start",
@@ -148,23 +144,23 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                       flexDirection: "row",
                       borderWidth: 1.5,
                       borderRadius: 5,
+                      marginTop: spacing.sm,
                     }}
                   >
                     <Text
                       style={{
                         fontFamily: typography.fonts.poppins.light,
                         fontSize: 16,
+                        padding: spacing.xxs,
                         // color: colors.palette.greenFont,
-                        marginVertical: spacing.xxs,
                       }}
                     >
                       {dollars} - {item.calories} CAL
                     </Text>
                   </View>
-                )}
+                </View>
               </View>
-            </View>
-            {/* <View style={{ flex: 1 }}>
+              {/* <View style={{ flex: 1 }}>
               {preset !== "default" && (
                 <OrderButton
                   style={{
@@ -180,10 +176,11 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                 />
               )}
             </View> */}
-          </View>
-        );
-      }}
-    </Pressable>
+            </View>
+          );
+        }}
+      </Pressable>
+    </Link>
   );
 });
 

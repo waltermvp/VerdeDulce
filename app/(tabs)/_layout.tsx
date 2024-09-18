@@ -1,13 +1,14 @@
-import { Tabs } from "expo-router";
+import { Link, Tabs } from "expo-router";
 import React from "react";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 // import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { colors, spacing, typography } from "../theme";
-import { StyleSheet, TextStyle } from "react-native";
-import { useMediaQuery } from "react-responsive";
-import { translate } from "../i18n";
+import { Pressable, StyleSheet, TextStyle, View } from "react-native";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import { Text } from "@/components";
+import Config from "../config";
+import { Ionicons } from "@expo/vector-icons";
 
 function getHeaderTitle(route) {
   // If the focused route is not found, we need to assume it's the initial screen
@@ -43,6 +44,56 @@ export default function TabLayout() {
         headerStyle: {
           backgroundColor: colors.palette.lightBackground,
         },
+        headerTitleAlign: "center",
+        headerTitleStyle: {
+          color: colors.palette.greenFont,
+          fontFamily: typography.fonts.poppins.Poppins_400Regular,
+          fontSize: spacing.xl,
+        },
+        headerTitle: () => {
+          return (
+            <Link href={"/"}>
+              <Text
+                preset="midHeading"
+                style={{
+                  color: colors.palette.greenFont,
+                  fontFamily: typography.fonts.poppins.semiBold,
+                }}
+              >
+                {Config.APP_NAME}
+              </Text>
+            </Link>
+          );
+        },
+        headerRight: () => {
+          return (
+            <View style={{ flexDirection: "row", marginRight: spacing.md }}>
+              {/* <Link
+                href={"/(drawer)"}
+                asChild
+                style={{ marginRight: spacing.md }}
+              >
+                <Pressable>
+                  <Ionicons
+                    size={spacing.xl}
+                    name="options-outline"
+                    color={colors.palette.darkKale}
+                  />
+                </Pressable>
+              </Link> */}
+              <Link href={"/(home)/account"} asChild>
+                <Pressable>
+                  <Ionicons
+                    size={spacing.xl}
+                    name="person-circle-outline"
+                    color={colors.palette.darkKale}
+                  />
+                </Pressable>
+              </Link>
+            </View>
+          );
+        },
+
         tabBarInactiveBackgroundColor: colors.palette.lightBackground,
         tabBarActiveBackgroundColor: colors.palette.greenFont,
         tabBarActiveTintColor: colors.palette.lightYellowGreen, //Colors[colorScheme ?? "light"].tint,
@@ -64,7 +115,7 @@ export default function TabLayout() {
         })}
       />
       <Tabs.Screen
-        name="menu"
+        name="(menu)"
         options={{
           headerShown: true,
           title: "Menu",

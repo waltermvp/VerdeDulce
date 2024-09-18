@@ -88,7 +88,10 @@ export const Bullet = function Bullet(props: BulletProps) {
                   {link.title}
                 </Text>
                 <Ionicons
-                  style={{ paddingLeft: spacing.sm }}
+                  style={{
+                    paddingLeft: spacing.sm,
+                    color: colors.palette.darkKale,
+                  }}
                   size={spacing.xl}
                   name={link.icon}
                 />
@@ -107,11 +110,10 @@ const $container: ViewStyle = {
   gap: spacing.xl,
 };
 const $heading: TextStyle = {
-  // padding: spacing.md,
+  // paddingVertical: spacing.md,
 };
 const $text: TextStyle = {
   fontFamily: typography.primary.normal,
-  fontSize: 14,
-  color: colors.palette.primary500,
+  color: colors.palette.darkKale,
   marginBottom: spacing.xxs,
 };
