@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { ViewStyle, View, Pressable } from "react-native";
+import { ViewStyle, View, Pressable, Dimensions } from "react-native";
 import {
   Button,
   Footer,
@@ -38,8 +38,7 @@ import { Link } from "expo-router";
 import { useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
 import { imageCDNURL } from "./utils/linkbuilder";
-import { ScrollView } from "react-native-gesture-handler";
-
+const { width } = Dimensions.get("window");
 // Amplify.configure({
 //   ...Amplify.getConfig(),
 //   analytics: outputs.analytics,
@@ -151,32 +150,6 @@ export default observer(function MenuItem() {
     }, [navigation])
   );
 
-  // const renderSectionTitle = ({ section }: { section: any }) => (
-  //   <View
-  //     style={{
-  //       // backgroundColor: "red",
-  //       width: "100%",
-  //       alignItems: "flex-start",
-  //       alignSelf: "flex-end",
-  //       justifyContent: "center",
-  //     }}
-  //   >
-  //     <Text
-  //       style={{
-  //         textAlign: "left",
-  //         fontFamily: typography.fonts.poppins.Poppins_200ExtraLight_Italic,
-  //         fontSize: 26,
-  //         lineHeight: 29,
-  //         textDecorationColor: colors.palette.greenFont,
-  //         color: "rgb(14, 21, 14)",
-  //         // backgroundColor: "red",
-  //       }}
-  //       preset="subheading"
-  //     >
-  //       {section.title.toUpperCase()}
-  //     </Text>
-  //   </View>
-  // );
   const number = item.price;
   const dollars = (number / 100).toLocaleString("en-US", {
     style: "currency",
@@ -186,28 +159,32 @@ export default observer(function MenuItem() {
 
   return (
     <Screen style={$root} preset="fixed">
-      <ScrollView style={{ flex: 8, backgroundColor: "blue" }}>
-        <Text>{menuItem}SLUG</Text>
-
+      <View style={{ flex: 13, alignItems: "center" }}>
         <Image
           source={{
             uri: imageCDNURL(item.url),
           }}
           style={{ width: 200, height: 200 }}
         />
-        <Text>{item.name}</Text>
-        <Text>{visibleText}</Text>
-        <ThemedIngredientList style={{ flex: 1 }} />
-        <ThemedIngredientList style={{ flex: 1 }} />
-      </ScrollView>
+        <Text style={{ textAlign: "left", alignSelf: "flex-start" }}>
+          {item.name}
+        </Text>
+        <Text style={{ textAlign: "left", alignSelf: "flex-start" }}>
+          {visibleText}
+        </Text>
+        <ThemedIngredientList
+          style={{ flex: 1, width, backgroundColor: "green" }}
+        />
+        {/* <ThemedIngredientList style={{ flex: 1 }} /> */}
+      </View>
       <View
         style={{
           // position: "absolute",
-          flex: 1,
+          // flex: 1,
           borderTopColor: colors.palette.darkKale,
           borderTopWidth: 1,
           flexDirection: "row",
-          width: "100%",
+          // width: "100%",
           backgroundColor: "red",
           justifyContent: "space-evenly",
           alignItems: "center",
@@ -215,7 +192,7 @@ export default observer(function MenuItem() {
         }}
       >
         <Link href={"/"}>
-          <Button text="Customize" />
+          <Button text="Customize" style={{ flex: 1 }} />
         </Link>
         <Link href={"/"}>
           <Button text="Add to Bag" />
@@ -229,11 +206,11 @@ const $root: ViewStyle = {
   // flex: 1,
   // alignItems: "flex-end",
   // height: "100%",
-  justifyContent: "space-evenly",
+  // justifyContent: "space-evenly",
 
   // borderWidth: 3,
   // borderColor: "pink",
-  backgroundColor: "red",
+  backgroundColor: colors.palette.lightBackground,
 
   // flexWrap: "wrap",
   // paddingVertical: spacing.md,
