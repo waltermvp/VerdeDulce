@@ -3,7 +3,8 @@
   "dependencies": {
     "@aws-sdk/client-sesv2": "^3.637.0",
     "@usewaypoint/email-builder": "^0.0.8",
-    "aws-amplify": "^6.6.0"
+    "aws-amplify": "^6.6.0",
+    "emailable": "^3.0.6"
   },
   "devDependencies": {}
 }
