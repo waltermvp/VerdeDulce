@@ -9,9 +9,11 @@ import { env } from "$amplify/env/registerUser"; // the import is '$amplify/env/
 /**
  * IF main then it should exist if
  */
-const emailableAPIKey = env.EMAILABLE_SECRET
-  ? env.EMAILABLE_SECRET
-  : "test_11e33507f7608e3af558";
+//TODO: get from secret manager
+const emailableAPIKey = "live_1a785c41a3ad8511db30"; //env.EMAILABLE_SECRET
+// ? env.EMAILABLE_SECRET
+// : "test_11e33507f7608e3af558";
+console.log("EMAILABLE_SECRET", JSON.stringify(env));
 var emailable = require("emailable")(emailableAPIKey);
 
 const region = "us-east-1";
@@ -281,6 +283,9 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (
   const start = performance.now();
   const email = event.arguments.email;
   // Set up the parameters for the email
+  console.log("emailableAPIKey", JSON.stringify({ emailableAPIKey }));
+  console.log("emailable", JSON.stringify({ env }));
+
   try {
     const verificationResponse = await new Promise((resolve, reject) => {
       emailable
@@ -288,6 +293,8 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (
         .then((response: unknown) => resolve(response))
         .catch((error: any) => reject(error));
     });
+    console.log("verificationResponse", verificationResponse);
+
     //The state of the verified email. (e.g. deliverable, undeliverable, risky, unknown)
     //@ts-ignore: Unreachable code error
     if (verificationResponse?.state === "deliverable") {
@@ -336,9 +343,12 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (
         reason: verificationResponse?.state,
       };
     }
-    console.log("verificationResponse", verificationResponse);
   } catch (error) {
     console.error("Error sending email:", error);
-    throw error;
+    return {
+      error,
+    };
+
+    // throw error;
   }
 };
