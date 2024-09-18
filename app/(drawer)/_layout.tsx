@@ -15,8 +15,6 @@ import { OrderButton, Text } from "../../components";
 import { translate } from "../i18n";
 import Config from "../config";
 
-const SIZE = 100;
-
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const CTA = translate("landingScreen.order");
