@@ -62,14 +62,22 @@ export default observer(function MenuScreen() {
   // const showDialog = () => setVisible(true)
 
   // const hideDialog = () => setVisible(false)
-
   const navigation = useNavigation();
-  const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 });
-  const isBigScreen = useMediaQuery({ minWidth: 768 });
-  const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 });
-  const isPortrait = useMediaQuery({ orientation: "portrait" });
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
-  console.log("is big screen", isBigScreen);
+  const isBigScreen = useMediaQuery({ minWidth: 720 });
+  const isMediumScreen = useMediaQuery({ minWidth: 1024 });
+  const isLargeScreen = useMediaQuery({ minWidth: 1440 });
+
+  let numberOfColumns;
+  if (isLargeScreen) {
+    numberOfColumns = 4;
+  } else if (isMediumScreen) {
+    numberOfColumns = 3;
+  } else if (isBigScreen) {
+    numberOfColumns = 2;
+  } else {
+    numberOfColumns = 1;
+  }
+
   // console.log("is isSmallScreen", isSmallScreen);
 
   // console.log(" ", imageCDNURL("menu/Hot_Honey_Chicken.png"));
@@ -176,8 +184,8 @@ export default observer(function MenuScreen() {
           alignItems: "center",
         }}
         // itemDimension={isSmallScreen ? 225 : 350}
-        // itemContainerStyle={{ height: 200 }}
-        maxItemsPerRow={isSmallScreen ? 1 : 3}
+        // itemContainerStyle={{ height: 700 }}
+        maxItemsPerRow={numberOfColumns}
         sections={transformDataForSectionList(items)}
         renderItem={({ item }) => {
           console.log("item", item);

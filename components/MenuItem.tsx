@@ -64,7 +64,6 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
         style={({ pressed }) => {
           return {
             backgroundColor: pressed ? colors.palette.neutral400 : undefined,
-            borderRadius: 13,
             opacity: activated ? 1 : 0.5,
           };
         }}
@@ -80,26 +79,13 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                 },
               ]}
             >
-              {showDelete && (
-                <Badge
-                  style={{
-                    alignSelf: "flex-end",
-
-                    marginBottom: -spacing.xs,
-                    zIndex: 9,
-                  }}
-                  onPress={onDelete}
-                >
-                  X
-                </Badge>
-              )}
-              <View style={{ flex: 8, alignItems: "center" }}>
+              <View style={{ flex: 1, alignItems: "center" }}>
                 <Image
                   style={{
                     // height: SIZE,
                     aspectRatio: 1,
-                    width: "85%",
-                    borderRadius: 9,
+                    width: "70%",
+                    borderRadius: 13,
                     // borderColor: "red",  borderWidth: 2
                   }}
                   source={{ uri: url }}
@@ -114,11 +100,17 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                   style={{
                     marginTop: spacing.md,
                     paddingHorizontal: spacing.xxl,
+                    flex: 1,
                   }}
                 >
                   <Text
                     preset="subheading"
-                    style={{ fontFamily: typography.fonts.poppins.light }}
+                    // numberOfLines={1}
+                    style={{
+                      fontFamily: typography.fonts.poppins.light,
+                      fontSize: 18,
+                      // NUMBER,
+                    }}
                   >
                     {item.name}
                   </Text>
@@ -127,16 +119,13 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                     style={{
                       fontFamily: typography.fonts.poppins.light,
                       marginTop: spacing.sm,
+                      fontSize: 14,
+                      // minHeight: spacing.xxl * 1.75,
+                      // minHeight: 525 / 2.5,
                     }}
                   >
                     {item.description}
                   </Text>
-                  {/* <Text
-                  style={{ alignSelf: "center", padding: spacing.md, fontSize: spacing.xl }}
-                  preset="bold"
-                >
-                  {dollars}
-                </Text> */}
                   <View
                     style={{
                       alignSelf: "flex-start",
@@ -160,22 +149,6 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                   </View>
                 </View>
               </View>
-              {/* <View style={{ flex: 1 }}>
-              {preset !== "default" && (
-                <OrderButton
-                  style={{
-                    marginTop: spacing.md,
-                    padding: spacing.md,
-                    // width: "90%",
-                    width: isSmallScreen ? 222 : 333,
-                    // bottom: spacing.xxxs,
-                  }}
-                  // tx={activated ? "landingScreen.order" : "landingScreen.comingSoon"}
-                  text={CTA}
-                  onPress={onPress}
-                />
-              )}
-            </View> */}
             </View>
           );
         }}
@@ -188,6 +161,7 @@ const $container: ViewStyle = {
   flex: 1,
   alignItems: "center",
   paddingVertical: spacing.lg,
+  // paddingHorizontal: spacing.xxl,
   borderRadius: 13,
   //TODO: decresase hieight for smaller breakpoints
   // margin:200
