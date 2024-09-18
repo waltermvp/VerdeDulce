@@ -30,6 +30,7 @@ const schema = a.schema({
       name: a.string(),
       // content: a.string(),
       url: a.string(),
+      slug: a.string(),
       description: a.string(),
       price: a.integer(),
       calories: a.integer(),
