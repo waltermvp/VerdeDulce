@@ -57,26 +57,6 @@ export const OrderButton = observer(function OrderButton(
   const isSmallScreen = useMediaQuery({ query: "(max-width: 479px)" });
   return (
     <Pressable
-      // style={({ pressed }) => [
-      //   {
-      //     flexDirection: "row",
-      //     alignItems: "center",
-
-      //     justifyContent: "center",
-      //     backgroundColor: onHoverIn
-      //       ? colors.palette.primary100
-      //       : colors.palette.greenFont,
-
-      //     // borderRadius: 13,
-      //     borderWidth: 3,
-      //     borderColor: onHoverIn
-      //       ? colors.palette.greenFont
-      //       : colors.palette.lightYellowGreen,
-      //     // alignSelf: "center",
-      //   },
-
-      //   $styles,
-      // ]}
       onPress={onPress}
       onHoverIn={() => {
         setOnHoverIn(true);
@@ -101,9 +81,6 @@ export const OrderButton = observer(function OrderButton(
             borderColor: onHoverIn
               ? colors.palette.greenFont
               : colors.palette.lightBackground,
-            //       ? colors.palette.greenFont
-            //       : colors.palette.lightYellowGreen,
-            //     // alignSelf: "center",
           },
           $styles,
         ]}
@@ -124,7 +101,7 @@ export const OrderButton = observer(function OrderButton(
         >
           {text}
         </Text>
-        {!isSmallScreen && (
+        {!isSmallScreen && icon && (
           <Ionicons
             style={{
               // textDecorationLine: onHoverIn ? "underline" : undefined,

@@ -22,8 +22,9 @@ export const FaqScreen: FC<FaqScreenProps> = observer(function FaqScreen() {
         headerRight: () => {
           return (
             <OrderButton
+              style={{ marginRight: spacing.sm }}
               tx="landingScreen.order"
-              icon="logo-whatsapp"
+              icon="arrow-forward"
               onPress={() => {
                 // navigation.navigate("OrderNav", { screen: "Home" })
                 // return

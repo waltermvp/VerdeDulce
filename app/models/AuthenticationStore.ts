@@ -187,7 +187,6 @@ export const AuthenticationStoreModel = types
         // }
         // store.setProp("orgID", result.orgID)
       } catch (error) {
-        console.log("refreshAuthStatus error: ", error);
         this.clear();
         // throw error
       }
