@@ -18,15 +18,15 @@ import { imageCDNURL } from "../app/utils/linkbuilder";
 import { useMediaQuery } from "react-responsive";
 import { Marquee } from "./Marquee";
 import { Href, Link } from "expo-router";
-const strategy = process.env.EXPO_PUBLIC_MARKETING_STRATEGY;
-const URL = (process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL as Href)
-  ? (process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL as Href)
-  : ("https://wa.me/c/593963021783" as Href);
+import Config from "@/app/config";
+
+const strategy = Config.MARKETING_STRATEGY;
+const URL = Config.WHATSAPP_CATALOG_URL as Href;
+
 const SIZE = 125;
 const SIZE_SMALL = SIZE / 2;
 const ICON_SIZE = SIZE / 4.75;
 const ICON_SIZE_SMALL = ICON_SIZE / 2;
-const CONTENT = "https://wa.me/c/593963021783";
 
 export interface FooterProps {
   /**
@@ -47,9 +47,9 @@ export const Footer = observer(function Footer(props: FooterProps) {
 
   return (
     <View style={$styles}>
-      {/* <View style={$newsletterContainer}>
+      <View style={$newsletterContainer}>
         <Newsletter />
-      </View> */}
+      </View>
       <View style={{ backgroundColor: colors.palette.footerGreen }}>
         <Link href={!whatsappStrategy ? URL : "/(tabs)"} asChild>
           <Pressable
@@ -104,7 +104,7 @@ export const Footer = observer(function Footer(props: FooterProps) {
                       ? { padding: spacing.xs, alignSelf: "flex-end" }
                       : styles.qr
                   }
-                  value={CONTENT}
+                  value={URL}
                   frameSize={isSmallScreen ? SIZE_SMALL : SIZE}
                   contentCells={5}
                   content={
@@ -120,7 +120,7 @@ export const Footer = observer(function Footer(props: FooterProps) {
                   dotColor="#ffff"
                   contentStyle={styles.box}
                 />
-                <Text style={$reserved}>&copy; 2024 VerdeDulce</Text>
+                <Text style={$reserved}>&copy; 2024 {Config.APP_NAME}</Text>
               </Pressable>
             </Link>
           </View>

@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { Dimensions, ViewStyle, View } from "react-native";
+import { ViewStyle, View, Pressable } from "react-native";
 import {
   Footer,
   MenuHeader,
@@ -10,27 +10,31 @@ import {
   Screen,
   SimpleMenu,
   Text,
-} from "../../components";
+} from "../components";
 
-import { colors, spacing, typography } from "../theme";
+import { colors, spacing, typography } from "./theme";
 import { useMediaQuery } from "react-responsive";
-import { RouteProp, useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 import { Linking } from "react-native"; // Import Linking module
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { imageCDNURL } from "../utils/linkbuilder";
 // import Config from "../config"
 import {
   // transformData,
   transformDataForSectionList,
-} from "../models/ItemStore";
+} from "./models/ItemStore";
 // import { useStores } from "app/models"
 // import { Schema } from "../../amplify/data/resource";
 // import { generateClient } from "aws-amplify/api";
-import { translate } from "../i18n";
+
 import { SectionGrid } from "react-native-super-grid";
 import { Amplify } from "aws-amplify";
 import { record } from "aws-amplify/analytics";
-import outputs from "../../amplify_outputs.json";
+import outputs from "../amplify_outputs.json";
+import { Ionicons } from "@expo/vector-icons";
+import { Link } from "expo-router";
+
+import { useLocalSearchParams } from "expo-router";
+
 // Amplify.configure({
 //   ...Amplify.getConfig(),
 //   analytics: outputs.analytics,
@@ -45,14 +49,12 @@ Amplify.configure({
   },
 });
 
-const width = Dimensions.get("window").width;
-const sweetgreenMenu = require("../../menu-es.json");
-const itemDimension = 555;
-const itemHeight = 222;
+const sweetgreenMenu = require("../menu-es.json");
 
 //TODO: This menu needs to be able to add to cart!
-export default observer(function MenuScreen() {
+export default observer(function MenuItem() {
   const route = useRoute();
+  const { menuItem } = useLocalSearchParams();
 
   const [items, setItems] = useState(
     sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true)
@@ -71,11 +73,10 @@ export default observer(function MenuScreen() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 });
   const isPortrait = useMediaQuery({ orientation: "portrait" });
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
-  console.log("is big screen", isBigScreen);
+  console.log("is big slug", menuItem);
   // console.log("is isSmallScreen", isSmallScreen);
 
   // console.log(" ", imageCDNURL("menu/Hot_Honey_Chicken.png"));
-  console.log(" ", imageCDNURL("VerdeDulce_logo.png", "og"));
   // useEffect(() => {
   //   // if (!displayID) {
   //   //   // setMode(MODE.MISSING_UDID)
@@ -105,69 +106,59 @@ export default observer(function MenuScreen() {
   // }, [])
 
   //TODO: localize
-  useFocusEffect(
-    React.useCallback(() => {
-      navigation.setOptions({
-        headerRight: () => {
-          return (
-            <OrderButton
-              tx="landingScreen.order"
-              icon="logo-whatsapp"
-              onPress={async () => {
-                // navigation.navigate("OrderNav", { screen: "Home" })
+  //TODO: https://github.com/waltermvp/VerdeDulce/issues/42
 
-                navigation.navigate("(tabs)", {
-                  screen: "OrderScreen",
-                });
-                // return
-                // const phoneNumber = "+593963021783" // Replace with the actual phone number
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     navigation.setOptions({
+  //       headerRight: () => {
+  //         return (
+  //           <Link href={"/(home)/account"} asChild>
+  //             <Pressable>
+  //               <Ionicons
+  //                 size={spacing.xl}
+  //                 name="person-circle-outline"
+  //                 color={colors.palette.darkKale}
+  //               />
+  //             </Pressable>
+  //           </Link>
+  //         );
+  //       },
+  //     });
+  //   }, [navigation])
+  // );
 
-                // record({
-                //   name: "orderNow",
-                // });
-                // // const message = translate("menuScreen.orderMessage") // Replace with the actual message
-                // const url = "https://wa.me/c/593963021783";
-                // await Linking.openURL(url).catch((err) =>
-                //   console.error("Failed to open WhatsApp", err)
-                // );
-              }}
-            />
-          );
-        },
-      });
-    }, [navigation])
-  );
-
-  const renderSectionTitle = ({ section }: { section: any }) => (
-    <View
-      style={{
-        // backgroundColor: "red",
-        width: "100%",
-        alignItems: "flex-start",
-        alignSelf: "flex-end",
-        justifyContent: "center",
-      }}
-    >
-      <Text
-        style={{
-          textAlign: "left",
-          fontFamily: typography.fonts.poppins.Poppins_200ExtraLight_Italic,
-          fontSize: 26,
-          lineHeight: 29,
-          textDecorationColor: colors.palette.greenFont,
-          color: "rgb(14, 21, 14)",
-          // backgroundColor: "red",
-        }}
-        preset="subheading"
-      >
-        {section.title.toUpperCase()}
-      </Text>
-    </View>
-  );
+  // const renderSectionTitle = ({ section }: { section: any }) => (
+  //   <View
+  //     style={{
+  //       // backgroundColor: "red",
+  //       width: "100%",
+  //       alignItems: "flex-start",
+  //       alignSelf: "flex-end",
+  //       justifyContent: "center",
+  //     }}
+  //   >
+  //     <Text
+  //       style={{
+  //         textAlign: "left",
+  //         fontFamily: typography.fonts.poppins.Poppins_200ExtraLight_Italic,
+  //         fontSize: 26,
+  //         lineHeight: 29,
+  //         textDecorationColor: colors.palette.greenFont,
+  //         color: "rgb(14, 21, 14)",
+  //         // backgroundColor: "red",
+  //       }}
+  //       preset="subheading"
+  //     >
+  //       {section.title.toUpperCase()}
+  //     </Text>
+  //   </View>
+  // );
 
   return (
     <Screen style={$root} preset="scroll">
-      <SectionGrid
+      <Text>{menuItem}SLUG</Text>
+      {/* <SectionGrid
         renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
         // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
         stickySectionHeadersEnabled={true}
@@ -212,7 +203,7 @@ export default observer(function MenuScreen() {
           />
         )}
         renderSectionHeader={renderSectionTitle}
-      />
+      /> */}
       {/* {menuType === "menu" && (
         <View>
           <SectionGrid
@@ -320,13 +311,6 @@ export default observer(function MenuScreen() {
       {menuType === "simpleMenu" && (
         <SimpleMenu categories={transformDataForSectionList(items)} />
       )} */}
-
-      <Footer
-        onPressQr={() => {
-          console.log("onPressQR");
-          navigation.navigate("Qr");
-        }}
-      />
     </Screen>
   );
 });

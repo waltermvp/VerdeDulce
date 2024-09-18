@@ -27,16 +27,6 @@ export const MenuHeader = observer(function MenuHeader(props: MenuHeaderProps) {
     <Link href={"/"} asChild>
       <Pressable>
         <View style={$styles}>
-          {/* <View style={{ flexDirection: "row" }}> */}
-          {/* {showImage && (
-          <View style={{ flex: 1, height: HEIGHT }}>
-            <Image
-              style={{ flex: 1 }}
-              source={require("../../assets/images/VerdeDulce_logo.svg")}
-            />
-          </View>
-        )} */}
-          {/* <View style={{ flex: 1, justifyContent: "center" }}> */}
           <Text
             tx="landingScreen.prompt"
             preset="headingLG"
@@ -58,8 +48,6 @@ export const MenuHeader = observer(function MenuHeader(props: MenuHeaderProps) {
             style={typography.primary}
             content="Verde Dulce! Comida de alta sostenible, y de alta calidad."
           /> */}
-          {/* </View> */}
-          {/* </View> */}
         </View>
       </Pressable>
     </Link>
@@ -68,6 +56,4 @@ export const MenuHeader = observer(function MenuHeader(props: MenuHeaderProps) {
 
 const $container: ViewStyle = {
   justifyContent: "center",
-  // height: HEIGHT,
-  // backgroundColor: "red",
 };

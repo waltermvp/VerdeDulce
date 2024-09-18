@@ -11,7 +11,8 @@
     "category": "Tazones",
     "activated": true,
     "hidden": false,
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "carne-con-ajo-caramelizado"
   },
   {
     "name": "Ensalada Picada Estilo Steakhouse",
@@ -25,7 +26,8 @@
     "category": "Tazones",
     "activated": true,
     "hidden": false,
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "ensalada-picada-estilo-steakhouse"
   },
   {
     "name": "César de Col (Carne)",
@@ -39,7 +41,8 @@
     "category": "Ensaladas",
     "activated": true,
     "hidden": false,
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "cesar-de-col-carne"
   },
   {
     "name": "Pollo Picante con Miel",
@@ -53,7 +56,8 @@
     "category": "Platos de Proteínas",
     "activated": true,
     "hidden": false,
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "pollo-picante-con-miel"
   },
   {
     "name": "Tazón de Cosecha",
@@ -67,9 +71,9 @@
     "category": "Tazones",
     "activated": true,
     "hidden": false,
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "tazon-de-cosecha"
   },
-
   {
     "activated": true,
     "hidden": false,
@@ -82,7 +86,8 @@
     "carbs": 40,
     "url": "menu/SG_Web_Image_Bowl_Chicken_Pesto_Parm.png",
     "category": "Tazones",
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "pollo-a-la-parmesana-con-pesto"
   },
   {
     "activated": true,
@@ -96,7 +101,8 @@
     "url": "menu/SG_Web_Image_Bowl_Chicken_Avocado_Ranch.png",
     "category": "Tazones",
     "hidden": true,
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "pollo-con-aguacate-y-ranch"
   },
   {
     "name": "César de Col",
@@ -110,7 +116,8 @@
     "category": "Ensaladas",
     "activated": true,
     "hidden": false,
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "cesar-de-col"
   },
   {
     "name": "Guacamole Verde",
@@ -124,7 +131,8 @@
     "category": "Ensaladas",
     "activated": true,
     "hidden": false,
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "guacamole-verde"
   },
   {
     "activated": true,
@@ -138,7 +146,8 @@
     "name": "Ensalada de Pollo a la BBQ",
     "description": "Pollo ennegrecido, col rallada, cebollas encurtidas, tomates, manzanas, chips de tortilla, lechuga romana picada, col rizada rallada, salsa BBQ con miel, ranch con diosa verde.",
     "url": "menu/SG_Web_Image_Salad_BBQ_Chicken.png",
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "ensalada-de-pollo-a-la-bbq"
   },
   {
     "activated": true,
@@ -152,7 +161,8 @@
     "url": "menu/SG_Web_Image_Salad_Hummus_Crunch.png",
     "category": "Ensaladas",
     "hidden": false,
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "hummus-crujiente"
   },
   {
     "activated": true,
@@ -166,7 +176,8 @@
     "url": "menu/SG_Web_Image_Salad_Buffalo_Chicken.png",
     "category": "Ensaladas",
     "hidden": false,
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "pollo-bufalo"
   },
   {
     "name": "Diosa Super Verde",
@@ -180,7 +191,8 @@
     "category": "Ensaladas",
     "activated": true,
     "hidden": false,
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "diosa-super-verde"
   },
   {
     "name": "Jardín Cobb",
@@ -190,12 +202,12 @@
     "protein": 22,
     "fat": 56,
     "carbs": 36,
-
     "url": "menu/SG_Web_Image_Bowl_Garden_Cobb.png",
     "category": "Ensaladas",
     "activated": true,
     "hidden": false,
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "jardin-cobb"
   },
   {
     "name": "Te de Jamaica",
@@ -209,6 +221,7 @@
     "category": "Bebidas",
     "activated": true,
     "hidden": false,
-    "itemURL": "https://wa.me/c/593963021783"
+    "itemURL": "https://wa.me/c/593963021783",
+    "slug": "te-de-jamaica"
   }
 ]
