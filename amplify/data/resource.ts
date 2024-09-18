@@ -29,6 +29,7 @@ const schema = a.schema({
   Item: a
     .model({
       id: a.id(), // Ensure the ID field is explicitly defined
+      itemId: a.id().required(),
       name: a.string().required(),
       url: a.string(),
       description: a.string(),
@@ -37,6 +38,8 @@ const schema = a.schema({
       categoryId: a.id(),
       category: a.belongsTo("Category", "categoryId"), // Relationship to Category
       ingredients: a.hasMany("Ingredient", "itemId"), // Relationship with Ingredient
+      orderItem: a.hasMany("OrderItem", "itemId"), // Relationship with OrderItem
+      review: a.hasMany("Review", "itemId"), // Relationship with Review
       metaData: a.json(),
       available: a.boolean(),
     })
@@ -50,11 +53,13 @@ const schema = a.schema({
   Ingredient: a
     .model({
       id: a.id(), // Ensure ID field for Ingredient
+      ingredientId: a.id().required(),
       name: a.string().required(),
       price: a.integer(), // Optional price for additional cost
       calories: a.integer(),
       itemId: a.id(), // Foreign key to Item
       item: a.belongsTo("Item", "itemId"), // Belongs to Item
+      orderIngredient: a.hasMany("OrderIngredient", "ingredientId"), // Relationship with OrderIngredient
       available: a.boolean(),
     })
     .authorization((allow) => [
