@@ -37,6 +37,22 @@ const schema = a.schema({
       category: a.string(),
       metaData: a.json(),
       available: a.boolean(),
+      ingredients: a.hasMany("Ingredient", "itemId"), // Relationship with Ingredient
+    })
+    .authorization((allow) => [
+      allow.guest(),
+      allow.publicApiKey(),
+      allow.authenticated(),
+    ]),
+  // Ingredient Model
+  Ingredient: a
+    .model({
+      name: a.string().required(),
+      price: a.integer(), // Optional price for additional cost
+      calories: a.integer(),
+      itemId: a.id(),
+      item: a.belongsTo("Item", "itemId"), // Belongs to an Item
+      available: a.boolean(),
     })
     .authorization((allow) => [
       allow.guest(),
