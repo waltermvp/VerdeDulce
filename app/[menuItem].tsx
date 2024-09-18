@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { ViewStyle, View, Pressable } from "react-native";
 import {
+  Button,
   Footer,
   MenuHeader,
   MenuItem,
@@ -10,6 +11,7 @@ import {
   Screen,
   SimpleMenu,
   Text,
+  ThemedIngredientList,
 } from "../components";
 
 import { colors, spacing, typography } from "./theme";
@@ -34,6 +36,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 
 import { useLocalSearchParams } from "expo-router";
+import { Image } from "expo-image";
+import { imageCDNURL } from "./utils/linkbuilder";
+import { ScrollView } from "react-native-gesture-handler";
 
 // Amplify.configure({
 //   ...Amplify.getConfig(),
@@ -56,9 +61,10 @@ export default observer(function MenuItem() {
   const route = useRoute();
   const { menuItem } = useLocalSearchParams();
 
-  const [items, setItems] = useState(
-    sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true)
+  const [item, setItem] = useState(
+    sweetgreenMenu.filter((item: { slug: string }) => item.slug === menuItem)[0]
   );
+  console.log("item", item);
 
   // const client = generateClient<Schema>()
   // const [visible, setVisible] = React.useState(false)
@@ -108,25 +114,42 @@ export default observer(function MenuItem() {
   //TODO: localize
   //TODO: https://github.com/waltermvp/VerdeDulce/issues/42
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     navigation.setOptions({
-  //       headerRight: () => {
-  //         return (
-  //           <Link href={"/(home)/account"} asChild>
-  //             <Pressable>
-  //               <Ionicons
-  //                 size={spacing.xl}
-  //                 name="person-circle-outline"
-  //                 color={colors.palette.darkKale}
-  //               />
-  //             </Pressable>
-  //           </Link>
-  //         );
-  //       },
-  //     });
-  //   }, [navigation])
-  // );
+  useFocusEffect(
+    React.useCallback(() => {
+      navigation.setOptions({
+        headerStyle: {
+          backgroundColor: colors.palette.lightBackground,
+        },
+        headerTitle: "",
+        headerRight: () => {
+          return (
+            <Link href={"/(tabs)/(menu)/menu"} asChild>
+              <Pressable>
+                <Ionicons
+                  name="close"
+                  size={spacing.xl}
+                  color={colors.palette.darkKale}
+                />
+              </Pressable>
+            </Link>
+          );
+        },
+        headerLeft: () => {
+          return (
+            <Link href={"/(tabs)/(menu)/menu"} asChild>
+              <Pressable>
+                <Ionicons
+                  size={spacing.xl}
+                  name="arrow-back"
+                  color={colors.palette.darkKale}
+                />
+              </Pressable>
+            </Link>
+          );
+        },
+      });
+    }, [navigation])
+  );
 
   // const renderSectionTitle = ({ section }: { section: any }) => (
   //   <View
@@ -154,172 +177,64 @@ export default observer(function MenuItem() {
   //     </Text>
   //   </View>
   // );
+  const number = item.price;
+  const dollars = (number / 100).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  const visibleText = `${dollars} - ${item.calories} CAL`;
 
   return (
-    <Screen style={$root} preset="scroll">
-      <Text>{menuItem}SLUG</Text>
-      {/* <SectionGrid
-        renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
-        // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
-        stickySectionHeadersEnabled={true}
-        contentContainerStyle={{
-          alignItems: "center",
-        }}
-        // itemDimension={isSmallScreen ? 225 : 350}
-        // itemContainerStyle={{ height: 200 }}
-        maxItemsPerRow={isSmallScreen ? 1 : 3}
-        sections={transformDataForSectionList(items)}
-        renderItem={({ item }) => (
-          <MenuItem
-            preset="menu"
-            item={item}
-            // showDelete={true}
-            onPress={async () => {
-              record({
-                name: "orderNow",
-                attributes: { name: item.name },
-              });
+    <Screen style={$root} preset="fixed">
+      <ScrollView style={{ flex: 8, backgroundColor: "blue" }}>
+        <Text>{menuItem}SLUG</Text>
 
-              // const phoneNumber = "+593963021783" // Replace with the actual phone number
-              // console.log("item", item.itemURL)
-              // const message = translate("menuScreen.orderMenuItemMessage", {
-              //   item: item.name,
-              // }) // Replace with the actual message
-              // console.log("message", message)
-              // const url = `whatsapp://send?text=${encodeURIComponent(
-              //   message + " " + item.itemURL,
-              // )}&phone=${encodeURIComponent(phoneNumber)}`
-              const url = item.itemURL;
-              await Linking.openURL(url).catch((err) =>
-                console.error("Failed to open WhatsApp", err)
-              );
-              // e.prevent
-            }}
-            onDelete={() => {
-              // setItemIDToDelete(item.id)
-              // showDialog()
-            }}
-            show={true}
-          />
-        )}
-        renderSectionHeader={renderSectionTitle}
-      /> */}
-      {/* {menuType === "menu" && (
-        <View>
-          <SectionGrid
-            renderSectionFooter={() => (
-              <View style={{ height: spacing.xl }}></View>
-            )}
-            // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
-            stickySectionHeadersEnabled={true}
-            contentContainerStyle={{
-              flexWrap: "wrap",
-              // margin: spacing.xxl,
-              // paddingHorizontal: spacing.xxs,
-              // alignItems: "center",
-              // rowGap: 100
-              // gap: 100,
-              // columnGap: 100,
-            }}
-            // itemDimension={itemDimension}
-            itemContainerStyle={{ width: itemDimension, height: itemHeight }}
-            // itemContainerStyle={{ height: 200 }}
-            // maxItemsPerRow={isHugeScreen ? 5 : isBigScreen ? 2 : 1}
-            maxItemsPerRow={4}
-            sections={transformDataForSectionList(items).slice(0, 2)}
-            renderItem={({ item }) => (
-              <MenuItemSmall
-                name={item.name}
-                price={item.price}
-                description={item.description}
-              />
-            )}
-            renderSectionHeader={renderSectionTitle}
-          />
-          <View
-            style={{
-              flexDirection: "row",
-              // backgroundColor: "red",
-              // alignItems: "flex-start",
-              // flex: 1,
-            }}
-          >
-            <SectionGrid
-              renderSectionFooter={() => (
-                <View style={{ height: spacing.xl }}></View>
-              )}
-              // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
-              stickySectionHeadersEnabled={true}
-              contentContainerStyle={{
-                flexWrap: "wrap",
-                width: width / 2.75,
-                // margin: spacing.xxl,
-                // paddingHorizontal: spacing.xxs,
-                // alignItems: "center",
-                // rowGap: 100
-                // gap: 100,
-                // columnGap: 100,
-              }}
-              itemContainerStyle={{ width: itemDimension, height: itemHeight }}
-              // maxItemsPerRow={isHugeScreen ? 5 : isBigScreen ? 2 : 1}
-              maxItemsPerRow={4}
-              sections={transformDataForSectionList(items).slice(2, 3)}
-              renderItem={({ item }) => (
-                <MenuItemSmall
-                  name={item.name}
-                  price={item.price}
-                  description={item.description}
-                />
-              )}
-              renderSectionHeader={renderSectionTitle}
-            />
-            <SectionGrid
-              renderSectionFooter={() => (
-                <View style={{ height: spacing.xl }}></View>
-              )}
-              // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
-              stickySectionHeadersEnabled={true}
-              contentContainerStyle={
-                {
-                  // marginLeft: -spacing.lg,
-                  // flexWrap: "wrap",
-                  // margin: spacing.xxl,
-                  // paddingHorizontal: spacing.xxs,
-                  // alignItems: "center",
-                  // rowGap: 100
-                  // gap: 100,
-                  // columnGap: 100,
-                  // height: width,
-                }
-              }
-              itemContainerStyle={{ width: itemDimension, height: itemHeight }}
-              // maxItemsPerRow={isHugeScreen ? 5 : isBigScreen ? 2 : 1}
-              maxItemsPerRow={4}
-              sections={transformDataForSectionList(items).slice(3, 4)}
-              renderItem={({ item }) => (
-                <MenuItemSmall
-                  name={item.name}
-                  price={item.price}
-                  description={item.description}
-                />
-              )}
-              renderSectionHeader={renderSectionTitle}
-            />
-          </View>
-        </View>
-      )}
-      {menuType === "simpleMenu" && (
-        <SimpleMenu categories={transformDataForSectionList(items)} />
-      )} */}
+        <Image
+          source={{
+            uri: imageCDNURL(item.url),
+          }}
+          style={{ width: 200, height: 200 }}
+        />
+        <Text>{item.name}</Text>
+        <Text>{visibleText}</Text>
+        <ThemedIngredientList style={{ flex: 1 }} />
+        <ThemedIngredientList style={{ flex: 1 }} />
+      </ScrollView>
+      <View
+        style={{
+          // position: "absolute",
+          flex: 1,
+          borderTopColor: colors.palette.darkKale,
+          borderTopWidth: 1,
+          flexDirection: "row",
+          width: "100%",
+          backgroundColor: "red",
+          justifyContent: "space-evenly",
+          alignItems: "center",
+          backgroundColor: "pink",
+        }}
+      >
+        <Link href={"/"}>
+          <Button text="Customize" />
+        </Link>
+        <Link href={"/"}>
+          <Button text="Add to Bag" />
+        </Link>
+      </View>
     </Screen>
   );
 });
 
 const $root: ViewStyle = {
   // flex: 1,
+  // alignItems: "flex-end",
+  // height: "100%",
+  justifyContent: "space-evenly",
+
   // borderWidth: 3,
   // borderColor: "pink",
-  backgroundColor: colors.palette.lightBackground,
+  backgroundColor: "red",
+
   // flexWrap: "wrap",
-  padding: spacing.md,
+  // paddingVertical: spacing.md,
 };

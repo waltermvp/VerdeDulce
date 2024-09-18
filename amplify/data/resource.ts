@@ -37,16 +37,21 @@ const schema = a.schema({
       category: a.string(),
       metaData: a.json(),
       available: a.boolean(),
+      ingredients: a.hasMany("Ingredient", "itemId"), // Relationship with Ingredient
     })
     .authorization((allow) => [
       allow.guest(),
       allow.publicApiKey(),
       allow.authenticated(),
     ]),
-
-  User: a
+  // Ingredient Model
+  Ingredient: a
     .model({
-      email: a.string(),
+      name: a.string().required(),
+      price: a.integer(), // Optional price for additional cost
+      calories: a.integer(),
+      itemId: a.id(),
+      item: a.belongsTo("Item", "itemId"), // Belongs to an Item
       available: a.boolean(),
     })
     .authorization((allow) => [
@@ -54,6 +59,87 @@ const schema = a.schema({
       allow.publicApiKey(),
       allow.authenticated(),
     ]),
+  // OrderItem Model (For items added to the cart)
+  OrderItem: a
+    .model({
+      orderId: a.id(),
+      order: a.belongsTo("Order", "orderId"), // Belongs to Order
+      itemId: a.id(),
+      item: a.belongsTo("Item", "itemId"), // The item ordered
+      selectedIngredients: a.hasMany("OrderIngredient", "orderItemId"), // Track selected ingredients with quantities
+      quantity: a.integer().required(), // Quantity of this item in the order
+    })
+    .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // OrderIngredient Model (Tracks individual ingredients with quantity)
+  OrderIngredient: a
+    .model({
+      orderItemId: a.id(),
+      orderItem: a.belongsTo("OrderItem", "orderItemId"), // Belongs to the ordered item
+      ingredientId: a.id(),
+      ingredient: a.belongsTo("Ingredient", "ingredientId"), // Belongs to an ingredient
+      quantity: a.integer().required(), // Quantity of this ingredient selected
+    })
+    .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // Order Model
+  // OrderStatus: a.enum(["pending", "completed", "canceled"]),
+
+  Order: a
+    .model({
+      orderNumber: a.string().required(),
+      userId: a.id(),
+      user: a.belongsTo("User", "userId"), // Belongs to a User
+      totalAmount: a.integer(),
+      orderItems: a.hasMany("OrderItem", "orderId"), // Track items in the order
+      // status: a.ref("OrderStatus").required()
+      status: a.string().default("pending"),
+    })
+    .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // User Model
+  User: a
+    .model({
+      username: a.string().required(),
+      email: a.string().required(),
+      password: a.string().required(),
+      role: a.string(), // e.g., 'admin', 'user'
+      orders: a.hasMany("Order", "userId"),
+      reviews: a.hasMany("Review", "userId"),
+      available: a.boolean(),
+    })
+    .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+  // Category Model
+  Category: a
+    .model({
+      name: a.string().required(),
+      description: a.string(),
+      items: a.hasMany("Item", "categoryId"),
+    })
+    .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // Review Model
+  Review: a
+    .model({
+      rating: a.integer().required(),
+      comment: a.string(),
+      userId: a.id(),
+      user: a.belongsTo("User", "userId"),
+      itemId: a.id(),
+      item: a.belongsTo("Item", "itemId"),
+    })
+    .authorization((allow) => [allow.authenticated()]),
+
+  // User: a
+  //   .model({
+  //     email: a.string(),
+  //     available: a.boolean(),
+  //   })
+  //   .authorization((allow) => [
+  //     allow.guest(),
+  //     allow.publicApiKey(),
+  //     allow.authenticated(),
+  //   ]),
 
   RegisterResponse: a.customType({
     email: a.string(),
@@ -149,3 +235,95 @@ Fetch records from the database and use them in your frontend component.
 // const { data: todos } = await client.models.Todo.list()
 
 // return <ul>{todos.map(todo => <li key={todo.id}>{todo.content}</li>)}</ul>
+// Item Model
+
+/*
+  Item: a.model({
+    name: a.string().required(),
+    url: a.string(),
+    description: a.string(),
+    price: a.integer(),
+    calories: a.integer(),
+    categoryId: a.id(),
+    category: a.belongsTo('Category', 'categoryId'),
+    ingredients: a.hasMany('Ingredient', 'itemId'), // Relationship with Ingredient
+    metaData: a.json(),
+    available: a.boolean(),
+  }).authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
+
+  // Ingredient Model
+  Ingredient: a.model({
+    name: a.string().required(),
+    price: a.integer().optional(), // Optional price for additional cost
+    calories: a.integer().optional(),
+    itemId: a.id(),
+    item: a.belongsTo('Item', 'itemId'), // Belongs to an Item
+    available: a.boolean(),
+  }).authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
+
+  // OrderItem Model (For items added to the cart)
+  OrderItem: a.model({
+    orderId: a.id(),
+    order: a.belongsTo('Order', 'orderId'), // Belongs to Order
+    itemId: a.id(),
+    item: a.belongsTo('Item', 'itemId'), // The item ordered
+    selectedIngredients: a.hasMany('OrderIngredient', 'orderItemId'), // Track selected ingredients with quantities
+    quantity: a.integer().required(), // Quantity of this item in the order
+  }).authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // OrderIngredient Model (Tracks individual ingredients with quantity)
+  OrderIngredient: a.model({
+    orderItemId: a.id(),
+    orderItem: a.belongsTo('OrderItem', 'orderItemId'), // Belongs to the ordered item
+    ingredientId: a.id(),
+    ingredient: a.belongsTo('Ingredient', 'ingredientId'), // Belongs to an ingredient
+    quantity: a.integer().required(), // Quantity of this ingredient selected
+  }).authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // Order Model
+  Order: a.model({
+    orderNumber: a.string().required(),
+    userId: a.id(),
+    user: a.belongsTo('User', 'userId'), // Belongs to a User
+    totalAmount: a.integer(),
+    orderItems: a.hasMany('OrderItem', 'orderId'), // Track items in the order
+    status: a.string(), // e.g., 'pending', 'completed', 'canceled'
+    createdAt: a.dateTime(),
+    updatedAt: a.dateTime(),
+  }).authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // User Model
+  User: a.model({
+    username: a.string().required(),
+    email: a.string().required(),
+    password: a.string().required(),
+    role: a.string(), // e.g., 'admin', 'user'
+    orders: a.hasMany('Order', 'userId'),
+    reviews: a.hasMany('Review', 'userId'),
+    createdAt: a.dateTime(),
+    updatedAt: a.dateTime(),
+  }).authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // Category Model
+  Category: a.model({
+    name: a.string().required(),
+    description: a.string(),
+    items: a.hasMany('Item', 'categoryId'),
+    createdAt: a.dateTime(),
+    updatedAt: a.dateTime(),
+  }).authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // Review Model
+  Review: a.model({
+    rating: a.integer().required(),
+    comment: a.string(),
+    userId: a.id(),
+    user: a.belongsTo('User', 'userId'),
+    itemId: a.id(),
+    item: a.belongsTo('Item', 'itemId'),
+    createdAt: a.dateTime(),
+    updatedAt: a.dateTime(),
+  }).authorization((allow) => [allow.authenticated()]),
+});
+
+*/
