@@ -4,8 +4,17 @@ import {
   renderToStaticMarkup,
   TReaderDocument,
 } from "@usewaypoint/email-builder";
+import { env } from "$amplify/env/registerUser"; // the import is '$amplify/env/<function-name>'
 
-const region = "sa-east-1";
+/**
+ * IF main then it should exist if
+ */
+const emailableAPIKey = env.EMAILABLE_SECRET
+  ? env.EMAILABLE_SECRET
+  : "test_11e33507f7608e3af558";
+var emailable = require("emailable")(emailableAPIKey);
+
+const region = "us-east-1";
 
 const CONFIGURATION: TReaderDocument = {
   root: {
@@ -273,42 +282,61 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (
   const email = event.arguments.email;
   // Set up the parameters for the email
   try {
-    const client = new SESv2Client({ region });
-    const string = renderToStaticMarkup(CONFIGURATION, { rootBlockId: "root" });
+    const verificationResponse = await new Promise((resolve, reject) => {
+      emailable
+        .verify(email)
+        .then((response: unknown) => resolve(response))
+        .catch((error: any) => reject(error));
+    });
+    //The state of the verified email. (e.g. deliverable, undeliverable, risky, unknown)
+    //@ts-ignore: Unreachable code error
+    if (verificationResponse?.state === "deliverable") {
+      const client = new SESv2Client({ region });
+      const string = renderToStaticMarkup(CONFIGURATION, {
+        rootBlockId: "root",
+      });
 
-    const input = {
-      Destination: {
-        ToAddresses: [email],
-      },
-      Content: {
-        Simple: {
-          Body: {
-            // Body
-            // Text: {
-            //   Data: "STRING_VALUE", // required
-            //   Charset: "STRING_VALUE",
-            // },
-            Html: {
-              Data: string, // required
-              // Charset: "STRING_VALUE",
+      const input = {
+        Destination: {
+          ToAddresses: [email],
+        },
+        Content: {
+          Simple: {
+            Body: {
+              // Body
+              // Text: {
+              //   Data: "STRING_VALUE", // required
+              //   Charset: "STRING_VALUE",
+              // },
+              Html: {
+                Data: string, // required
+                // Charset: "STRING_VALUE",
+              },
+            },
+            Subject: {
+              Data: "¡Bienvenido a verdedulce.com!",
             },
           },
-          Subject: {
-            Data: "¡Bienvenido a verdedulce.com!",
-          },
         },
-      },
-      FromEmailAddress: "contact@verdedulce.com",
-    };
-    console.log("will send :", input);
-    // @ts-ignore: Unreachable code error
-    const command = new SendEmailCommand(input);
-    const response = await client.send(command);
+        FromEmailAddress: "contact@verdedulce.com",
+      };
+      console.log("will send :", input);
+      // @ts-ignore: Unreachable code error
+      const command = new SendEmailCommand(input);
+      const response = await client.send(command);
 
-    return {
-      email: `Echoing content: ${event.arguments.email}`,
-      executionDuration: performance.now() - start,
-    };
+      return {
+        email: `Echoing content: ${event.arguments.email}`,
+        executionDuration: performance.now() - start,
+      };
+    } else {
+      return {
+        email: `Not Deliverable: ${event.arguments.email}`,
+        //@ts-ignore: Unreachable code error
+        reason: verificationResponse?.state,
+      };
+    }
+    console.log("verificationResponse", verificationResponse);
   } catch (error) {
     console.error("Error sending email:", error);
     throw error;

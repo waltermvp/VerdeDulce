@@ -2,14 +2,20 @@ import {
   type ClientSchema,
   a,
   defineData,
-  defineFunction, // 1.Import "defineFunction" to create new functions
-} from "@aws-amplify/backend"
+  defineFunction,
+  secret, // 1.Import "defineFunction" to create new functions
+} from "@aws-amplify/backend";
 
 // 2. define a function
 export const registerUserFunction = defineFunction({
   name: "registerUser",
   entry: "./registerUser/handler.ts",
-})
+  environment: {
+    NAME: "World",
+    API_ENDPOINT: "process.env.API_ENDPOINT",
+    EMAILABLE_SECRET: secret("EMAILABLE_SECRET"),
+  },
+});
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -31,14 +37,22 @@ const schema = a.schema({
       metaData: a.json(),
       available: a.boolean(),
     })
-    .authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
+    .authorization((allow) => [
+      allow.guest(),
+      allow.publicApiKey(),
+      allow.authenticated(),
+    ]),
 
   User: a
     .model({
       email: a.string(),
       available: a.boolean(),
     })
-    .authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
+    .authorization((allow) => [
+      allow.guest(),
+      allow.publicApiKey(),
+      allow.authenticated(),
+    ]),
 
   RegisterResponse: a.customType({
     email: a.string(),
@@ -54,7 +68,7 @@ const schema = a.schema({
     // .returns(a.ref "User"))
     .returns(a.ref("RegisterResponse"))
     .handler(
-      a.handler.function(registerUserFunction),
+      a.handler.function(registerUserFunction)
 
       // a.handler.custom({
       //   dataSource: a.ref("User"),
@@ -62,7 +76,11 @@ const schema = a.schema({
       // }),
     )
     // only allow signed-in users to call this API
-    .authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
+    .authorization((allow) => [
+      allow.guest(),
+      allow.publicApiKey(),
+      allow.authenticated(),
+    ]),
 
   // OrderStatus: a.enum(["OrderPending", "OrderShipped", "OrderDelivered"]),
   // OrderStatusChange: a.customType({
@@ -88,9 +106,9 @@ const schema = a.schema({
   //   .returns(a.ref('Post'))
   //   // only allow signed-in users to call this API
   //   .authorization(allow => [allow.authenticated()])
-})
+});
 
-export type Schema = ClientSchema<typeof schema>
+export type Schema = ClientSchema<typeof schema>;
 
 export const data = defineData({
   schema,
@@ -100,7 +118,7 @@ export const data = defineData({
 
     //TODO:  add apikey as an authorization mode
   },
-})
+});
 
 /*== STEP 2 ===============================================================
 Go to your frontend source code. From your client-side code, generate a
