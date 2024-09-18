@@ -10,6 +10,7 @@ import {
   Screen,
   SimpleMenu,
   Text,
+  ThemedIngredientList,
 } from "../components";
 
 import { colors, spacing, typography } from "./theme";
@@ -34,6 +35,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 
 import { useLocalSearchParams } from "expo-router";
+import { Image } from "expo-image";
+import { imageCDNURL } from "./utils/linkbuilder";
 
 // Amplify.configure({
 //   ...Amplify.getConfig(),
@@ -56,9 +59,10 @@ export default observer(function MenuItem() {
   const route = useRoute();
   const { menuItem } = useLocalSearchParams();
 
-  const [items, setItems] = useState(
-    sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true)
+  const [item, setItem] = useState(
+    sweetgreenMenu.filter((item: { slug: string }) => item.slug === menuItem)[0]
   );
+  console.log("item", item);
 
   // const client = generateClient<Schema>()
   // const [visible, setVisible] = React.useState(false)
@@ -108,25 +112,42 @@ export default observer(function MenuItem() {
   //TODO: localize
   //TODO: https://github.com/waltermvp/VerdeDulce/issues/42
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     navigation.setOptions({
-  //       headerRight: () => {
-  //         return (
-  //           <Link href={"/(home)/account"} asChild>
-  //             <Pressable>
-  //               <Ionicons
-  //                 size={spacing.xl}
-  //                 name="person-circle-outline"
-  //                 color={colors.palette.darkKale}
-  //               />
-  //             </Pressable>
-  //           </Link>
-  //         );
-  //       },
-  //     });
-  //   }, [navigation])
-  // );
+  useFocusEffect(
+    React.useCallback(() => {
+      navigation.setOptions({
+        headerStyle: {
+          backgroundColor: colors.palette.lightBackground,
+        },
+        headerTitle: "",
+        headerRight: () => {
+          return (
+            <Link href={"/(tabs)/(menu)/menu"} asChild>
+              <Pressable>
+                <Ionicons
+                  name="close"
+                  size={spacing.xl}
+                  color={colors.palette.darkKale}
+                />
+              </Pressable>
+            </Link>
+          );
+        },
+        headerLeft: () => {
+          return (
+            <Link href={"/(tabs)/(menu)/menu"} asChild>
+              <Pressable>
+                <Ionicons
+                  size={spacing.xl}
+                  name="arrow-back"
+                  color={colors.palette.darkKale}
+                />
+              </Pressable>
+            </Link>
+          );
+        },
+      });
+    }, [navigation])
+  );
 
   // const renderSectionTitle = ({ section }: { section: any }) => (
   //   <View
@@ -154,10 +175,27 @@ export default observer(function MenuItem() {
   //     </Text>
   //   </View>
   // );
+  const number = item.price;
+  const dollars = (number / 100).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  const visibleText = `${dollars} - ${item.calories} CAL`;
 
   return (
     <Screen style={$root} preset="scroll">
       <Text>{menuItem}SLUG</Text>
+
+      <Image
+        source={{
+          uri: imageCDNURL(item.url),
+        }}
+        style={{ width: 200, height: 200 }}
+      />
+      <Text>{item.name}</Text>
+      <Text>{visibleText}</Text>
+      <ThemedIngredientList />
+
       {/* <SectionGrid
         renderSectionFooter={() => <View style={{ height: spacing.xl }}></View>}
         // ListHeaderComponentStyle={{ marginTop: 0, marginBottom: 0 }}
