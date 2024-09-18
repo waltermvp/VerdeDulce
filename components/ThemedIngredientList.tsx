@@ -16,6 +16,7 @@ import { Image } from "expo-image";
 import { colors, spacing } from "@/app/theme";
 import { Link } from "expo-router";
 import { Button } from "./Button";
+import { useMediaQuery } from "react-responsive";
 const { width } = Dimensions.get("window");
 export type ThemedIngredientListProps = TextProps & {
   lightColor?: string;
@@ -53,6 +54,22 @@ export function ThemedIngredientList({
 }: ThemedIngredientListProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
   const styles = [$container, style];
+
+  const isBigScreen = useMediaQuery({ minWidth: 720 });
+  const isMediumScreen = useMediaQuery({ minWidth: 1024 });
+  const isLargeScreen = useMediaQuery({ minWidth: 1440 });
+
+  let numberOfColumns;
+  if (isLargeScreen) {
+    numberOfColumns = 4;
+  } else if (isMediumScreen) {
+    numberOfColumns = 3;
+  } else if (isBigScreen) {
+    numberOfColumns = 3;
+  } else {
+    numberOfColumns = 3;
+  }
+
   const renderIngredient = ({ item }) => {
     return (
       <View style={$ingredient}>
@@ -68,11 +85,12 @@ export function ThemedIngredientList({
       // contentContainerStyle={[styles[type], { color }, style]}
       contentContainerStyle={styles}
       columnWrapperStyle={$columnContainer}
-      numColumns={3}
+      numColumns={numberOfColumns}
       // horizontal
       data={data}
       // {...rest}
       renderItem={renderIngredient}
+      extraData={numberOfColumns}
     />
   );
 }
