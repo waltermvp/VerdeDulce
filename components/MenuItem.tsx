@@ -193,6 +193,7 @@ const $baseStyle: StyleProp<ViewStyle> = [
 
   {
     backgroundColor: "transparent",
+    flex: 1,
     // color: colors.text,
     // lineHeight: 18,
     // fontFamily: typography.fonts.poppins.normal,
