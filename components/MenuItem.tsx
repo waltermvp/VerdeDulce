@@ -32,19 +32,24 @@ export interface MenuItemProps {
  * Describe your component here
  */
 export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
-  const {
-    style,
-    item,
-    showDelete = false,
-    onDelete,
-    onPress,
-    preset = "default",
-    href = "/",
-  } = props;
+  const { style, item, preset = "default", href = "/" } = props;
 
   const $styles = [$container, $presets[preset], style];
 
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
+  const isBigScreen = useMediaQuery({ minWidth: 720 });
+  const isMediumScreen = useMediaQuery({ minWidth: 1024 });
+  const isLargeScreen = useMediaQuery({ minWidth: 1440 });
+
+  let numberOfColumns;
+  if (isLargeScreen) {
+    numberOfColumns = 4;
+  } else if (isMediumScreen) {
+    numberOfColumns = 3;
+  } else if (isBigScreen) {
+    numberOfColumns = 2;
+  } else {
+    numberOfColumns = 1;
+  }
   const url = imageCDNURL(item.url, "none");
 
   const activated = item.activated;
@@ -71,20 +76,19 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
         {({}) => {
           return (
             <View
-              // style={[$styles, { backgroundColor: pressed ? colors.palette.darkTeal : undefined }]
               style={[
                 $styles,
                 {
-                  minHeight: isSmallScreen ? 500 : minHeight,
+                  minHeight: isLargeScreen ? 600 : 531 / 2,
                 },
               ]}
             >
-              <View style={{ flex: 1, alignItems: "center" }}>
+              <View style={{ flex: 1, alignItems: "center", minWidth: "95%" }}>
                 <Image
                   style={{
                     // height: SIZE,
                     aspectRatio: 1,
-                    width: "70%",
+                    width: "75%",
                     borderRadius: 13,
                     // borderColor: "red",  borderWidth: 2
                   }}
@@ -99,47 +103,59 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                 <View
                   style={{
                     marginTop: spacing.md,
-                    paddingHorizontal: spacing.xxl,
+                    paddingHorizontal: spacing.md,
                     flex: 1,
+                    // backgroundColor: "red",
                   }}
                 >
-                  <Text
-                    preset="subheading"
-                    // numberOfLines={1}
+                  <View
                     style={{
-                      fontFamily: typography.fonts.poppins.light,
-                      fontSize: 18,
-                      // NUMBER,
+                      flex: 1,
+                      // backgroundColor: "purple",
+                      justifyContent: "flex-end",
                     }}
                   >
-                    {item.name}
-                  </Text>
-                  <Text
-                    preset="default"
-                    style={{
-                      fontFamily: typography.fonts.poppins.light,
-                      marginTop: spacing.sm,
-                      fontSize: 14,
-                      // minHeight: spacing.xxl * 1.75,
-                      // minHeight: 525 / 2.5,
-                    }}
-                  >
-                    {item.description}
-                  </Text>
+                    <Text
+                      preset="subheading"
+                      // numberOfLines={1}
+                      style={{
+                        fontFamily: typography.fonts.poppins.light,
+                        fontSize: 18,
+                        lineHeight: spacing.lg,
+                        // NUMBER,
+                      }}
+                    >
+                      {item.name}
+                    </Text>
+                    <Text
+                      preset="default"
+                      style={{
+                        fontFamily: typography.fonts.poppins.light,
+                        marginTop: spacing.sm,
+                        fontSize: 14,
+                        // minHeight: spacing.xxl * 1.75,
+                        // minHeight: 525 / 2.5,
+                      }}
+                    >
+                      {item.description}
+                    </Text>
+                  </View>
+
                   <View
                     style={{
                       alignSelf: "flex-start",
                       // justifyContent: "center",
                       flexDirection: "row",
-                      borderWidth: 1.5,
+                      borderWidth: 0.75,
                       borderRadius: 5,
                       marginTop: spacing.sm,
+                      // backgroundColor: "brown",
                     }}
                   >
                     <Text
                       style={{
                         fontFamily: typography.fonts.poppins.light,
-                        fontSize: 16,
+                        fontSize: 14,
                         padding: spacing.xxs,
                         // color: colors.palette.greenFont,
                       }}
@@ -168,24 +184,6 @@ const $container: ViewStyle = {
   // backgroundColor: "red",
 };
 
-const $fontWeightStyles = Object.entries(typography.primary).reduce(
-  (acc, [weight, fontFamily]) => {
-    return { ...acc, [weight]: { fontFamily } };
-  },
-  {}
-) as Record<Weights, TextStyle>;
-
-const $sizeStyles = {
-  xxxl: { fontSize: 52, lineHeight: 52 } satisfies TextStyle,
-  xxl: { fontSize: 36, lineHeight: 44 } satisfies TextStyle,
-  xl: { fontSize: 24, lineHeight: 34 } satisfies TextStyle,
-  lg: { fontSize: 20, lineHeight: 32 } satisfies TextStyle,
-  md: { fontSize: 18, lineHeight: 26 } satisfies TextStyle,
-  sm: { fontSize: 16, lineHeight: 24 } satisfies TextStyle,
-  xs: { fontSize: 14, lineHeight: 21 } satisfies TextStyle,
-  xxs: { fontSize: 12, lineHeight: 18 } satisfies TextStyle,
-};
-
 const $baseStyle: StyleProp<ViewStyle> = [
   // $sizeStyles.sm,
   // $fontWeightStyles.normal,
@@ -205,6 +203,5 @@ const $presets = {
   menu: [
     $baseStyle,
     { backgroundColor: "rgba(232, 220, 198, 1)" },
-    $fontWeightStyles.bold,
   ] as StyleProp<TextStyle>,
 };

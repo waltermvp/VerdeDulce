@@ -10,13 +10,10 @@ import {
 } from "react-native";
 
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { string } from "mobx-state-tree/dist/internal";
 import { imageCDNURL } from "@/app/utils/linkbuilder";
 import { Image } from "expo-image";
 import { colors, spacing } from "@/app/theme";
-import { Link } from "expo-router";
-import { Button } from "./Button";
-const { width } = Dimensions.get("window");
+import { useMediaQuery } from "react-responsive";
 export type ThemedIngredientListProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
@@ -53,10 +50,32 @@ export function ThemedIngredientList({
 }: ThemedIngredientListProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
   const styles = [$container, style];
+
+  const isBigScreen = useMediaQuery({ minWidth: 720 });
+  const isMediumScreen = useMediaQuery({ minWidth: 1024 });
+  const isLargeScreen = useMediaQuery({ minWidth: 1440 });
+
+  let numberOfColumns;
+  if (isLargeScreen) {
+    numberOfColumns = 4;
+  } else if (isMediumScreen) {
+    numberOfColumns = 3;
+  } else if (isBigScreen) {
+    numberOfColumns = 3;
+  } else {
+    numberOfColumns = 3;
+  }
+
   const renderIngredient = ({ item }) => {
     return (
       <View style={$ingredient}>
-        <Text style={[$text, { color }]}>{item.title}</Text>
+        <Text
+          style={[
+            $text, // { color }
+          ]}
+        >
+          {item.title}
+        </Text>
 
         <Image source={{ uri: item.url }} style={$image} />
       </View>
@@ -68,11 +87,12 @@ export function ThemedIngredientList({
       // contentContainerStyle={[styles[type], { color }, style]}
       contentContainerStyle={styles}
       columnWrapperStyle={$columnContainer}
-      numColumns={3}
+      numColumns={numberOfColumns}
       // horizontal
       data={data}
       // {...rest}
       renderItem={renderIngredient}
+      extraData={numberOfColumns}
     />
   );
 }
@@ -92,7 +112,7 @@ const $ingredient: ViewStyle = {
   backgroundColor: editing ? "rgb(216, 229, 214)" : "rgb(232, 220, 198)",
   borderRadius: spacing.md,
   alignItems: "center",
-  width: width * 0.27,
+  width: "33%",
   height: 130,
   justifyContent: "space-between",
 };
@@ -110,6 +130,6 @@ const $image: ViewStyle = {
   flex: 3,
   margin: spacing.xs,
   aspectRatio: 1,
-  width: "90%",
+  // width: "90%",
   // backgroundColor: "blue",
 };
