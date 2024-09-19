@@ -38,7 +38,7 @@ import { Link } from "expo-router";
 import { useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
 import { imageCDNURL } from "./utils/linkbuilder";
-const { width } = Dimensions.get("window");
+const width = Dimensions.get("window").width;
 // Amplify.configure({
 //   ...Amplify.getConfig(),
 //   analytics: outputs.analytics,
@@ -123,7 +123,7 @@ export default observer(function MenuItem() {
         headerRight: () => {
           return (
             <Link href={"/(tabs)/(menu)/menu"} asChild>
-              <Pressable>
+              <Pressable style={{ marginRight: spacing.sm }}>
                 <Ionicons
                   name="close"
                   size={spacing.xl}
@@ -136,7 +136,7 @@ export default observer(function MenuItem() {
         headerLeft: () => {
           return (
             <Link href={"/(tabs)/(menu)/menu"} asChild>
-              <Pressable>
+              <Pressable style={{ marginLeft: spacing.sm }}>
                 <Ionicons
                   size={spacing.xl}
                   name="arrow-back"
@@ -159,43 +159,68 @@ export default observer(function MenuItem() {
 
   return (
     <Screen style={$root} preset="fixed">
-      <View style={{ flex: 13, alignItems: "center" }}>
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          // paddingHorizontal: spacing.sm,
+          // backgroundColor: "red",
+        }}
+      >
         <Image
           source={{
             uri: imageCDNURL(item.url),
           }}
-          style={{ width: 200, height: 200 }}
+          style={{ width: "90%", aspectRatio: 1 }}
         />
-        <Text style={{ textAlign: "left", alignSelf: "flex-start" }}>
-          {item.name}
-        </Text>
-        <Text style={{ textAlign: "left", alignSelf: "flex-start" }}>
-          {visibleText}
-        </Text>
-        <ThemedIngredientList
-          style={{ flex: 1, width, backgroundColor: "green" }}
-        />
-        {/* <ThemedIngredientList style={{ flex: 1 }} /> */}
+        <View style={{ width, flex: 1, paddingHorizontal: spacing.md }}>
+          <Text
+            style={{
+              textAlign: "left",
+              alignSelf: "flex-start",
+              flexWrap: "wrap",
+              fontSize: spacing.lg,
+              //TODO: figure out why this is needed
+              maxWidth: width,
+              lineHeight: spacing.xl - spacing.xxs,
+              marginTop: spacing.md,
+            }}
+            preset="heading"
+          >
+            {item.name}
+          </Text>
+          <Text
+            style={{
+              textAlign: "left",
+              alignSelf: "flex-start",
+              fontSize: spacing.md + spacing.xxs,
+            }}
+            preset="subheading"
+          >
+            {visibleText}
+          </Text>
+          <ThemedIngredientList style={{ marginTop: spacing.lg }} />
+        </View>
       </View>
       <View
         style={{
-          // position: "absolute",
-          // flex: 1,
+          // flex: 1.25,
+          height: 81,
           borderTopColor: colors.palette.darkKale,
           borderTopWidth: 1,
           flexDirection: "row",
-          // width: "100%",
-          backgroundColor: "red",
-          justifyContent: "space-evenly",
+          width: "100%",
+          // backgroundColor: "red",
+          justifyContent: "space-between",
           alignItems: "center",
-          backgroundColor: "pink",
+          paddingHorizontal: spacing.md,
         }}
       >
         <Link href={"/"}>
-          <Button text="Customize" style={{ flex: 1 }} />
+          <Button text="Customize" style={$button} />
         </Link>
         <Link href={"/"}>
-          <Button text="Add to Bag" />
+          <Button text="Add to Bag" style={$button} />
         </Link>
       </View>
     </Screen>
@@ -211,7 +236,10 @@ const $root: ViewStyle = {
   // borderWidth: 3,
   // borderColor: "pink",
   backgroundColor: colors.palette.lightBackground,
+  flexDirection: "row",
 
   // flexWrap: "wrap",
   // paddingVertical: spacing.md,
 };
+
+const $button: ViewStyle = { borderRadius: 33, paddingHorizontal: spacing.md };

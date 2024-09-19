@@ -32,15 +32,7 @@ export interface MenuItemProps {
  * Describe your component here
  */
 export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
-  const {
-    style,
-    item,
-    showDelete = false,
-    onDelete,
-    onPress,
-    preset = "default",
-    href = "/",
-  } = props;
+  const { style, item, preset = "default", href = "/" } = props;
 
   const $styles = [$container, $presets[preset], style];
 
@@ -84,11 +76,10 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
         {({}) => {
           return (
             <View
-              // style={[$styles, { backgroundColor: pressed ? colors.palette.darkTeal : undefined }]
               style={[
                 $styles,
                 {
-                  minHeight: isLargeScreen ? 600 : 550,
+                  minHeight: isLargeScreen ? 600 : 531 / 2,
                 },
               ]}
             >
@@ -97,7 +88,7 @@ export const MenuItem = observer(function MenuItem(props: MenuItemProps) {
                   style={{
                     // height: SIZE,
                     aspectRatio: 1,
-                    width: 252,
+                    width: "75%",
                     borderRadius: 13,
                     // borderColor: "red",  borderWidth: 2
                   }}

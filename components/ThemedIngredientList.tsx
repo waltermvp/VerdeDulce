@@ -10,14 +10,10 @@ import {
 } from "react-native";
 
 import { useThemeColor } from "@/hooks/useThemeColor";
-import { string } from "mobx-state-tree/dist/internal";
 import { imageCDNURL } from "@/app/utils/linkbuilder";
 import { Image } from "expo-image";
 import { colors, spacing } from "@/app/theme";
-import { Link } from "expo-router";
-import { Button } from "./Button";
 import { useMediaQuery } from "react-responsive";
-const { width } = Dimensions.get("window");
 export type ThemedIngredientListProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
@@ -73,7 +69,13 @@ export function ThemedIngredientList({
   const renderIngredient = ({ item }) => {
     return (
       <View style={$ingredient}>
-        <Text style={[$text, { color }]}>{item.title}</Text>
+        <Text
+          style={[
+            $text, // { color }
+          ]}
+        >
+          {item.title}
+        </Text>
 
         <Image source={{ uri: item.url }} style={$image} />
       </View>
@@ -110,7 +112,7 @@ const $ingredient: ViewStyle = {
   backgroundColor: editing ? "rgb(216, 229, 214)" : "rgb(232, 220, 198)",
   borderRadius: spacing.md,
   alignItems: "center",
-  width: width * 0.27,
+  width: "33%",
   height: 130,
   justifyContent: "space-between",
 };
@@ -128,6 +130,6 @@ const $image: ViewStyle = {
   flex: 3,
   margin: spacing.xs,
   aspectRatio: 1,
-  width: "90%",
+  // width: "90%",
   // backgroundColor: "blue",
 };
