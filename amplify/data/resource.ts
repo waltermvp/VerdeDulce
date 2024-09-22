@@ -23,17 +23,23 @@ adding a new "isDone" field as a boolean. The authorization rule below
 specifies that any unauthenticated user can "create", "read", "update", 
 and "delete" any "Todo" records.
 =========================================================================*/
-//TODO: rename to product
+/// Main Schema
 const schema = a.schema({
+  // Item Model
   Item: a
     .model({
-      name: a.string(),
-      // content: a.string(),
+      id: a.id(), // Ensure the ID field is explicitly defined
+      itemId: a.id().required(),
+      name: a.string().required(),
       url: a.string(),
       description: a.string(),
       price: a.integer(),
       calories: a.integer(),
-      category: a.string(),
+      categoryId: a.id(),
+      category: a.belongsTo("Category", "categoryId"), // Relationship to Category
+      ingredients: a.hasMany("Ingredient", "itemId"), // Relationship with Ingredient
+      orderItem: a.hasMany("OrderItem", "itemId"), // Relationship with OrderItem
+      review: a.hasMany("Review", "itemId"), // Relationship with Review
       metaData: a.json(),
       available: a.boolean(),
     })
@@ -43,9 +49,17 @@ const schema = a.schema({
       allow.authenticated(),
     ]),
 
-  User: a
+  // Ingredient Model
+  Ingredient: a
     .model({
-      email: a.string(),
+      id: a.id(), // Ensure ID field for Ingredient
+      ingredientId: a.id().required(),
+      name: a.string().required(),
+      price: a.integer(), // Optional price for additional cost
+      calories: a.integer(),
+      itemId: a.id(), // Foreign key to Item
+      item: a.belongsTo("Item", "itemId"), // Belongs to Item
+      orderIngredient: a.hasMany("OrderIngredient", "ingredientId"), // Relationship with OrderIngredient
       available: a.boolean(),
     })
     .authorization((allow) => [
@@ -53,6 +67,81 @@ const schema = a.schema({
       allow.publicApiKey(),
       allow.authenticated(),
     ]),
+
+  // OrderItem Model
+  OrderItem: a
+    .model({
+      id: a.id(), // Ensure ID field for OrderItem
+      orderId: a.id(),
+      order: a.belongsTo("Order", "orderId"), // Belongs to Order
+      itemId: a.id().required(), // References Item
+      item: a.belongsTo("Item", "itemId"), // Belongs to Item
+      selectedIngredients: a.hasMany("OrderIngredient", "orderItemId"), // Track selected ingredients with quantities
+      quantity: a.integer().required(), // Quantity of this item in the order
+    })
+    .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // OrderIngredient Model (Tracks individual ingredients with quantity)
+  OrderIngredient: a
+    .model({
+      id: a.id(), // Ensure ID field for OrderIngredient
+      orderItemId: a.id(), // Foreign key to OrderItem
+      orderItem: a.belongsTo("OrderItem", "orderItemId"), // Belongs to OrderItem
+      ingredientId: a.id().required(), // References Ingredient
+      ingredient: a.belongsTo("Ingredient", "ingredientId"), // Belongs to Ingredient
+      quantity: a.integer().required(), // Quantity of this ingredient selected
+    })
+    .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // Order Model
+  Order: a
+    .model({
+      id: a.id(), // Ensure ID field for Order
+      orderNumber: a.string().required(),
+      userId: a.id(),
+      user: a.belongsTo("User", "userId"), // Belongs to User
+      totalAmount: a.integer(),
+      orderItems: a.hasMany("OrderItem", "orderId"), // Track items in the order
+      status: a.string(), // e.g., 'pending', 'completed', 'canceled'
+    })
+    .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // User Model
+  User: a
+    .model({
+      id: a.id(), // Ensure ID field for User
+      username: a.string().required(),
+      email: a.string().required(),
+      password: a.string().required(),
+      role: a.string(), // e.g., 'admin', 'user'
+      orders: a.hasMany("Order", "userId"), // Relationship to Orders
+      reviews: a.hasMany("Review", "userId"), // Relationship to Reviews
+      available: a.boolean().default(true),
+    })
+    .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // Category Model
+  Category: a
+    .model({
+      id: a.id(), // Ensure ID field for Category
+      name: a.string().required(),
+      description: a.string(),
+      items: a.hasMany("Item", "categoryId"), // Relationship to Items
+    })
+    .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // Review Model
+  Review: a
+    .model({
+      id: a.id(), // Ensure ID field for Review
+      rating: a.integer().required(),
+      comment: a.string(),
+      userId: a.id(), // Foreign key to User
+      user: a.belongsTo("User", "userId"), // Belongs to User
+      itemId: a.id(), // Foreign key to Item
+      item: a.belongsTo("Item", "itemId"), // Belongs to Item
+    })
+    .authorization((allow) => [allow.authenticated()]),
 
   RegisterResponse: a.customType({
     email: a.string(),
@@ -81,31 +170,6 @@ const schema = a.schema({
       allow.publicApiKey(),
       allow.authenticated(),
     ]),
-
-  // OrderStatus: a.enum(["OrderPending", "OrderShipped", "OrderDelivered"]),
-  // OrderStatusChange: a.customType({
-  //   orderId: a.id().required(),
-  //   status: a.ref("OrderStatus").required(),
-  //   message: a.string().required(),
-  // }),
-
-  // Post: a.model({
-  //   id: a.id(),
-  //   content: a.string(),
-  //   likes: a.integer()
-  // }),
-
-  // // 2. Define your mutation with the return type and, optionally, arguments
-  // likePost: a
-  //   .mutation()
-  //   // arguments that this query accepts
-  //   .arguments({
-  //     postId: a.string()
-  //   })
-  //   // return type of the query
-  //   .returns(a.ref('Post'))
-  //   // only allow signed-in users to call this API
-  //   .authorization(allow => [allow.authenticated()])
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -148,3 +212,96 @@ Fetch records from the database and use them in your frontend component.
 // const { data: todos } = await client.models.Todo.list()
 
 // return <ul>{todos.map(todo => <li key={todo.id}>{todo.content}</li>)}</ul>
+// Item Model
+
+/*
+const schema = a.schema({
+  // Item Model
+  Item: a.model({
+    name: a.string().required(),
+    url: a.string(),
+    description: a.string(),
+    price: a.integer(),
+    calories: a.integer(),
+    categoryId: a.id(),
+    category: a.belongsTo('Category', 'categoryId'),
+    ingredients: a.hasMany('Ingredient', 'itemId'), // Relationship with Ingredient
+    metaData: a.json(),
+    available: a.boolean(),
+  }).authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
+
+  // Ingredient Model
+  Ingredient: a.model({
+    name: a.string().required(),
+    price: a.integer().optional(), // Optional price for additional cost
+    calories: a.integer().optional(),
+    itemId: a.id(),
+    item: a.belongsTo('Item', 'itemId'), // Belongs to an Item
+    available: a.boolean(),
+  }).authorization((allow) => [allow.guest(), allow.publicApiKey(), allow.authenticated()]),
+
+  // OrderItem Model
+  OrderItem: a.model({
+    orderId: a.id(),
+    order: a.belongsTo('Order', 'orderId'), // Belongs to Order
+    itemId: a.id().required(), // References Item
+    item: a.belongsTo('Item', 'itemId'), // Correct belongsTo relationship to Item
+    selectedIngredients: a.hasMany('OrderIngredient', 'orderItemId'), // Track selected ingredients with quantities
+    quantity: a.integer().required(), // Quantity of this item in the order
+  }).authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // OrderIngredient Model (Tracks individual ingredients with quantity)
+  OrderIngredient: a.model({
+    orderItemId: a.id(),
+    orderItem: a.belongsTo('OrderItem', 'orderItemId'), // Belongs to the ordered item
+    ingredientId: a.id().required(), // References Ingredient
+    ingredient: a.belongsTo('Ingredient', 'ingredientId'), // Belongs to an ingredient
+    quantity: a.integer().required(), // Quantity of this ingredient selected
+  }).authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // Order Model
+  Order: a.model({
+    orderNumber: a.string().required(),
+    userId: a.id(),
+    user: a.belongsTo('User', 'userId'), // Belongs to a User
+    totalAmount: a.integer(),
+    orderItems: a.hasMany('OrderItem', 'orderId'), // Track items in the order
+    status: a.string(), // e.g., 'pending', 'completed', 'canceled'
+    createdAt: a.dateTime(),
+    updatedAt: a.dateTime(),
+  }).authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // User Model
+  User: a.model({
+    username: a.string().required(),
+    email: a.string().required(),
+    password: a.string().required(),
+    role: a.string(), // e.g., 'admin', 'user'
+    orders: a.hasMany('Order', 'userId'),
+    reviews: a.hasMany('Review', 'userId'),
+    createdAt: a.dateTime(),
+    updatedAt: a.dateTime(),
+  }).authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // Category Model
+  Category: a.model({
+    name: a.string().required(),
+    description: a.string(),
+    items: a.hasMany('Item', 'categoryId'),
+    createdAt: a.dateTime(),
+    updatedAt: a.dateTime(),
+  }).authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+
+  // Review Model
+  Review: a.model({
+    rating: a.integer().required(),
+    comment: a.string(),
+    userId: a.id(),
+    user: a.belongsTo('User', 'userId'),
+    itemId: a.id(),
+    item: a.belongsTo('Item', 'itemId'),
+    createdAt: a.dateTime(),
+    updatedAt: a.dateTime(),
+  }).authorization((allow) => [allow.authenticated()]),
+});
+*/
