@@ -61,6 +61,7 @@ export const MenuScreen: FC = observer(function MenuScreen() {
   //TODO: localize
 
   const whatsappStrategy = strategy === "whatsapp";
+  console.log("whatsappStrategy", whatsappStrategy);
   useFocusEffect(
     React.useCallback(() => {
       navigation.setOptions({
