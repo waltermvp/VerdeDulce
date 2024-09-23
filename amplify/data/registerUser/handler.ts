@@ -26,7 +26,11 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (
 ) => {
   const email = event.arguments.email;
   // Set up the parameters for the email
-  console.log("emailable", JSON.stringify({ env }));
+  console.log("emailable", JSON.stringify({ emailableAPIKey }));
+  return {
+    email,
+    metadata: emailableAPIKey,
+  };
 
   try {
     const verificationResponse = await new Promise((resolve, reject) => {
@@ -88,6 +92,7 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (
   } catch (error) {
     console.error("Error sending email:", error);
     return {
+      secret: emailableAPIKey,
       error,
     };
 
