@@ -10,10 +10,12 @@ import { env } from "$amplify/env/registerUser"; // the import is '$amplify/env/
  * IF main then it should exist if
  */
 //TODO: get from secret manager
-const emailableAPIKey = "live_1a785c41a3ad8511db30"; //env.EMAILABLE_SECRET
-// ? env.EMAILABLE_SECRET
-// : "test_11e33507f7608e3af558";
+const emailableAPIKey = env.EMAILABLE_SECRET // "live_1a785c41a3ad8511db30";
+  ? env.EMAILABLE_SECRET
+  : "test_11e33507f7608e3af558";
 console.log("JSON.stringify(env", JSON.stringify(env));
+console.log(JSON.parse(JSON.stringify(env.EMAILABLE_SECRET)));
+console.log("emailableAPIKey", emailableAPIKey);
 var emailable = require("emailable")(emailableAPIKey);
 
 const region = "us-east-1";
@@ -24,8 +26,11 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (
 ) => {
   const email = event.arguments.email;
   // Set up the parameters for the email
-  console.log("emailableAPIKey", JSON.stringify({ emailableAPIKey }));
-  console.log("emailable", JSON.stringify({ env }));
+  console.log("emailable", JSON.stringify({ emailableAPIKey }));
+  return {
+    email,
+    metadata: emailableAPIKey,
+  };
 
   try {
     const verificationResponse = await new Promise((resolve, reject) => {
@@ -87,6 +92,7 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (
   } catch (error) {
     console.error("Error sending email:", error);
     return {
+      secret: emailableAPIKey,
       error,
     };
 
@@ -197,6 +203,7 @@ export const colors = {
    */
   errorBackground: palette.angry100,
 };
+
 const CONFIGURATION: TReaderDocument = {
   root: {
     type: "EmailLayout",
@@ -244,10 +251,9 @@ const CONFIGURATION: TReaderDocument = {
     type: "Text",
     data: {
       style: {
-        fontWeight: "bold",
         color: "#FFFF",
-        textDecoration: "underline",
-        underlineColor: colors.palette.lightYellowGreen,
+        // textDecoration: "underline",
+        // underlineColor: colors.palette.lightYellowGreen,
         padding: {
           top: 0,
           bottom: 16,
