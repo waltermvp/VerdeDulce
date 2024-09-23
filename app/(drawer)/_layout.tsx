@@ -10,10 +10,11 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { Linking, StyleSheet, TextStyle } from "react-native";
+import { TextStyle } from "react-native";
 import { OrderButton, Text } from "../../components";
 import { translate } from "../i18n";
 import Config from "../config";
+import { linkToWhatsAppCatalog } from "../utils/linkbuilder";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -31,7 +32,7 @@ export default function TabLayout() {
                 margin: spacing.md,
               }}
               text={CTA}
-              onPress={() => Linking.openURL(Config.WHATSAPP_CATALOG_URL)}
+              onPress={linkToWhatsAppCatalog}
             />
           </DrawerContentScrollView>
         )}

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { observer } from "mobx-react-lite";
 import {
   Dimensions,
@@ -11,10 +11,8 @@ import {
   Footer,
   MenuHeader,
   HomeItem,
-  MenuItemSmall,
   OrderButton,
   Screen,
-  SimpleMenu,
   Text,
 } from "@/components";
 
@@ -30,6 +28,7 @@ import { record } from "aws-amplify/analytics";
 import outputs from "../../amplify_outputs.json";
 import { Href, Link } from "expo-router";
 const strategy = process.env.EXPO_PUBLIC_MARKETING_STRATEGY;
+console.log("strategy", strategy);
 //TODO: - move to env fix env
 const URL = (process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL as Href)
   ? (process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL as Href)
@@ -50,8 +49,6 @@ Amplify.configure({
 const sweetgreenMenu = require("../../menu-es.json");
 
 export const MenuScreen: FC = observer(function MenuScreen() {
-  const route = useRoute();
-
   const [items, setItems] = useState(
     sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true)
   );

@@ -4,7 +4,7 @@ import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { MenuScreen } from "./home";
+import { MenuScreen } from "../pages/home";
 
 export default function HomeScreen() {
   return <MenuScreen />;

@@ -1,7 +1,9 @@
 import amplifyOutputs from "../../amplify_outputs.json";
 import { colors, typography } from "../../app/theme";
 import { ImageStyle } from "expo-image";
-import { StyleProp, type TextStyle } from "react-native";
+import { Linking, StyleProp, type TextStyle } from "react-native";
+import { translate } from "../i18n";
+import Config from "../config";
 //TODO: review presets
 const cloudfrontCDN = "https://dta56yysqj9ke.cloudfront.net";
 
@@ -116,4 +118,21 @@ export const moderatedURL = (urlString: string) => {
   const encodedObject = btoa(imageRequest);
   const url = `${cloudfrontCDN}/${encodedObject}`;
   return url;
+};
+
+export const linkToWhatsApp = () => {
+  // navigation.navigate("OrderNav", { screen: "Home" })
+  // return
+  const phoneNumber = "+593963021783"; // Replace with the actual phone number
+
+  const message = translate("menuScreen.orderMessage"); // Replace with the actual message
+  const url = `whatsapp://send?text=${encodeURIComponent(
+    message
+  )}&phone=${encodeURIComponent(phoneNumber)}`;
+  Linking.openURL(url).catch((err) =>
+    console.error("Failed to open WhatsApp", err)
+  );
+};
+export const linkToWhatsAppCatalog = () => {
+  Linking.openURL(Config.WHATSAPP_CATALOG_URL);
 };

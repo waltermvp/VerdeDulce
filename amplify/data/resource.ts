@@ -13,7 +13,9 @@ export const registerUserFunction = defineFunction({
   environment: {
     NAME: "World",
     API_ENDPOINT: "process.env.API_ENDPOINT",
-    EMAILABLE_SECRET: secret("EMAILABLE_SECRET"),
+    EMAILABLE_SECRET: secret("EMAILABLE_SECRET")
+      ? secret("EMAILABLE_SECRET")
+      : "another value",
   },
 });
 
@@ -145,7 +147,8 @@ const schema = a.schema({
 
   RegisterResponse: a.customType({
     email: a.string(),
-    executionDuration: a.float(),
+    metadata: a.string(),
+    // executionDuration: a.float(),
   }),
   registerUser: a
     .mutation()

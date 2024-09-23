@@ -14,6 +14,8 @@ import { imageCDNURL } from "@/app/utils/linkbuilder";
 import { Image } from "expo-image";
 import { colors, spacing } from "@/app/theme";
 import { useMediaQuery } from "react-responsive";
+const width = Dimensions.get("window").width;
+
 export type ThemedIngredientListProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
@@ -112,7 +114,7 @@ const $ingredient: ViewStyle = {
   backgroundColor: editing ? "rgb(216, 229, 214)" : "rgb(232, 220, 198)",
   borderRadius: spacing.md,
   alignItems: "center",
-  width: "33%",
+  width: width * 0.3,
   height: 130,
   justifyContent: "space-between",
 };
@@ -125,6 +127,7 @@ const $text: TextStyle = {
 };
 const $columnContainer: ViewStyle = {
   gap: spacing.sm,
+  alignItems: "flex-start",
 };
 const $image: ViewStyle = {
   flex: 3,

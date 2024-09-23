@@ -1,6 +1,13 @@
 import React, { FC, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { ViewStyle, View, Pressable, Dimensions } from "react-native";
+import {
+  ViewStyle,
+  View,
+  Pressable,
+  Dimensions,
+  TextStyle,
+  ScrollView,
+} from "react-native";
 import {
   Button,
   Footer,
@@ -17,7 +24,6 @@ import {
 import { colors, spacing, typography } from "./theme";
 import { useMediaQuery } from "react-responsive";
 import { useFocusEffect } from "@react-navigation/native";
-import { Linking } from "react-native"; // Import Linking module
 import { useNavigation, useRoute } from "@react-navigation/native";
 // import Config from "../config"
 import {
@@ -159,8 +165,8 @@ export default observer(function MenuItem() {
 
   return (
     <Screen style={$root} preset="fixed">
-      <View
-        style={{
+      <ScrollView
+        contentContainerStyle={{
           flex: 1,
           alignItems: "center",
           // paddingHorizontal: spacing.sm,
@@ -190,37 +196,32 @@ export default observer(function MenuItem() {
             {item.name}
           </Text>
           <Text
+            preset="subheading"
             style={{
               textAlign: "left",
               alignSelf: "flex-start",
               fontSize: spacing.md + spacing.xxs,
+              fontFamily: typography.fonts.poppins.Poppins_300Light,
             }}
-            preset="subheading"
           >
             {visibleText}
           </Text>
-          <ThemedIngredientList style={{ marginTop: spacing.lg }} />
+          <ThemedIngredientList
+            style={{ marginTop: spacing.lg }}
+            data={ITEMS}
+          />
         </View>
-      </View>
-      <View
-        style={{
-          // flex: 1.25,
-          height: 81,
-          borderTopColor: colors.palette.darkKale,
-          borderTopWidth: 1,
-          flexDirection: "row",
-          width: "100%",
-          // backgroundColor: "red",
-          justifyContent: "space-between",
-          alignItems: "center",
-          paddingHorizontal: spacing.md,
-        }}
-      >
+      </ScrollView>
+      <View style={$footer}>
         <Link href={"/"}>
           <Button text="Customize" style={$button} />
         </Link>
         <Link href={"/"}>
-          <Button text="Add to Bag" style={$button} />
+          <Button
+            text="Add to Bag"
+            style={$buttonGreen}
+            textStyle={$buttonText}
+          />
         </Link>
       </View>
     </Screen>
@@ -228,18 +229,95 @@ export default observer(function MenuItem() {
 });
 
 const $root: ViewStyle = {
-  // flex: 1,
-  // alignItems: "flex-end",
-  // height: "100%",
-  // justifyContent: "space-evenly",
-
-  // borderWidth: 3,
-  // borderColor: "pink",
+  flex: 1,
   backgroundColor: colors.palette.lightBackground,
   flexDirection: "row",
-
-  // flexWrap: "wrap",
-  // paddingVertical: spacing.md,
 };
 
-const $button: ViewStyle = { borderRadius: 33, paddingHorizontal: spacing.md };
+const $button: ViewStyle = {
+  borderRadius: 33,
+  paddingHorizontal: spacing.lg,
+  borderWidth: 1,
+
+  borderColor: colors.palette.neutral900,
+  backgroundColor: colors.palette.lightBackground,
+};
+const $buttonGreen: ViewStyle = {
+  borderRadius: 33,
+  paddingHorizontal: spacing.lg,
+  borderWidth: 1,
+
+  borderColor: colors.palette.neutral900,
+  backgroundColor: "rgb(0, 71, 60)",
+};
+const $buttonText: TextStyle = {
+  color: colors.palette.neutral100,
+  fontFamily: typography.fonts.poppins.Poppins_300Light,
+};
+
+const $footer: ViewStyle = {
+  height: 81,
+  borderTopColor: colors.palette.darkKale,
+  borderTopWidth: 1,
+  flexDirection: "row",
+  width: "100%",
+  // backgroundColor: "red",
+  justifyContent: "space-between",
+  alignItems: "center",
+  paddingHorizontal: spacing.md,
+};
+
+const ITEMS = [
+  {
+    title: "Shredded Kale",
+    url: imageCDNURL(
+      "menu/ingredients-png/S423_OLO_ShreddedKale_800x800_cspcol.png"
+    ),
+  },
+  {
+    title: "Wild Rice",
+    url: imageCDNURL(
+      "menu/ingredients-png/S423_OLO_WildRice_800x800_mhyu2l.png"
+    ),
+  },
+  {
+    title: "Roasted Sweet Potato",
+    url: imageCDNURL(
+      "menu/ingredients-png/S423_OLO_RoastedSweetPotatoes_800x800_lnumy5.png"
+    ),
+  },
+  {
+    title: "Roasted Almonds",
+    url: imageCDNURL(
+      "menu/ingredients-png/S423_OLO_RoastedSweetPotatoes_800x800_lnumy5.png"
+    ),
+  },
+  {
+    title: "Apples",
+    url: imageCDNURL("menu/ingredients-png/S423_OLO_Apples_800x800_kh6mdc.png"),
+  },
+  {
+    title: "Goat Cheese",
+    url: imageCDNURL(
+      "menu/ingredients-png/S423_OLO_GoatCheese_800x800_nj7e9y.png"
+    ),
+  },
+  {
+    title: "Blackened Chicken",
+    url: imageCDNURL(
+      "menu/ingredients-png/S423_OLO_BlackenedChicken_800x800_wpw1oa.png"
+    ),
+  },
+  {
+    title: "Maple Glazed Brussels",
+    url: imageCDNURL(
+      "menu/ingredients-png/S423_OLO_RoastedSweetPotatoes_800x800_lnumy5.png"
+    ),
+  },
+  {
+    title: "Balsamic Vinaigrette",
+    url: imageCDNURL(
+      "menu/ingredients-png/S423_OLO_BalsamicVinaigrette_800x800_upmsnl.png"
+    ),
+  },
+];
