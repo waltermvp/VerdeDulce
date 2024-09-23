@@ -1,16 +1,14 @@
 import React, { FC } from "react";
 import { observer } from "mobx-react-lite";
-import { ViewStyle, View, Linking, TextStyle } from "react-native";
+import { ViewStyle, View, TextStyle } from "react-native";
 // import { AppStackScreenProps } from "../../app/navigators";
 import { Footer, OrderButton, Screen, Text } from "../../components";
 import { colors, spacing, typography } from "../../app/theme";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 // import { useStores } from "../../app/models"
-import { translate } from "../../app/i18n";
+import { linkToWhatsApp } from "../utils/linkbuilder";
 
-interface FaqScreenProps extends AppStackScreenProps<"Faq"> {}
-
-export const FaqScreen: FC<FaqScreenProps> = observer(function FaqScreen() {
+export const FaqScreen: FC = observer(function FaqScreen() {
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
 
@@ -26,17 +24,7 @@ export const FaqScreen: FC<FaqScreenProps> = observer(function FaqScreen() {
               tx="landingScreen.order"
               icon="arrow-forward"
               onPress={() => {
-                // navigation.navigate("OrderNav", { screen: "Home" })
-                // return
-                const phoneNumber = "+593963021783"; // Replace with the actual phone number
-
-                const message = translate("menuScreen.orderMessage"); // Replace with the actual message
-                const url = `whatsapp://send?text=${encodeURIComponent(
-                  message
-                )}&phone=${encodeURIComponent(phoneNumber)}`;
-                Linking.openURL(url).catch((err) =>
-                  console.error("Failed to open WhatsApp", err)
-                );
+                linkToWhatsApp();
               }}
             />
           );

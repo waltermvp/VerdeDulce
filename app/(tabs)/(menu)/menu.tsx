@@ -15,7 +15,6 @@ import {
 import { colors, spacing, typography } from "../../theme";
 import { useMediaQuery } from "react-responsive";
 import { useFocusEffect } from "@react-navigation/native";
-import { Linking } from "react-native"; // Import Linking module
 import { useNavigation } from "@react-navigation/native";
 // import Config from "../config"
 import {
