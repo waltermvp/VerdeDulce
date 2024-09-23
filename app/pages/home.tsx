@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { observer } from "mobx-react-lite";
 import {
   Dimensions,
@@ -11,10 +11,8 @@ import {
   Footer,
   MenuHeader,
   HomeItem,
-  MenuItemSmall,
   OrderButton,
   Screen,
-  SimpleMenu,
   Text,
 } from "@/components";
 
@@ -50,8 +48,6 @@ Amplify.configure({
 const sweetgreenMenu = require("../../menu-es.json");
 
 export const MenuScreen: FC = observer(function MenuScreen() {
-  const route = useRoute();
-
   const [items, setItems] = useState(
     sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true)
   );
