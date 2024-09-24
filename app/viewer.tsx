@@ -10,9 +10,7 @@ import {
 import { observer } from "mobx-react-lite";
 import { colors, spacing, typography } from "../app/theme";
 
-import Markdown from "react-native-markdown-display";
-import { OrderButton } from "../components/OrderButton";
-import { Ad, Screen, Text } from "@/components";
+import { Screen, Text } from "@/components";
 import { ImageBackground } from "expo-image";
 import { QrCodeSvg } from "react-native-qr-svg";
 import { imageCDNURL } from "./utils/linkbuilder";
@@ -92,12 +90,6 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                     colors.palette.lightYellowGreen,
                   ]}
                   contentCells={5}
-                  // content={
-                  //   <Image
-                  //     style={{ width: ICON_SIZE, height: ICON_SIZE }}
-                  //     source={require("../assets/images/VerdeDulce_logo.png")}
-                  //   />
-                  // }
                   backgroundColor={colors.palette.greenFont}
                   dotColor="#ffff"
                   contentStyle={styles.box}
@@ -105,24 +97,9 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                 <Text
                   text="Entregas a Domicilio - Portoviejo"
                   preset="bold"
-                  style={[
-                    // $yellowColor,
-                    $subTitleText,
-                  ]}
+                  style={$subTitleText}
                 ></Text>
               </View>
-
-              {/* <Text
-                  text="(por App)"
-                  preset="default"
-                  style={{
-                    color: "white",
-                    fontSize: spacing.md,
-                    textAlign: "center",
-
-                    lineHeight: spacing.xxxl,
-                  }}
-                /> */}
             </View>
           </View>
         </ImageBackground>
@@ -163,42 +140,6 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
               style={[$headerText, $footerContent]}
             />
           </View>
-
-          {/* <View
-              style={{
-                flex: 1,
-                alignItems: "center",
-                marginBottom: spacing.lg,
-              }}
-            >
-              <QrCodeSvg
-                style={styles.qr}
-                value={CONTENT}
-                frameSize={SIZE}
-                gradientColors={[
-                  colors.palette.lightYellowGreen,
-
-                  "#ffff",
-                  // "#3b4423",
-                  // colors.palette.lightYellowGreen,
-                ]}
-                contentCells={5}
-                content={
-                  <Image
-                    style={{ width: ICON_SIZE, height: ICON_SIZE }}
-                    source={require("../assets/images/VerdeDulce_logo.png")}
-                  />
-                }
-                backgroundColor={colors.palette.greenFont}
-                dotColor="#ffff"
-                contentStyle={styles.box}
-              />
-              <Text
-                text="Entregas a Domicilio - Portoviejo"
-                preset="bold"
-                style={[$yellowColor, { letterSpacing: spacing.xxs }]}
-              ></Text>
-            </View> */}
         </View>
       </View>
     </Screen>
@@ -206,19 +147,15 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
 });
 
 const $container: ViewStyle = {
-  // flex: 1,
   height,
-  // justifyContent: "center",
 
   backgroundColor: colors.palette.greenFont,
 };
 
 const $headerText: TextStyle = {
-  // textAlign: "center",
   color: colors.palette.neutral100,
   fontFamily: typography.fonts.poppins.light,
   lineHeight: spacing.xxl,
-  // padding: spacing.xs,
 };
 
 const $yellowColor: TextStyle = {
@@ -228,8 +165,6 @@ const $yellowColor: TextStyle = {
   letterSpacing: spacing.xxs,
   fontSize: spacing.xxl,
   fontWeight: "bold",
-  // textDecorationLine: "underline",
-  // padding: spacing.xxs,
 };
 
 const styles = StyleSheet.create({
@@ -287,10 +222,7 @@ const $footerContent: TextStyle = {
 };
 
 const $imageBackground: ViewStyle = {
-  // backgroundColor: "red",
-  // height: "150%",
   width: height * 2,
-  // height: 1000,
   aspectRatio: 1,
   flex: 1,
 };
