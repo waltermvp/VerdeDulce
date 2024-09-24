@@ -27,11 +27,11 @@ import { Amplify } from "aws-amplify";
 import { record } from "aws-amplify/analytics";
 import outputs from "../../amplify_outputs.json";
 import { Href, Link } from "expo-router";
-const strategy = process.env.EXPO_PUBLIC_MARKETING_STRATEGY;
+const strategy = Config.MARKETING_STRATEGY;
 console.log("strategy", strategy);
 //TODO: - move to env fix env
-const URL = (process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL as Href)
-  ? (process.env.EXPO_PUBLIC_WHATSAPP_CATALOG_URL as Href)
+const URL = (Config.WHATSAPP_CATALOG_URL as Href)
+  ? (Config.WHATSAPP_CATALOG_URL as Href)
   : ("https://wa.me/c/593963021783" as Href);
 console.log("process.env", process.env);
 console.log("process.env", Config);
