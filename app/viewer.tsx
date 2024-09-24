@@ -19,40 +19,28 @@ import { Image, ImageBackground } from "expo-image";
 import { QrCodeSvg } from "react-native-qr-svg";
 import { imageCDNURL } from "./utils/linkbuilder";
 import { Ionicons } from "@expo/vector-icons";
+import { translate } from "./i18n";
 const height = Dimensions.get("window").height;
-const EXPO_PUBLIC_MARKETING_STRATEGY = "AD";
+
+enum MarketingStrategy {
+  whatsapp = "whatsapp",
+  sweetgreen = "sweetgreen",
+  AD = "AD",
+  SingleDish = "SingleDish",
+}
+const EXPO_PUBLIC_MARKETING_STRATEGY = MarketingStrategy.SingleDish;
 const SIZE = 225;
-const ICON_SIZE = SIZE / 4.75;
 const CONTENT = "https://wa.me/c/593963021783";
 
 const FONT_COLOR = colors.palette.lightYellowGreen;
-
-const copy = `# ¡Bienvenido a verdedulce.com!
-## **Fresco, Rápido, Sabroso – Tu Verde Diario**
-
-
-En Verde Dulce, creemos en ofrecer comidas frescas, saludables y deliciosas que te harán sentir bien. Nuestro menú está diseñado para brindarte opciones nutritivas y llenas de sabor, perfectas para un almuerzo rápido o una cena satisfactoria.
-
-### Nuestro Compromiso con la Sostenibilidad:
-
-Nos importa nuestro planeta tanto como tu salud. Por eso usamos empaques ecológicos, incluyendo bowls de cartón reciclado y bolsas sostenibles. Cada comida que disfrutas en Verde Dulce ayuda a tener un impacto positivo.
-
-### Cómo Funciona:
-
-1. Ve a [verdedulce.com](https://verdedulce.com/)  y pide tu ensalada: Explora nuestro menú y personaliza tu comida según tus gustos y necesidades dietéticas.
-2.	Mezcla Tu Ensalada: Agita bien con nuestros ingredientes frescos y aderezos.
-3.	Disfruta Tu Ensalada: Saborea los sabores de Verde Dulce, sabiendo que estás haciendo una elección saludable y sostenible.
-
-¡Únete a Nosotros Hoy!
-
-Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una experiencia fresca y sabrosa.
-`;
 
 export interface IntroEmailProps {
   /**
    * An optional style override useful for padding & margin.
    */
   style?: StyleProp<ViewStyle>;
+
+  strategy?: MarketingStrategy;
 
   /**
    * Function to handle the press event of the order button.
@@ -67,141 +55,94 @@ export interface IntroEmailProps {
  * Describe your component here
  */
 export default observer(function IntroEmail(props: IntroEmailProps) {
-  const { style, onPress } = props;
+  const { style, onPress, strategy = MarketingStrategy.SingleDish } = props;
   const $styles = [$container, style];
+  const dish = menu[1];
 
   return (
     <Screen style={$styles} preset="scroll">
-      {EXPO_PUBLIC_MARKETING_STRATEGY === "whatsapp" && (
-        <View style={$styles}>
-          <Markdown
-            style={{
-              heading1: { fontSize: spacing.xxxl },
-              heading3: { fontSize: spacing.xxl },
-              body: {
-                fontSize: spacing.lg,
-                fontFamily: typography.fonts.poppins.semiBold,
-                color: colors.palette.neutral100,
-              },
-              text: {
-                color: "white",
-                fontFamily: typography.fonts.poppins.light,
-              },
+      <View
+        style={{
+          flexDirection: "row",
+          height,
+        }}
+      >
+        <ImageBackground
+          source={
+            strategy === MarketingStrategy.SingleDish
+              ? { uri: imageCDNURL(dish.url) }
+              : require("../assets/images/clipped.png")
+          }
+          // export type ImageContentFit = 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
 
-              list_item: {
-                paddingVertical: spacing.xxs,
-                fontFamily: typography.fonts.poppins.semiBold,
-              },
-              // inline: { backgroundColor: "red", color: "red" },
-              ordered_list: {
-                color: "white",
-                paddingVertical: spacing.sm,
-                fontFamily: typography.fonts.poppins.semiBold,
-              },
-              bullet_list: {
-                backgroundColor: "red",
-                color: "red",
-                fontFamily: typography.fonts.poppins.semiBold,
-              },
-              // heading1: { color: "white" },
-              // heading2: { color: "white" },
-              // strong: { color: "white" },
-            }}
-          >
-            {copy}
-            {/* <OrderButton text="/???" /> */}
-          </Markdown>
-          <OrderButton
-            style={{
-              backgroundColor: colors.palette.lightYellowGreen,
-              borderRadius: 13,
-            }}
-            text="Ordena Ya"
-            textStyle={{ color: colors.palette.greenFont }}
-            onPress={onPress}
-          />
-        </View>
-      )}
-
-      {EXPO_PUBLIC_MARKETING_STRATEGY === "sweetgreen" && <></>}
-      {EXPO_PUBLIC_MARKETING_STRATEGY === "AD" && (
-        <View
+          contentFit="cover"
+          transition={1000}
           style={{
-            flexDirection: "row",
-            height,
+            // backgroundColor: "red",
+            // height: "150%",
+            width: height * 2,
+            // height: 1000,
+            aspectRatio: 1,
+            flex: 1,
           }}
         >
-          <ImageBackground
-            source={require("../assets/images/clipped.png")}
-            // export type ImageContentFit = 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
-
-            contentFit="cover"
-            transition={1000}
+          <View
             style={{
-              // backgroundColor: "red",
-              // height: "150%",
-              width: height * 2,
-              // height: 1000,
-              aspectRatio: 1,
+              backgroundColor: "rgba(0, 0, 0, 0.25)",
               flex: 1,
+              justifyContent: "flex-end",
             }}
           >
             <View
               style={{
-                backgroundColor: "rgba(0, 0, 0, 0.25)",
-                flex: 1,
-                justifyContent: "flex-end",
+                // alignItems: "center",
+                marginHorizontal: spacing.lg,
+                // backgroundColor: "red",
               }}
             >
               <View
                 style={{
-                  // alignItems: "center",
-                  marginHorizontal: spacing.lg,
-                  // backgroundColor: "red",
+                  flex: 1,
+                  alignItems: "center",
+                  marginBottom: spacing.lg,
                 }}
               >
-                <View
-                  style={{
-                    flex: 1,
-                    alignItems: "center",
-                    marginBottom: spacing.lg,
-                  }}
-                >
-                  <QrCodeSvg
-                    style={styles.qr}
-                    value={CONTENT}
-                    frameSize={SIZE}
-                    gradientColors={[
-                      colors.palette.lightYellowGreen,
-                      colors.palette.lightYellowGreen,
-                    ]}
-                    contentCells={5}
-                    // content={
-                    //   <Image
-                    //     style={{ width: ICON_SIZE, height: ICON_SIZE }}
-                    //     source={require("../assets/images/VerdeDulce_logo.png")}
-                    //   />
-                    // }
-                    backgroundColor={colors.palette.greenFont}
-                    dotColor="#ffff"
-                    contentStyle={styles.box}
-                  />
-                  <Text
-                    text="Entregas a Domicilio - Portoviejo"
-                    preset="bold"
-                    style={[
-                      // $yellowColor,
-                      {
-                        letterSpacing: spacing.xxxs,
-                        lineHeight: spacing.xxl,
-                        fontSize: spacing.lg,
-                        color: colors.palette.neutral100,
-                      },
-                    ]}
-                  ></Text>
-                </View>
+                <QrCodeSvg
+                  style={styles.qr}
+                  value={CONTENT}
+                  frameSize={SIZE}
+                  gradientColors={[
+                    colors.palette.lightYellowGreen,
+                    colors.palette.lightYellowGreen,
+                  ]}
+                  contentCells={5}
+                  // content={
+                  //   <Image
+                  //     style={{ width: ICON_SIZE, height: ICON_SIZE }}
+                  //     source={require("../assets/images/VerdeDulce_logo.png")}
+                  //   />
+                  // }
+                  backgroundColor={colors.palette.greenFont}
+                  dotColor="#ffff"
+                  contentStyle={styles.box}
+                />
+                <Text
+                  text="Entregas a Domicilio - Portoviejo"
+                  preset="bold"
+                  style={[
+                    // $yellowColor,
+                    {
+                      letterSpacing: spacing.xxxs,
+                      lineHeight: spacing.xxl,
+                      fontSize: spacing.lg,
+                      color: colors.palette.neutral100,
+                      textAlign: "center",
+                    },
+                  ]}
+                ></Text>
+              </View>
 
-                {/* <Text
+              {/* <Text
                   text="(por App)"
                   preset="default"
                   style={{
@@ -212,89 +153,89 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                     lineHeight: spacing.xxxl,
                   }}
                 /> */}
-              </View>
             </View>
-          </ImageBackground>
+          </View>
+        </ImageBackground>
+        <View
+          style={{
+            // height: "100%",
+            flex: 1,
+            // height: "75%",
+            // alignItems: "center",
+            // paddingVertical: spacing.xxl,
+            paddingTop: spacing.xxl * 1.25,
+            // justifyContent: "space-between",
+            // paddingVertical: spacing.xxl,
+            // backgroundColor: "red",
+            // paddingHorizontal: spacing.xxl,
+          }}
+        >
+          <Text
+            text={translate("adScreen.add1Title")}
+            preset="heading"
+            style={{
+              // color: colors.palette.greenFont,
+              color: colors.palette.neutral100,
+              textAlign: "center",
+              fontSize: spacing.xxl,
+              lineHeight: spacing.xxxl + spacing.sm,
+              fontFamily: typography.fonts.poppins.Poppins_400Regular,
+              // paddingHorizontal: spacing.,
+            }}
+          ></Text>
+          <Text
+            text={dish.name + "?"}
+            preset="heading"
+            style={{
+              // color: colors.palette.greenFont,
+              color: colors.palette.lightYellowGreen,
+              textAlign: "center",
+              fontSize: spacing.xxl,
+              lineHeight: spacing.xxxl + spacing.sm,
+              fontFamily: typography.fonts.poppins.Poppins_400Regular,
+              // paddingHorizontal: spacing.,
+            }}
+          ></Text>
+
           <View
             style={{
-              // height: "100%",
               flex: 1,
-              // height: "75%",
-              // alignItems: "center",
-              // paddingVertical: spacing.xxl,
-              paddingTop: spacing.xxl * 1.25,
-              // justifyContent: "space-between",
-              // paddingVertical: spacing.xxl,
-              // backgroundColor: "red",
-              // paddingHorizontal: spacing.xxl,
+              alignItems: "center",
+              paddingTop: spacing.xxl,
             }}
           >
-            <Image
-              source={{ uri: imageCDNURL("VerdeDulce_logo_with_border.png") }}
-              style={{
-                width: 200,
-                height: 200,
-                alignSelf: "center",
-                marginBottom: spacing.xxl,
-              }}
-            ></Image>
             <Text
-              text="¡Acumula 9 ensaladas y la 10ª es gratis!"
+              tx="adScreen.add1Subtitle"
               preset="heading"
-              style={{
-                // color: colors.palette.greenFont,
-                color: "white",
-                textAlign: "center",
-                fontSize: spacing.xxl,
-                lineHeight: spacing.xxxl + spacing.sm,
-                fontFamily: typography.fonts.poppins.Poppins_400Regular,
-                // paddingHorizontal: spacing.,
-              }}
-            ></Text>
+              style={[$headerText, { marginBottom: spacing.sm }]}
+            />
+            <Text text="verdedulce.com" preset="heading" style={$yellowColor} />
+            <Text text="o" preset="heading" style={$headerText} />
 
             <View
               style={{
-                flex: 1,
+                flexDirection: "row",
                 alignItems: "center",
-                paddingTop: spacing.xxl,
+                marginTop: spacing.sm,
               }}
             >
-              <Text
-                text="Ordena ahora en"
-                preset="heading"
-                style={[$headerText, { marginBottom: spacing.sm }]}
+              <Ionicons
+                name="logo-whatsapp"
+                size={spacing.xxl}
+                color={colors.palette.lightYellowGreen}
+                style={{ marginRight: spacing.md }}
               />
-              <Text
-                text="verdedulce.com"
-                preset="heading"
-                style={$yellowColor}
-              />
-              <Text text="o" preset="heading" style={$headerText} />
-
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginTop: spacing.sm,
-                }}
-              >
-                <Ionicons
-                  name="logo-whatsapp"
-                  size={spacing.xxl}
-                  color={colors.palette.lightYellowGreen}
-                  style={{ marginRight: spacing.md }}
-                />
-                <Text text="0963021783" preset="heading" style={$yellowColor} />
-              </View>
+              <Text text="0963021783" preset="heading" style={$yellowColor} />
             </View>
-            <View
-              style={{
-                flex: 1,
-                height: "100%",
-                alignItems: "center",
-              }}
-            >
-              {/* <Text
+          </View>
+          <View
+            style={{
+              flex: 1,
+              height: "100%",
+              alignItems: "center",
+            }}
+          >
+            {/* <Text
                 text="Ordena ahora en"
                 preset="heading"
                 style={$headerText}
@@ -304,23 +245,23 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                 preset="heading"
                 style={$yellowColor}
               /> */}
-              <Text
-                text="Comida fresca, delicioso y saludable"
-                preset="heading"
-                style={[
-                  $headerText,
-                  {
-                    marginHorizontal: spacing.xl,
-                    marginTop: spacing.lg,
-                    textAlign: "center",
-                    fontSize: spacing.xxl,
-                    letterSpacing: spacing.xxs,
-                  },
-                ]}
-              />
-            </View>
+            <Text
+              tx="adScreen.footerContent"
+              preset="heading"
+              style={[
+                $headerText,
+                {
+                  marginHorizontal: spacing.xl,
+                  marginTop: spacing.lg,
+                  textAlign: "center",
+                  fontSize: spacing.xxl,
+                  letterSpacing: spacing.xxs,
+                },
+              ]}
+            />
+          </View>
 
-            {/* <View
+          {/* <View
               style={{
                 flex: 1,
                 alignItems: "center",
@@ -355,9 +296,8 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                 style={[$yellowColor, { letterSpacing: spacing.xxs }]}
               ></Text>
             </View> */}
-          </View>
         </View>
-      )}
+      </View>
     </Screen>
   );
 });
@@ -429,3 +369,53 @@ Haz tu pedido ahora!
 Visítanos en VerdeDulce.com, pide tu ensalada y comienza a acumular tus puntos hoy mismo.
 
 */
+import menu from "../menu-es.json";
+
+// <View style={$styles}>
+// <Markdown
+//   style={{
+//     heading1: { fontSize: spacing.xxxl },
+//     heading3: { fontSize: spacing.xxl },
+//     body: {
+//       fontSize: spacing.lg,
+//       fontFamily: typography.fonts.poppins.semiBold,
+//       color: colors.palette.neutral100,
+//     },
+//     text: {
+//       color: "white",
+//       fontFamily: typography.fonts.poppins.light,
+//     },
+
+//     list_item: {
+//       paddingVertical: spacing.xxs,
+//       fontFamily: typography.fonts.poppins.semiBold,
+//     },
+//     // inline: { backgroundColor: "red", color: "red" },
+//     ordered_list: {
+//       color: "white",
+//       paddingVertical: spacing.sm,
+//       fontFamily: typography.fonts.poppins.semiBold,
+//     },
+//     bullet_list: {
+//       backgroundColor: "red",
+//       color: "red",
+//       fontFamily: typography.fonts.poppins.semiBold,
+//     },
+//     // heading1: { color: "white" },
+//     // heading2: { color: "white" },
+//     // strong: { color: "white" },
+//   }}
+// >
+//   {copy}
+//   {/* <OrderButton text="/???" /> */}
+// </Markdown>
+// <OrderButton
+//   style={{
+//     backgroundColor: colors.palette.lightYellowGreen,
+//     borderRadius: 13,
+//   }}
+//   text="Ordena Ya"
+//   textStyle={{ color: colors.palette.greenFont }}
+//   onPress={onPress}
+// />
+// </View>

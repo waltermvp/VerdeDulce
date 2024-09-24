@@ -1,4 +1,14 @@
 const en = {
+  adScreen: {
+    addtitle: "¡Acumula 9 ensaladas y la 10ª es gratis!",
+    add1Title: "¿Conoces nuestra",
+    // add1Title: "Ordena nuestro %{itemName}",
+    add1Subtitle: "Pidela ahora en",
+    footerContent: "Comida fresca, deliciosa y saludable",
+    qrCodesubtitle: "Escanea el código QR para ordenar",
+    leftTitle: "Entregas a Domicilio - Portoviejo",
+  },
+
   landingScreen: {
     name: "Verde Dulce",
     order: "Order",

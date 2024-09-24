@@ -1,6 +1,16 @@
+import { add } from "date-fns";
 import { Translations } from "./en";
 
 const es: Translations = {
+  adScreen: {
+    addtitle: "¡Acumula 9 ensaladas y la 10ª es gratis!",
+    add1Title: "Ordena nuestra",
+    // add1Title: "Ordena nuestro %{itemName}",
+    add1Subtitle: "Pidela ahora en",
+    footerConte: "Comida fresca, deliciosa y saludable",
+    qrCodesubtitle: "Escanea el código QR para ordenar",
+    leftTitle: "Entregas a Domicilio - Portoviejo",
+  },
   landingScreen: {
     order: "Ordena",
     comingSoon: "¡Próximamente!",
