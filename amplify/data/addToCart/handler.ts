@@ -46,7 +46,7 @@ export const handler: Schema["addToCart"]["functionHandler"] = async (
   const { itemId, quantity, selectedIngredients } = event.arguments;
 
   console.log("event.arguments", JSON.stringify(event, null, 2));
-
+  const userId = "event.identity.sub";
   try {
     // Fetch or create Cart for user
     let cart = await fetchUserCart(userId);
