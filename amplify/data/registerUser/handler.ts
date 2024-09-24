@@ -251,7 +251,7 @@ const CONFIGURATION: TReaderDocument = {
     type: "Text",
     data: {
       style: {
-        color: "#FFFF",
+        color: colors.palette.greenFont,
         // textDecoration: "underline",
         // underlineColor: colors.palette.lightYellowGreen,
         padding: {
@@ -271,8 +271,7 @@ const CONFIGURATION: TReaderDocument = {
     data: {
       style: {
         fontWeight: "normal",
-        color: "#FFFF",
-
+        color: colors.palette.greenFont,
         padding: {
           top: 0,
           bottom: 16,
@@ -290,8 +289,7 @@ const CONFIGURATION: TReaderDocument = {
     data: {
       style: {
         fontWeight: "normal",
-        color: "#FFFF",
-
+        color: colors.palette.greenFont,
         padding: {
           top: 0,
           bottom: 16,
@@ -309,7 +307,7 @@ const CONFIGURATION: TReaderDocument = {
     data: {
       style: {
         fontWeight: "bold",
-        color: "#FFFF",
+        color: colors.palette.greenFont,
 
         padding: {
           top: 0,
@@ -329,7 +327,7 @@ const CONFIGURATION: TReaderDocument = {
     data: {
       style: {
         fontWeight: "normal",
-        color: "#FFFF",
+        color: colors.palette.greenFont,
 
         padding: {
           top: 0,
@@ -348,6 +346,7 @@ const CONFIGURATION: TReaderDocument = {
     data: {
       style: {
         fontWeight: "normal",
+        color: colors.palette.greenFont,
         padding: {
           top: 16,
           bottom: 16,
@@ -365,6 +364,7 @@ const CONFIGURATION: TReaderDocument = {
     data: {
       style: {
         fontWeight: "normal",
+        color: colors.palette.greenFont,
         padding: {
           top: 16,
           bottom: 16,
@@ -386,6 +386,7 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
     data: {
       style: {
         fontWeight: "normal",
+        color: colors.palette.greenFont,
         padding: {
           top: 16,
           bottom: 16,
@@ -403,7 +404,7 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
     data: {
       style: {
         fontWeight: "normal",
-
+        color: colors.palette.greenFont,
         padding: {
           top: 16,
           bottom: 40,
@@ -455,7 +456,7 @@ Visita verdedulce.com para hacer tu pedido y haz que tu próxima comida sea una 
         // @ts-ignore: Unreachable code error
         buttonBackgroundColor: "#ebfe72",
         buttonStyle: "rounded",
-        buttonTextColor: "#000000",
+        buttonTextColor: colors.palette.darkKale,
         text: "Ordena Ya",
         url: "https://www.verdedulce.com",
       },
