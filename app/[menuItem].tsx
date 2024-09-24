@@ -216,13 +216,21 @@ export default observer(function MenuItem() {
         <Link href={"/"}>
           <Button text="Customize" style={$button} />
         </Link>
-        <Link href={"/"}>
-          <Button
-            text="Add to Bag"
-            style={$buttonGreen}
-            textStyle={$buttonText}
-          />
-        </Link>
+        {/* <Link href={"/"}> */}
+        <Button
+          tx="menuItemScreen.addToCart"
+          style={$buttonGreen}
+          textStyle={$buttonText}
+          onPress={() => {
+            record({
+              name: "AddToCart",
+              attributes: { item: item.name },
+            });
+
+            // client
+          }}
+        />
+        {/* </Link> */}
       </View>
     </Screen>
   );

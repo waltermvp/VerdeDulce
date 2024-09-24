@@ -9,5 +9,5 @@ export default {
   API_URL: "https://api.rss2json.com/v1/",
   APP_NAME: "dulceverdeDEV",
   WHATSAPP_CATALOG_URL: "https://wa.me/c/593963021783",
-  MARKETING_STRATEGY: "whatsapp",
+  MARKETING_STRATEGY: "sweetgreen",
 };
