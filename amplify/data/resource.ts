@@ -107,6 +107,41 @@ const schema = a.schema({
       status: a.string(), // e.g., 'pending', 'completed', 'canceled'
     })
     .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+  // Cart Model
+  Cart: a
+    .model({
+      id: a.id(), // Cart ID
+      userId: a.id().required(), // Reference to the user
+      user: a.belongsTo("User", "userId"), // Each user has one cart
+      cartItems: a.hasMany("CartItem", "cartId"), // Cart has many items
+      totalAmount: a.integer(), // Total amount of the cart
+    })
+    .authorization((allow) => [allow.authenticated()]), // Only authenticated users
+
+  // CartItem Model
+  CartItem: a
+    .model({
+      id: a.id(), // CartItem ID
+      cartId: a.id().required(), // Reference to the cart
+      cart: a.belongsTo("Cart", "cartId"), // CartItem belongs to a cart
+      itemId: a.id().required(), // Reference to the menu item
+      item: a.belongsTo("Item", "itemId"), // Each cart item is an Item
+      selectedIngredients: a.hasMany("CartIngredient", "cartItemId"), // Selected ingredients for this item
+      quantity: a.integer().required(), // Quantity of the item
+    })
+    .authorization((allow) => [allow.authenticated()]),
+
+  // CartIngredient Model
+  CartIngredient: a
+    .model({
+      id: a.id(), // CartIngredient ID
+      cartItemId: a.id().required(), // Reference to the CartItem
+      cartItem: a.belongsTo("CartItem", "cartItemId"), // Belongs to CartItem
+      ingredientId: a.id().required(), // Reference to the Ingredient
+      ingredient: a.belongsTo("Ingredient", "ingredientId"), // Belongs to Ingredient
+      quantity: a.integer().required(), // Quantity of this ingredient
+    })
+    .authorization((allow) => [allow.authenticated()]),
 
   // User Model
   User: a
