@@ -18,23 +18,13 @@ export const getCart = /* GraphQL */ `query GetCart($id: ID!) {
     id
     totalAmount
     updatedAt
-    user {
-      available
-      createdAt
-      email
-      id
-      password
-      role
-      updatedAt
-      username
-      __typename
-    }
     userId
     __typename
   }
 }
 ` as GeneratedQuery<APITypes.GetCartQueryVariables, APITypes.GetCartQuery>;
-export const getCartIngredient = /* GraphQL */ `query GetCartIngredient($id: ID!) {
+export const getCartIngredient =
+  /* GraphQL */ `query GetCartIngredient($id: ID!) {
   getCartIngredient(id: $id) {
     cartItem {
       cartId
@@ -67,9 +57,9 @@ export const getCartIngredient = /* GraphQL */ `query GetCartIngredient($id: ID!
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetCartIngredientQueryVariables,
-  APITypes.GetCartIngredientQuery
->;
+    APITypes.GetCartIngredientQueryVariables,
+    APITypes.GetCartIngredientQuery
+  >;
 export const getCartItem = /* GraphQL */ `query GetCartItem($id: ID!) {
   getCartItem(id: $id) {
     cart {
@@ -241,7 +231,8 @@ export const getOrder = /* GraphQL */ `query GetOrder($id: ID!) {
   }
 }
 ` as GeneratedQuery<APITypes.GetOrderQueryVariables, APITypes.GetOrderQuery>;
-export const getOrderIngredient = /* GraphQL */ `query GetOrderIngredient($id: ID!) {
+export const getOrderIngredient =
+  /* GraphQL */ `query GetOrderIngredient($id: ID!) {
   getOrderIngredient(id: $id) {
     createdAt
     id
@@ -274,9 +265,9 @@ export const getOrderIngredient = /* GraphQL */ `query GetOrderIngredient($id: I
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetOrderIngredientQueryVariables,
-  APITypes.GetOrderIngredientQuery
->;
+    APITypes.GetOrderIngredientQueryVariables,
+    APITypes.GetOrderIngredientQuery
+  >;
 export const getOrderItem = /* GraphQL */ `query GetOrderItem($id: ID!) {
   getOrderItem(id: $id) {
     createdAt

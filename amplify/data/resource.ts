@@ -206,14 +206,7 @@ const schema = a
       // return type of the query
       // .returns(a.ref "User"))
       .returns(a.ref("RegisterResponse"))
-      .handler(
-        a.handler.function(registerUserFunction)
-
-        // a.handler.custom({
-        //   dataSource: a.ref("User"),
-        //   entry: "./registerUser.js",
-        // }),
-      )
+      .handler(a.handler.function(registerUserFunction))
       // only allow signed-in users to call this API
       .authorization((allow) => [
         allow.guest(),
@@ -221,33 +214,22 @@ const schema = a
         allow.authenticated(),
       ]),
     AddToCartResponse: a.customType({
-      cartItem: a.string(),
+      cartItems: a.json().array(),
       // executionDuration: a.float(),
     }),
 
     addToCart: a
       .mutation()
-      // arguments that this query accepts
       .arguments({
         itemId: a.id(),
-        selectedIngredients: a.id().array(),
+        selectedIngredients: a.json().array(),
         quantity: a.integer(),
       })
-      // return type of the query
-      // .returns(a.ref "User"))
       .returns(a.ref("AddToCartResponse"))
-      .handler(
-        a.handler.function(addToCartFunction)
-
-        // a.handler.custom({
-        //   dataSource: a.ref("User"),
-        //   entry: "./registerUser.js",
-        // }),
-      )
-      // only allow signed-in users to call this API
+      .handler(a.handler.function(addToCartFunction))
       .authorization((allow) => [
-        allow.guest(),
-        allow.publicApiKey(),
+        // allow.guest(),
+        // allow.publicApiKey(),
         allow.authenticated(),
       ]),
   })
@@ -259,7 +241,7 @@ export const data = defineData({
   schema,
   authorizationModes: {
     defaultAuthorizationMode: "userPool",
-    apiKeyAuthorizationMode: { expiresInDays: 7 },
+    apiKeyAuthorizationMode: { expiresInDays: 30 },
     lambdaAuthorizationMode: { function: addToCartFunction },
 
     //TODO:  add apikey as an authorization mode

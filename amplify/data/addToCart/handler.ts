@@ -2,8 +2,12 @@ import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/data";
 import { Schema } from "../../data/resource";
 import { env } from "$amplify/env/addToCart"; // replace with your function name
-import { getUser, listCarts } from "./graphql/queries";
-import { createCart } from "./graphql/mutations";
+import { getCart, getUser, listCarts } from "./graphql/queries";
+import {
+  createCart,
+  createCartIngredient,
+  createCartItem,
+} from "./graphql/mutations";
 
 Amplify.configure(
   {
@@ -35,40 +39,61 @@ Amplify.configure(
 
 const dataClient = generateClient<Schema>();
 
-// export const handler = async (event) => {
-//   // your function code goes here
-// };
-const region = "us-east-1";
-
 export const handler: Schema["addToCart"]["functionHandler"] = async (
   event
+  // context
 ) => {
   const { itemId, quantity, selectedIngredients } = event.arguments;
+  //@ts-ignore
+  const userId = event.identity.sub;
 
-  console.log("event.arguments", JSON.stringify(event, null, 2));
-  const userId = "event.identity.sub";
   try {
     // Fetch or create Cart for user
-    let cart = await fetchUserCart(userId);
+    let cart = await fetchUserWithCart(userId);
     if (!cart) {
       cart = await createNewCart(userId);
     }
+    // const cartObject = JSON.parse(cart);
+    console.log("cart", JSON.stringify(cart, null, 2));
 
+    if (!cart) {
+      console.log("1");
+      throw new Error("Could not create cart");
+    }
+    if (!itemId) {
+      console.log("2", itemId);
+      throw new Error("Item ID is required");
+    }
+    if (!quantity) {
+      console.log("3", quantity);
+      return {
+        error: "Quanity ID is required",
+      };
+    }
+
+    console.log("this farrr:");
     // Add Item to Cart
-    //@ts-ignore Unreachable code error
+    const ingredients = selectedIngredients as {
+      ingredientId: string;
+      quantity: 0;
+    }[];
+    console.log("ingredients", ingredients);
     const cartItem = await addItemToCart(
-      //@ts-ignore Unreachable code error
-
       cart.id,
-      //@ts-ignore Unreachable code error
-
-      itemId,
       quantity,
-      selectedIngredients
+      ingredients,
+      itemId
     );
-    //@ts-ignore Unreachable code error
 
-    return cartItem.id;
+    if (!cartItem) {
+      return {
+        error: "Could not add item to cart",
+      };
+    }
+
+    // Fetch all cart items
+    const cartItems = await fetchCart(cart.id);
+    return { cartItems: ["cartItems"] };
   } catch (error) {
     console.error("Error sending email:", error);
     return {
@@ -79,7 +104,7 @@ export const handler: Schema["addToCart"]["functionHandler"] = async (
   }
 };
 
-async function fetchUserCart(userId: string) {
+async function fetchUserWithCart(userId: string) {
   // GraphQL query to fetch user cart
 
   const user = await dataClient.graphql({
@@ -96,6 +121,21 @@ async function fetchUserCart(userId: string) {
   return null;
 }
 
+async function fetchCart(cartId: string) {
+  // GraphQL query to fetch cart items
+  try {
+    const cart = await dataClient.graphql({
+      query: getCart,
+      variables: { id: cartId },
+    });
+    console.log("cart", JSON.stringify(cart, null, 2));
+    return cart.data.getCart;
+  } catch (error) {
+    console.error("Error fetching cart:", error);
+    return null;
+  }
+}
+
 async function createNewCart(userId: string) {
   // GraphQL mutation to create a new cart for user
   try {
@@ -106,18 +146,61 @@ async function createNewCart(userId: string) {
     return cart.data.createCart;
   } catch (error) {
     console.error("Error creating cart:", error);
+
     return null;
   }
 }
 
 async function addItemToCart(
   cartId: string,
-  itemId: string,
-  quantity: string,
-  selectedIngredients: string
+  quantity: number,
+  selectedIngredients: { ingredientId: string; quantity: 0 }[],
+  itemId: string
 ) {
-  // GraphQL mutation to add item to cart
-  return null;
+  const cartItem = await dataClient
+    .graphql({
+      query: createCartItem,
+      variables: {
+        input: {
+          cartId,
+          itemId,
+          quantity,
+        },
+      },
+    })
+    .catch((error) => {
+      console.error("Error creating cart item:", error);
+      return null;
+    });
+
+  console.log("createCartInput", cartItem);
+
+  for (let i = 0; i < selectedIngredients.length; i++) {
+    const ingredient = selectedIngredients[i];
+
+    const createCartInput = {
+      cartItemId: cartItem?.data?.createCartItem?.id
+        ? cartItem?.data?.createCartItem?.id
+        : "error",
+      ingredientId: ingredient.ingredientId,
+      quantity: ingredient.quantity,
+    };
+    console.log("addItemToCart", createCartInput);
+    const cartIngredient = await dataClient
+      .graphql({
+        query: createCartIngredient,
+        variables: {
+          input: createCartInput,
+        },
+      })
+      .catch((error) => {
+        console.error("Error creating cart item:", error);
+        return null;
+      });
+    console.log("cartIngredient", cartIngredient);
+  }
+
+  return cartItem?.data.createCartItem;
 }
 
 const palette = {

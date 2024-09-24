@@ -182,7 +182,6 @@ export default observer(function MenuScreen() {
         maxItemsPerRow={numberOfColumns}
         sections={transformDataForSectionList(items)}
         renderItem={({ item }) => {
-          console.log("item", item);
           return (
             <MenuItem
               preset="menu"
