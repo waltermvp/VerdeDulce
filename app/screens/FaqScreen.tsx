@@ -6,7 +6,7 @@ import { Footer, OrderButton, Screen, Text } from "../../components";
 import { colors, spacing, typography } from "../../app/theme";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 // import { useStores } from "../../app/models"
-import { linkToWhatsApp } from "../utils/linkbuilder";
+import { linkToWhatsAppCatalog } from "../utils/linkbuilder";
 
 export const FaqScreen: FC = observer(function FaqScreen() {
   // Pull in one of our MST stores
@@ -24,7 +24,7 @@ export const FaqScreen: FC = observer(function FaqScreen() {
               tx="landingScreen.order"
               icon="arrow-forward"
               onPress={() => {
-                linkToWhatsApp();
+                linkToWhatsAppCatalog();
               }}
             />
           );
