@@ -10,12 +10,10 @@ import {
 import { observer } from "mobx-react-lite";
 import { colors, spacing, typography } from "../app/theme";
 
-import Constants from "expo-constants";
 import Markdown from "react-native-markdown-display";
 import { OrderButton } from "../components/OrderButton";
-import { Marker } from "react-native-svg";
 import { Ad, Screen, Text } from "@/components";
-import { Image, ImageBackground } from "expo-image";
+import { ImageBackground } from "expo-image";
 import { QrCodeSvg } from "react-native-qr-svg";
 import { imageCDNURL } from "./utils/linkbuilder";
 import { Ionicons } from "@expo/vector-icons";
@@ -28,7 +26,6 @@ enum MarketingStrategy {
   AD = "AD",
   SingleDish = "SingleDish",
 }
-const EXPO_PUBLIC_MARKETING_STRATEGY = MarketingStrategy.SingleDish;
 const SIZE = 225;
 const CONTENT = "https://wa.me/c/593963021783";
 
@@ -55,7 +52,7 @@ export interface IntroEmailProps {
  * Describe your component here
  */
 export default observer(function IntroEmail(props: IntroEmailProps) {
-  const { style, onPress, strategy = MarketingStrategy.SingleDish } = props;
+  const { style, strategy = MarketingStrategy.SingleDish } = props;
   const $styles = [$container, style];
   const dish = menu[1];
 
@@ -77,36 +74,15 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
 
           contentFit="cover"
           transition={1000}
-          style={{
-            // backgroundColor: "red",
-            // height: "150%",
-            width: height * 2,
-            // height: 1000,
-            aspectRatio: 1,
-            flex: 1,
-          }}
+          style={$imageBackground}
         >
-          <View
-            style={{
-              backgroundColor: "rgba(0, 0, 0, 0.25)",
-              flex: 1,
-              justifyContent: "flex-end",
-            }}
-          >
+          <View style={$leftContainer}>
             <View
               style={{
-                // alignItems: "center",
                 marginHorizontal: spacing.lg,
-                // backgroundColor: "red",
               }}
             >
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "center",
-                  marginBottom: spacing.lg,
-                }}
-              >
+              <View style={$qrContainer}>
                 <QrCodeSvg
                   style={styles.qr}
                   value={CONTENT}
@@ -131,13 +107,7 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                   preset="bold"
                   style={[
                     // $yellowColor,
-                    {
-                      letterSpacing: spacing.xxxs,
-                      lineHeight: spacing.xxl,
-                      fontSize: spacing.lg,
-                      color: colors.palette.neutral100,
-                      textAlign: "center",
-                    },
+                    $subTitleText,
                   ]}
                 ></Text>
               </View>
@@ -156,54 +126,18 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
             </View>
           </View>
         </ImageBackground>
-        <View
-          style={{
-            // height: "100%",
-            flex: 1,
-            // height: "75%",
-            // alignItems: "center",
-            // paddingVertical: spacing.xxl,
-            paddingTop: spacing.xxl * 1.25,
-            // justifyContent: "space-between",
-            // paddingVertical: spacing.xxl,
-            // backgroundColor: "red",
-            // paddingHorizontal: spacing.xxl,
-          }}
-        >
+        <View style={$contentContainer}>
           <Text
             text={translate("adScreen.add1Title")}
             preset="heading"
-            style={{
-              // color: colors.palette.greenFont,
-              color: colors.palette.neutral100,
-              textAlign: "center",
-              fontSize: spacing.xxl,
-              lineHeight: spacing.xxxl + spacing.sm,
-              fontFamily: typography.fonts.poppins.Poppins_400Regular,
-              // paddingHorizontal: spacing.,
-            }}
+            style={$titleText}
           ></Text>
           <Text
             text={dish.name + "?"}
             preset="heading"
-            style={{
-              // color: colors.palette.greenFont,
-              color: colors.palette.lightYellowGreen,
-              textAlign: "center",
-              fontSize: spacing.xxl,
-              lineHeight: spacing.xxxl + spacing.sm,
-              fontFamily: typography.fonts.poppins.Poppins_400Regular,
-              // paddingHorizontal: spacing.,
-            }}
+            style={$dishNameText}
           ></Text>
-
-          <View
-            style={{
-              flex: 1,
-              alignItems: "center",
-              paddingTop: spacing.xxl,
-            }}
-          >
+          <View style={$bottonContainer}>
             <Text
               tx="adScreen.add1Subtitle"
               preset="heading"
@@ -212,13 +146,7 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
             <Text text="verdedulce.com" preset="heading" style={$yellowColor} />
             <Text text="o" preset="heading" style={$headerText} />
 
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                marginTop: spacing.sm,
-              }}
-            >
+            <View style={$ionicon}>
               <Ionicons
                 name="logo-whatsapp"
                 size={spacing.xxl}
@@ -228,36 +156,11 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
               <Text text="0963021783" preset="heading" style={$yellowColor} />
             </View>
           </View>
-          <View
-            style={{
-              flex: 1,
-              height: "100%",
-              alignItems: "center",
-            }}
-          >
-            {/* <Text
-                text="Ordena ahora en"
-                preset="heading"
-                style={$headerText}
-              />
-              <Text
-                text="verdedulce.com"
-                preset="heading"
-                style={$yellowColor}
-              /> */}
+          <View style={$footerContentContainer}>
             <Text
               tx="adScreen.footerContent"
               preset="heading"
-              style={[
-                $headerText,
-                {
-                  marginHorizontal: spacing.xl,
-                  marginTop: spacing.lg,
-                  textAlign: "center",
-                  fontSize: spacing.xxl,
-                  letterSpacing: spacing.xxs,
-                },
-              ]}
+              style={[$headerText, $footerContent]}
             />
           </View>
 
@@ -352,70 +255,79 @@ const styles = StyleSheet.create({
     padding: 15,
   },
 });
-/*
-¡Compra 9 ensaladas y la 10ª es gratis!
 
-En Verde Dulce, queremos premiar tu fidelidad. Por cada ensalada que compres, acumularás puntos automáticamente en tu cuenta. ¡Al llegar a 9 ensaladas, la décima es completamente gratis!
-
-¿Cómo funciona?
-
-    1.    Compra tu ensalada favorita: Cada vez que realices una compra, los puntos se añadirán a tu cuenta.
-    2.    Acumula puntos: Por cada ensalada que compres, obtendrás 1 punto.
-    3.    Lleva la 10ª ensalada gratis: Cuando hayas acumulado 9 puntos, recibirás una ensalada gratis en tu próxima compra.
-    4.    Revisa tu progreso: Inicia sesión en tu cuenta en nuestro sitio web y revisa cuántos puntos llevas acumulados.
-
-Haz tu pedido ahora!
-
-Visítanos en VerdeDulce.com, pide tu ensalada y comienza a acumular tus puntos hoy mismo.
-
-*/
 import menu from "../menu-es.json";
+const $contentContainer: ViewStyle = {
+  flex: 1,
+  paddingTop: spacing.xxl * 1.25,
+};
 
-// <View style={$styles}>
-// <Markdown
-//   style={{
-//     heading1: { fontSize: spacing.xxxl },
-//     heading3: { fontSize: spacing.xxl },
-//     body: {
-//       fontSize: spacing.lg,
-//       fontFamily: typography.fonts.poppins.semiBold,
-//       color: colors.palette.neutral100,
-//     },
-//     text: {
-//       color: "white",
-//       fontFamily: typography.fonts.poppins.light,
-//     },
+const $titleText: TextStyle = {
+  color: colors.palette.neutral100,
+  textAlign: "center",
+  fontSize: spacing.xxl,
+  lineHeight: spacing.xxxl + spacing.sm,
+  fontFamily: typography.fonts.poppins.Poppins_400Regular,
+};
 
-//     list_item: {
-//       paddingVertical: spacing.xxs,
-//       fontFamily: typography.fonts.poppins.semiBold,
-//     },
-//     // inline: { backgroundColor: "red", color: "red" },
-//     ordered_list: {
-//       color: "white",
-//       paddingVertical: spacing.sm,
-//       fontFamily: typography.fonts.poppins.semiBold,
-//     },
-//     bullet_list: {
-//       backgroundColor: "red",
-//       color: "red",
-//       fontFamily: typography.fonts.poppins.semiBold,
-//     },
-//     // heading1: { color: "white" },
-//     // heading2: { color: "white" },
-//     // strong: { color: "white" },
-//   }}
-// >
-//   {copy}
-//   {/* <OrderButton text="/???" /> */}
-// </Markdown>
-// <OrderButton
-//   style={{
-//     backgroundColor: colors.palette.lightYellowGreen,
-//     borderRadius: 13,
-//   }}
-//   text="Ordena Ya"
-//   textStyle={{ color: colors.palette.greenFont }}
-//   onPress={onPress}
-// />
-// </View>
+const $dishNameText: TextStyle = {
+  color: colors.palette.lightYellowGreen,
+  textAlign: "center",
+  fontSize: spacing.xxl,
+  lineHeight: spacing.xxxl + spacing.sm,
+  fontFamily: typography.fonts.poppins.Poppins_400Regular,
+};
+
+const $footerContent: TextStyle = {
+  marginHorizontal: spacing.xl,
+  marginTop: spacing.lg,
+  textAlign: "center",
+  fontSize: spacing.xxl,
+  letterSpacing: spacing.xxs,
+};
+
+const $imageBackground: ViewStyle = {
+  // backgroundColor: "red",
+  // height: "150%",
+  width: height * 2,
+  // height: 1000,
+  aspectRatio: 1,
+  flex: 1,
+};
+const $leftContainer: ViewStyle = {
+  backgroundColor: "rgba(0, 0, 0, 0.25)",
+  flex: 1,
+  justifyContent: "flex-end",
+};
+
+const $subTitleText: TextStyle = {
+  letterSpacing: spacing.xxxs,
+  lineHeight: spacing.xxl,
+  fontSize: spacing.lg,
+  color: colors.palette.neutral100,
+  textAlign: "center",
+};
+
+const $qrContainer: ViewStyle = {
+  flex: 1,
+  alignItems: "center",
+  marginBottom: spacing.lg,
+};
+
+const $ionicon: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  marginTop: spacing.sm,
+};
+
+const $footerContentContainer: ViewStyle = {
+  flex: 1,
+  height: "100%",
+  alignItems: "center",
+};
+
+const $bottonContainer: ViewStyle = {
+  flex: 1,
+  alignItems: "center",
+  paddingTop: spacing.xxl,
+};
