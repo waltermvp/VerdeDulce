@@ -153,7 +153,6 @@ export function Button(props: ButtonProps) {
       !!disabled && $disabledTextStyleOverride,
     ];
   }
-  console.log("loading in button", loading);
   return (
     <Pressable
       style={$viewStyle}
@@ -167,9 +166,8 @@ export function Button(props: ButtonProps) {
           return (
             <View style={$dotWrapper}>
               <LoadingDots
-                // style={{ flex: 1 }}
                 bounceHeight={12}
-                size={16}
+                size={14}
                 dots={3}
                 colors={[
                   colors.palette.neutral100,

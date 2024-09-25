@@ -121,12 +121,14 @@ const schema = a
     // Cart Model
     Cart: a
       .model({
-        id: a.id(), // Cart ID
+        id: a.id(), // Ensure ID field for Cart
         userId: a.id().required(), // Reference to the user
         user: a.belongsTo("User", "userId"), // Each user has one cart
         cartItems: a.hasMany("CartItem", "cartId"), // Cart has many items
         totalAmount: a.integer(), // Total amount of the cart
+        authenticated: a.boolean().default(false),
       })
+      .secondaryIndexes((index) => [index("userId").queryField("cartByUser")])
       .authorization((allow) => [allow.authenticated()]), // Only authenticated users
 
     // CartItem Model
@@ -134,12 +136,15 @@ const schema = a
       .model({
         id: a.id(), // CartItem ID
         cartId: a.id().required(), // Reference to the cart
+        userId: a.string().required(), // Reference to the cart
         cart: a.belongsTo("Cart", "cartId"), // CartItem belongs to a cart
         itemId: a.id().required(), // Reference to the menu item
         item: a.belongsTo("Item", "itemId"), // Each cart item is an Item
         selectedIngredients: a.hasMany("CartIngredient", "cartItemId"), // Selected ingredients for this item
         quantity: a.integer().required(), // Quantity of the item
       })
+      .secondaryIndexes((index) => [index("cartId"), index("userId")])
+
       .authorization((allow) => [allow.authenticated()]),
 
     // CartIngredient Model

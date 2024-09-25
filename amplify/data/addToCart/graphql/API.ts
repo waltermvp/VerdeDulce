@@ -2,8 +2,108 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
+export type ModelCartFilterInput = {
+  and?: Array< ModelCartFilterInput | null > | null,
+  authenticated?: ModelBooleanInput | null,
+  createdAt?: ModelStringInput | null,
+  id?: ModelIDInput | null,
+  not?: ModelCartFilterInput | null,
+  or?: Array< ModelCartFilterInput | null > | null,
+  totalAmount?: ModelIntInput | null,
+  updatedAt?: ModelStringInput | null,
+  userId?: ModelIDInput | null,
+};
+
+export type ModelBooleanInput = {
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  eq?: boolean | null,
+  ne?: boolean | null,
+};
+
+export enum ModelAttributeTypes {
+  _null = "_null",
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+}
+
+
+export type ModelStringInput = {
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  beginsWith?: string | null,
+  between?: Array< string | null > | null,
+  contains?: string | null,
+  eq?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ne?: string | null,
+  notContains?: string | null,
+  size?: ModelSizeInput | null,
+};
+
+export type ModelSizeInput = {
+  between?: Array< number | null > | null,
+  eq?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ne?: number | null,
+};
+
+export type ModelIDInput = {
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  beginsWith?: string | null,
+  between?: Array< string | null > | null,
+  contains?: string | null,
+  eq?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ne?: string | null,
+  notContains?: string | null,
+  size?: ModelSizeInput | null,
+};
+
+export type ModelIntInput = {
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  between?: Array< number | null > | null,
+  eq?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ne?: number | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
+export type ModelCartConnection = {
+  __typename: "ModelCartConnection",
+  items:  Array<Cart | null >,
+  nextToken?: string | null,
+};
+
 export type Cart = {
   __typename: "Cart",
+  authenticated?: boolean | null,
   cartItems?: ModelCartItemConnection | null,
   createdAt: string,
   id: string,
@@ -30,6 +130,7 @@ export type CartItem = {
   quantity: number,
   selectedIngredients?: ModelCartIngredientConnection | null,
   updatedAt: string,
+  userId: string,
 };
 
 export type Item = {
@@ -211,80 +312,6 @@ export type ModelCartIngredientFilterInput = {
   updatedAt?: ModelStringInput | null,
 };
 
-export type ModelIDInput = {
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  beginsWith?: string | null,
-  between?: Array< string | null > | null,
-  contains?: string | null,
-  eq?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ne?: string | null,
-  notContains?: string | null,
-  size?: ModelSizeInput | null,
-};
-
-export enum ModelAttributeTypes {
-  _null = "_null",
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-}
-
-
-export type ModelSizeInput = {
-  between?: Array< number | null > | null,
-  eq?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ne?: number | null,
-};
-
-export type ModelStringInput = {
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  beginsWith?: string | null,
-  between?: Array< string | null > | null,
-  contains?: string | null,
-  eq?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ne?: string | null,
-  notContains?: string | null,
-  size?: ModelSizeInput | null,
-};
-
-export type ModelIntInput = {
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  between?: Array< number | null > | null,
-  eq?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ne?: number | null,
-};
-
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
-
 export type ModelCartItemFilterInput = {
   and?: Array< ModelCartItemFilterInput | null > | null,
   cartId?: ModelIDInput | null,
@@ -295,23 +322,7 @@ export type ModelCartItemFilterInput = {
   or?: Array< ModelCartItemFilterInput | null > | null,
   quantity?: ModelIntInput | null,
   updatedAt?: ModelStringInput | null,
-};
-
-export type ModelCartFilterInput = {
-  and?: Array< ModelCartFilterInput | null > | null,
-  createdAt?: ModelStringInput | null,
-  id?: ModelIDInput | null,
-  not?: ModelCartFilterInput | null,
-  or?: Array< ModelCartFilterInput | null > | null,
-  totalAmount?: ModelIntInput | null,
-  updatedAt?: ModelStringInput | null,
-  userId?: ModelIDInput | null,
-};
-
-export type ModelCartConnection = {
-  __typename: "ModelCartConnection",
-  items:  Array<Cart | null >,
-  nextToken?: string | null,
+  userId?: ModelStringInput | null,
 };
 
 export type ModelCategoryFilterInput = {
@@ -344,13 +355,6 @@ export type ModelIngredientFilterInput = {
   or?: Array< ModelIngredientFilterInput | null > | null,
   price?: ModelIntInput | null,
   updatedAt?: ModelStringInput | null,
-};
-
-export type ModelBooleanInput = {
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  eq?: boolean | null,
-  ne?: boolean | null,
 };
 
 export type ModelItemFilterInput = {
@@ -443,11 +447,12 @@ export type ModelUserConnection = {
 
 export type AddToCartResponse = {
   __typename: "AddToCartResponse",
-  cartItem?: string | null,
+  cartItems?: Array< string | null > | null,
 };
 
 export type ModelCartConditionInput = {
   and?: Array< ModelCartConditionInput | null > | null,
+  authenticated?: ModelBooleanInput | null,
   createdAt?: ModelStringInput | null,
   not?: ModelCartConditionInput | null,
   or?: Array< ModelCartConditionInput | null > | null,
@@ -457,6 +462,7 @@ export type ModelCartConditionInput = {
 };
 
 export type CreateCartInput = {
+  authenticated?: boolean | null,
   id?: string | null,
   totalAmount?: number | null,
   userId: string,
@@ -489,6 +495,7 @@ export type ModelCartItemConditionInput = {
   or?: Array< ModelCartItemConditionInput | null > | null,
   quantity?: ModelIntInput | null,
   updatedAt?: ModelStringInput | null,
+  userId?: ModelStringInput | null,
 };
 
 export type CreateCartItemInput = {
@@ -496,6 +503,7 @@ export type CreateCartItemInput = {
   id?: string | null,
   itemId: string,
   quantity: number,
+  userId: string,
 };
 
 export type ModelCategoryConditionInput = {
@@ -717,6 +725,7 @@ export type RegisterResponse = {
 };
 
 export type UpdateCartInput = {
+  authenticated?: boolean | null,
   id: string,
   totalAmount?: number | null,
   userId?: string | null,
@@ -734,6 +743,7 @@ export type UpdateCartItemInput = {
   id: string,
   itemId?: string | null,
   quantity?: number | null,
+  userId?: string | null,
 };
 
 export type UpdateCategoryInput = {
@@ -806,12 +816,18 @@ export type UpdateUserInput = {
 
 export type ModelSubscriptionCartFilterInput = {
   and?: Array< ModelSubscriptionCartFilterInput | null > | null,
+  authenticated?: ModelSubscriptionBooleanInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   id?: ModelSubscriptionIDInput | null,
   or?: Array< ModelSubscriptionCartFilterInput | null > | null,
   totalAmount?: ModelSubscriptionIntInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   userId?: ModelSubscriptionIDInput | null,
+};
+
+export type ModelSubscriptionBooleanInput = {
+  eq?: boolean | null,
+  ne?: boolean | null,
 };
 
 export type ModelSubscriptionStringInput = {
@@ -876,6 +892,7 @@ export type ModelSubscriptionCartItemFilterInput = {
   or?: Array< ModelSubscriptionCartItemFilterInput | null > | null,
   quantity?: ModelSubscriptionIntInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
+  userId?: ModelSubscriptionStringInput | null,
 };
 
 export type ModelSubscriptionCategoryFilterInput = {
@@ -900,11 +917,6 @@ export type ModelSubscriptionIngredientFilterInput = {
   or?: Array< ModelSubscriptionIngredientFilterInput | null > | null,
   price?: ModelSubscriptionIntInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
-};
-
-export type ModelSubscriptionBooleanInput = {
-  eq?: boolean | null,
-  ne?: boolean | null,
 };
 
 export type ModelSubscriptionItemFilterInput = {
@@ -983,6 +995,30 @@ export type ModelSubscriptionUserFilterInput = {
   username?: ModelSubscriptionStringInput | null,
 };
 
+export type CartByUserQueryVariables = {
+  filter?: ModelCartFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  userId: string,
+};
+
+export type CartByUserQuery = {
+  cartByUser?:  {
+    __typename: "ModelCartConnection",
+    items:  Array< {
+      __typename: "Cart",
+      authenticated?: boolean | null,
+      createdAt: string,
+      id: string,
+      totalAmount?: number | null,
+      updatedAt: string,
+      userId: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetCartQueryVariables = {
   id: string,
 };
@@ -990,6 +1026,7 @@ export type GetCartQueryVariables = {
 export type GetCartQuery = {
   getCart?:  {
     __typename: "Cart",
+    authenticated?: boolean | null,
     cartItems?:  {
       __typename: "ModelCartItemConnection",
       nextToken?: string | null,
@@ -1028,6 +1065,7 @@ export type GetCartIngredientQuery = {
       itemId: string,
       quantity: number,
       updatedAt: string,
+      userId: string,
     } | null,
     cartItemId: string,
     createdAt: string,
@@ -1059,6 +1097,7 @@ export type GetCartItemQuery = {
     __typename: "CartItem",
     cart?:  {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,
@@ -1090,6 +1129,7 @@ export type GetCartItemQuery = {
       nextToken?: string | null,
     } | null,
     updatedAt: string,
+    userId: string,
   } | null,
 };
 
@@ -1367,6 +1407,7 @@ export type GetUserQuery = {
     available?: boolean | null,
     cart?:  {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,
@@ -1415,6 +1456,56 @@ export type ListCartIngredientsQuery = {
   } | null,
 };
 
+export type ListCartItemByCartIdQueryVariables = {
+  cartId: string,
+  filter?: ModelCartItemFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+};
+
+export type ListCartItemByCartIdQuery = {
+  listCartItemByCartId?:  {
+    __typename: "ModelCartItemConnection",
+    items:  Array< {
+      __typename: "CartItem",
+      cartId: string,
+      createdAt: string,
+      id: string,
+      itemId: string,
+      quantity: number,
+      updatedAt: string,
+      userId: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListCartItemByUserIdQueryVariables = {
+  filter?: ModelCartItemFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  userId: string,
+};
+
+export type ListCartItemByUserIdQuery = {
+  listCartItemByUserId?:  {
+    __typename: "ModelCartItemConnection",
+    items:  Array< {
+      __typename: "CartItem",
+      cartId: string,
+      createdAt: string,
+      id: string,
+      itemId: string,
+      quantity: number,
+      updatedAt: string,
+      userId: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type ListCartItemsQueryVariables = {
   filter?: ModelCartItemFilterInput | null,
   id?: string | null,
@@ -1434,6 +1525,7 @@ export type ListCartItemsQuery = {
       itemId: string,
       quantity: number,
       updatedAt: string,
+      userId: string,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1452,6 +1544,7 @@ export type ListCartsQuery = {
     __typename: "ModelCartConnection",
     items:  Array< {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,
@@ -1675,7 +1768,7 @@ export type AddToCartMutationVariables = {
 export type AddToCartMutation = {
   addToCart?:  {
     __typename: "AddToCartResponse",
-    cartItem?: string | null,
+    cartItems?: Array< string | null > | null,
   } | null,
 };
 
@@ -1687,6 +1780,7 @@ export type CreateCartMutationVariables = {
 export type CreateCartMutation = {
   createCart?:  {
     __typename: "Cart",
+    authenticated?: boolean | null,
     cartItems?:  {
       __typename: "ModelCartItemConnection",
       nextToken?: string | null,
@@ -1726,6 +1820,7 @@ export type CreateCartIngredientMutation = {
       itemId: string,
       quantity: number,
       updatedAt: string,
+      userId: string,
     } | null,
     cartItemId: string,
     createdAt: string,
@@ -1758,6 +1853,7 @@ export type CreateCartItemMutation = {
     __typename: "CartItem",
     cart?:  {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,
@@ -1789,6 +1885,7 @@ export type CreateCartItemMutation = {
       nextToken?: string | null,
     } | null,
     updatedAt: string,
+    userId: string,
   } | null,
 };
 
@@ -2074,6 +2171,7 @@ export type CreateUserMutation = {
     available?: boolean | null,
     cart?:  {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,
@@ -2106,6 +2204,7 @@ export type DeleteCartMutationVariables = {
 export type DeleteCartMutation = {
   deleteCart?:  {
     __typename: "Cart",
+    authenticated?: boolean | null,
     cartItems?:  {
       __typename: "ModelCartItemConnection",
       nextToken?: string | null,
@@ -2145,6 +2244,7 @@ export type DeleteCartIngredientMutation = {
       itemId: string,
       quantity: number,
       updatedAt: string,
+      userId: string,
     } | null,
     cartItemId: string,
     createdAt: string,
@@ -2177,6 +2277,7 @@ export type DeleteCartItemMutation = {
     __typename: "CartItem",
     cart?:  {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,
@@ -2208,6 +2309,7 @@ export type DeleteCartItemMutation = {
       nextToken?: string | null,
     } | null,
     updatedAt: string,
+    userId: string,
   } | null,
 };
 
@@ -2493,6 +2595,7 @@ export type DeleteUserMutation = {
     available?: boolean | null,
     cart?:  {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,
@@ -2537,6 +2640,7 @@ export type UpdateCartMutationVariables = {
 export type UpdateCartMutation = {
   updateCart?:  {
     __typename: "Cart",
+    authenticated?: boolean | null,
     cartItems?:  {
       __typename: "ModelCartItemConnection",
       nextToken?: string | null,
@@ -2576,6 +2680,7 @@ export type UpdateCartIngredientMutation = {
       itemId: string,
       quantity: number,
       updatedAt: string,
+      userId: string,
     } | null,
     cartItemId: string,
     createdAt: string,
@@ -2608,6 +2713,7 @@ export type UpdateCartItemMutation = {
     __typename: "CartItem",
     cart?:  {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,
@@ -2639,6 +2745,7 @@ export type UpdateCartItemMutation = {
       nextToken?: string | null,
     } | null,
     updatedAt: string,
+    userId: string,
   } | null,
 };
 
@@ -2924,6 +3031,7 @@ export type UpdateUserMutation = {
     available?: boolean | null,
     cart?:  {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,
@@ -2955,6 +3063,7 @@ export type OnCreateCartSubscriptionVariables = {
 export type OnCreateCartSubscription = {
   onCreateCart?:  {
     __typename: "Cart",
+    authenticated?: boolean | null,
     cartItems?:  {
       __typename: "ModelCartItemConnection",
       nextToken?: string | null,
@@ -2993,6 +3102,7 @@ export type OnCreateCartIngredientSubscription = {
       itemId: string,
       quantity: number,
       updatedAt: string,
+      userId: string,
     } | null,
     cartItemId: string,
     createdAt: string,
@@ -3024,6 +3134,7 @@ export type OnCreateCartItemSubscription = {
     __typename: "CartItem",
     cart?:  {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,
@@ -3055,6 +3166,7 @@ export type OnCreateCartItemSubscription = {
       nextToken?: string | null,
     } | null,
     updatedAt: string,
+    userId: string,
   } | null,
 };
 
@@ -3332,6 +3444,7 @@ export type OnCreateUserSubscription = {
     available?: boolean | null,
     cart?:  {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,
@@ -3363,6 +3476,7 @@ export type OnDeleteCartSubscriptionVariables = {
 export type OnDeleteCartSubscription = {
   onDeleteCart?:  {
     __typename: "Cart",
+    authenticated?: boolean | null,
     cartItems?:  {
       __typename: "ModelCartItemConnection",
       nextToken?: string | null,
@@ -3401,6 +3515,7 @@ export type OnDeleteCartIngredientSubscription = {
       itemId: string,
       quantity: number,
       updatedAt: string,
+      userId: string,
     } | null,
     cartItemId: string,
     createdAt: string,
@@ -3432,6 +3547,7 @@ export type OnDeleteCartItemSubscription = {
     __typename: "CartItem",
     cart?:  {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,
@@ -3463,6 +3579,7 @@ export type OnDeleteCartItemSubscription = {
       nextToken?: string | null,
     } | null,
     updatedAt: string,
+    userId: string,
   } | null,
 };
 
@@ -3740,6 +3857,7 @@ export type OnDeleteUserSubscription = {
     available?: boolean | null,
     cart?:  {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,
@@ -3771,6 +3889,7 @@ export type OnUpdateCartSubscriptionVariables = {
 export type OnUpdateCartSubscription = {
   onUpdateCart?:  {
     __typename: "Cart",
+    authenticated?: boolean | null,
     cartItems?:  {
       __typename: "ModelCartItemConnection",
       nextToken?: string | null,
@@ -3809,6 +3928,7 @@ export type OnUpdateCartIngredientSubscription = {
       itemId: string,
       quantity: number,
       updatedAt: string,
+      userId: string,
     } | null,
     cartItemId: string,
     createdAt: string,
@@ -3840,6 +3960,7 @@ export type OnUpdateCartItemSubscription = {
     __typename: "CartItem",
     cart?:  {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,
@@ -3871,6 +3992,7 @@ export type OnUpdateCartItemSubscription = {
       nextToken?: string | null,
     } | null,
     updatedAt: string,
+    userId: string,
   } | null,
 };
 
@@ -4148,6 +4270,7 @@ export type OnUpdateUserSubscription = {
     available?: boolean | null,
     cart?:  {
       __typename: "Cart",
+      authenticated?: boolean | null,
       createdAt: string,
       id: string,
       totalAmount?: number | null,

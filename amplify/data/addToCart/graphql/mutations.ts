@@ -8,26 +8,30 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const addToCart =
-  /* GraphQL */ `mutation AddToCart($itemId: ID, $quantity: Int, $selectedIngredients: [ID]) {
+export const addToCart = /* GraphQL */ `mutation AddToCart(
+  $itemId: ID
+  $quantity: Int
+  $selectedIngredients: [AWSJSON]
+) {
   addToCart(
     itemId: $itemId
     quantity: $quantity
     selectedIngredients: $selectedIngredients
   ) {
-    cartItem
+    cartItems
     __typename
   }
 }
 ` as GeneratedMutation<
-    APITypes.AddToCartMutationVariables,
-    APITypes.AddToCartMutation
-  >;
+  APITypes.AddToCartMutationVariables,
+  APITypes.AddToCartMutation
+>;
 export const createCart = /* GraphQL */ `mutation CreateCart(
   $condition: ModelCartConditionInput
   $input: CreateCartInput!
 ) {
   createCart(condition: $condition, input: $input) {
+    authenticated
     cartItems {
       nextToken
       __typename
@@ -36,6 +40,17 @@ export const createCart = /* GraphQL */ `mutation CreateCart(
     id
     totalAmount
     updatedAt
+    user {
+      available
+      createdAt
+      email
+      id
+      password
+      role
+      updatedAt
+      username
+      __typename
+    }
     userId
     __typename
   }
@@ -44,8 +59,7 @@ export const createCart = /* GraphQL */ `mutation CreateCart(
   APITypes.CreateCartMutationVariables,
   APITypes.CreateCartMutation
 >;
-export const createCartIngredient =
-  /* GraphQL */ `mutation CreateCartIngredient(
+export const createCartIngredient = /* GraphQL */ `mutation CreateCartIngredient(
   $condition: ModelCartIngredientConditionInput
   $input: CreateCartIngredientInput!
 ) {
@@ -57,11 +71,24 @@ export const createCartIngredient =
       itemId
       quantity
       updatedAt
+      userId
       __typename
     }
     cartItemId
     createdAt
     id
+    ingredient {
+      available
+      calories
+      createdAt
+      id
+      ingredientId
+      itemId
+      name
+      price
+      updatedAt
+      __typename
+    }
     ingredientId
     quantity
     updatedAt
@@ -69,15 +96,16 @@ export const createCartIngredient =
   }
 }
 ` as GeneratedMutation<
-    APITypes.CreateCartIngredientMutationVariables,
-    APITypes.CreateCartIngredientMutation
-  >;
+  APITypes.CreateCartIngredientMutationVariables,
+  APITypes.CreateCartIngredientMutation
+>;
 export const createCartItem = /* GraphQL */ `mutation CreateCartItem(
   $condition: ModelCartItemConditionInput
   $input: CreateCartItemInput!
 ) {
   createCartItem(condition: $condition, input: $input) {
     cart {
+      authenticated
       createdAt
       id
       totalAmount
@@ -110,6 +138,7 @@ export const createCartItem = /* GraphQL */ `mutation CreateCartItem(
       __typename
     }
     updatedAt
+    userId
     __typename
   }
 }
@@ -264,8 +293,7 @@ export const createOrder = /* GraphQL */ `mutation CreateOrder(
   APITypes.CreateOrderMutationVariables,
   APITypes.CreateOrderMutation
 >;
-export const createOrderIngredient =
-  /* GraphQL */ `mutation CreateOrderIngredient(
+export const createOrderIngredient = /* GraphQL */ `mutation CreateOrderIngredient(
   $condition: ModelOrderIngredientConditionInput
   $input: CreateOrderIngredientInput!
 ) {
@@ -301,9 +329,9 @@ export const createOrderIngredient =
   }
 }
 ` as GeneratedMutation<
-    APITypes.CreateOrderIngredientMutationVariables,
-    APITypes.CreateOrderIngredientMutation
-  >;
+  APITypes.CreateOrderIngredientMutationVariables,
+  APITypes.CreateOrderIngredientMutation
+>;
 export const createOrderItem = /* GraphQL */ `mutation CreateOrderItem(
   $condition: ModelOrderItemConditionInput
   $input: CreateOrderItemInput!
@@ -403,6 +431,7 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
   createUser(condition: $condition, input: $input) {
     available
     cart {
+      authenticated
       createdAt
       id
       totalAmount
@@ -437,6 +466,7 @@ export const deleteCart = /* GraphQL */ `mutation DeleteCart(
   $input: DeleteCartInput!
 ) {
   deleteCart(condition: $condition, input: $input) {
+    authenticated
     cartItems {
       nextToken
       __typename
@@ -464,8 +494,7 @@ export const deleteCart = /* GraphQL */ `mutation DeleteCart(
   APITypes.DeleteCartMutationVariables,
   APITypes.DeleteCartMutation
 >;
-export const deleteCartIngredient =
-  /* GraphQL */ `mutation DeleteCartIngredient(
+export const deleteCartIngredient = /* GraphQL */ `mutation DeleteCartIngredient(
   $condition: ModelCartIngredientConditionInput
   $input: DeleteCartIngredientInput!
 ) {
@@ -477,6 +506,7 @@ export const deleteCartIngredient =
       itemId
       quantity
       updatedAt
+      userId
       __typename
     }
     cartItemId
@@ -501,15 +531,16 @@ export const deleteCartIngredient =
   }
 }
 ` as GeneratedMutation<
-    APITypes.DeleteCartIngredientMutationVariables,
-    APITypes.DeleteCartIngredientMutation
-  >;
+  APITypes.DeleteCartIngredientMutationVariables,
+  APITypes.DeleteCartIngredientMutation
+>;
 export const deleteCartItem = /* GraphQL */ `mutation DeleteCartItem(
   $condition: ModelCartItemConditionInput
   $input: DeleteCartItemInput!
 ) {
   deleteCartItem(condition: $condition, input: $input) {
     cart {
+      authenticated
       createdAt
       id
       totalAmount
@@ -542,6 +573,7 @@ export const deleteCartItem = /* GraphQL */ `mutation DeleteCartItem(
       __typename
     }
     updatedAt
+    userId
     __typename
   }
 }
@@ -696,8 +728,7 @@ export const deleteOrder = /* GraphQL */ `mutation DeleteOrder(
   APITypes.DeleteOrderMutationVariables,
   APITypes.DeleteOrderMutation
 >;
-export const deleteOrderIngredient =
-  /* GraphQL */ `mutation DeleteOrderIngredient(
+export const deleteOrderIngredient = /* GraphQL */ `mutation DeleteOrderIngredient(
   $condition: ModelOrderIngredientConditionInput
   $input: DeleteOrderIngredientInput!
 ) {
@@ -733,9 +764,9 @@ export const deleteOrderIngredient =
   }
 }
 ` as GeneratedMutation<
-    APITypes.DeleteOrderIngredientMutationVariables,
-    APITypes.DeleteOrderIngredientMutation
-  >;
+  APITypes.DeleteOrderIngredientMutationVariables,
+  APITypes.DeleteOrderIngredientMutation
+>;
 export const deleteOrderItem = /* GraphQL */ `mutation DeleteOrderItem(
   $condition: ModelOrderItemConditionInput
   $input: DeleteOrderItemInput!
@@ -835,6 +866,7 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
   deleteUser(condition: $condition, input: $input) {
     available
     cart {
+      authenticated
       createdAt
       id
       totalAmount
@@ -864,8 +896,7 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
   APITypes.DeleteUserMutationVariables,
   APITypes.DeleteUserMutation
 >;
-export const registerUser =
-  /* GraphQL */ `mutation RegisterUser($email: String) {
+export const registerUser = /* GraphQL */ `mutation RegisterUser($email: String) {
   registerUser(email: $email) {
     email
     metadata
@@ -873,14 +904,15 @@ export const registerUser =
   }
 }
 ` as GeneratedMutation<
-    APITypes.RegisterUserMutationVariables,
-    APITypes.RegisterUserMutation
-  >;
+  APITypes.RegisterUserMutationVariables,
+  APITypes.RegisterUserMutation
+>;
 export const updateCart = /* GraphQL */ `mutation UpdateCart(
   $condition: ModelCartConditionInput
   $input: UpdateCartInput!
 ) {
   updateCart(condition: $condition, input: $input) {
+    authenticated
     cartItems {
       nextToken
       __typename
@@ -908,8 +940,7 @@ export const updateCart = /* GraphQL */ `mutation UpdateCart(
   APITypes.UpdateCartMutationVariables,
   APITypes.UpdateCartMutation
 >;
-export const updateCartIngredient =
-  /* GraphQL */ `mutation UpdateCartIngredient(
+export const updateCartIngredient = /* GraphQL */ `mutation UpdateCartIngredient(
   $condition: ModelCartIngredientConditionInput
   $input: UpdateCartIngredientInput!
 ) {
@@ -921,6 +952,7 @@ export const updateCartIngredient =
       itemId
       quantity
       updatedAt
+      userId
       __typename
     }
     cartItemId
@@ -945,15 +977,16 @@ export const updateCartIngredient =
   }
 }
 ` as GeneratedMutation<
-    APITypes.UpdateCartIngredientMutationVariables,
-    APITypes.UpdateCartIngredientMutation
-  >;
+  APITypes.UpdateCartIngredientMutationVariables,
+  APITypes.UpdateCartIngredientMutation
+>;
 export const updateCartItem = /* GraphQL */ `mutation UpdateCartItem(
   $condition: ModelCartItemConditionInput
   $input: UpdateCartItemInput!
 ) {
   updateCartItem(condition: $condition, input: $input) {
     cart {
+      authenticated
       createdAt
       id
       totalAmount
@@ -986,6 +1019,7 @@ export const updateCartItem = /* GraphQL */ `mutation UpdateCartItem(
       __typename
     }
     updatedAt
+    userId
     __typename
   }
 }
@@ -1140,8 +1174,7 @@ export const updateOrder = /* GraphQL */ `mutation UpdateOrder(
   APITypes.UpdateOrderMutationVariables,
   APITypes.UpdateOrderMutation
 >;
-export const updateOrderIngredient =
-  /* GraphQL */ `mutation UpdateOrderIngredient(
+export const updateOrderIngredient = /* GraphQL */ `mutation UpdateOrderIngredient(
   $condition: ModelOrderIngredientConditionInput
   $input: UpdateOrderIngredientInput!
 ) {
@@ -1177,9 +1210,9 @@ export const updateOrderIngredient =
   }
 }
 ` as GeneratedMutation<
-    APITypes.UpdateOrderIngredientMutationVariables,
-    APITypes.UpdateOrderIngredientMutation
-  >;
+  APITypes.UpdateOrderIngredientMutationVariables,
+  APITypes.UpdateOrderIngredientMutation
+>;
 export const updateOrderItem = /* GraphQL */ `mutation UpdateOrderItem(
   $condition: ModelOrderItemConditionInput
   $input: UpdateOrderItemInput!
@@ -1279,6 +1312,7 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
   updateUser(condition: $condition, input: $input) {
     available
     cart {
+      authenticated
       createdAt
       id
       totalAmount

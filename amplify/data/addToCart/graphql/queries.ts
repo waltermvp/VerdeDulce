@@ -8,8 +8,40 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
+export const cartByUser = /* GraphQL */ `query CartByUser(
+  $filter: ModelCartFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+  $userId: ID!
+) {
+  cartByUser(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+    userId: $userId
+  ) {
+    items {
+      authenticated
+      createdAt
+      id
+      totalAmount
+      updatedAt
+      userId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.CartByUserQueryVariables,
+  APITypes.CartByUserQuery
+>;
 export const getCart = /* GraphQL */ `query GetCart($id: ID!) {
   getCart(id: $id) {
+    authenticated
     cartItems {
       nextToken
       __typename
@@ -18,13 +50,23 @@ export const getCart = /* GraphQL */ `query GetCart($id: ID!) {
     id
     totalAmount
     updatedAt
+    user {
+      available
+      createdAt
+      email
+      id
+      password
+      role
+      updatedAt
+      username
+      __typename
+    }
     userId
     __typename
   }
 }
 ` as GeneratedQuery<APITypes.GetCartQueryVariables, APITypes.GetCartQuery>;
-export const getCartIngredient =
-  /* GraphQL */ `query GetCartIngredient($id: ID!) {
+export const getCartIngredient = /* GraphQL */ `query GetCartIngredient($id: ID!) {
   getCartIngredient(id: $id) {
     cartItem {
       cartId
@@ -33,6 +75,7 @@ export const getCartIngredient =
       itemId
       quantity
       updatedAt
+      userId
       __typename
     }
     cartItemId
@@ -57,12 +100,13 @@ export const getCartIngredient =
   }
 }
 ` as GeneratedQuery<
-    APITypes.GetCartIngredientQueryVariables,
-    APITypes.GetCartIngredientQuery
-  >;
+  APITypes.GetCartIngredientQueryVariables,
+  APITypes.GetCartIngredientQuery
+>;
 export const getCartItem = /* GraphQL */ `query GetCartItem($id: ID!) {
   getCartItem(id: $id) {
     cart {
+      authenticated
       createdAt
       id
       totalAmount
@@ -95,6 +139,7 @@ export const getCartItem = /* GraphQL */ `query GetCartItem($id: ID!) {
       __typename
     }
     updatedAt
+    userId
     __typename
   }
 }
@@ -231,8 +276,7 @@ export const getOrder = /* GraphQL */ `query GetOrder($id: ID!) {
   }
 }
 ` as GeneratedQuery<APITypes.GetOrderQueryVariables, APITypes.GetOrderQuery>;
-export const getOrderIngredient =
-  /* GraphQL */ `query GetOrderIngredient($id: ID!) {
+export const getOrderIngredient = /* GraphQL */ `query GetOrderIngredient($id: ID!) {
   getOrderIngredient(id: $id) {
     createdAt
     id
@@ -265,9 +309,9 @@ export const getOrderIngredient =
   }
 }
 ` as GeneratedQuery<
-    APITypes.GetOrderIngredientQueryVariables,
-    APITypes.GetOrderIngredientQuery
-  >;
+  APITypes.GetOrderIngredientQueryVariables,
+  APITypes.GetOrderIngredientQuery
+>;
 export const getOrderItem = /* GraphQL */ `query GetOrderItem($id: ID!) {
   getOrderItem(id: $id) {
     createdAt
@@ -355,6 +399,7 @@ export const getUser = /* GraphQL */ `query GetUser($id: ID!) {
   getUser(id: $id) {
     available
     cart {
+      authenticated
       createdAt
       id
       totalAmount
@@ -412,6 +457,70 @@ export const listCartIngredients = /* GraphQL */ `query ListCartIngredients(
   APITypes.ListCartIngredientsQueryVariables,
   APITypes.ListCartIngredientsQuery
 >;
+export const listCartItemByCartId = /* GraphQL */ `query ListCartItemByCartId(
+  $cartId: ID!
+  $filter: ModelCartItemFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listCartItemByCartId(
+    cartId: $cartId
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      cartId
+      createdAt
+      id
+      itemId
+      quantity
+      updatedAt
+      userId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListCartItemByCartIdQueryVariables,
+  APITypes.ListCartItemByCartIdQuery
+>;
+export const listCartItemByUserId = /* GraphQL */ `query ListCartItemByUserId(
+  $filter: ModelCartItemFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+  $userId: String!
+) {
+  listCartItemByUserId(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+    userId: $userId
+  ) {
+    items {
+      cartId
+      createdAt
+      id
+      itemId
+      quantity
+      updatedAt
+      userId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListCartItemByUserIdQueryVariables,
+  APITypes.ListCartItemByUserIdQuery
+>;
 export const listCartItems = /* GraphQL */ `query ListCartItems(
   $filter: ModelCartItemFilterInput
   $id: ID
@@ -433,6 +542,7 @@ export const listCartItems = /* GraphQL */ `query ListCartItems(
       itemId
       quantity
       updatedAt
+      userId
       __typename
     }
     nextToken
@@ -458,6 +568,7 @@ export const listCarts = /* GraphQL */ `query ListCarts(
     sortDirection: $sortDirection
   ) {
     items {
+      authenticated
       createdAt
       id
       totalAmount

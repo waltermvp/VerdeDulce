@@ -44,13 +44,15 @@ import { Link } from "expo-router";
 import { useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
 import { imageCDNURL } from "./utils/linkbuilder";
+import { useStores } from "./models";
+import Config from "./config";
 const width = Dimensions.get("window").width;
 // Amplify.configure({
 //   ...Amplify.getConfig(),
 //   analytics: outputs.analytics,
 // });
 Amplify.configure({
-  ...Amplify.getConfig(),
+  ...outputs,
   Analytics: {
     Pinpoint: {
       appId: outputs.analytics.amazon_pinpoint.app_id,
@@ -65,11 +67,13 @@ const sweetgreenMenu = require("../menu-es.json");
 export default observer(function MenuItem() {
   const route = useRoute();
   const { menuItem } = useLocalSearchParams();
+  const {
+    cartStore: { isLoading, addToCart },
+  } = useStores();
 
   const [item, setItem] = useState(
     sweetgreenMenu.filter((item: { slug: string }) => item.slug === menuItem)[0]
   );
-  console.log("item", item);
 
   // const client = generateClient<Schema>()
   // const [visible, setVisible] = React.useState(false)
@@ -84,7 +88,6 @@ export default observer(function MenuItem() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 });
   const isPortrait = useMediaQuery({ orientation: "portrait" });
   const isSmallScreen = useMediaQuery({ query: "(max-width: 430px)" });
-  console.log("is big slug", menuItem);
   // console.log("is isSmallScreen", isSmallScreen);
 
   // console.log(" ", imageCDNURL("menu/Hot_Honey_Chicken.png"));
@@ -221,13 +224,18 @@ export default observer(function MenuItem() {
           tx="menuItemScreen.addToCart"
           style={$buttonGreen}
           textStyle={$buttonText}
+          loading={isLoading}
           onPress={() => {
-            record({
-              name: "AddToCart",
-              attributes: { item: item.name },
-            });
+            if (!Config.APP_NAME)
+              record({
+                name: "AddToCart",
+                attributes: { item: item.name },
+              });
+            console.log("item", item.id);
+            console.log("item", item);
+            addToCart(item.id);
 
-            // client
+            // navigation.navigate("cart");
           }}
         />
         {/* </Link> */}

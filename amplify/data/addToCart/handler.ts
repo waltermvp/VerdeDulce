@@ -1,13 +1,20 @@
 import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/data";
-import { Schema } from "../../data/resource";
+import { data, Schema } from "../../data/resource";
 import { env } from "$amplify/env/addToCart"; // replace with your function name
-import { getCart, getUser, listCarts } from "./graphql/queries";
+import {
+  cartByUser,
+  getCart,
+  getUser,
+  listCartItemByUserId,
+  listCarts,
+} from "./graphql/queries";
 import {
   createCart,
   createCartIngredient,
   createCartItem,
 } from "./graphql/mutations";
+import { Cart } from "./graphql/API";
 
 Amplify.configure(
   {
@@ -49,7 +56,7 @@ export const handler: Schema["addToCart"]["functionHandler"] = async (
 
   try {
     // Fetch or create Cart for user
-    let cart = await fetchUserWithCart(userId);
+    let cart = await fetchCart(userId);
     if (!cart) {
       cart = await createNewCart(userId);
     }
@@ -73,18 +80,13 @@ export const handler: Schema["addToCart"]["functionHandler"] = async (
 
     console.log("this farrr:");
     // Add Item to Cart
-    const ingredients = selectedIngredients as {
-      ingredientId: string;
-      quantity: 0;
-    }[];
-    console.log("ingredients", ingredients);
-    const cartItem = await addItemToCart(
-      cart.id,
-      quantity,
-      ingredients,
-      itemId
-    );
-
+    // const ingredients = selectedIngredients as {
+    //   ingredientId: string;
+    //   quantity: 0;
+    // }[];
+    // console.log("ingredients", ingredients);
+    const cartItem = await addItemToCart(cart.userId, quantity, [], itemId);
+    console.log("new cartItem", JSON.stringify(cartItem, null, 2));
     if (!cartItem) {
       return {
         error: "Could not add item to cart",
@@ -92,8 +94,21 @@ export const handler: Schema["addToCart"]["functionHandler"] = async (
     }
 
     // Fetch all cart items
-    const cartItems = await fetchCart(cart.id);
-    return { cartItems: ["cartItems"] };
+    const cartItems = await fetchCartItems(userId);
+    console.log(
+      "cartItems after new cart items",
+      JSON.stringify(cartItems, null, 2)
+    );
+
+    if (!cartItems) {
+      console.log("!cartItems");
+    } else {
+      // const cartStrings = cartItems.
+      console.log("cartItems", typeof cartItems);
+      console.log("cartItems", JSON.stringify(cartItems, null, 2));
+
+      return { cartItems: [] };
+    }
   } catch (error) {
     console.error("Error sending email:", error);
     return {
@@ -104,6 +119,21 @@ export const handler: Schema["addToCart"]["functionHandler"] = async (
   }
 };
 
+async function fetchCart(userId: string) {
+  // GraphQL query to fetch user cart
+
+  const cart = await dataClient.graphql({
+    query: cartByUser,
+    variables: { userId },
+  });
+
+  if (cart.data.cartByUser.items.length === 0) {
+    console.error("Cart not found");
+    return null;
+  }
+
+  return cart.data.cartByUser.items[0];
+}
 async function fetchUserWithCart(userId: string) {
   // GraphQL query to fetch user cart
 
@@ -113,23 +143,25 @@ async function fetchUserWithCart(userId: string) {
   });
 
   if (!user.data.getUser) {
+    console.error("User not found");
     return null;
   }
   if (user.data.getUser.cart) {
     return user.data.getUser.cart;
   }
+  console.log("user has no cart", JSON.stringify(user, null, 2));
   return null;
 }
 
-async function fetchCart(cartId: string) {
+async function fetchCartItems(userId: string) {
   // GraphQL query to fetch cart items
   try {
     const cart = await dataClient.graphql({
-      query: getCart,
-      variables: { id: cartId },
+      query: listCartItemByUserId,
+      variables: { userId },
     });
-    console.log("cart", JSON.stringify(cart, null, 2));
-    return cart.data.getCart;
+
+    return cart.data.listCartItemByUserId.items;
   } catch (error) {
     console.error("Error fetching cart:", error);
     return null;
@@ -139,13 +171,15 @@ async function fetchCart(cartId: string) {
 async function createNewCart(userId: string) {
   // GraphQL mutation to create a new cart for user
   try {
+    //Must be idempotent
+
     const cart = await dataClient.graphql({
       query: createCart,
       variables: { input: { userId } },
     });
     return cart.data.createCart;
   } catch (error) {
-    console.error("Error creating cart:", error);
+    console.error("Error creating cart:", error, userId);
 
     return null;
   }
@@ -157,23 +191,26 @@ async function addItemToCart(
   selectedIngredients: { ingredientId: string; quantity: 0 }[],
   itemId: string
 ) {
+  const createCartItemVars = {
+    input: {
+      cartId,
+      userId: cartId,
+      itemId,
+      quantity,
+    },
+  };
   const cartItem = await dataClient
     .graphql({
       query: createCartItem,
-      variables: {
-        input: {
-          cartId,
-          itemId,
-          quantity,
-        },
-      },
+      variables: createCartItemVars,
     })
     .catch((error) => {
       console.error("Error creating cart item:", error);
+      console.error("createCartItemVars:", createCartItemVars);
       return null;
     });
 
-  console.log("createCartInput", cartItem);
+  console.log("cartItem result :", cartItem);
 
   for (let i = 0; i < selectedIngredients.length; i++) {
     const ingredient = selectedIngredients[i];

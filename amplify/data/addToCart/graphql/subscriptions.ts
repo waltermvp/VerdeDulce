@@ -10,6 +10,7 @@ type GeneratedSubscription<InputType, OutputType> = string & {
 
 export const onCreateCart = /* GraphQL */ `subscription OnCreateCart($filter: ModelSubscriptionCartFilterInput) {
   onCreateCart(filter: $filter) {
+    authenticated
     cartItems {
       nextToken
       __typename
@@ -48,6 +49,7 @@ export const onCreateCartIngredient = /* GraphQL */ `subscription OnCreateCartIn
       itemId
       quantity
       updatedAt
+      userId
       __typename
     }
     cartItemId
@@ -78,6 +80,7 @@ export const onCreateCartIngredient = /* GraphQL */ `subscription OnCreateCartIn
 export const onCreateCartItem = /* GraphQL */ `subscription OnCreateCartItem($filter: ModelSubscriptionCartItemFilterInput) {
   onCreateCartItem(filter: $filter) {
     cart {
+      authenticated
       createdAt
       id
       totalAmount
@@ -110,6 +113,7 @@ export const onCreateCartItem = /* GraphQL */ `subscription OnCreateCartItem($fi
       __typename
     }
     updatedAt
+    userId
     __typename
   }
 }
@@ -382,6 +386,7 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser($filter: Mo
   onCreateUser(filter: $filter) {
     available
     cart {
+      authenticated
       createdAt
       id
       totalAmount
@@ -413,6 +418,7 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser($filter: Mo
 >;
 export const onDeleteCart = /* GraphQL */ `subscription OnDeleteCart($filter: ModelSubscriptionCartFilterInput) {
   onDeleteCart(filter: $filter) {
+    authenticated
     cartItems {
       nextToken
       __typename
@@ -451,6 +457,7 @@ export const onDeleteCartIngredient = /* GraphQL */ `subscription OnDeleteCartIn
       itemId
       quantity
       updatedAt
+      userId
       __typename
     }
     cartItemId
@@ -481,6 +488,7 @@ export const onDeleteCartIngredient = /* GraphQL */ `subscription OnDeleteCartIn
 export const onDeleteCartItem = /* GraphQL */ `subscription OnDeleteCartItem($filter: ModelSubscriptionCartItemFilterInput) {
   onDeleteCartItem(filter: $filter) {
     cart {
+      authenticated
       createdAt
       id
       totalAmount
@@ -513,6 +521,7 @@ export const onDeleteCartItem = /* GraphQL */ `subscription OnDeleteCartItem($fi
       __typename
     }
     updatedAt
+    userId
     __typename
   }
 }
@@ -785,6 +794,7 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser($filter: Mo
   onDeleteUser(filter: $filter) {
     available
     cart {
+      authenticated
       createdAt
       id
       totalAmount
@@ -816,6 +826,7 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser($filter: Mo
 >;
 export const onUpdateCart = /* GraphQL */ `subscription OnUpdateCart($filter: ModelSubscriptionCartFilterInput) {
   onUpdateCart(filter: $filter) {
+    authenticated
     cartItems {
       nextToken
       __typename
@@ -854,6 +865,7 @@ export const onUpdateCartIngredient = /* GraphQL */ `subscription OnUpdateCartIn
       itemId
       quantity
       updatedAt
+      userId
       __typename
     }
     cartItemId
@@ -884,6 +896,7 @@ export const onUpdateCartIngredient = /* GraphQL */ `subscription OnUpdateCartIn
 export const onUpdateCartItem = /* GraphQL */ `subscription OnUpdateCartItem($filter: ModelSubscriptionCartItemFilterInput) {
   onUpdateCartItem(filter: $filter) {
     cart {
+      authenticated
       createdAt
       id
       totalAmount
@@ -916,6 +929,7 @@ export const onUpdateCartItem = /* GraphQL */ `subscription OnUpdateCartItem($fi
       __typename
     }
     updatedAt
+    userId
     __typename
   }
 }
@@ -1188,6 +1202,7 @@ export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser($filter: Mo
   onUpdateUser(filter: $filter) {
     available
     cart {
+      authenticated
       createdAt
       id
       totalAmount
