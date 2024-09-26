@@ -234,7 +234,7 @@ async function loadInitialData() {
   //Must be idempotent
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
-
+    console.log("item", item);
     try {
       const cart = await dataClient.graphql({
         query: createItem,
