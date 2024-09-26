@@ -40,7 +40,6 @@ const schema = a
     Item: a
       .model({
         id: a.id(), // Ensure the ID field is explicitly defined
-        itemId: a.id().required(),
         name: a.string().required(),
         url: a.string(),
         description: a.string(),
@@ -144,7 +143,6 @@ const schema = a
         quantity: a.integer().required(), // Quantity of the item
       })
       .secondaryIndexes((index) => [index("cartId"), index("userId")])
-
       .authorization((allow) => [allow.authenticated()]),
 
     // CartIngredient Model
@@ -222,7 +220,6 @@ const schema = a
       cartItems: a.json().array(),
       // executionDuration: a.float(),
     }),
-
     addToCart: a
       .mutation()
       .arguments({
@@ -237,6 +234,13 @@ const schema = a
         // allow.publicApiKey(),
         allow.authenticated(),
       ]),
+
+    loadInitialData: a
+      .mutation()
+      .arguments({ clear: a.boolean() })
+      .returns(a.customType({ message: a.string() }))
+      .handler(a.handler.function(addToCartFunction))
+      .authorization((allow) => [allow.guest(), allow.group("ADMINS")]),
   })
   .authorization((allow) => [allow.resource(addToCartFunction)]);
 

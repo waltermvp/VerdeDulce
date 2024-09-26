@@ -98,7 +98,6 @@ export const onCreateCartItem = /* GraphQL */ `subscription OnCreateCartItem($fi
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -159,7 +158,6 @@ export const onCreateIngredient = /* GraphQL */ `subscription OnCreateIngredient
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -206,7 +204,6 @@ export const onCreateItem = /* GraphQL */ `subscription OnCreateItem($filter: Mo
       nextToken
       __typename
     }
-    itemId
     metaData
     name
     orderItem {
@@ -307,7 +304,6 @@ export const onCreateOrderItem = /* GraphQL */ `subscription OnCreateOrderItem($
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -352,7 +348,6 @@ export const onCreateReview = /* GraphQL */ `subscription OnCreateReview($filter
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -506,7 +501,6 @@ export const onDeleteCartItem = /* GraphQL */ `subscription OnDeleteCartItem($fi
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -567,7 +561,6 @@ export const onDeleteIngredient = /* GraphQL */ `subscription OnDeleteIngredient
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -614,7 +607,6 @@ export const onDeleteItem = /* GraphQL */ `subscription OnDeleteItem($filter: Mo
       nextToken
       __typename
     }
-    itemId
     metaData
     name
     orderItem {
@@ -715,7 +707,6 @@ export const onDeleteOrderItem = /* GraphQL */ `subscription OnDeleteOrderItem($
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -760,7 +751,6 @@ export const onDeleteReview = /* GraphQL */ `subscription OnDeleteReview($filter
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -914,7 +904,6 @@ export const onUpdateCartItem = /* GraphQL */ `subscription OnUpdateCartItem($fi
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -975,7 +964,6 @@ export const onUpdateIngredient = /* GraphQL */ `subscription OnUpdateIngredient
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -1022,7 +1010,6 @@ export const onUpdateItem = /* GraphQL */ `subscription OnUpdateItem($filter: Mo
       nextToken
       __typename
     }
-    itemId
     metaData
     name
     orderItem {
@@ -1123,7 +1110,6 @@ export const onUpdateOrderItem = /* GraphQL */ `subscription OnUpdateOrderItem($
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -1168,7 +1154,6 @@ export const onUpdateReview = /* GraphQL */ `subscription OnUpdateReview($filter
       createdAt
       description
       id
-      itemId
       metaData
       name
       price

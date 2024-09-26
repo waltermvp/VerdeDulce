@@ -7,7 +7,9 @@ import {
   createCart,
   createCartIngredient,
   createCartItem,
+  createItem,
 } from "./graphql/mutations";
+import items from "../../../menu-es.json";
 
 Amplify.configure(
   {
@@ -43,6 +45,19 @@ export const handler: Schema["addToCart"]["functionHandler"] = async (
   event
   // context
 ) => {
+  console.log("event", event);
+
+  // @ts-ignore
+  if (event?.fieldName === "loadInitialData") {
+    try {
+      loadInitialData();
+      return { message: "loaded data" };
+    } catch (error) {
+      return { error: error };
+    }
+  }
+  // const { type} = event.info.parentTypeName;
+
   const { itemId, quantity, selectedIngredients } = event.arguments;
   //@ts-ignore
   const userId = event.identity.sub;
@@ -212,6 +227,28 @@ async function addItemToCart(
   }
 
   return cartItem?.data.createCartItem;
+}
+
+async function loadInitialData() {
+  //Must be idempotent
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    const cart = await dataClient.graphql({
+      query: createItem,
+      variables: {
+        input: {
+          name: item.name,
+          url: item.url,
+          description: item.description,
+          price: item.price,
+          calories: item.calories,
+          categoryId: "",
+          available: true,
+        },
+      },
+    });
+    return cart.data.createItem;
+  }
 }
 
 const palette = {

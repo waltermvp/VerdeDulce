@@ -163,7 +163,6 @@ export const createIngredient = /* GraphQL */ `mutation CreateIngredient(
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -213,7 +212,6 @@ export const createItem = /* GraphQL */ `mutation CreateItem(
       nextToken
       __typename
     }
-    itemId
     metaData
     name
     orderItem {
@@ -322,7 +320,6 @@ export const createOrderItem = /* GraphQL */ `mutation CreateOrderItem(
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -370,7 +367,6 @@ export const createReview = /* GraphQL */ `mutation CreateReview(
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -535,7 +531,6 @@ export const deleteCartItem = /* GraphQL */ `mutation DeleteCartItem(
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -600,7 +595,6 @@ export const deleteIngredient = /* GraphQL */ `mutation DeleteIngredient(
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -650,7 +644,6 @@ export const deleteItem = /* GraphQL */ `mutation DeleteItem(
       nextToken
       __typename
     }
-    itemId
     metaData
     name
     orderItem {
@@ -759,7 +752,6 @@ export const deleteOrderItem = /* GraphQL */ `mutation DeleteOrderItem(
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -807,7 +799,6 @@ export const deleteReview = /* GraphQL */ `mutation DeleteReview(
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -874,6 +865,17 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
   APITypes.DeleteUserMutationVariables,
   APITypes.DeleteUserMutation
 >;
+export const loadInitialData =
+  /* GraphQL */ `mutation LoadInitialData($clear: Boolean) {
+  loadInitialData(clear: $clear) {
+    message
+    __typename
+  }
+}
+` as GeneratedMutation<
+    APITypes.LoadInitialDataMutationVariables,
+    APITypes.LoadInitialDataMutation
+  >;
 export const registerUser =
   /* GraphQL */ `mutation RegisterUser($email: String) {
   registerUser(email: $email) {
@@ -984,7 +986,6 @@ export const updateCartItem = /* GraphQL */ `mutation UpdateCartItem(
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -1049,7 +1050,6 @@ export const updateIngredient = /* GraphQL */ `mutation UpdateIngredient(
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -1099,7 +1099,6 @@ export const updateItem = /* GraphQL */ `mutation UpdateItem(
       nextToken
       __typename
     }
-    itemId
     metaData
     name
     orderItem {
@@ -1208,7 +1207,6 @@ export const updateOrderItem = /* GraphQL */ `mutation UpdateOrderItem(
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -1256,7 +1254,6 @@ export const updateReview = /* GraphQL */ `mutation UpdateReview(
       createdAt
       description
       id
-      itemId
       metaData
       name
       price

@@ -124,7 +124,6 @@ export const getCartItem = /* GraphQL */ `query GetCartItem($id: ID!) {
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -183,7 +182,6 @@ export const getIngredient = /* GraphQL */ `query GetIngredient($id: ID!) {
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -230,7 +228,6 @@ export const getItem = /* GraphQL */ `query GetItem($id: ID!) {
       nextToken
       __typename
     }
-    itemId
     metaData
     name
     orderItem {
@@ -323,7 +320,6 @@ export const getOrderItem = /* GraphQL */ `query GetOrderItem($id: ID!) {
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -368,7 +364,6 @@ export const getReview = /* GraphQL */ `query GetReview($id: ID!) {
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
@@ -666,7 +661,6 @@ export const listItems = /* GraphQL */ `query ListItems(
       createdAt
       description
       id
-      itemId
       metaData
       name
       price
