@@ -45,6 +45,8 @@ const schema = a
         description: a.string(),
         price: a.integer(),
         calories: a.integer(),
+        protein: a.integer(),
+        carbs: a.integer(),
         categoryId: a.id(),
         category: a.belongsTo("Category", "categoryId"), // Relationship to Category
         ingredients: a.hasMany("Ingredient", "itemId"), // Relationship with Ingredient
