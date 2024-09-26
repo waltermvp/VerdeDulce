@@ -258,6 +258,7 @@ async function loadInitialData() {
       return cart.data.createItem;
     } catch (error) {
       console.log("error laodi initial data func", error);
+      throw error;
     }
   }
 }
