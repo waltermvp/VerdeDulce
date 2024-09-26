@@ -230,24 +230,34 @@ async function addItemToCart(
 }
 
 async function loadInitialData() {
+  console.log("items start");
   //Must be idempotent
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
-    const cart = await dataClient.graphql({
-      query: createItem,
-      variables: {
-        input: {
-          name: item.name,
-          url: item.url,
-          description: item.description,
-          price: item.price,
-          calories: item.calories,
-          categoryId: "",
-          available: true,
+
+    try {
+      const cart = await dataClient.graphql({
+        query: createItem,
+        variables: {
+          input: {
+            name: item.name,
+            url: item.url,
+            description: item.description,
+            price: item.price,
+            calories: item.calories,
+            // protein: item.protein,
+            // carbs: item.carbs,
+            // slug: item.slug,
+            categoryId: "",
+            available: true,
+          },
         },
-      },
-    });
-    return cart.data.createItem;
+      });
+      console.log("cart", cart);
+      return cart.data.createItem;
+    } catch (error) {
+      console.log("error laodi initial data func", error);
+    }
   }
 }
 
