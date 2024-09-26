@@ -17,13 +17,17 @@ import { ActivityIndicator } from "react-native-paper";
 import { MenuHeader } from "./MenuHeader";
 import { generateClient } from "aws-amplify/api";
 import { Schema } from "@/amplify/data/resource";
-import { CartItem as CartItemCell } from "@/amplify/data/addToCart/graphql/API";
+import {
+  CartItem,
+  CartItem as CartItemCell,
+} from "@/amplify/data/addToCart/graphql/API";
+import { Image, ImageStyle } from "expo-image";
 
 type Presets = keyof typeof $containerPresets;
 
 interface CartItemProps extends TouchableOpacityProps {
   style?: ViewStyle;
-  cartItem: any;
+  cartItem: CartItem;
   onPress?: () => void;
 }
 
@@ -36,101 +40,46 @@ interface CartItemProps extends TouchableOpacityProps {
  */
 export function CartItem(props: CartItemProps) {
   const { style, cartItem, onPress } = props;
-  const {
-    // cartStore: {
-    //   cartId,
-    //   cartItems,
-    //   totalAmount,
-    //   isLoading,
-    //   errorMessage,
-    //   fetchCart,
-    // },
-    authenticationStore: { subjectID },
-  } = useStores();
-  const [cartItems, setCartItems] = useState();
-  const [isLoading, setIsLoading] = useState(false);
-  const fullscreen = useMediaQuery({ minWidth: 720 });
-  const client = generateClient<Schema>();
-
-  useEffect(() => {
-    if (!subjectID) {
-      console.log("no subjectID");
-      return;
-    }
-
-    const sub = client.models.CartItem.observeQuery({
-      filter: { userId: { eq: subjectID } },
-      authMode: subjectID ? "userPool" : "apiKey",
-    }).subscribe({
-      next: ({ items, isSynced }) => {
-        setIsLoading(!isSynced);
-
-        if (isSynced) {
-          console.log("items", items);
-          console.log("items", items.length);
-          console.log("items", typeof items);
-          setCartItems(items);
-        }
-      },
-    });
-    return () => {
-      sub.unsubscribe();
-    };
-  }, []);
 
   const $containerStyle = [$containerBase, style];
-
-  function CartHeader() {
-    return (
-      <View
-        style={{
-          backgroundColor: "red",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          paddingHorizontal: spacing.md,
-        }}
-      >
-        <Pressable onPress={dismiss}>
-          <Ionicons name="arrow-back-outline" size={44} />
-        </Pressable>
-        <Pressable onPress={dismiss}>
-          <Ionicons name="close-outline" size={44} />
-        </Pressable>
-      </View>
-    );
-  }
-
-  console.log("isLoading", isLoading);
-  if (isLoading) {
-    return (
-      <View style={[$containerStyle, {}]}>
-        <MenuHeader />
-        <ActivityIndicator />
-      </View>
-    );
-  }
+  console.log(cartItem, "caritem");
   return (
-    <View
-      style={[$containerStyle, { width: !fullscreen ? "100%" : undefined }]}
-    ></View>
+    <View style={[$containerStyle]}>
+      <View style={{ flex: 1, backgroundColor: "blue" }}>
+        <Image style={{}} source={{ uri: cartItem.url }} />
+      </View>
+      <View style={{ flex: 5, backgroundColor: "red" }}>
+        <Text>{cartItem.name}</Text>
+      </View>
+      <View style={{ flex: 5, backgroundColor: "red" }}>
+        <Text>{cartItem.item.to}</Text>
+        <Text>{cartItem.name}</Text>
+      </View>
+    </View>
   );
 }
 
 const $containerBase: ViewStyle = {
   // flex: 1,
-  // flexDirection: "column",
-  alignSelf: "flex-end",
-  height: "100%",
+  flexDirection: "row",
+  // alignSelf: "flex-end",
+  height: 75,
+  // height: "100%",
   // borderRadius: spacing.md,
-  padding: spacing.xs,
-  borderWidth: 1,
-  shadowColor: colors.palette.neutral800,
-  shadowOffset: { width: 0, height: 12 },
-  shadowOpacity: 0.08,
-  shadowRadius: 12.81,
-  elevation: 16,
-  minHeight: 96,
-  backgroundColor: colors.palette.lightBackground,
+  // padding: spacing.xs,
+  // borderWidth: 1,
+  // shadowColor: colors.palette.neutral800,
+  // shadowOffset: { width: 0, height: 12 },
+  // shadowOpacity: 0.08,
+  // shadowRadius: 12.81,
+  // elevation: 16,
+  // minHeight: 96,"
+};
+const $image: ImageStyle = {
+  aspectRatio: 1,
+  width: 80,
+  height: 80,
+  resizeMode: "cover",
 };
 
 const $containerPresets = {

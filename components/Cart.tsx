@@ -12,11 +12,12 @@ import { Text, TextProps } from "./Text";
 import { useStores } from "@/app/models";
 import { Ionicons } from "@expo/vector-icons";
 import { useMediaQuery } from "react-responsive";
-import { ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator, Divider } from "react-native-paper";
 import { MenuHeader } from "./MenuHeader";
 import { generateClient } from "aws-amplify/api";
 import { Schema } from "@/amplify/data/resource";
-import { CartItem } from "./CartItem";
+import { ListItem } from "./ListItem";
+import { Image, ImageStyle } from "expo-image";
 
 type Presets = keyof typeof $containerPresets;
 
@@ -47,7 +48,7 @@ interface CartProps extends TouchableOpacityProps {
    * CartId
    */
 
-  cartID: string;
+  cartId: string;
   /**
    * Funciton to call to dismiss modal cart
    * @returns
@@ -75,7 +76,7 @@ export function Cart(props: CartProps) {
     // },
     authenticationStore: { subjectID },
   } = useStores();
-  const [cartItems, setCartItems] = useState();
+  const [cartItems, setCartItems] = useState<Schema["CartItem"][]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const fullscreen = useMediaQuery({ minWidth: 720 });
   const client = generateClient<Schema>();
@@ -89,14 +90,13 @@ export function Cart(props: CartProps) {
     const sub = client.models.CartItem.observeQuery({
       filter: { userId: { eq: subjectID } },
       authMode: subjectID ? "userPool" : "apiKey",
+      // selectionSet: ["item.*"],
     }).subscribe({
       next: ({ items, isSynced }) => {
         setIsLoading(!isSynced);
 
         if (isSynced) {
-          console.log("items", items);
-          console.log("items", items.length);
-          console.log("items", typeof items);
+          console.log("items!!", items);
           setCartItems(items);
         }
       },
@@ -109,7 +109,19 @@ export function Cart(props: CartProps) {
   const $containerStyle = [$containerBase, $containerStyleOverride];
 
   const renderCartItem = ({ item }) => {
-    return <CartItem cartItem={item} />;
+    // console.log("itemss, ", item);
+
+    return (
+      <ListItem
+        LeftComponent={<Image style={$image} source={{ uri: item.url }} />}
+        RightComponent={
+          <View style={{ backgroundColor: "blue", flex: 1 }}>
+            {/* <Text>{item.name}</Text>
+            <Text>{item}</Text> */}
+          </View>
+        }
+      />
+    );
   };
 
   function CartHeader() {
@@ -147,10 +159,11 @@ export function Cart(props: CartProps) {
     >
       <CartHeader />
       <FlatList
-        style={{ flex: 1, borderColor: "red", borderWidth: 1 }}
+        style={{ borderColor: "red", borderWidth: 1 }}
         ListHeaderComponent={<Text>Your Order</Text>}
         data={cartItems}
         renderItem={renderCartItem}
+        ItemSeparatorComponent={Divider}
       />
     </View>
   );
@@ -189,4 +202,10 @@ const $containerPresets = {
       borderColor: colors.palette.neutral500,
     },
   ] as StyleProp<ViewStyle>,
+};
+const $image: ImageStyle = {
+  aspectRatio: 1,
+  width: 80,
+  height: 80,
+  resizeMode: "cover",
 };
