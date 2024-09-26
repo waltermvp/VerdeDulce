@@ -230,7 +230,7 @@ async function addItemToCart(
 }
 
 async function loadInitialData() {
-  console.log("items start");
+  console.log("items start", items.length);
   //Must be idempotent
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
