@@ -1,6 +1,9 @@
+<Pressable>
+  <Ionicons name="close" size={44} />
+</Pressable>;
 import React, { FC, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { ViewStyle, View, Pressable } from "react-native";
+import { ViewStyle, View, Pressable, Modal, StyleSheet } from "react-native";
 import {
   Footer,
   MenuHeader,
@@ -16,7 +19,6 @@ import { colors, spacing, typography } from "../../theme";
 import { useMediaQuery } from "react-responsive";
 import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
-// import Config from "../config"
 import {
   // transformData,
   transformDataForSectionList,
@@ -30,7 +32,9 @@ import { Amplify } from "aws-amplify";
 import { record } from "aws-amplify/analytics";
 import outputs from "../../../amplify_outputs.json";
 import { Ionicons } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
+import { Cart } from "@/components/Cart";
+import { useStores } from "@/app/models";
 
 Amplify.configure({
   ...outputs,
@@ -46,9 +50,16 @@ const sweetgreenMenu = require("../../../menu-es.json");
 
 //TODO: This menu needs to be able to add to cart!
 export default observer(function MenuScreen() {
+  const navy = useNavigation();
+  const { referrer } = useLocalSearchParams<{ referrer: string }>();
+  console.log("slug", referrer);
   const [items, setItems] = useState(
     sweetgreenMenu.filter((item: { hidden: boolean }) => item.hidden !== true)
   );
+
+  const {
+    authenticationStore: { subjectID },
+  } = useStores();
 
   // const client = generateClient<Schema>()
   // const [visible, setVisible] = React.useState(false)
@@ -207,6 +218,33 @@ export default observer(function MenuScreen() {
           navigation.navigate("Qr");
         }}
       />
+      <Modal
+        animationType="slide"
+        transparent={true}
+        // visible={menuVisible}
+        visible={referrer?.toLowerCase() === "menu"}
+        onRequestClose={() => {
+          navy.setParams({ referrer: null });
+        }}
+      >
+        <Cart
+          cartId={subjectID}
+          dismiss={() => {
+            navy.setParams({ referrer: null });
+          }}
+        />
+        {/* <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello World!</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => navy.setParams({ referrer: null })}
+            >
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </Pressable>
+          </View>
+        </View> */}
+      </Modal>
     </Screen>
   );
 });
@@ -219,3 +257,46 @@ const $root: ViewStyle = {
   // flexWrap: "wrap",
   padding: spacing.md,
 };
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+});

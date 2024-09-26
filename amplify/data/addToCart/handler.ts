@@ -2,19 +2,12 @@ import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/data";
 import { data, Schema } from "../../data/resource";
 import { env } from "$amplify/env/addToCart"; // replace with your function name
-import {
-  cartByUser,
-  getCart,
-  getUser,
-  listCartItemByUserId,
-  listCarts,
-} from "./graphql/queries";
+import { cartByUser, getUser, listCartItemByUserId } from "./graphql/queries";
 import {
   createCart,
   createCartIngredient,
   createCartItem,
 } from "./graphql/mutations";
-import { Cart } from "./graphql/API";
 
 Amplify.configure(
   {
@@ -53,6 +46,14 @@ export const handler: Schema["addToCart"]["functionHandler"] = async (
   const { itemId, quantity, selectedIngredients } = event.arguments;
   //@ts-ignore
   const userId = event.identity.sub;
+  if (!itemId) {
+    throw new Error("Item ID is required");
+  }
+  if (!quantity) {
+    return {
+      error: "Quanity ID is required",
+    };
+  }
 
   try {
     // Fetch or create Cart for user
@@ -60,33 +61,18 @@ export const handler: Schema["addToCart"]["functionHandler"] = async (
     if (!cart) {
       cart = await createNewCart(userId);
     }
-    // const cartObject = JSON.parse(cart);
-    console.log("cart", JSON.stringify(cart, null, 2));
-
     if (!cart) {
-      console.log("1");
       throw new Error("Could not create cart");
-    }
-    if (!itemId) {
-      console.log("2", itemId);
-      throw new Error("Item ID is required");
-    }
-    if (!quantity) {
-      console.log("3", quantity);
-      return {
-        error: "Quanity ID is required",
-      };
     }
 
     console.log("this farrr:");
     // Add Item to Cart
-    // const ingredients = selectedIngredients as {
-    //   ingredientId: string;
-    //   quantity: 0;
-    // }[];
+    const ingredients = selectedIngredients as {
+      ingredientId: string;
+      quantity: 0;
+    }[];
     // console.log("ingredients", ingredients);
     const cartItem = await addItemToCart(cart.userId, quantity, [], itemId);
-    console.log("new cartItem", JSON.stringify(cartItem, null, 2));
     if (!cartItem) {
       return {
         error: "Could not add item to cart",
@@ -95,20 +81,10 @@ export const handler: Schema["addToCart"]["functionHandler"] = async (
 
     // Fetch all cart items
     const cartItems = await fetchCartItems(userId);
-    console.log(
-      "cartItems after new cart items",
-      JSON.stringify(cartItems, null, 2)
-    );
-
-    if (!cartItems) {
-      console.log("!cartItems");
-    } else {
-      // const cartStrings = cartItems.
-      console.log("cartItems", typeof cartItems);
-      console.log("cartItems", JSON.stringify(cartItems, null, 2));
-
-      return { cartItems: [] };
-    }
+    const strings = cartItems?.map((item) => {
+      return JSON.stringify(item);
+    });
+    return { cartItems: strings };
   } catch (error) {
     console.error("Error sending email:", error);
     return {
@@ -210,8 +186,6 @@ async function addItemToCart(
       return null;
     });
 
-  console.log("cartItem result :", cartItem);
-
   for (let i = 0; i < selectedIngredients.length; i++) {
     const ingredient = selectedIngredients[i];
 
@@ -231,7 +205,7 @@ async function addItemToCart(
         },
       })
       .catch((error) => {
-        console.error("Error creating cart item:", error);
+        console.error("Error creating cart cartIngredient:", error);
         return null;
       });
     console.log("cartIngredient", cartIngredient);

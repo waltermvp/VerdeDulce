@@ -7,6 +7,7 @@ import {
   Dimensions,
   TextStyle,
   ScrollView,
+  StyleSheet,
 } from "react-native";
 import {
   Button,
@@ -24,7 +25,6 @@ import {
 import { colors, spacing, typography } from "./theme";
 import { useMediaQuery } from "react-responsive";
 import { useFocusEffect } from "@react-navigation/native";
-import { useNavigation, useRoute } from "@react-navigation/native";
 // import Config from "../config"
 import {
   // transformData,
@@ -39,13 +39,15 @@ import { Amplify } from "aws-amplify";
 import { record } from "aws-amplify/analytics";
 import outputs from "../amplify_outputs.json";
 import { Ionicons } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Link, useNavigation, useRouter } from "expo-router";
 
 import { useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
 import { imageCDNURL } from "./utils/linkbuilder";
 import { useStores } from "./models";
 import Config from "./config";
+import { generateClient } from "aws-amplify/api";
+import { Schema } from "@/amplify/data/resource";
 const width = Dimensions.get("window").width;
 // Amplify.configure({
 //   ...Amplify.getConfig(),
@@ -65,8 +67,8 @@ const sweetgreenMenu = require("../menu-es.json");
 
 //TODO: This menu needs to be able to add to cart!
 export default observer(function MenuItem() {
-  const route = useRoute();
   const { menuItem } = useLocalSearchParams();
+  const router = useRouter();
   const {
     cartStore: { isLoading, addToCart },
   } = useStores();
@@ -75,7 +77,7 @@ export default observer(function MenuItem() {
     sweetgreenMenu.filter((item: { slug: string }) => item.slug === menuItem)[0]
   );
 
-  // const client = generateClient<Schema>()
+  const client = generateClient<Schema>();
   // const [visible, setVisible] = React.useState(false)
   // const [isSyncedLocal, setIsSyncedLocal] = useState(false)
   // const showDialog = () => setVisible(true)
@@ -91,33 +93,6 @@ export default observer(function MenuItem() {
   // console.log("is isSmallScreen", isSmallScreen);
 
   // console.log(" ", imageCDNURL("menu/Hot_Honey_Chicken.png"));
-  // useEffect(() => {
-  //   // if (!displayID) {
-  //   //   // setMode(MODE.MISSING_UDID)
-  //   //   return
-  //   // }
-
-  //   const sub = client.models.Item.observeQuery({
-  //     // filter: { displayId: { eq: displayID } },
-  //     authMode: "apiKey",
-  //   }).subscribe({
-  //     next: ({ items, isSynced }) => {
-  //       setIsSyncedLocal(isSynced)papcka
-  //       if (isSynced) {
-  //         if (items.length > 0) {
-  //           const transformed = transformDataForSectionList(items)
-  //           console.log("transformed", transformed)
-  //           setItems(transformed)
-  //         }
-
-  //         // setSlideCount(items.length)
-  //       }
-  //     },
-  //   })
-  //   return () => {
-  //     sub.unsubscribe()
-  //   }
-  // }, [])
 
   //TODO: localize
   //TODO: https://github.com/waltermvp/VerdeDulce/issues/42
@@ -219,23 +194,39 @@ export default observer(function MenuItem() {
         <Link href={"/"}>
           <Button text="Customize" style={$button} />
         </Link>
-        {/* <Link href={"/"}> */}
+        {/* <Link
+          href={"/(tabs)/(menu)/menu?referrer=Menu"}
+          // push
+          asChild
+          onPress={async () => {
+            // if (!Config.APP_NAME)
+            //   record({
+            //     name: "AddToCart",
+            //     attributes: { item: item.name },
+            //   });
+            console.log("item", item.id);
+            console.log("item", item);
+            await addToCart(item.id);
+          }}
+        > */}
+
         <Button
           tx="menuItemScreen.addToCart"
           style={$buttonGreen}
           textStyle={$buttonText}
           loading={isLoading}
-          onPress={() => {
-            if (!Config.APP_NAME)
-              record({
-                name: "AddToCart",
-                attributes: { item: item.name },
-              });
-            console.log("item", item.id);
-            console.log("item", item);
-            addToCart(item.id);
+          onPress={async () => {
+            // if (!Config.APP_NAME)
+            //   record({
+            //     name: "AddToCart",
+            //     attributes: { item: item.name },
+            //   });
+            await addToCart(item.id);
 
-            // navigation.navigate("cart");
+            router.navigate({
+              pathname: "/(tabs)/(menu)/menu",
+              params: { referrer: "Menu" },
+            });
           }}
         />
         {/* </Link> */}
@@ -337,3 +328,46 @@ const ITEMS = [
     ),
   },
 ];
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+});

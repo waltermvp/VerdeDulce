@@ -17,8 +17,7 @@ export const CartStoreModel = types
   .model("CartStore")
   .props({
     cartId: types.identifier,
-    cart: types.array(CartItemModel),
-    // cart: CartItem[] = [];
+    cartItems: types.array(CartItemModel),
     totalAmount: 0,
     isLoading: false,
     errorMessage: "",
@@ -26,6 +25,26 @@ export const CartStoreModel = types
   .actions(withSetPropAction)
   .actions((store) => ({
     async fetchCart() {
+      store.setProp("isLoading", true);
+      const fetchParams = {
+        authMode: "userPool",
+        cartId: store.cartId,
+        sortDirection: "ASC",
+      };
+      console.log("will fetchParams:", fetchParams);
+      Amplify.configure(outputs);
+      const client = generateClient<Schema>();
+      try {
+        const response = await client.models.CartItem.listCartItemByCartId(
+          fetchParams
+        );
+        console.log("response", response);
+        store.setProp("isLoading", false);
+      } catch (error) {
+        console.log("error", error);
+        store.setProp("isLoading", false);
+      }
+
       // if (response.data?.id) {
       //   console.log("response.data", response.data);
       //   // store.setProp("cart", response.data.cartItems);
