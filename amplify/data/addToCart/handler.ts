@@ -9,7 +9,7 @@ import {
   createCartItem,
   createItem,
 } from "./graphql/mutations";
-import items from "../../../menu-es.json";
+import items from "./menu-es.json";
 
 Amplify.configure(
   {
