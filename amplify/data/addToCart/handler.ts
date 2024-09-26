@@ -50,7 +50,7 @@ export const handler: Schema["addToCart"]["functionHandler"] = async (
   // @ts-ignore
   if (event?.fieldName === "loadInitialData") {
     try {
-      loadInitialData();
+      await loadInitialData();
       return { message: "loaded data" };
     } catch (error) {
       return { error: error };
