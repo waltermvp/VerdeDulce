@@ -245,8 +245,8 @@ async function loadInitialData() {
             description: item.description,
             price: item.price,
             calories: item.calories,
-            protein: item.protein,
-            carbs: item.carbs,
+            // protein: item.protein,
+            // carbs: item.carbs,
             // slug: item.slug,
 
             categoryId: "",
