@@ -196,14 +196,6 @@ export const createItem = /* GraphQL */ `mutation CreateItem(
       nextToken
       __typename
     }
-    category {
-      createdAt
-      description
-      id
-      name
-      updatedAt
-      __typename
-    }
     categoryId
     createdAt
     description

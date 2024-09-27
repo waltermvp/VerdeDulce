@@ -7,6 +7,10 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react-native";
+import { Button } from "@/components";
+import { generateClient } from "aws-amplify/api";
+import { Schema } from "@/amplify/data/resource";
+import { signOut } from "aws-amplify/auth";
 
 export default function Loyalty() {
   return (
@@ -21,6 +25,31 @@ export default function Loyalty() {
           <ThemedView style={styles.titleContainer}>
             <ThemedText type="title">Explore</ThemedText>
           </ThemedView>
+          <Button
+            text="RRRR"
+            onPress={async () => {
+              try {
+                const client = generateClient<Schema>();
+                const rsult = await client.mutations.loadInitialData({
+                  clear: true,
+                });
+                console.log(rsult, "rsult");
+              } catch (error) {
+                console.log(error, "error");
+              }
+            }}
+          />
+          <Button
+            text="lgo out"
+            onPress={async () => {
+              try {
+                await signOut();
+                console.log("rsult");
+              } catch (error) {
+                console.log(error, "error");
+              }
+            }}
+          />
           <ThemedText>
             This app includes example code to help you get started.
           </ThemedText>
@@ -93,6 +122,7 @@ export default function Loyalty() {
               <ThemedText type="link">Learn more</ThemedText>
             </ExternalLink>
           </Collapsible>
+
           <Collapsible title="Animations">
             <ThemedText>
               This template includes an example of an animated component. The{" "}
@@ -117,7 +147,7 @@ export default function Loyalty() {
               ),
             })}
           </Collapsible>
-        </ParallaxScrollView>{" "}
+        </ParallaxScrollView>
       </Authenticator>
     </Authenticator.Provider>
   );

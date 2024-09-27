@@ -53,7 +53,7 @@ export const handler: Schema["addToCart"]["functionHandler"] = async (
       await loadInitialData();
       return { message: "loaded data" };
     } catch (error) {
-      return { error: error };
+      throw error;
     }
   }
   // const { type} = event.info.parentTypeName;
@@ -236,28 +236,31 @@ async function loadInitialData() {
     const item = items[i];
     console.log("item", item);
     try {
+      const variables = {
+        input: {
+          name: item.name,
+          url: item.url,
+          description: item.description,
+          price: item.price,
+          calories: item.calories,
+          // carbs: item.carbs,
+          // slug: item.slug,
+
+          // categoryId: "",
+          available: true,
+        },
+      };
+      console.log("variables", variables);
       const cart = await dataClient.graphql({
         query: createItem,
-        variables: {
-          input: {
-            name: item.name,
-            url: item.url,
-            description: item.description,
-            price: item.price,
-            calories: item.calories,
-            // protein: item.protein,
-            // carbs: item.carbs,
-            // slug: item.slug,
-
-            categoryId: "",
-            available: true,
-          },
-        },
+        variables,
       });
       console.log("cart", cart);
-      return cart.data.createItem;
     } catch (error) {
-      console.log("error laodi initial data func", error);
+      console.log(
+        "error laodi initial data func",
+        JSON.stringify(error, null, 2)
+      );
       throw error;
     }
   }
