@@ -21,6 +21,7 @@ export const registerUserFunction = defineFunction({
 export const addToCartFunction = defineFunction({
   name: "addToCart",
   entry: "./addToCart/handler.ts",
+  timeoutSeconds: 23,
   environment: {
     NAME: "addToCart",
     API_ENDPOINT: "process.env.API_ENDPOINT",
