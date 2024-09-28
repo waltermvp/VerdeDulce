@@ -7,6 +7,8 @@ import {
   createCart,
   createCartIngredient,
   createCartItem,
+  createCategory,
+  createIngredient,
   createItem,
 } from "./graphql/mutations";
 import items from "./menu-es.json";
@@ -137,9 +139,9 @@ async function fetchUserWithCart(userId: string) {
     console.error("User not found");
     return null;
   }
-  if (user.data.getUser.cart) {
-    return user.data.getUser.cart;
-  }
+  // if (user.data.getUser.cart) {
+  //   return user.data.getUser.cart;
+  // }
   console.log("user has no cart", JSON.stringify(user, null, 2));
   return null;
 }
@@ -229,12 +231,48 @@ async function addItemToCart(
   return cartItem?.data.createCartItem;
 }
 
-async function loadInitialData() {
-  console.log("items start", items.length);
-  //Must be idempotent
+async function createIngredients(categories: []) {
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
     console.log("item", item);
+    try {
+      const variables = {
+        input: {
+          name: item.name,
+          url: item.url,
+          // description: item.description,
+          price: item.price,
+          calories: item.calories,
+
+          protein: item.protein,
+          carbs: item.carbs,
+
+          // carbs: item.carbs,
+          // slug: item.slug,
+
+          // categoryId: "",
+          available: true,
+        },
+      };
+      console.log("variables", variables);
+      // const cart = await dataClient.graphql({
+      //   query: createIngredient,
+      //   variables,
+      // });
+      // console.log("cart", cart);
+    } catch (error) {
+      console.log(
+        "error laodi initial data func",
+        JSON.stringify(error, null, 2)
+      );
+      throw error;
+    }
+  }
+}
+async function createItems() {
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    console.log("item:", item);
     try {
       const variables = {
         input: {
@@ -255,6 +293,24 @@ async function loadInitialData() {
         query: createItem,
         variables,
       });
+
+      for (let index = 0; index < item.ingredients.length; index++) {
+        const element = item.ingredients[index];
+        const createIngredientParam = {
+          input: {
+            name: element.name,
+            calories: element.calories,
+            protein: element.protein,
+            carbs: element.carbs,
+            url: element.url,
+          },
+        };
+        const ingredientResult = await dataClient.graphql({
+          query: createIngredient,
+          variables: createIngredientParam,
+        });
+        console.log(ingredientResult, "ingredients result");
+      }
       console.log("cart", cart);
     } catch (error) {
       console.log(
@@ -264,6 +320,11 @@ async function loadInitialData() {
       throw error;
     }
   }
+}
+async function loadInitialData() {
+  const createItemsResults = await createItems();
+  console.log("items start", items.length);
+  //Must be idempotent
 }
 
 const palette = {

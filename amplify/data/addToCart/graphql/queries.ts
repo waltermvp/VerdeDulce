@@ -42,25 +42,10 @@ export const cartByUser = /* GraphQL */ `query CartByUser(
 export const getCart = /* GraphQL */ `query GetCart($id: ID!) {
   getCart(id: $id) {
     authenticated
-    cartItems {
-      nextToken
-      __typename
-    }
     createdAt
     id
     totalAmount
     updatedAt
-    user {
-      available
-      createdAt
-      email
-      id
-      password
-      role
-      updatedAt
-      username
-      __typename
-    }
     userId
     __typename
   }
@@ -68,31 +53,9 @@ export const getCart = /* GraphQL */ `query GetCart($id: ID!) {
 ` as GeneratedQuery<APITypes.GetCartQueryVariables, APITypes.GetCartQuery>;
 export const getCartIngredient = /* GraphQL */ `query GetCartIngredient($id: ID!) {
   getCartIngredient(id: $id) {
-    cartItem {
-      cartId
-      createdAt
-      id
-      itemId
-      quantity
-      updatedAt
-      userId
-      __typename
-    }
     cartItemId
     createdAt
     id
-    ingredient {
-      available
-      calories
-      createdAt
-      id
-      ingredientId
-      itemId
-      name
-      price
-      updatedAt
-      __typename
-    }
     ingredientId
     quantity
     updatedAt
@@ -105,38 +68,11 @@ export const getCartIngredient = /* GraphQL */ `query GetCartIngredient($id: ID!
 >;
 export const getCartItem = /* GraphQL */ `query GetCartItem($id: ID!) {
   getCartItem(id: $id) {
-    cart {
-      authenticated
-      createdAt
-      id
-      totalAmount
-      updatedAt
-      userId
-      __typename
-    }
     cartId
     createdAt
     id
-    item {
-      available
-      calories
-      categoryId
-      createdAt
-      description
-      id
-      metaData
-      name
-      price
-      updatedAt
-      url
-      __typename
-    }
     itemId
     quantity
-    selectedIngredients {
-      nextToken
-      __typename
-    }
     updatedAt
     userId
     __typename
@@ -151,10 +87,6 @@ export const getCategory = /* GraphQL */ `query GetCategory($id: ID!) {
     createdAt
     description
     id
-    items {
-      nextToken
-      __typename
-    }
     name
     updatedAt
     __typename
@@ -168,16 +100,13 @@ export const getIngredient = /* GraphQL */ `query GetIngredient($id: ID!) {
   getIngredient(id: $id) {
     available
     calories
-    cartIngredient {
-      nextToken
-      __typename
-    }
+    carbs
     createdAt
     id
-    ingredientId
     item {
       available
       calories
+      carbs
       categoryId
       createdAt
       description
@@ -185,17 +114,15 @@ export const getIngredient = /* GraphQL */ `query GetIngredient($id: ID!) {
       metaData
       name
       price
+      protein
       updatedAt
       url
       __typename
     }
     itemId
     name
-    orderIngredient {
-      nextToken
-      __typename
-    }
     price
+    protein
     updatedAt
     __typename
   }
@@ -208,18 +135,7 @@ export const getItem = /* GraphQL */ `query GetItem($id: ID!) {
   getItem(id: $id) {
     available
     calories
-    cartItem {
-      nextToken
-      __typename
-    }
-    category {
-      createdAt
-      description
-      id
-      name
-      updatedAt
-      __typename
-    }
+    carbs
     categoryId
     createdAt
     description
@@ -230,15 +146,8 @@ export const getItem = /* GraphQL */ `query GetItem($id: ID!) {
     }
     metaData
     name
-    orderItem {
-      nextToken
-      __typename
-    }
     price
-    review {
-      nextToken
-      __typename
-    }
+    protein
     updatedAt
     url
     __typename
@@ -249,25 +158,10 @@ export const getOrder = /* GraphQL */ `query GetOrder($id: ID!) {
   getOrder(id: $id) {
     createdAt
     id
-    orderItems {
-      nextToken
-      __typename
-    }
     orderNumber
     status
     totalAmount
     updatedAt
-    user {
-      available
-      createdAt
-      email
-      id
-      password
-      role
-      updatedAt
-      username
-      __typename
-    }
     userId
     __typename
   }
@@ -277,28 +171,7 @@ export const getOrderIngredient = /* GraphQL */ `query GetOrderIngredient($id: I
   getOrderIngredient(id: $id) {
     createdAt
     id
-    ingredient {
-      available
-      calories
-      createdAt
-      id
-      ingredientId
-      itemId
-      name
-      price
-      updatedAt
-      __typename
-    }
     ingredientId
-    orderItem {
-      createdAt
-      id
-      itemId
-      orderId
-      quantity
-      updatedAt
-      __typename
-    }
     orderItemId
     quantity
     updatedAt
@@ -313,37 +186,9 @@ export const getOrderItem = /* GraphQL */ `query GetOrderItem($id: ID!) {
   getOrderItem(id: $id) {
     createdAt
     id
-    item {
-      available
-      calories
-      categoryId
-      createdAt
-      description
-      id
-      metaData
-      name
-      price
-      updatedAt
-      url
-      __typename
-    }
     itemId
-    order {
-      createdAt
-      id
-      orderNumber
-      status
-      totalAmount
-      updatedAt
-      userId
-      __typename
-    }
     orderId
     quantity
-    selectedIngredients {
-      nextToken
-      __typename
-    }
     updatedAt
     __typename
   }
@@ -357,34 +202,9 @@ export const getReview = /* GraphQL */ `query GetReview($id: ID!) {
     comment
     createdAt
     id
-    item {
-      available
-      calories
-      categoryId
-      createdAt
-      description
-      id
-      metaData
-      name
-      price
-      updatedAt
-      url
-      __typename
-    }
     itemId
     rating
     updatedAt
-    user {
-      available
-      createdAt
-      email
-      id
-      password
-      role
-      updatedAt
-      username
-      __typename
-    }
     userId
     __typename
   }
@@ -393,27 +213,10 @@ export const getReview = /* GraphQL */ `query GetReview($id: ID!) {
 export const getUser = /* GraphQL */ `query GetUser($id: ID!) {
   getUser(id: $id) {
     available
-    cart {
-      authenticated
-      createdAt
-      id
-      totalAmount
-      updatedAt
-      userId
-      __typename
-    }
     createdAt
     email
     id
-    orders {
-      nextToken
-      __typename
-    }
     password
-    reviews {
-      nextToken
-      __typename
-    }
     role
     updatedAt
     username
@@ -623,12 +426,13 @@ export const listIngredients = /* GraphQL */ `query ListIngredients(
     items {
       available
       calories
+      carbs
       createdAt
       id
-      ingredientId
       itemId
       name
       price
+      protein
       updatedAt
       __typename
     }
@@ -657,6 +461,7 @@ export const listItems = /* GraphQL */ `query ListItems(
     items {
       available
       calories
+      carbs
       categoryId
       createdAt
       description
@@ -664,6 +469,7 @@ export const listItems = /* GraphQL */ `query ListItems(
       metaData
       name
       price
+      protein
       updatedAt
       url
       __typename

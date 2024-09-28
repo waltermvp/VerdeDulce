@@ -13,7 +13,49 @@
     "activated": true,
     "hidden": false,
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "carne-con-ajo-caramelizado"
+    "slug": "carne-con-ajo-caramelizado",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e8400-e29b-41d4-a716-446655440030",
@@ -30,7 +72,49 @@
     "activated": true,
     "hidden": false,
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "ensalada-picada-estilo-steakhouse"
+    "slug": "ensalada-picada-estilo-steakhouse",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e8400-e29b-41d4d-a716-446655440000",
@@ -47,7 +131,49 @@
     "activated": true,
     "hidden": false,
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "cesar-de-col-carne"
+    "slug": "cesar-de-col-carne",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e8400-e29b-41d4f-a716-446655440000",
@@ -64,7 +190,49 @@
     "activated": true,
     "hidden": false,
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "pollo-picante-con-miel"
+    "slug": "pollo-picante-con-miel",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e8400-fe29b-41d4-a716-446655440000",
@@ -81,7 +249,49 @@
     "activated": true,
     "hidden": false,
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "tazon-de-cosecha"
+    "slug": "tazon-de-cosecha",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e840f0-e29b-41d4-a716-446655440000",
@@ -98,7 +308,49 @@
     "url": "menu/SG_Web_Image_Bowl_Chicken_Pesto_Parm.png",
     "category": "Tazones",
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "pollo-a-la-parmesana-con-pesto"
+    "slug": "pollo-a-la-parmesana-con-pesto",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e8f400-e29b-41d4-a716-446655440000",
@@ -115,7 +367,49 @@
     "category": "Tazones",
     "hidden": true,
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "pollo-con-aguacate-y-ranch"
+    "slug": "pollo-con-aguacate-y-ranch",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e8400-e2c9b-41d4-a716-446655440000",
@@ -132,7 +426,49 @@
     "activated": true,
     "hidden": false,
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "cesar-de-col"
+    "slug": "cesar-de-col",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e8400-e2c9b-41d4-a716-446655440000",
@@ -149,7 +485,49 @@
     "activated": true,
     "hidden": false,
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "guacamole-verde"
+    "slug": "guacamole-verde",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e8400-ce29b-41d4-a716-446655440000",
@@ -166,7 +544,49 @@
     "description": "Pollo ennegrecido, col rallada, cebollas encurtidas, tomates, manzanas, chips de tortilla, lechuga romana picada, col rizada rallada, salsa BBQ con miel, ranch con diosa verde.",
     "url": "menu/SG_Web_Image_Salad_BBQ_Chicken.png",
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "ensalada-de-pollo-a-la-bbq"
+    "slug": "ensalada-de-pollo-a-la-bbq",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e8c400-e29b-41d4-a716-446655440000",
@@ -183,7 +603,49 @@
     "category": "Ensaladas",
     "hidden": false,
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "hummus-crujiente"
+    "slug": "hummus-crujiente",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e8c400-e29b-41d4-a716-446655440000",
@@ -200,7 +662,49 @@
     "category": "Ensaladas",
     "hidden": false,
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "pollo-bufalo"
+    "slug": "pollo-bufalo",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e8c400-e29b-41d4-a716-446655440000",
@@ -217,7 +721,49 @@
     "activated": true,
     "hidden": false,
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "diosa-super-verde"
+    "slug": "diosa-super-verde",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e8c400-e29b-41d4-a716-446655440000",
@@ -234,7 +780,49 @@
     "activated": true,
     "hidden": false,
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "jardin-cobb"
+    "slug": "jardin-cobb",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e8400-ef29b-41d4-a716-446655440000",
@@ -251,6 +839,48 @@
     "activated": true,
     "hidden": false,
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "te-de-jamaica"
+    "slug": "te-de-jamaica",
+    "ingredients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   }
 ]

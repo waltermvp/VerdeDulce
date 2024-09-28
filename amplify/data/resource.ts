@@ -49,11 +49,11 @@ const schema = a
         protein: a.integer(),
         carbs: a.integer(),
         categoryId: a.id(),
-        category: a.belongsTo("Category", "categoryId"), // Relationship to Category
+        // category: a.belongsTo("Category", "categoryId"), // Relationship to Category
         ingredients: a.hasMany("Ingredient", "itemId"), // Relationship with Ingredient
-        orderItem: a.hasMany("OrderItem", "itemId"), // Relationship with OrderItem
-        review: a.hasMany("Review", "itemId"), // Relationship with Review
-        cartItem: a.hasMany("CartItem", "itemId"), // Relationship with CartItem
+        // orderItem: a.hasMany("OrderItem", "itemId"), // Relationship with OrderItem
+        // review: a.hasMany("Review", "itemId"), // Relationship with Review
+        // cartItem: a.hasMany("CartItem", "itemId"), // Relationship with CartItem
         metaData: a.json(),
         available: a.boolean(),
       })
@@ -67,15 +67,18 @@ const schema = a
     Ingredient: a
       .model({
         id: a.id(), // Ensure ID field for Ingredient
-        ingredientId: a.id().required(),
+        // ingredientId: a.id().required(),
         name: a.string().required(),
         price: a.integer(), // Optional price for additional cost
         calories: a.integer(),
+        protein: a.integer(),
+        carbs: a.integer(),
+
         itemId: a.id(), // Foreign key to Item
         item: a.belongsTo("Item", "itemId"), // Belongs to Item
-        orderIngredient: a.hasMany("OrderIngredient", "ingredientId"), // Relationship with OrderIngredient
+        // orderIngredient: a.hasMany("OrderIngredient", "ingredientId"), // Relationship with OrderIngredient
         available: a.boolean(),
-        cartIngredient: a.hasMany("CartIngredient", "ingredientId"), // Relationship with CartIngredient
+        // cartIngredient: a.hasMany("CartIngredient", "id"), // Relationship with CartIngredient
       })
       .authorization((allow) => [
         allow.guest(),
@@ -88,10 +91,10 @@ const schema = a
       .model({
         id: a.id(), // Ensure ID field for OrderItem
         orderId: a.id(),
-        order: a.belongsTo("Order", "orderId"), // Belongs to Order
+        // order: a.belongsTo("Order", "orderId"), // Belongs to Order
         itemId: a.id().required(), // References Item
-        item: a.belongsTo("Item", "itemId"), // Belongs to Item
-        selectedIngredients: a.hasMany("OrderIngredient", "orderItemId"), // Track selected ingredients with quantities
+        // item: a.belongsTo("Item", "itemId"), // Belongs to Item
+        // selectedIngredients: a.hasMany("OrderIngredient", "orderItemId"), // Track selected ingredients with quantities
         quantity: a.integer().required(), // Quantity of this item in the order
       })
       .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
@@ -101,9 +104,9 @@ const schema = a
       .model({
         id: a.id(), // Ensure ID field for OrderIngredient
         orderItemId: a.id(), // Foreign key to OrderItem
-        orderItem: a.belongsTo("OrderItem", "orderItemId"), // Belongs to OrderItem
+        // orderItem: a.belongsTo("OrderItem", "orderItemId"), // Belongs to OrderItem
         ingredientId: a.id().required(), // References Ingredient
-        ingredient: a.belongsTo("Ingredient", "ingredientId"), // Belongs to Ingredient
+        // ingredient: a.belongsTo("Ingredient", "id"), // Belongs to Ingredient
         quantity: a.integer().required(), // Quantity of this ingredient selected
       })
       .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
@@ -114,9 +117,9 @@ const schema = a
         id: a.id(), // Ensure ID field for Order
         orderNumber: a.string().required(),
         userId: a.id(),
-        user: a.belongsTo("User", "userId"), // Belongs to User
+        // user: a.belongsTo("User", "userId"), // Belongs to User
         totalAmount: a.integer(),
-        orderItems: a.hasMany("OrderItem", "orderId"), // Track items in the order
+        // orderItems: a.hasMany("OrderItem", "orderId"), // Track items in the order
         status: a.string(), // e.g., 'pending', 'completed', 'canceled'
       })
       .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
@@ -126,7 +129,7 @@ const schema = a
         id: a.id(), // Ensure ID field for Cart
         userId: a.id().required(), // Reference to the user
         user: a.belongsTo("User", "userId"), // Each user has one cart
-        cartItems: a.hasMany("CartItem", "cartId"), // Cart has many items
+        // cartItems: a.hasMany("CartItem", "cartId"), // Cart has many items
         totalAmount: a.integer(), // Total amount of the cart
         authenticated: a.boolean().default(false),
       })
@@ -139,10 +142,10 @@ const schema = a
         id: a.id(), // CartItem ID
         cartId: a.id().required(), // Reference to the cart
         userId: a.string().required(), // Reference to the cart
-        cart: a.belongsTo("Cart", "cartId"), // CartItem belongs to a cart
+        // cart: a.belongsTo("Cart", "cartId"), // CartItem belongs to a cart
         itemId: a.id().required(), // Reference to the menu item
-        item: a.belongsTo("Item", "itemId"), // Each cart item is an Item
-        selectedIngredients: a.hasMany("CartIngredient", "cartItemId"), // Selected ingredients for this item
+        // item: a.belongsTo("Item", "itemId"), // Each cart item is an Item
+        // selectedIngredients: a.hasMany("CartIngredient", "cartItemId"), // Selected ingredients for this item
         quantity: a.integer().required(), // Quantity of the item
       })
       .secondaryIndexes((index) => [index("cartId"), index("userId")])
@@ -153,9 +156,9 @@ const schema = a
       .model({
         id: a.id(), // CartIngredient ID
         cartItemId: a.id().required(), // Reference to the CartItem
-        cartItem: a.belongsTo("CartItem", "cartItemId"), // Belongs to CartItem
+        // cartItem: a.belongsTo("CartItem", "cartItemId"), // Belongs to CartItem
         ingredientId: a.id().required(), // Reference to the Ingredient
-        ingredient: a.belongsTo("Ingredient", "ingredientId"), // Belongs to Ingredient
+        // ingredient: a.belongsTo("Ingredient", "ingredientId"), // Belongs to Ingredient
         quantity: a.integer().required(), // Quantity of this ingredient
       })
       .authorization((allow) => [allow.authenticated()]),
@@ -168,8 +171,8 @@ const schema = a
         email: a.string().required(),
         password: a.string().required(),
         role: a.string(), // e.g., 'admin', 'user'
-        orders: a.hasMany("Order", "userId"), // Relationship to Orders
-        reviews: a.hasMany("Review", "userId"), // Relationship to Reviews
+        // orders: a.hasMany("Order", "userId"), // Relationship to Orders
+        // reviews: a.hasMany("Review", "userId"), // Relationship to Reviews
         cart: a.hasOne("Cart", "userId"), // Each user has one cart
         available: a.boolean().default(true),
       })
@@ -181,7 +184,7 @@ const schema = a
         id: a.id(), // Ensure ID field for Category
         name: a.string().required(),
         description: a.string(),
-        items: a.hasMany("Item", "categoryId"), // Relationship to Items
+        // items: a.hasMany("Item", "categoryId"), // Relationship to Items
       })
       .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
 
@@ -192,9 +195,9 @@ const schema = a
         rating: a.integer().required(),
         comment: a.string(),
         userId: a.id(), // Foreign key to User
-        user: a.belongsTo("User", "userId"), // Belongs to User
+        // user: a.belongsTo("User", "userId"), // Belongs to User
         itemId: a.id(), // Foreign key to Item
-        item: a.belongsTo("Item", "itemId"), // Belongs to Item
+        // item: a.belongsTo("Item", "itemId"), // Belongs to Item
       })
       .authorization((allow) => [allow.authenticated()]),
 

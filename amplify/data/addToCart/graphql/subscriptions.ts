@@ -11,25 +11,10 @@ type GeneratedSubscription<InputType, OutputType> = string & {
 export const onCreateCart = /* GraphQL */ `subscription OnCreateCart($filter: ModelSubscriptionCartFilterInput) {
   onCreateCart(filter: $filter) {
     authenticated
-    cartItems {
-      nextToken
-      __typename
-    }
     createdAt
     id
     totalAmount
     updatedAt
-    user {
-      available
-      createdAt
-      email
-      id
-      password
-      role
-      updatedAt
-      username
-      __typename
-    }
     userId
     __typename
   }
@@ -42,31 +27,9 @@ export const onCreateCartIngredient = /* GraphQL */ `subscription OnCreateCartIn
   $filter: ModelSubscriptionCartIngredientFilterInput
 ) {
   onCreateCartIngredient(filter: $filter) {
-    cartItem {
-      cartId
-      createdAt
-      id
-      itemId
-      quantity
-      updatedAt
-      userId
-      __typename
-    }
     cartItemId
     createdAt
     id
-    ingredient {
-      available
-      calories
-      createdAt
-      id
-      ingredientId
-      itemId
-      name
-      price
-      updatedAt
-      __typename
-    }
     ingredientId
     quantity
     updatedAt
@@ -79,38 +42,11 @@ export const onCreateCartIngredient = /* GraphQL */ `subscription OnCreateCartIn
 >;
 export const onCreateCartItem = /* GraphQL */ `subscription OnCreateCartItem($filter: ModelSubscriptionCartItemFilterInput) {
   onCreateCartItem(filter: $filter) {
-    cart {
-      authenticated
-      createdAt
-      id
-      totalAmount
-      updatedAt
-      userId
-      __typename
-    }
     cartId
     createdAt
     id
-    item {
-      available
-      calories
-      categoryId
-      createdAt
-      description
-      id
-      metaData
-      name
-      price
-      updatedAt
-      url
-      __typename
-    }
     itemId
     quantity
-    selectedIngredients {
-      nextToken
-      __typename
-    }
     updatedAt
     userId
     __typename
@@ -125,10 +61,6 @@ export const onCreateCategory = /* GraphQL */ `subscription OnCreateCategory($fi
     createdAt
     description
     id
-    items {
-      nextToken
-      __typename
-    }
     name
     updatedAt
     __typename
@@ -144,16 +76,13 @@ export const onCreateIngredient = /* GraphQL */ `subscription OnCreateIngredient
   onCreateIngredient(filter: $filter) {
     available
     calories
-    cartIngredient {
-      nextToken
-      __typename
-    }
+    carbs
     createdAt
     id
-    ingredientId
     item {
       available
       calories
+      carbs
       categoryId
       createdAt
       description
@@ -161,17 +90,15 @@ export const onCreateIngredient = /* GraphQL */ `subscription OnCreateIngredient
       metaData
       name
       price
+      protein
       updatedAt
       url
       __typename
     }
     itemId
     name
-    orderIngredient {
-      nextToken
-      __typename
-    }
     price
+    protein
     updatedAt
     __typename
   }
@@ -184,18 +111,7 @@ export const onCreateItem = /* GraphQL */ `subscription OnCreateItem($filter: Mo
   onCreateItem(filter: $filter) {
     available
     calories
-    cartItem {
-      nextToken
-      __typename
-    }
-    category {
-      createdAt
-      description
-      id
-      name
-      updatedAt
-      __typename
-    }
+    carbs
     categoryId
     createdAt
     description
@@ -206,15 +122,8 @@ export const onCreateItem = /* GraphQL */ `subscription OnCreateItem($filter: Mo
     }
     metaData
     name
-    orderItem {
-      nextToken
-      __typename
-    }
     price
-    review {
-      nextToken
-      __typename
-    }
+    protein
     updatedAt
     url
     __typename
@@ -228,25 +137,10 @@ export const onCreateOrder = /* GraphQL */ `subscription OnCreateOrder($filter: 
   onCreateOrder(filter: $filter) {
     createdAt
     id
-    orderItems {
-      nextToken
-      __typename
-    }
     orderNumber
     status
     totalAmount
     updatedAt
-    user {
-      available
-      createdAt
-      email
-      id
-      password
-      role
-      updatedAt
-      username
-      __typename
-    }
     userId
     __typename
   }
@@ -261,28 +155,7 @@ export const onCreateOrderIngredient = /* GraphQL */ `subscription OnCreateOrder
   onCreateOrderIngredient(filter: $filter) {
     createdAt
     id
-    ingredient {
-      available
-      calories
-      createdAt
-      id
-      ingredientId
-      itemId
-      name
-      price
-      updatedAt
-      __typename
-    }
     ingredientId
-    orderItem {
-      createdAt
-      id
-      itemId
-      orderId
-      quantity
-      updatedAt
-      __typename
-    }
     orderItemId
     quantity
     updatedAt
@@ -297,37 +170,9 @@ export const onCreateOrderItem = /* GraphQL */ `subscription OnCreateOrderItem($
   onCreateOrderItem(filter: $filter) {
     createdAt
     id
-    item {
-      available
-      calories
-      categoryId
-      createdAt
-      description
-      id
-      metaData
-      name
-      price
-      updatedAt
-      url
-      __typename
-    }
     itemId
-    order {
-      createdAt
-      id
-      orderNumber
-      status
-      totalAmount
-      updatedAt
-      userId
-      __typename
-    }
     orderId
     quantity
-    selectedIngredients {
-      nextToken
-      __typename
-    }
     updatedAt
     __typename
   }
@@ -341,34 +186,9 @@ export const onCreateReview = /* GraphQL */ `subscription OnCreateReview($filter
     comment
     createdAt
     id
-    item {
-      available
-      calories
-      categoryId
-      createdAt
-      description
-      id
-      metaData
-      name
-      price
-      updatedAt
-      url
-      __typename
-    }
     itemId
     rating
     updatedAt
-    user {
-      available
-      createdAt
-      email
-      id
-      password
-      role
-      updatedAt
-      username
-      __typename
-    }
     userId
     __typename
   }
@@ -380,27 +200,10 @@ export const onCreateReview = /* GraphQL */ `subscription OnCreateReview($filter
 export const onCreateUser = /* GraphQL */ `subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
   onCreateUser(filter: $filter) {
     available
-    cart {
-      authenticated
-      createdAt
-      id
-      totalAmount
-      updatedAt
-      userId
-      __typename
-    }
     createdAt
     email
     id
-    orders {
-      nextToken
-      __typename
-    }
     password
-    reviews {
-      nextToken
-      __typename
-    }
     role
     updatedAt
     username
@@ -414,25 +217,10 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser($filter: Mo
 export const onDeleteCart = /* GraphQL */ `subscription OnDeleteCart($filter: ModelSubscriptionCartFilterInput) {
   onDeleteCart(filter: $filter) {
     authenticated
-    cartItems {
-      nextToken
-      __typename
-    }
     createdAt
     id
     totalAmount
     updatedAt
-    user {
-      available
-      createdAt
-      email
-      id
-      password
-      role
-      updatedAt
-      username
-      __typename
-    }
     userId
     __typename
   }
@@ -445,31 +233,9 @@ export const onDeleteCartIngredient = /* GraphQL */ `subscription OnDeleteCartIn
   $filter: ModelSubscriptionCartIngredientFilterInput
 ) {
   onDeleteCartIngredient(filter: $filter) {
-    cartItem {
-      cartId
-      createdAt
-      id
-      itemId
-      quantity
-      updatedAt
-      userId
-      __typename
-    }
     cartItemId
     createdAt
     id
-    ingredient {
-      available
-      calories
-      createdAt
-      id
-      ingredientId
-      itemId
-      name
-      price
-      updatedAt
-      __typename
-    }
     ingredientId
     quantity
     updatedAt
@@ -482,38 +248,11 @@ export const onDeleteCartIngredient = /* GraphQL */ `subscription OnDeleteCartIn
 >;
 export const onDeleteCartItem = /* GraphQL */ `subscription OnDeleteCartItem($filter: ModelSubscriptionCartItemFilterInput) {
   onDeleteCartItem(filter: $filter) {
-    cart {
-      authenticated
-      createdAt
-      id
-      totalAmount
-      updatedAt
-      userId
-      __typename
-    }
     cartId
     createdAt
     id
-    item {
-      available
-      calories
-      categoryId
-      createdAt
-      description
-      id
-      metaData
-      name
-      price
-      updatedAt
-      url
-      __typename
-    }
     itemId
     quantity
-    selectedIngredients {
-      nextToken
-      __typename
-    }
     updatedAt
     userId
     __typename
@@ -528,10 +267,6 @@ export const onDeleteCategory = /* GraphQL */ `subscription OnDeleteCategory($fi
     createdAt
     description
     id
-    items {
-      nextToken
-      __typename
-    }
     name
     updatedAt
     __typename
@@ -547,16 +282,13 @@ export const onDeleteIngredient = /* GraphQL */ `subscription OnDeleteIngredient
   onDeleteIngredient(filter: $filter) {
     available
     calories
-    cartIngredient {
-      nextToken
-      __typename
-    }
+    carbs
     createdAt
     id
-    ingredientId
     item {
       available
       calories
+      carbs
       categoryId
       createdAt
       description
@@ -564,17 +296,15 @@ export const onDeleteIngredient = /* GraphQL */ `subscription OnDeleteIngredient
       metaData
       name
       price
+      protein
       updatedAt
       url
       __typename
     }
     itemId
     name
-    orderIngredient {
-      nextToken
-      __typename
-    }
     price
+    protein
     updatedAt
     __typename
   }
@@ -587,18 +317,7 @@ export const onDeleteItem = /* GraphQL */ `subscription OnDeleteItem($filter: Mo
   onDeleteItem(filter: $filter) {
     available
     calories
-    cartItem {
-      nextToken
-      __typename
-    }
-    category {
-      createdAt
-      description
-      id
-      name
-      updatedAt
-      __typename
-    }
+    carbs
     categoryId
     createdAt
     description
@@ -609,15 +328,8 @@ export const onDeleteItem = /* GraphQL */ `subscription OnDeleteItem($filter: Mo
     }
     metaData
     name
-    orderItem {
-      nextToken
-      __typename
-    }
     price
-    review {
-      nextToken
-      __typename
-    }
+    protein
     updatedAt
     url
     __typename
@@ -631,25 +343,10 @@ export const onDeleteOrder = /* GraphQL */ `subscription OnDeleteOrder($filter: 
   onDeleteOrder(filter: $filter) {
     createdAt
     id
-    orderItems {
-      nextToken
-      __typename
-    }
     orderNumber
     status
     totalAmount
     updatedAt
-    user {
-      available
-      createdAt
-      email
-      id
-      password
-      role
-      updatedAt
-      username
-      __typename
-    }
     userId
     __typename
   }
@@ -664,28 +361,7 @@ export const onDeleteOrderIngredient = /* GraphQL */ `subscription OnDeleteOrder
   onDeleteOrderIngredient(filter: $filter) {
     createdAt
     id
-    ingredient {
-      available
-      calories
-      createdAt
-      id
-      ingredientId
-      itemId
-      name
-      price
-      updatedAt
-      __typename
-    }
     ingredientId
-    orderItem {
-      createdAt
-      id
-      itemId
-      orderId
-      quantity
-      updatedAt
-      __typename
-    }
     orderItemId
     quantity
     updatedAt
@@ -700,37 +376,9 @@ export const onDeleteOrderItem = /* GraphQL */ `subscription OnDeleteOrderItem($
   onDeleteOrderItem(filter: $filter) {
     createdAt
     id
-    item {
-      available
-      calories
-      categoryId
-      createdAt
-      description
-      id
-      metaData
-      name
-      price
-      updatedAt
-      url
-      __typename
-    }
     itemId
-    order {
-      createdAt
-      id
-      orderNumber
-      status
-      totalAmount
-      updatedAt
-      userId
-      __typename
-    }
     orderId
     quantity
-    selectedIngredients {
-      nextToken
-      __typename
-    }
     updatedAt
     __typename
   }
@@ -744,34 +392,9 @@ export const onDeleteReview = /* GraphQL */ `subscription OnDeleteReview($filter
     comment
     createdAt
     id
-    item {
-      available
-      calories
-      categoryId
-      createdAt
-      description
-      id
-      metaData
-      name
-      price
-      updatedAt
-      url
-      __typename
-    }
     itemId
     rating
     updatedAt
-    user {
-      available
-      createdAt
-      email
-      id
-      password
-      role
-      updatedAt
-      username
-      __typename
-    }
     userId
     __typename
   }
@@ -783,27 +406,10 @@ export const onDeleteReview = /* GraphQL */ `subscription OnDeleteReview($filter
 export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
   onDeleteUser(filter: $filter) {
     available
-    cart {
-      authenticated
-      createdAt
-      id
-      totalAmount
-      updatedAt
-      userId
-      __typename
-    }
     createdAt
     email
     id
-    orders {
-      nextToken
-      __typename
-    }
     password
-    reviews {
-      nextToken
-      __typename
-    }
     role
     updatedAt
     username
@@ -817,25 +423,10 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser($filter: Mo
 export const onUpdateCart = /* GraphQL */ `subscription OnUpdateCart($filter: ModelSubscriptionCartFilterInput) {
   onUpdateCart(filter: $filter) {
     authenticated
-    cartItems {
-      nextToken
-      __typename
-    }
     createdAt
     id
     totalAmount
     updatedAt
-    user {
-      available
-      createdAt
-      email
-      id
-      password
-      role
-      updatedAt
-      username
-      __typename
-    }
     userId
     __typename
   }
@@ -848,31 +439,9 @@ export const onUpdateCartIngredient = /* GraphQL */ `subscription OnUpdateCartIn
   $filter: ModelSubscriptionCartIngredientFilterInput
 ) {
   onUpdateCartIngredient(filter: $filter) {
-    cartItem {
-      cartId
-      createdAt
-      id
-      itemId
-      quantity
-      updatedAt
-      userId
-      __typename
-    }
     cartItemId
     createdAt
     id
-    ingredient {
-      available
-      calories
-      createdAt
-      id
-      ingredientId
-      itemId
-      name
-      price
-      updatedAt
-      __typename
-    }
     ingredientId
     quantity
     updatedAt
@@ -885,38 +454,11 @@ export const onUpdateCartIngredient = /* GraphQL */ `subscription OnUpdateCartIn
 >;
 export const onUpdateCartItem = /* GraphQL */ `subscription OnUpdateCartItem($filter: ModelSubscriptionCartItemFilterInput) {
   onUpdateCartItem(filter: $filter) {
-    cart {
-      authenticated
-      createdAt
-      id
-      totalAmount
-      updatedAt
-      userId
-      __typename
-    }
     cartId
     createdAt
     id
-    item {
-      available
-      calories
-      categoryId
-      createdAt
-      description
-      id
-      metaData
-      name
-      price
-      updatedAt
-      url
-      __typename
-    }
     itemId
     quantity
-    selectedIngredients {
-      nextToken
-      __typename
-    }
     updatedAt
     userId
     __typename
@@ -931,10 +473,6 @@ export const onUpdateCategory = /* GraphQL */ `subscription OnUpdateCategory($fi
     createdAt
     description
     id
-    items {
-      nextToken
-      __typename
-    }
     name
     updatedAt
     __typename
@@ -950,16 +488,13 @@ export const onUpdateIngredient = /* GraphQL */ `subscription OnUpdateIngredient
   onUpdateIngredient(filter: $filter) {
     available
     calories
-    cartIngredient {
-      nextToken
-      __typename
-    }
+    carbs
     createdAt
     id
-    ingredientId
     item {
       available
       calories
+      carbs
       categoryId
       createdAt
       description
@@ -967,17 +502,15 @@ export const onUpdateIngredient = /* GraphQL */ `subscription OnUpdateIngredient
       metaData
       name
       price
+      protein
       updatedAt
       url
       __typename
     }
     itemId
     name
-    orderIngredient {
-      nextToken
-      __typename
-    }
     price
+    protein
     updatedAt
     __typename
   }
@@ -990,18 +523,7 @@ export const onUpdateItem = /* GraphQL */ `subscription OnUpdateItem($filter: Mo
   onUpdateItem(filter: $filter) {
     available
     calories
-    cartItem {
-      nextToken
-      __typename
-    }
-    category {
-      createdAt
-      description
-      id
-      name
-      updatedAt
-      __typename
-    }
+    carbs
     categoryId
     createdAt
     description
@@ -1012,15 +534,8 @@ export const onUpdateItem = /* GraphQL */ `subscription OnUpdateItem($filter: Mo
     }
     metaData
     name
-    orderItem {
-      nextToken
-      __typename
-    }
     price
-    review {
-      nextToken
-      __typename
-    }
+    protein
     updatedAt
     url
     __typename
@@ -1034,25 +549,10 @@ export const onUpdateOrder = /* GraphQL */ `subscription OnUpdateOrder($filter: 
   onUpdateOrder(filter: $filter) {
     createdAt
     id
-    orderItems {
-      nextToken
-      __typename
-    }
     orderNumber
     status
     totalAmount
     updatedAt
-    user {
-      available
-      createdAt
-      email
-      id
-      password
-      role
-      updatedAt
-      username
-      __typename
-    }
     userId
     __typename
   }
@@ -1067,28 +567,7 @@ export const onUpdateOrderIngredient = /* GraphQL */ `subscription OnUpdateOrder
   onUpdateOrderIngredient(filter: $filter) {
     createdAt
     id
-    ingredient {
-      available
-      calories
-      createdAt
-      id
-      ingredientId
-      itemId
-      name
-      price
-      updatedAt
-      __typename
-    }
     ingredientId
-    orderItem {
-      createdAt
-      id
-      itemId
-      orderId
-      quantity
-      updatedAt
-      __typename
-    }
     orderItemId
     quantity
     updatedAt
@@ -1103,37 +582,9 @@ export const onUpdateOrderItem = /* GraphQL */ `subscription OnUpdateOrderItem($
   onUpdateOrderItem(filter: $filter) {
     createdAt
     id
-    item {
-      available
-      calories
-      categoryId
-      createdAt
-      description
-      id
-      metaData
-      name
-      price
-      updatedAt
-      url
-      __typename
-    }
     itemId
-    order {
-      createdAt
-      id
-      orderNumber
-      status
-      totalAmount
-      updatedAt
-      userId
-      __typename
-    }
     orderId
     quantity
-    selectedIngredients {
-      nextToken
-      __typename
-    }
     updatedAt
     __typename
   }
@@ -1147,34 +598,9 @@ export const onUpdateReview = /* GraphQL */ `subscription OnUpdateReview($filter
     comment
     createdAt
     id
-    item {
-      available
-      calories
-      categoryId
-      createdAt
-      description
-      id
-      metaData
-      name
-      price
-      updatedAt
-      url
-      __typename
-    }
     itemId
     rating
     updatedAt
-    user {
-      available
-      createdAt
-      email
-      id
-      password
-      role
-      updatedAt
-      username
-      __typename
-    }
     userId
     __typename
   }
@@ -1186,27 +612,10 @@ export const onUpdateReview = /* GraphQL */ `subscription OnUpdateReview($filter
 export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
   onUpdateUser(filter: $filter) {
     available
-    cart {
-      authenticated
-      createdAt
-      id
-      totalAmount
-      updatedAt
-      userId
-      __typename
-    }
     createdAt
     email
     id
-    orders {
-      nextToken
-      __typename
-    }
     password
-    reviews {
-      nextToken
-      __typename
-    }
     role
     updatedAt
     username
