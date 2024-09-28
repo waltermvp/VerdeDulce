@@ -16,11 +16,11 @@ export default function Root({ children }: PropsWithChildren) {
         </title>
         <meta
           name="description"
-          content={`{Config.APP_NAME}, comida fresca y de alta calidad. Sostenible y de origen local`}
+          content={`${Config.APP_NAME}, comida fresca y de alta calidad. Sostenible y de origen local`}
         />
         <meta
           property="og:title"
-          content={`{Config.APP_NAME}, comida fresca y de alta calidad`}
+          content={`${Config.APP_NAME}, comida fresca y de alta calidad`}
         />
         <meta property="og:url" content="https://www.portoentregas.com/" />
         <meta property="og:description" content="Ordena Ya!" />
