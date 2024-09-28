@@ -1,5 +1,6 @@
 import { ScrollViewStyleReset } from "expo-router/html";
 import { type PropsWithChildren } from "react";
+import Config from "./config";
 
 /**
  * This file is web-only and used to configure the root HTML for every web page during static rendering.
@@ -10,18 +11,18 @@ export default function Root({ children }: PropsWithChildren) {
     <html lang="en">
       <head>
         <title>
-          verdedulce, comida fresca y de alta calidad. Sostenible y de origen
-          local. Portoviejo
+          {Config.APP_NAME}, comida fresca y de alta calidad. Sostenible y de
+          origen local. Portoviejo
         </title>
         <meta
           name="description"
-          content="verdedulce, comida fresca y de alta calidad. Sostenible y de origen local"
+          content={`{Config.APP_NAME}, comida fresca y de alta calidad. Sostenible y de origen local`}
         />
         <meta
           property="og:title"
-          content="verdedulce, comida fresca y de alta calidad"
+          content={`{Config.APP_NAME}, comida fresca y de alta calidad`}
         />
-        <meta property="og:url" content="https://www.verdedulce.com/" />
+        <meta property="og:url" content="https://www.portoentregas.com/" />
         <meta property="og:description" content="Ordena Ya!" />
         <meta
           property="og:image"

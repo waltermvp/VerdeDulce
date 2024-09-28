@@ -13,11 +13,52 @@
     "activated": true,
     "hidden": false,
     "itemURL": "https://wa.me/c/593963021783",
-    "slug": "carne-con-ajo-caramelizado"
+    "slug": "carne-con-ajo-caramelizado",
+    "ingregients": [
+      {
+        "name": "Arroz integral",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100,
+        "url": "dd"
+      },
+      {
+        "name": "Brócoli picante",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Tomates",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Camote",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+
+      {
+        "name": "Carne con ajo caramelizado",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      },
+      {
+        "name": "Vinagreta de pesto",
+        "calories": 100,
+        "carbs": 100,
+        "protein": 100
+      }
+    ]
   },
   {
     "id": "550e8400-e29b-41d4-a716-446655440030",
-
     "name": "Ensalada Picada Estilo Steakhouse",
     "description": "Lechuga romana picada, quinoa con hierbas, col rallada, tomates, cebollas crujientes, queso azul, carne con ajo caramelizado, aderezo ranch",
     "price": 1000,

@@ -7,7 +7,7 @@
  */
 export default {
   API_URL: "https://api.rss2json.com/v1/",
-  APP_NAME: "dulceverdeDEV",
+  APP_NAME: "portoentregasDEV",
   WHATSAPP_CATALOG_URL: "https://wa.me/c/593963021783",
   MARKETING_STRATEGY: "sweetgreen",
 };
