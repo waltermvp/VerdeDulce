@@ -18,7 +18,7 @@
     "bundle:web": "npx expo export --platform web",
     "serve:web": "npx server dist",
     "prebuild:clean": "npx expo prebuild --clean",
-    "generate": "npx ampx generate outputs --app-id d1ptvrvloahojd --branch main",
+    "generate": "npx ampx generate outputs --app-id d1ptvrvloahojd --branch staging",
     "apiToken": "curl -X POST --data \"username=my_user&password=my_password&device_name=my_device\" https://tastyigniter.verdedulce.com/api/token"
   },
   "jest": {
@@ -75,7 +75,8 @@
     "react-native-url-polyfill": "^2.0.0",
     "react-native-web": "~0.19.6",
     "react-responsive": "^10.0.0",
-    "rn-placeholder": "^3.0.3"
+    "rn-placeholder": "^3.0.3",
+    "tailwind-variants": "^0.2.1"
   },
   "devDependencies": {
     "@aws-amplify/backend": "^1.0.4",

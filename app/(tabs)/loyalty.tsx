@@ -6,7 +6,7 @@ import { ExternalLink } from "@/components/ExternalLink";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react-native";
+import { Authenticator } from "@aws-amplify/ui-react-native";
 import { Button } from "@/components";
 import { generateClient } from "aws-amplify/api";
 import { Schema } from "@/amplify/data/resource";

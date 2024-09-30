@@ -1,6 +1,13 @@
 import { addToCart } from "@/amplify/data/addToCart/graphql/mutations";
 
 const en = {
+  createScreen: {
+    saveConfirm: "You have created an item :)",
+    deleteConfirm: "Delete Item",
+    deleteCancel: "Cancel",
+    errorTitle: "Error Creating Item",
+    ok: "OK",
+  },
   landingScreen: {
     name: "Verde Dulce",
     order: "Order",

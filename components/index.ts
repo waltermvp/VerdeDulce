@@ -32,3 +32,4 @@ export * from "./SimpleMenuItem";
 export * from "./Ad";
 export * from "./HomeItem";
 export * from "./ThemedIngredientList";
+export * from "./RnPaperDialog";

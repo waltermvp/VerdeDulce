@@ -56,11 +56,12 @@ const schema = a
         // cartItem: a.hasMany("CartItem", "itemId"), // Relationship with CartItem
         metaData: a.json(),
         available: a.boolean(),
+        sortIndex: a.integer().default(0),
       })
       .authorization((allow) => [
-        allow.guest(),
-        allow.publicApiKey(),
-        allow.authenticated(),
+        allow.guest().to(["read"]),
+        allow.publicApiKey().to(["read"]),
+        allow.group("ADMINS").to(["create", "read", "update", "delete"]),
       ]),
 
     // Ingredient Model
@@ -246,7 +247,7 @@ const schema = a
       .arguments({ clear: a.boolean() })
       .returns(a.customType({ message: a.string() }))
       .handler(a.handler.function(addToCartFunction))
-      .authorization((allow) => [allow.guest(), allow.group("ADMINS")]),
+      .authorization((allow) => [allow.group("ADMINS")]),
   })
   .authorization((allow) => [allow.resource(addToCartFunction)]);
 

@@ -52,7 +52,6 @@ export default function RootLayout() {
         <Stack initialRouteName="(drawer)">
           <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-
           <Stack.Screen name="+not-found" />
           <Stack.Screen
             name="LoginScreen"
@@ -60,14 +59,12 @@ export default function RootLayout() {
               presentation: "modal",
             }}
           />
-
-          {/* <Stack.Screen
-            name="account"
-            initialParams={{ accountID: "123456789" }}
+          <Stack.Screen
+            name="createItem"
             options={{
-              title: "Account Info",
+              presentation: "modal",
             }}
-          /> */}
+          />
           <Stack.Screen
             name="viewer"
             options={{
