@@ -26,7 +26,6 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (
 ) => {
   const email = event.arguments.email;
   // Set up the parameters for the email
-  console.log("emailable", JSON.stringify({ emailableAPIKey }));
   // return {
   //   email,
   //   metadata: emailableAPIKey,
@@ -73,7 +72,6 @@ export const handler: Schema["registerUser"]["functionHandler"] = async (
         },
         FromEmailAddress: "contact@verdedulce.com",
       };
-      console.log("will send :", input);
       // @ts-ignore: Unreachable code error
       const command = new SendEmailCommand(input);
       const response = await client.send(command);
