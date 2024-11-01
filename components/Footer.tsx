@@ -47,9 +47,9 @@ export const Footer = observer(function Footer(props: FooterProps) {
 
   return (
     <View style={$styles}>
-      <View style={$newsletterContainer}>
+      {/* <View style={$newsletterContainer}>
         <Newsletter />
-      </View>
+      </View> */}
       <View style={{ backgroundColor: colors.palette.footerGreen }}>
         <Link href={!whatsappStrategy ? URL : "/(tabs)"} asChild>
           <Pressable
