@@ -1,3 +1,5 @@
+import { addToCart } from "@/amplify/data/addToCart/graphql/mutations";
+
 const en = {
   adScreen: {
     addtitle: "¡Acumula 9 ensaladas y la 10ª es gratis!",
@@ -23,6 +25,12 @@ const en = {
     logOut: "Log Out",
     logIn: "Log In",
     comingSoon: "Coming Soon!",
+  },
+  menuItemScreen: {
+    addToCart: "Add to Bag",
+    orderMessage: "Hello, I would like to place an order with Verde Dulce.",
+    orderMenuItemMessage:
+      "Hola, me gustaría hacer un pedido con Verde Dulce. Me gustaría ordenar {{item}}",
   },
   menuScreen: {
     orderMessage: "Hello, I would like to place an order with Verde Dulce.",

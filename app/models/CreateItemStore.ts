@@ -17,10 +17,6 @@ export const CreateItemStoreModel = types
     price: 0,
     calories: 0,
     url: "",
-
-    // items: types.array(ItemModel),
-    // favorites: types.array(types.reference(ItemModel)),
-    // favoritesOnly: false,
   })
   .actions(withSetPropAction)
   .actions((store) => ({

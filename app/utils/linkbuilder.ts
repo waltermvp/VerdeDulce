@@ -5,7 +5,7 @@ import { Linking, StyleProp, type TextStyle } from "react-native";
 import { translate } from "../i18n";
 import Config from "../config";
 //TODO: review presets
-const cloudfrontCDN = "https://dta56yysqj9ke.cloudfront.net";
+const cloudfrontCDN = "https://d1y88dmezll7at.cloudfront.net";
 
 const $sizeStyles = {
   xxl: { width: 200, height: 200 } satisfies ImageStyle,

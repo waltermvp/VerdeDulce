@@ -5,10 +5,12 @@ import {
   PressableStateCallbackType,
   StyleProp,
   TextStyle,
+  View,
   ViewStyle,
 } from "react-native";
 import { colors, spacing, typography } from "../app/theme";
 import { Text, TextProps } from "./Text";
+import LoadingDots from "react-native-loading-dots";
 
 type Presets = keyof typeof $viewPresets;
 
@@ -79,6 +81,12 @@ export interface ButtonProps extends PressableProps {
    * An optional style override for the disabled state
    */
   disabledStyle?: StyleProp<ViewStyle>;
+
+  /**
+   * loading prop, accessed directly for declarative styling reasons.
+   * will show a loading indicator react-native-loading-dots
+   */
+  loading?: boolean;
 }
 
 /**
@@ -110,6 +118,7 @@ export function Button(props: ButtonProps) {
     LeftAccessory,
     disabled,
     disabledStyle: $disabledViewStyleOverride,
+    loading,
     ...rest
   } = props;
 
@@ -144,7 +153,6 @@ export function Button(props: ButtonProps) {
       !!disabled && $disabledTextStyleOverride,
     ];
   }
-
   return (
     <Pressable
       style={$viewStyle}
@@ -153,34 +161,53 @@ export function Button(props: ButtonProps) {
       {...rest}
       disabled={disabled}
     >
-      {(state) => (
-        <>
-          {!!LeftAccessory && (
-            <LeftAccessory
-              style={$leftAccessoryStyle}
-              pressableState={state}
-              disabled={disabled}
-            />
-          )}
+      {(state) => {
+        if (loading) {
+          return (
+            <View style={$dotWrapper}>
+              <LoadingDots
+                bounceHeight={12}
+                size={14}
+                dots={3}
+                colors={[
+                  colors.palette.neutral100,
+                  colors.palette.neutral100,
+                  colors.palette.neutral100,
+                ]}
+              />
+            </View>
+          );
+        } else {
+          return (
+            <>
+              {!!LeftAccessory && (
+                <LeftAccessory
+                  style={$leftAccessoryStyle}
+                  pressableState={state}
+                  disabled={disabled}
+                />
+              )}
 
-          <Text
-            tx={tx}
-            text={text}
-            txOptions={txOptions}
-            style={$textStyle(state)}
-          >
-            {children}
-          </Text>
+              <Text
+                tx={tx}
+                text={text}
+                txOptions={txOptions}
+                style={$textStyle(state)}
+              >
+                {children}
+              </Text>
 
-          {!!RightAccessory && (
-            <RightAccessory
-              style={$rightAccessoryStyle}
-              pressableState={state}
-              disabled={disabled}
-            />
-          )}
-        </>
-      )}
+              {!!RightAccessory && (
+                <RightAccessory
+                  style={$rightAccessoryStyle}
+                  pressableState={state}
+                  disabled={disabled}
+                />
+              )}
+            </>
+          );
+        }
+      }}
     </Pressable>
   );
 }
@@ -262,3 +289,4 @@ const $pressedTextPresets: Record<Presets, StyleProp<TextStyle>> = {
   reversed: { opacity: 0.9 },
   link: { opacity: 0.9 },
 };
+const $dotWrapper: ViewStyle = { flex: 1 };
