@@ -59,7 +59,7 @@ const schema = a
       })
       .authorization((allow) => [
         allow.guest(),
-        allow.publicApiKey(),
+        // allow.publicApiKey(),
         allow.authenticated(),
       ]),
 
@@ -79,7 +79,7 @@ const schema = a
       })
       .authorization((allow) => [
         allow.guest(),
-        allow.publicApiKey(),
+        // allow.publicApiKey(),
         allow.authenticated(),
       ]),
 
@@ -94,7 +94,10 @@ const schema = a
         selectedIngredients: a.hasMany("OrderIngredient", "orderItemId"), // Track selected ingredients with quantities
         quantity: a.integer().required(), // Quantity of this item in the order
       })
-      .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+      .authorization((allow) => [
+        allow.authenticated(),
+        //  allow.publicApiKey()
+      ]),
 
     // OrderIngredient Model (Tracks individual ingredients with quantity)
     OrderIngredient: a
@@ -106,7 +109,10 @@ const schema = a
         ingredient: a.belongsTo("Ingredient", "ingredientId"), // Belongs to Ingredient
         quantity: a.integer().required(), // Quantity of this ingredient selected
       })
-      .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+      .authorization((allow) => [
+        allow.authenticated(),
+        //  allow.publicApiKey()
+      ]),
 
     // Order Model
     Order: a
@@ -119,7 +125,10 @@ const schema = a
         orderItems: a.hasMany("OrderItem", "orderId"), // Track items in the order
         status: a.string(), // e.g., 'pending', 'completed', 'canceled'
       })
-      .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+      .authorization((allow) => [
+        allow.authenticated(),
+        // allow.publicApiKey()
+      ]),
     // Cart Model
     Cart: a
       .model({
@@ -173,7 +182,10 @@ const schema = a
         cart: a.hasOne("Cart", "userId"), // Each user has one cart
         available: a.boolean().default(true),
       })
-      .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+      .authorization((allow) => [
+        allow.authenticated(),
+        // allow.publicApiKey()
+      ]),
 
     // Category Model
     Category: a
@@ -183,7 +195,10 @@ const schema = a
         description: a.string(),
         items: a.hasMany("Item", "categoryId"), // Relationship to Items
       })
-      .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+      .authorization((allow) => [
+        allow.authenticated(),
+        //  allow.publicApiKey()
+      ]),
 
     // Review Model
     Review: a
@@ -216,7 +231,7 @@ const schema = a
       // only allow signed-in users to call this API
       .authorization((allow) => [
         allow.guest(),
-        allow.publicApiKey(),
+        // allow.publicApiKey(),
         allow.authenticated(),
       ]),
     AddToCartResponse: a.customType({
