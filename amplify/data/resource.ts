@@ -59,7 +59,7 @@ const schema = a
       })
       .authorization((allow) => [
         allow.guest(),
-        // allow.publicApiKey(),
+        allow.publicApiKey(),
         allow.authenticated(),
       ]),
 
@@ -79,7 +79,7 @@ const schema = a
       })
       .authorization((allow) => [
         allow.guest(),
-        // allow.publicApiKey(),
+        allow.publicApiKey(),
         allow.authenticated(),
       ]),
 
@@ -97,27 +97,29 @@ const schema = a
       .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
 
     // OrderIngredient Model (Tracks individual ingredients with quantity)
-    OrderIngredient: a.model({
-      id: a.id(), // Ensure ID field for OrderIngredient
-      orderItemId: a.id(), // Foreign key to OrderItem
-      orderItem: a.belongsTo("OrderItem", "orderItemId"), // Belongs to OrderItem
-      ingredientId: a.id().required(), // References Ingredient
-      ingredient: a.belongsTo("Ingredient", "ingredientId"), // Belongs to Ingredient
-      quantity: a.integer().required(), // Quantity of this ingredient selected
-    }),
-    // .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+    OrderIngredient: a
+      .model({
+        id: a.id(), // Ensure ID field for OrderIngredient
+        orderItemId: a.id(), // Foreign key to OrderItem
+        orderItem: a.belongsTo("OrderItem", "orderItemId"), // Belongs to OrderItem
+        ingredientId: a.id().required(), // References Ingredient
+        ingredient: a.belongsTo("Ingredient", "ingredientId"), // Belongs to Ingredient
+        quantity: a.integer().required(), // Quantity of this ingredient selected
+      })
+      .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
 
     // Order Model
-    Order: a.model({
-      id: a.id(), // Ensure ID field for Order
-      orderNumber: a.string().required(),
-      userId: a.id(),
-      user: a.belongsTo("User", "userId"), // Belongs to User
-      totalAmount: a.integer(),
-      orderItems: a.hasMany("OrderItem", "orderId"), // Track items in the order
-      status: a.string(), // e.g., 'pending', 'completed', 'canceled'
-    }),
-    // .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+    Order: a
+      .model({
+        id: a.id(), // Ensure ID field for Order
+        orderNumber: a.string().required(),
+        userId: a.id(),
+        user: a.belongsTo("User", "userId"), // Belongs to User
+        totalAmount: a.integer(),
+        orderItems: a.hasMany("OrderItem", "orderId"), // Track items in the order
+        status: a.string(), // e.g., 'pending', 'completed', 'canceled'
+      })
+      .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
     // Cart Model
     Cart: a
       .model({
@@ -159,27 +161,29 @@ const schema = a
       .authorization((allow) => [allow.authenticated()]),
 
     // User Model
-    User: a.model({
-      id: a.id(), // Ensure ID field for User
-      username: a.string().required(),
-      email: a.string().required(),
-      password: a.string().required(),
-      role: a.string(), // e.g., 'admin', 'user'
-      orders: a.hasMany("Order", "userId"), // Relationship to Orders
-      reviews: a.hasMany("Review", "userId"), // Relationship to Reviews
-      cart: a.hasOne("Cart", "userId"), // Each user has one cart
-      available: a.boolean().default(true),
-    }),
-    // .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+    User: a
+      .model({
+        id: a.id(), // Ensure ID field for User
+        username: a.string().required(),
+        email: a.string().required(),
+        password: a.string().required(),
+        role: a.string(), // e.g., 'admin', 'user'
+        orders: a.hasMany("Order", "userId"), // Relationship to Orders
+        reviews: a.hasMany("Review", "userId"), // Relationship to Reviews
+        cart: a.hasOne("Cart", "userId"), // Each user has one cart
+        available: a.boolean().default(true),
+      })
+      .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
 
     // Category Model
-    Category: a.model({
-      id: a.id(), // Ensure ID field for Category
-      name: a.string().required(),
-      description: a.string(),
-      items: a.hasMany("Item", "categoryId"), // Relationship to Items
-    }),
-    // .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
+    Category: a
+      .model({
+        id: a.id(), // Ensure ID field for Category
+        name: a.string().required(),
+        description: a.string(),
+        items: a.hasMany("Item", "categoryId"), // Relationship to Items
+      })
+      .authorization((allow) => [allow.authenticated(), allow.publicApiKey()]),
 
     // Review Model
     Review: a
@@ -212,7 +216,7 @@ const schema = a
       // only allow signed-in users to call this API
       .authorization((allow) => [
         allow.guest(),
-        // allow.publicApiKey(),
+        allow.publicApiKey(),
         allow.authenticated(),
       ]),
     AddToCartResponse: a.customType({
