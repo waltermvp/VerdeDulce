@@ -1,6 +1,6 @@
 import { defineBackend } from "@aws-amplify/backend";
 import { auth } from "./auth/resource";
-import { data, registerUserFunction } from "./data/resource";
+// import { data, registerUserFunction } from "./data/resource";
 import { storage } from "./storage/resource";
 import { EmailIdentity } from "aws-cdk-lib/aws-ses";
 import { Stack } from "aws-cdk-lib/core";
@@ -14,9 +14,10 @@ import { CfnApp } from "aws-cdk-lib/aws-pinpoint";
  */
 const backend = defineBackend({
   auth,
-  data,
+  // data,
+  // registerUserFunction,
   storage,
-  registerUserFunction,
+  // registerUserFunction,
 });
 
 // console.log(backend.data., "::: backend.data.resources")
@@ -43,8 +44,8 @@ const statement = new iam.PolicyStatement({
   resources: ["*"], // Replace with specific SES resource ARN if needed
 });
 
-const something = backend.registerUserFunction.resources.lambda;
-something.addToRolePolicy(statement);
+// const something = backend.registerUserFunction.resources.lambda;
+// something.addToRolePolicy(statement);
 
 const analyticsStack = backend.createStack("analytics-stack");
 

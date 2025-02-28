@@ -121,16 +121,10 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
           }}
         >
           <ImageBackground
-            // source={{ uri: require("../assets/images/react-logo.png") }}
-            // export type ImageContentFit = 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
-
             contentFit="cover"
             transition={1000}
             style={{
-              // backgroundColor: "red",
-              // height: "150%",
               width: height * 2,
-              // height: 1000,
               aspectRatio: 1,
               flex: 1,
             }}
@@ -142,9 +136,7 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
             >
               <View
                 style={{
-                  // alignItems: "center",
                   marginHorizontal: spacing.lg,
-                  // backgroundColor: "red",
                 }}
               >
                 <View
@@ -163,12 +155,6 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                       colors.palette.lightYellowGreen,
                     ]}
                     contentCells={5}
-                    // content={
-                    //   <Image
-                    //     style={{ width: ICON_SIZE, height: ICON_SIZE }}
-                    //     source={require("../assets/images/VerdeDulce_logo.png")}
-                    //   />
-                    // }
                     backgroundColor={colors.palette.greenFont}
                     dotColor="#ffff"
                     contentStyle={styles.box}
@@ -177,7 +163,6 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                     text="Entregas a Domicilio - Portoviejo"
                     preset="bold"
                     style={[
-                      // $yellowColor,
                       {
                         letterSpacing: spacing.xxxs,
                         lineHeight: spacing.xxl,
@@ -187,70 +172,23 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                     ]}
                   ></Text>
                 </View>
-
-                {/* <Text
-                  text="(por App)"
-                  preset="default"
-                  style={{
-                    color: "white",
-                    fontSize: spacing.md,
-                    textAlign: "center",
-
-                    lineHeight: spacing.xxxl,
-                  }}
-                /> */}
               </View>
             </View>
           </ImageBackground>
-          <View
-            style={{
-              // height: "100%",
-              flex: 1,
-              // height: "75%",
-              // alignItems: "center",
-              // paddingVertical: spacing.xxl,
-              paddingTop: spacing.xxl,
-              // justifyContent: "space-between",
-              // paddingVertical: spacing.xxl,
-              // backgroundColor: "red",
-              // paddingHorizontal: spacing.xxl,
-            }}
-          >
-            <Image
-              // source={{ uri: imageCDNURL("VerdeDulce_logo_with_border.png") }}
-              source={require("../assets/images/VerdeDulce_logo.png")}
-              style={{
-                width: 200,
-                height: 200,
-                alignSelf: "center",
-                borderWidth: 4,
-                borderColor: colors.palette.neutral100,
-                marginBottom: spacing.xxl,
-              }}
-            ></Image>
+          <View style={$contentContainer}>
             <Text
-              text="¡Acumula 9 ensaladas y la 10ª es gratis!"
+              text={translate("adScreen.add1Title")}
               preset="heading"
-              style={{
-                // color: colors.palette.greenFont,
-                color: "white",
-                textAlign: "center",
-                fontSize: spacing.xxl,
-                lineHeight: spacing.xxxl + spacing.sm,
-                fontFamily: typography.fonts.poppins.Poppins_400Regular,
-                // paddingHorizontal: spacing.,
-              }}
+              style={$titleText}
             ></Text>
-
-            <View
-              style={{
-                flex: 1,
-                alignItems: "center",
-                paddingTop: spacing.xxl,
-              }}
-            >
+            <Text
+              text={dish.name + "?"}
+              preset="heading"
+              style={$dishNameText}
+            ></Text>
+            <View style={$bottonContainer}>
               <Text
-                text="Ordena ahora en"
+                tx="adScreen.add1Subtitle"
                 preset="heading"
                 style={[$headerText, { marginBottom: spacing.sm }]}
               />
@@ -261,64 +199,23 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
               />
               <Text text="o" preset="heading" style={$headerText} />
 
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginTop: spacing.sm,
-                }}
-              >
+              <View style={$ionicon}>
                 <Ionicons
                   name="logo-whatsapp"
                   size={spacing.xxl}
                   color={colors.palette.lightYellowGreen}
                   style={{ marginRight: spacing.md }}
                 />
-                <Text
-                  text="Entregas a Domicilio - Portoviejo"
-                  preset="bold"
-                  style={$subTitleText}
-                ></Text>
+                <Text text="0963021783" preset="heading" style={$yellowColor} />
               </View>
             </View>
-          </View>
-        </ImageBackground>
-        <View style={$contentContainer}>
-          <Text
-            text={translate("adScreen.add1Title")}
-            preset="heading"
-            style={$titleText}
-          ></Text>
-          <Text
-            text={dish.name + "?"}
-            preset="heading"
-            style={$dishNameText}
-          ></Text>
-          <View style={$bottonContainer}>
-            <Text
-              tx="adScreen.add1Subtitle"
-              preset="heading"
-              style={[$headerText, { marginBottom: spacing.sm }]}
-            />
-            <Text text="verdedulce.com" preset="heading" style={$yellowColor} />
-            <Text text="o" preset="heading" style={$headerText} />
-
-            <View style={$ionicon}>
-              <Ionicons
-                name="logo-whatsapp"
-                size={spacing.xxl}
-                color={colors.palette.lightYellowGreen}
-                style={{ marginRight: spacing.md }}
+            <View style={$footerContentContainer}>
+              <Text
+                tx="adScreen.footerContent"
+                preset="heading"
+                style={[$headerText, $footerContent]}
               />
-              <Text text="0963021783" preset="heading" style={$yellowColor} />
             </View>
-          </View>
-          <View style={$footerContentContainer}>
-            <Text
-              tx="adScreen.footerContent"
-              preset="heading"
-              style={[$headerText, $footerContent]}
-            />
           </View>
         </View>
       )}
@@ -357,8 +254,6 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                       padding: spacing.xs,
                       marginTop: spacing.xxl,
                       textAlign: "center",
-                      // color: colors.palette.darkKale,
-                      // backgroundColor: colors.palette.lig/htBackground,
                       color: darkMode
                         ? colors.palette.darkKale
                         : colors.palette.neutral100,
@@ -406,16 +301,7 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                           />
                         </View>
                       }
-                      // LeftComponent={
-                      //   <Image
-                      //     style={$image}
-                      //     contentFit="fill"
-                      //     // source={{ uri: imageCDNURL(item.url) }}
-                      //     placeholder={require("../assets/images/icon.png")}
-                      //   />
-                      // }
                       RightComponent={
-                        // <View style={{ backgroundColor: "red" }}>
                         <Text
                           preset="subheading"
                           style={{
@@ -425,7 +311,6 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                           }}
                           text={dollars}
                         />
-                        // </View>
                       }
                     />
                   );
@@ -441,7 +326,6 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                     text={section.title}
                     style={{
                       marginTop: spacing.xxl,
-
                       color: colors.palette.darkKale,
                       backgroundColor: darkMode
                         ? colors.palette.greenFont
@@ -464,12 +348,10 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                       LeftComponent={
                         <Image
                           style={$image}
-                          // source={{ uri: imageCDNURL(item.url) }}
                           placeholder={require("../assets/images/icon.png")}
                         />
                       }
                       RightComponent={
-                        // <View style={{ backgroundColor: "red" }}>
                         <Text
                           preset="subheading"
                           style={{
@@ -477,7 +359,6 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                           }}
                           text={dollars}
                         />
-                        // </View>
                       }
                     />
                   );
@@ -488,9 +369,6 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
               <View
                 style={{
                   flex: 0.51,
-                  // alignItems: "center",
-                  // flexDirection: "row",
-                  // marginBottom: spacing.lg,
                 }}
               >
                 <OrdenaYa />
@@ -520,10 +398,7 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
                 text="Entregas a Domicilio - Portoviejo"
                 preset="bold"
                 style={[
-                  // $yellowColor,
                   {
-                    // letterSpacing: spacing.xxxs,
-                    // lineHeight: spacing.xxl,
                     fontSize: spacing.lg,
                     color: colors.palette.neutral100,
                     textAlign: "center",
@@ -540,7 +415,6 @@ export default observer(function IntroEmail(props: IntroEmailProps) {
 
 const $container: ViewStyle = {
   height,
-
   backgroundColor: colors.palette.greenFont,
 };
 
@@ -586,54 +460,7 @@ const styles = StyleSheet.create({
 const $image = {
   height: "100%",
   aspectRatio: 1,
-  // width: 75,
-  // alignSelf: "center",
 };
-/*
-¡Compra 9 ensaladas y la 10ª es gratis!
-
-import menu from "../menu-es.json";
-const $contentContainer: ViewStyle = {
-  flex: 1,
-  paddingTop: spacing.xxl * 1.25,
-};
-
-const $titleText: TextStyle = {
-  color: colors.palette.neutral100,
-  textAlign: "center",
-  fontSize: spacing.xxl,
-  lineHeight: spacing.xxxl + spacing.sm,
-  fontFamily: typography.fonts.poppins.Poppins_400Regular,
-};
-
-const $dishNameText: TextStyle = {
-  color: colors.palette.lightYellowGreen,
-  textAlign: "center",
-  fontSize: spacing.xxl,
-  lineHeight: spacing.xxxl + spacing.sm,
-  fontFamily: typography.fonts.poppins.Poppins_400Regular,
-};
-
-const $footerContent: TextStyle = {
-  marginHorizontal: spacing.xl,
-  marginTop: spacing.lg,
-  textAlign: "center",
-  fontSize: spacing.xxl,
-  letterSpacing: spacing.xxs,
-};
-
-const $imageBackground: ViewStyle = {
-  width: height * 2,
-  aspectRatio: 1,
-  flex: 1,
-};
-const $leftContainer: ViewStyle = {
-  backgroundColor: "rgba(0, 0, 0, 0.25)",
-  flex: 1,
-  justifyContent: "flex-end",
-};
-
-*/
 
 function OrdenaYa() {
   return (
