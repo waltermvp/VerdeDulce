@@ -1,0 +1,30 @@
+name: AI PR Reviewer
+
+# Calls the org's shared reviewer (Qodo PR-Agent on Claude):
+# https://github.com/epiphanyapps/.github/blob/main/.github/workflows/pr-agent-review.yml
+# Manual commands in any PR comment: /review  /describe  /improve  /ask "..."
+# Needs the ANTHROPIC_KEY repo secret; the run fails if no review is posted.
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  review:
+    uses: epiphanyapps/.github/.github/workflows/pr-agent-review.yml@v1
+    with:
+      extra_instructions: >-
+        Public ecommerce repo built with Expo: prices, totals, discounts and
+        inventory must be computed or verified server-side; order and payment
+        flows must not double-charge or double-submit; nothing secret or
+        customer-identifying may be committed. Check web fallbacks for native-
+        only APIs.
+    secrets:
+      ANTHROPIC_KEY: ${{ secrets.ANTHROPIC_KEY }}
